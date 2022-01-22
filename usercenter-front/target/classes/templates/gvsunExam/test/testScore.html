@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/style/admin.css}" media="all">
+		<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="testscorebox" id="testscorebox">
+				<div class="layui-fluid">
+					<div classs="layui-row layui-col-space20">
+						<div class="layui-col-md12">
+							<div class="layui-card">
+								<div class="layui-card-header">测试成绩
+									<a class="fa fa-download header_btn" lay-tips="导出成绩单"></a>
+									<a class="layui-btn layui-btn-xs" onclick="commitTranscript()">更新成绩到成绩册</a>
+									<!--搜索开始-->
+									<!--<div class="fr search_line">-->
+										<!--<div class="layui-inline">-->
+											<!--<select name="site" lay-search>-->
+												<!--<option value="">请选择站点</option>-->
+												<!--<option value="1">1</option>-->
+												<!--<option value="2">2</option>-->
+												<!--<option value="3">3</option>-->
+											<!--</select>-->
+										<!--</div>-->
+										<!--<div class="layui-inline">-->
+											<!--<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />-->
+										<!--</div>-->
+										<!--<input type="button" class="layui-btn" data-type="reload" value="搜索" />-->
+									<!--</div>-->
+									<!--搜索结束-->
+								</div>
+								<div class="layui-card-body">
+									<div class="layui-col-md12">
+										<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+											<!--<ul class="layui-tab-title">-->
+												<!--<li class="layui-this">-->
+													<!--<a href="testscore.html">已参加测试</a>-->
+												<!--</li>-->
+												<!--<li>-->
+													<!--<a href="notestscore.html">未参加测试</a>-->
+												<!--</li>-->
+											<!--</ul>-->
+											<div class="layui-tab-content">
+												<div class="layui-tab-item layui-show">
+													<div class="layui-col-md12">
+														<!--表单开始-->
+														<table class="layui-hide" id="testscore" lay-filter="testscore"></table>
+														<script type="text/html" id="toolbar">
+															<a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+															<a class="layui-btn layui-btn-xs" lay-event="grade">教师手动打分</a>
+														</script>
+														<!--表单结束-->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/gvsunExam/globalscript"></div>
+		<script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+		<script th:src="@{/modules/gvsunExam/static/js/myProject.js}"></script>
+<!--		<script th:src="@{/modules/gvsunExam/common.js}"></script>-->
+		<script th:inline="javascript">
+			const assignmentId = [[${assignmentId}]];
+			const siteId = [[${session.cid}]];
+			const username = [[${session.user.username}]];
+		</script>
+		<script th:src="@{/modules/gvsunExam/test/testScore.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	<link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+	<link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/flexibleTextarea.css}">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/registration/css/expand.css}" media="all">
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+	<script th:src="@{/js/initOAuth2.js}"></script>
+	<script th:src="@{/js/jquery.textareafullscreen.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<!--    <script type="text/javascript" th:src="@{${session.oauth2} + '/oauth/OAuth2.js'}"></script>-->
+	<link rel="stylesheet" th:href="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.css'}" media="all">
+	<script type="text/javascript" th:src="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.js'}"></script>
+	<script th:src="@{/modules/configcenter/static/commonResource.js}"></script>
+	<script th:inline="javascript">
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var currentCname = [[${session.user.cname}]];
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var oauth2Host = [[${session.oauth2}]];
+		var dataSource = [[${session.dataSource}]];
+		var configType = [[${session.configType}]];
+		var timetableId = [[${timetableId}]];
+		var resourceContainerHost = [[${resourceContainerHost}]];
+		var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+	</script>
+	<!--    <script th:src="@{/modules/common.js}"></script>-->
+	<!--    <script th:src="@{/modules/configcenter/static/common.js}"></script>-->
+	<!--    <script th:src="@{/modules/configcenter/static/global.js}"></script>-->
+	<link rel="stylesheet" th:href="@{/modules/configcenter/process/css/commonList.css}">
+		<style>
+			.layui-form-label {
+				width: 65px;
+			}
+			
+			.layui-input-block {
+				margin-left: 65px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="resource-container"></div>
+		<div class="main_content_box">
+			<!--主体开始-->
+			<div class="full_box">
+				<form class="layui-form lesson_card" action="" lay-filter="newacademicstudentworklogbox" id="newacademicstudentworklogbox">
+					<div class="layui-row layui-col-space20">
+						<div class="layui-col-lg12">
+							<label class="layui-form-label">工作日期</label>
+							<div class="layui-input-block">
+								<input class="layui-input" name="date" id="date" autocomplete="on" lay-verify="required" placeholder="请选择工作日志所属月份" />
+							</div>
+						</div>
+						<div class="layui-col-lg12">
+							<label class="layui-form-label">工作内容</label>
+							<div class="layui-input-block">
+								<textarea id="note" name="worklog" style="display: none;"></textarea>
+							</div>
+						</div>
+					</div>
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="newacademicstudentworklogbtn" id="newacademicstudentworklogbtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</form>
+			</div>
+			<!--主体结束-->
+		</div>
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<!--<a href="#"><br/></a>-->
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/registration/newAcademicStudentWorkLog.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../layuiadmin/' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'newAcademicStudentWorkLog']);-->
+<!--		</script>-->
+	</body>
+
+</html>

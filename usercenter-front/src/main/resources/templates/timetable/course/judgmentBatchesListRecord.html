@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!--layout:decorator="/timetable/iframe"-->
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="Generator" content="GVSUN" />
+    <meta name="Author" content="chenyawen" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <script th:src="@{/js/directoryEngine/directoryEngine-core.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/modules/timetable/static_limsproduct/js/layerSilica.js}"></script>
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/plugins/formselect/formSelects-v4.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/expand.css}" media="all">
+    <style>
+        /*已安排时间段高度*/
+
+        #judgmentBatchesListStepThree+.layui-table-view .layui-table-body {
+            /*max-height: 213px;*/
+        }
+
+        .search_line .layui-form-select {
+            width: 113px;
+        }
+        .xm-select-parent .xm-select-title div.xm-select-label>span {
+            margin: 6px 5px 2px 0;
+        }
+        .xm-select-parent .xm-select-sj {
+            /*top: 8px;*/
+        }
+        .schedule_tab tbody th {
+             /*padding: 9px 2px;*/
+        }
+        .step_bottom {
+            position: absolute;
+            bottom: -63px;
+            left: 0;
+        }
+        .xm-select-dl{
+            min-width:150px!important;
+        }
+        #schedule_tab .ui-selecting:not(.not_check) { background: #409effcc; }
+        /*#tab_stu .check_box .ui-selected:not(.not_check) { background: #F39814; color: white; }*/
+        /*#tab_stu .check_box .ui-selected:not(.not_check) { background: #F39814; color: white; }*/
+        #schedule_tab .ui-selected:not(.not_check){
+            background: #409eff!important;
+            /*border: 3px solid #409eff!important; */
+            color: white; }
+        #schedule_tab .ui-selected:not(.not_check) span{ color: white; }
+        .btn_save {
+            position: absolute;
+            top: 75px;
+            /* left: -377px; */
+            right: 377px;
+        }
+        .lesson_card{
+            margin-bottom:10px;
+        }
+        #unassigned_right {
+            width:360px;
+        }
+        .table_header_th {
+            min-width: 70px;
+        }
+        .schedule_header_fix {
+            position: fixed;
+            right: 403px;
+        }
+        .schedule_left_fix{
+            /*position: absolute;*/
+            /*top: 0;*/
+            z-index: 2;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 33px;
+        }
+        .schedule_left_fix_table{
+            /*position: absolute;*/
+            /*top: 0;*/
+            z-index: 2;
+            overflow: hidden;
+            position: fixed;
+            top: 53px;
+            left: 33px;
+        }
+        #schedule_header{
+            overflow: hidden;
+            background-color: white;
+        }
+        /*.schedule_right_fix {*/
+            /*position: fixed;*/
+            /*top: 20px;*/
+            /*right: 23px;*/
+            /*height: 100%;*/
+            /*padding: 0px 10px 79px;*/
+        /*}*/
+        .return-top{
+            width:26px;
+            /*height:100px;*/
+            font:bold 23px/26px "宋体";
+            color:#fff;
+            background-color:rgb(64, 158, 255);
+            position:fixed;
+            bottom:20px;
+            right:20px;
+            text-align:center;
+            cursor:pointer;
+            display:none;
+            z-index: 9999;
+        }
+        .return-top.active{
+            display:block;
+        }
+    </style>
+    <script th:inline="javascript">
+        var username = [[${session.user.username}]];
+        var role = [[${session.selected_role}]];
+        var academyNumber = [[${session.selected_academy}]];
+    </script>
+</head>
+
+<body layout:fragment="timetable">
+<div class="main_content">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md12">
+            <!--步骤开始-->
+            <div class="step_box">
+                <div class="step_content finish_step_content">
+                    <input type="hidden" id="zuulServerUrl" th:value="${zuulServerUrl}" />
+                    <input type="hidden" id="termid" th:value="${term}" />
+                    <input type="hidden" id="academyNumber" th:value="${academy_number}" />
+                    <input type="hidden" id="courseNo" name="courseNo" th:value="${courseNo}">
+                    <input type="hidden" id="groupId" name="groupId" th:value="${groupId}">
+                    <label class="layui-icon"></label>
+                    <div class="step_text">
+                        <div>
+                            <font>步骤一</font>
+                        </div>
+                        <span>选择教师，可跳过，于排课页面细化</span>
+                    </div>
+                </div>
+                <div class="step_content finish_step_content">
+                    <label class="layui-icon"></label>
+                    <div class="step_text">
+                        <div>
+                            <font>步骤二</font>
+                        </div>
+                        <span>分批、分组</span>
+                    </div>
+                </div>
+                <div class="step_content select_step_content">
+                    <label class="layui-icon"></label>
+                    <div class="step_text">
+                        <div>
+                            <font>步骤三</font>
+                        </div>
+                        <span>查看排课记录</span>
+                    </div>
+                </div>
+            </div>
+            <!--步骤结束-->
+        </div>
+        <div class="layui-col-md12">
+            <!--课程信息开始-->
+            <blockquote class="layui-elem-quote layui-quote-nm tag_box lesson_info" id="lesson_info">
+                <div class="li_cell_tit">
+                    <div class="lesson_name" th:text="${schoolCourse.courseName}"></div>
+                    <div class="link_r">
+                        <!--<div class="li_cell">-->
+                        <!--<a class="projectdetail" data-method="projectdetail" lay-tips="查看实验项目详情">实验项目</a>-->
+                        <!--</div>-->
+                        <div class="li_cell">
+                            <a class="studentlist" data-method="studentlist" lay-tips="查看学生名单详情"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="li_cell username_cname"><i class="layui-icon layui-icon-username"></i></div>
+                <!--<div class="li_cell total_credits  "><i class="layui-icon layui-icon-note"></i></div>-->
+                <!--<div class="li_cell total_credits  "><i class="layui-icon layui-icon-note"></i>总学分32分</div>-->
+                <!--<div class="li_cell lab_credits"><i class="layui-icon layui-icon-note"></i>实验学分16分</div>-->
+                <div class="li_cell lab_credits"><i class="layui-icon layui-icon-note"></i></div>
+                <div class="li_cell course_plan"><i class="layui-icon layui-icon-log"></i>教务系统课程安排时间：
+                    <!--<span><font>星期一</font><font>3-4节</font><font>1-8周</font></span>-->
+                    <!--<span><font>星期三</font><font>3-4节</font><font>9-16周</font></span>-->
+                </div>
+            </blockquote>
+            <!--课程信息结束-->
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-row layui-col-space20" id="set_course">
+                        <div class="layui-card" id="assigned_right" style="margin: 0;">
+                            <div class="layui-card-header">已安排时间段
+                                <font id="planedTimes"></font>
+                            </div>
+                            <div class="layui-card-body">
+                                <table class="layui-hide" id="judgmentBatchesListStepThree" lay-filter="judgmentBatchesListStepThree"></table>
+                                <script type="text/html" id="line_toolbar">
+                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                </script>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+    <div class="return-top" id="return_top">▲</div>
+    <!--步骤完成交接开始-->
+    <div class="step_bottom">
+        教师设置完成
+        <a class="layui-btn previousStep" data-method="previousStep">上一步</a>
+        <a class="layui-btn closeLayer" data-method="closeLayer">完成</a>
+
+    </div>
+    <!--步骤完成交接结束-->
+    <script th:src="@{/modules/timetable/layui_admin/layui/layui.js}"></script>
+    <script th:src="@{/modules/timetable/layui_admin/static/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/modules/timetable/layui_admin/static/plugins/formselect/formSelects-v4.min.js}"></script>
+    <script th:src="@{/modules/timetable/layui_admin/static/js/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.cookie.js}"></script>
+    <script th:src="@{/modules/timetable/static_limsproduct/jquery-ui-1.11.4.custom/jquery-ui.min.js}"></script>
+    <link th:href="@{/modules/timetable/static_limsproduct/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css}" rel="stylesheet">
+    <link th:href="@{/modules/timetable/static_limsproduct/jquery-ui-1.11.4.custom/jquery-ui.min.css}" rel="stylesheet">
+    <link th:href="@{/modules/timetable/static_limsproduct/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css}" rel="stylesheet">
+    <link th:href="@{/modules/timetable/static_limsproduct/jquery-ui-1.11.4.custom/jquery-ui.structure.css}" rel="stylesheet">
+    <script th:src="@{/modules/timetable/layui_admin/modules/judgmentBatchesListStepRecord.js}"></script>
+<!--    <script>-->
+<!--        layui.config({-->
+<!--                base: '/layui_admin/' //静态资源所在路径-->
+<!--            }-->
+
+<!--        ).extend({-->
+<!--                index: 'lib/index' //主入口模块-->
+<!--            }-->
+
+<!--        ).use(['index', 'judgmentBatchesListStepRecord']);-->
+<!--    </script>-->
+    <script type="text/javascript">
+//        var return_top = document.getElementById("return_top");
+//        var sTop;
+//        window.onscroll = function() {
+//            //表格
+//                var t1 = document.documentElement.scrollTop || document.body.scrollTop;
+//                var table_left = document.getElementById("table_header");
+//                var schedule_header = document.getElementById("schedule_header");
+//                var fr = document.getElementById("fr");
+//                var thwidth = $('#weeks_th th').width();
+//                var left_width = $('.schedule_tit').width();
+//                var tab_width = $('#schedule_tab').width();
+//                var table_tbody_width = $('#schedule_tab tbody').width();
+//                var schedule_day_th = $('.schedule_day_th').width()+18;
+//                $('#table_header').css('width',tab_width+'px');
+//                $('#table_header_th').css('min-width',schedule_day_th*2+'px');
+//                var tdwidthp = 100/weekNum1;
+//                var tdwidthpp = tdwidthp/100
+////                var tdwidth = tab_width*tdwidthpp;
+//                var tdwidth = $('#1_1_1').width()+6;
+//                $('#weeks_th th').css('width',tdwidth+'px');
+//                if(t1 >= 305) {
+//                    $('#schedule_tab tbody').css('width',table_tbody_width+'px')
+//                    table_left.classList.add("schedule_left_fix_table");
+//                    schedule_header.classList.add("schedule_left_fix");
+//                    $('#schedule_header').css('width',document.body.clientWidth-420)
+//                    $('#schedule_header').css('height','55px')
+//                    fr.classList.add("schedule_header_fix");
+//                    var course_width = $('#set_course').width();
+//                    if(course_width<806){
+//                        var heig = 275+$('#lesson_info').height();
+//                        var t2 = t1-heig-33;
+//                    }else{
+//                        var heig = 244+$('#lesson_info').height();
+//                        var t2 = t1-heig-33;
+//                    }
+////                    $('#table_header').css('top',t2+'px')
+//                }else{
+//                    table_left.classList.remove("schedule_left_fix_table");
+//                    schedule_header.classList.remove("schedule_left_fix");
+//                    fr.classList.remove("schedule_header_fix");
+//                    $('#schedule_header').css('width','')
+//                    $('#schedule_header').css('height','')
+//                }
+//
+//            //右侧
+//            if($('#unassigned_right').height()>300||$('#assigned_right').height()>220){
+//                var height = $('#assigned_right').height();
+//                var mousemove = 305 + height;
+//                var t = document.documentElement.scrollTop || document.body.scrollTop;
+//                var main_container_left = document.getElementById("unassigned_right");
+//                $('.schedule_right_fix').css('top','20px');
+//            }else{
+//                var t = document.documentElement.scrollTop || document.body.scrollTop;
+//                var main_container_left = document.getElementById("schedule_right");
+//                mousemove=305;
+//            }
+//            if(t >= mousemove) {
+//                main_container_left.classList.add("schedule_right_fix");
+//            } else {
+//                main_container_left.classList.remove("schedule_right_fix");
+//            }
+//            //sTop :滚动条距离顶部的距离数值
+//            sTop = document.body.scrollTop||document.documentElement.scrollTop;
+//            if(sTop>300){
+//                return_top.className = "return-top active";
+//            }else{
+//                return_top.className = "return-top";
+//            }
+//        }
+//
+//
+////        window.onscroll = function(){
+////
+////        }
+//
+//        return_top.onclick = function(){
+//            var termId = setInterval(function(){
+//                sTop-=50;
+//                if(sTop<=0){
+//
+//                    clearInterval(termId);
+//                }
+//                window.scrollTo(0,sTop);
+//
+//            },1);
+//        }
+    </script>
+</body>
+
+</html>

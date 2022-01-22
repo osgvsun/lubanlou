@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/expand.css}" media="all">
+</head>
+<body>
+
+    <div class="content_box">
+        <form class="layui-form lesson_card" action="" lay-filter="creditcardrecordsattendcebox" id="creditcardrecordsattendcebox">
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space20">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <span class="edit_time_title">已排坐班列表</span>
+                                <input type="button" class="layui-btn hide header_edit exportData" lay-tips="调整完成" value="调整完成" />
+                            </div>
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-md12">
+                                        <div class="layui-col-md12">
+                                            <!--表单开始-->
+                                            <!-- 三种表格-->
+                                            <!--WEEKDAY_WEEK_CLASS-->
+                                            <table class="layui-table" style="display: none">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>星期</th>
+                                                    <th>周次</th>
+                                                    <th>节次</th>
+                                                    <th>房间号</th>
+                                                    <th>导师</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="student1">
+
+                                                </tbody>
+                                            </table>
+                                            <!--DATETIME-->
+                                            <table class="layui-table" style="display: none">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>时间</th>
+                                                    <th>房间号</th>
+                                                    <th>导师</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="student2">
+
+                                                </tbody>
+                                            </table>
+                                            <!--WEEKDAY_TIME_WEEK-->
+                                            <table class="layui-table" style="display: none">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>星期</th>
+                                                    <th>周次</th>
+                                                    <th>时间</th>
+                                                    <th>房间号</th>
+                                                    <th>导师</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="student3">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:replace="/answering/globalscript"></div>
+    <script th:inline="javascript">
+        const courseNo = [[${courseNo}]];
+        const timetableStyle = [[${timetableStyle}]];
+        const status = [[${status}]];
+    </script>
+    <script th:src="@{/modules/answering/static/js/common.js}"></script>
+    <script th:src="@{/modules/answering/editCourse.js}"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>用户中心</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/jquery-3.2.0.min.js}"></script>
+
+    <script th:inline="javascript">
+        var userCenterHost = [[${usercenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        $(".currentUserName").val(currentUsername);
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+</head>
+
+<body class="layui-layout-body">
+
+<div id="LAY_app">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <!-- 头部区域 -->
+            <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+                <li class="layui-nav-item layadmin-flexible" lay-unselect>
+                    <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                        <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                    </a>
+                </li>
+                <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
+    <a href="http://www.layui.com/admin/" target="_blank" title="前台">
+      <i class="layui-icon layui-icon-website"></i>
+    </a>
+  </li>-->
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;" layadmin-event="refresh" title="刷新">
+                        <i class="layui-icon layui-icon-refresh-3"></i>
+                    </a>
+                </li>
+
+
+                <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
+                    <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords=">
+                </li>-->
+                <!--
+                                <li class="layui-nav-item" lay-unselect>
+                                    <a lay-href="message/index.html" layadmin-event="message" lay-text="消息中心" title="消息中心">
+                                        <i class="layui-icon layui-icon-notice"></i>
+
+                                        &lt;!&ndash; 如果有新消息，则显示小圆点 &ndash;&gt;
+                                        <span class="layui-badge-dot"></span>
+                                    </a>
+                                </li>-->
+                <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
+    <a href="javascript:;" layadmin-event="theme">
+      <i class="layui-icon layui-icon-theme"></i>
+    </a>
+  </li>
+  <li class="layui-nav-item layui-hide-xs" lay-unselect>
+    <a href="javascript:;" layadmin-event="note">
+      <i class="layui-icon layui-icon-note"></i>
+    </a>
+  </li>-->
+                <li class="layui-nav-item layui-hide-xs" lay-unselect title="全屏">
+                    <a href="javascript:;" layadmin-event="fullscreen">
+                        <i class="layui-icon layui-icon-screen-full"></i>
+                    </a>
+                </li>
+                <!--                <li class="layui-nav-item layui-hide-xs" lay-unselect title="登录">
+                                    <a href="user/login.html" target="_self">
+                                        <cite>登录</cite>
+                                    </a>
+                                </li>-->
+                <li class="layui-nav-item teacherManager" lay-unselect style="border-top: 2px solid #1989fa">
+                    <a href="index_teacher" target="_top">
+                        <cite style="color: #1989fa!important"><span >教师信息管理</span></cite>
+                    </a>
+                </li>
+                <li class="layui-nav-item" lay-unselect>
+                    <a  href="index_student" target="_top">
+                        <cite><span>学生信息管理</span></cite>
+                    </a>
+                </li>
+                <!--1单位用户-->
+                <li class="layui-nav-item perUser" lay-unselect>
+                    <a href="javascript:;" title="单位用户">
+                        <a>单位用户</a>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd style="text-align: center;">
+                            <a href="javascript:;" class="enterprise">企业用户</a>
+                        </dd>
+                        <dd style="text-align: center;">
+                            <a href="javascript:;" class="userInfo">事业单位</a>
+                        </dd>
+                    </dl>
+                </li>
+                <!--1 over-->
+                <!--2注册审核-->
+                <li class="layui-nav-item registration" lay-unselect>
+                    <a  href="registration_audit" target="_top">
+                        <cite><span>注册审核</span></cite>
+                    </a>
+                </li>
+                <li class="layui-nav-item roleChange" lay-unselect>
+                    <a href="system_index" target="_top">
+                        <cite><span >系统管理</span></cite>
+                    </a>
+                </li>
+                <!--2 over-->
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;" title="切换权限">
+                        <a>权限切换</a>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <!--<dd>
+                            <a lay-href="user/info.html">基本资料</a>
+                        </dd>
+                        <hr>-->
+                        <dd  style="text-align: center;" id="roleList">
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;">
+                        <cite><span id="currentName"></span></cite>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <!--<dd>
+                            <a lay-href="user/info.html">基本资料</a>
+                        </dd>
+                        <hr>-->
+                        <dd  style="text-align: center;">
+                            <a  onclick="logout()">退出</a>
+                        </dd>
+                        <dd style="text-align: center;">
+                            <a onclick="changePassword()" class="currentUserName">修改密码</a>
+                        </dd>
+                        <!--                        <dd style="text-align: center;">
+                                                    <a onclick="resetPassword(this)" class="currentUserName">重置密码</a>
+                                                </dd>-->
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-hide-xs" lay-unselect title="更多">
+                    <a href="javascript:;" layadmin-event="about"><i
+                            class="layui-icon layui-icon-more-vertical"></i></a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 侧边菜单 -->
+        <div class="layui-side layui-side-menu" id="teacher">
+            <div class="layui-side-scroll">
+                <a class="skipHost" target="_blank">
+                    <div class="layui-logo" lay-href="">
+                        <img th:src="@{'/images/'+${logo}}"/>
+                        <i class="layui-icon layui-icon-home"></i>
+                        <!--<span>教师信息库</span>-->
+                    </div>
+                </a>
+                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
+                    lay-filter="layadmin-system-side-menu">
+                    <li class="layui-nav-item nav-item layui-this">
+                        <a lay-direction="2" class="leftTeacher">
+                            <i class="layui-icon layui-icon-auz"></i>
+                            <cite>教师信息管理</cite></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 页面标签 -->
+        <div class="layadmin-pagetabs" id="LAY_app_tabs">
+            <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+            <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+            <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;"></a>
+                        <dl class="layui-nav-child layui-anim-fadein">
+                            <dd layadmin-event="closeThisTabs">
+                                <a href="javascript:;">关闭当前标签页</a>
+                            </dd>
+                            <dd layadmin-event="closeOtherTabs">
+                                <a href="javascript:;">关闭其它标签页</a>
+                            </dd>
+                            <dd layadmin-event="closeAllTabs">
+                                <a href="javascript:;">关闭全部标签页</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+                <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                    <li id="lay-src"  class="layui-this"><i class="layui-icon layui-icon-home"></i>教师信息管理</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主体内容 -->
+        <div class="layui-body" id="LAY_app_body">
+            <div class="layadmin-tabsbody-item layui-show">
+                <iframe id="iframe_src" frameborder="0" class="layadmin-iframe"></iframe>
+            </div>
+        </div>
+        <!-- 辅助元素，一般用于移动设备下遮罩 -->
+        <div class="layadmin-body-shade" layadmin-event="shade"></div>
+    </div>
+</div>
+
+<script th:src="@{/modules/roleManage_teacher.js}"></script>
+<script>
+    var serverHostArray = document.location.href.split('/');
+    var serverHost = serverHostArray[0] + "//" + serverHostArray[2] + "/" + serverHostArray[3] + "/";
+    layui.config({
+        base: serverHost //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use('index');
+    $('#lay-src').attr('lay-attr',serverHost+'manager/teacherPersonManage?currentShowRole=ROLE_TEACHER');
+    $('#lay-src').attr('lay-id',serverHost+'manager/teacherPersonManage?currentShowRole=ROLE_TEACHER');
+    $('#iframe_src').attr('src',serverHost+'manager/teacherPersonManage?currentShowRole=ROLE_TEACHER');
+    var teach = $('.teacherManager');
+    var cite = $('.teacherManager').find('cite');
+    var regis = $('.registration');
+    var regisCite = $('.registration').find('cite');
+    var ulTitle = $('#LAY_app_tabsheader').find('li');
+    var perUser = $('.perUser');
+    var titleTeacher = $('.leftTeacher')
+    var con = $('#iframe_src').attr('src');
+    titleTeacher.click(function () {
+        $('#LAY_app_tabsheader').find('li').each(function () {
+            var y = $(this).attr('lay-id');
+            if (y == con){
+                $(this).addClass('layui-this');
+            } else {
+                $(this).removeClass('layui-this');
+            }
+        });
+        $('#LAY_app_body').find('iframe').each(function () {
+            var div = $(this).attr('src');
+            if (div == con){
+                $(this).parent().addClass('layui-show');
+
+            }else {
+                $(this).parent().removeClass('layui-show');
+            }
+        });
+    })
+    regis.click(function () {
+        $('#lay-src').attr('lay-attr',serverHost+'manager/EAG_audit?currentShowRole=ROLE_ADMIN');
+        $('#lay-src').attr('lay-id',serverHost+'manager/EAG_audit?currentShowRole=ROLE_ADMIN');
+        $('#iframe_src').attr('src',serverHost+'manager/EAG_audit?currentShowRole=ROLE_ADMIN');
+        teach.removeAttr('style');
+        cite.removeAttr('style');
+        perUser.removeAttr('style');
+        regis.css({"border-top": "2px solid #1989fa"});
+        regisCite.css({"color": "#1989fa"});
+        ulTitle.text('注册审核');
+    });
+    $('.enterprise').click(function () {
+        $('#lay-src').attr('lay-attr',serverHost+'manager/enterpriseInfo?currentShowRole=ROLE_ADMIN');
+        $('#lay-src').attr('lay-id',serverHost+'manager/enterpriseInfo?currentShowRole=ROLE_ADMIN');
+        $('#iframe_src').attr('src',serverHost+'manager/enterpriseInfo?currentShowRole=ROLE_ADMIN');
+        teach.removeAttr('style');
+        cite.removeAttr('style');
+        regis.removeAttr('style');
+        regisCite.removeAttr('style');
+        $('.userInfo').removeAttr('style');
+        perUser.css({"border-top": "2px solid #1989fa"});
+        $('.enterprise').css({"color": "#1989fa"});
+        ulTitle.text('企业用户');
+    });
+    $('.userInfo').click(function () {
+        $('#lay-src').attr('lay-attr',serverHost+'manager/GSIInfo?currentShowRole=ROLE_ADMIN');
+        $('#lay-src').attr('lay-id',serverHost+'manager/GSIInfo?currentShowRole=ROLE_ADMIN');
+        $('#iframe_src').attr('src',serverHost+'manager/GSIInfo?currentShowRole=ROLE_ADMIN');
+        teach.removeAttr('style');
+        cite.removeAttr('style');
+        regis.removeAttr('style');
+        regisCite.removeAttr('style');
+        $('.enterprise').removeAttr('style');
+        perUser.css({"border-top": "2px solid #1989fa"});
+        $('.userInfo').css({"color": "#1989fa"});
+        ulTitle.text('事业单位');
+    });
+    $('.skipHost').on('click', function () {
+        $(this).attr('href', "http://" + document.location.host);
+    })
+</script>
+
+
+<!-- 百度统计 -->
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script>
+    function logout() {
+        localStorage.clear();
+        location.href=serverHost+'logout';
+    }
+</script>
+<!--密码修改页面-->
+<div id="edit_password">
+    <form class="layui-form" lay-filter="editPassword">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">旧密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="oldPassword" id="oldPassword" lay-verify="required|oldPassword" autocomplete="off" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">新密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="newPassword" id="newPassword" lay-verify="required|pass" autocomplete="off" class="layui-input">
+                    <span id="passstrength"></span>
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">确认新密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="reNewPassword" id="reNewPassword" lay-verify="required|pass" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="editPassword">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

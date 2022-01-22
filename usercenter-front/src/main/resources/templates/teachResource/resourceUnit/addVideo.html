@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/layui/css/layui.css}" >
+		<link media="all" rel="stylesheet" th:href="@{/modules/teachResource/style/admin.css}" >
+		<link media="all" rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+		<link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/css/expand.css}" >
+		<link rel="stylesheet" type="text/css" th:href="@{${resourceContainerHost} +  '/shareApi/resourceContainer.css'}"/>
+		<script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+		<style>
+			.layui-form-label {
+				width: 90px;
+			}
+			
+			.layui-input-block {
+				margin-left: 90px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="layui-fluid">
+			<div class="layui-row layui-col-space20">
+				<form class="layui-form" action="" lay-filter="addvideo" id="addvideo">
+					<!--基本信息开始-->
+					<div class="layui-col-md12">
+						<div class="layui-card">
+							<div class="layui-card-header">基本信息</div>
+							<div class="layui-card-body">
+								<div class="layui-row layui-form-item">
+									<div class="fill_box">
+										<div class="layui-row layui-col-space10 layui-form-item">
+											<div class="layui-col-lg6">
+												<label class="layui-form-label">文件夹名称</label>
+												<div class="layui-input-block">
+													<input type="text" name="name" lay-verify="required" autocomplete="on" class="layui-input" value="" placeholder="请填写文件夹名称">
+												</div>
+											</div>
+											<div class="layui-col-lg6">
+												<label class="layui-form-label">所属分类</label>
+												<div class="layui-input-block">
+													<select name="type" lay-filter="required">
+														<option value="">请选择分类</option>
+														<option value="1">知识</option>
+														<option value="2">技能</option>
+														<option value="3">体验</option>
+													</select>
+												</div>
+											</div>
+											<div class="layui-col-lg6">
+												<label class="layui-form-label">所属章节</label>
+												<div class="layui-input-block">
+													<select name="chapter" lay-filter="required">
+														<option value="">请选择章节</option>
+														<option value="1">第一章</option>
+														<option value="2">第二章</option>
+														<option value="3">第三章</option>
+													</select>
+												</div>
+											</div>
+											<div class="layui-col-lg6">
+												<label class="layui-form-label">所属课时</label>
+												<div class="layui-input-block">
+													<select name="lesson" lay-filter="required">
+														<option value="">请选择课时</option>
+														<option value="1">课时1</option>
+														<option value="2">课时2</option>
+														<option value="3">课时3</option>
+														<option value="4">课时4</option>
+														<option value="5">课时5</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--基本信息结束-->
+					<div class="space"></div>
+					<!--添加视频开始-->
+					<div class="layui-col-md12">
+						<div class="layui-card">
+							<div class="layui-card-header">添加视频</div>
+							<div class="layui-card-body">
+								<div class="layui-row layui-form-item">
+									<div class="fill_box">
+										<div class="layui-row layui-col-space10 layui-form-item">
+											<div class="layui-col-lg12">
+												<div class="mix_uploadbox">
+													<div class="layui-upload">
+														<div class="layui-upload-drag" id="projectvideo">
+															<i class="layui-icon"></i>
+															<p>点击选择视频，或将视频拖拽到此处</p>
+														</div>
+														<div class="layui-upload-list">
+															<table class="layui-table">
+																<thead>
+																	<tr>
+																		<th>文件名</th>
+																		<th>大小</th>
+																		<th>状态</th>
+																		<th>操作</th>
+																	</tr>
+																</thead>
+																<tbody id="pvlist"></tbody>
+															</table>
+															<div class="upload_btn">
+																<button type="button" class="layui-btn" id="uploadfilesbtn">开始上传</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--添加视频结束-->
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<button lay-filter="addvideobtn" id="addvideobtn" class="layui-btn" lay-submit>立即提交</button>
+						<button type="reset" class="layui-btn layui-btn-primary">取消</button>
+					</div>
+					<!--操作按钮结束-->
+				</form>
+			</div>
+		</div>
+		<!--右侧栏开始-->
+		<div class="quick_line">
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+
+
+		<script th:src="@{/modules/teachResource/static/layui/layui.js}"></script>
+		<script th:src="@{/modules/teachResource/static/js/vue.js}"></script>
+		<script th:src="@{/modules/teachResource/static/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{/modules/teachResource/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const apiGateWayHost = [[${apiGateWayHost}]];
+			const httpBaseUrl = /*[[${gvsunExam}]]*/'';
+			const pathType = "knowledge";
+			const siteId = "1218";
+			const username = "20180218";
+			const chapName =[[${name}]]
+		</script>
+
+		<script th:src="@{/modules/teachResource/knowledge/addVideo.js}"></script>
+		<script th:src="@{/modules/teachResource/common.js}"></script>
+	</body>
+
+</html>

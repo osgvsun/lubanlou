@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/teachPublic/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+    <style>
+        .main_content {
+            padding: 20px 20px 0;
+        }
+
+        .layui-form-label {
+            box-sizing: border-box;
+            width: 75px;
+        }
+
+        .layui-input-block {
+            margin-left: 75px;
+        }
+
+        .xm-select-parent .xm-select .xm-select-label {
+            width: auto;
+            white-space: nowrap;
+            overflow: visible;
+        }
+
+        @media screen and (max-height: 590px) {
+            .xm-select-parent .xm-form-selected dl,
+            .layui-form-selected dl {
+                max-height: 368px;
+            }
+        }
+
+        @media screen and (max-height: 500px) {
+            .xm-select-parent .xm-form-selected dl,
+            .layui-form-selected dl {
+                max-height: 155px;
+            }
+        }
+    </style>
+    <script th:inline="javascript">
+        var labRoomHost = [[${labRoomHost}]];
+        var labRoomId = [[${labRoomId}]];
+    </script>
+</head>
+
+<body>
+
+<div class="main_content_box">
+    <div class="full_box">
+        <!--主体开始-->
+        <div class="content_box">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <span id="labDetailTitle"></span>
+                            <label class="layui-btn header_edit editlab hide" data-method="editlab">编辑</label>
+                        </div>
+                        <div class="layui-card-body">
+                            <form class="layui-form detail_item" action="" lay-filter="labdetailbox">
+                                <div class="layui-row">
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">实验室编号</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="number"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">实验室名称</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="name"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">实验室英文名称</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="englishname"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg12">
+                                        <label class="layui-form-label">实验室地点</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="address"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">所属实验中心</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="core"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">所属实验室</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="lab"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">实验室分类</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="sort"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">有无多媒体</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="media"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg8">
+                                        <label class="layui-form-label">实验室类别</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="category"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">实验室类型</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="cdictionaryByLabRoom"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">性质</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="labRoomNature"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">所属校区</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="campus"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">所属楼宇</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="building"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">楼层</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="floor"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg12">
+                                        <label class="layui-form-label">所属房间</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="systemRoom"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">所属基地</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="base"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">使用面积(M²)</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="area"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">实验室容量</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="capacity"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">建立时间</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="date"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">所属学科</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="lesson"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">是否可预约</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="appointment"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">是否可排课</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="isOpen"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">是否校企共建</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="construction"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">是否生产性实验室</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="productivelab"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">是否虚拟仿真实验室</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="simulationlab"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg12">
+                                        <label class="layui-form-label">规章制度</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="rule"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg12">
+                                        <label class="layui-form-label">实验室描述</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="describe"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg12">
+                                        <label class="layui-form-label">注意事项</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="attention"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg12">
+                                        <label class="layui-form-label">获奖信息</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="award"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script th:src="@{/js/cookie.js}"></script>
+<script th:src="@{/modules/labBranch/static/js/global.js}"></script>
+<script th:src="@{/modules/labBranch/static/js/labTreeCommonFn.js}"></script>
+<script th:src="@{/modules/labBranch/labDetail.js}"></script>
+</body>
+</html>

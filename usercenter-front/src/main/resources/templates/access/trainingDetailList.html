@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 139px;
+			}
+			
+			.layui-input-block {
+				margin-left: 139px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="trainingdetaillistbox" id="trainingdetaillistbox">
+				<div class="layui-fluid">
+					<!--结果录入开始-->
+					<div class="layui-card">
+						<div class="layui-card-header">结果录入</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space10">
+								<!--搜索开始-->
+								<div class="layui-col-md12 search_line">
+									<div class="layui-inline">
+										<input type="radio" name="result" value="通过" title="通过">
+										<input type="radio" name="result" value="不通过" title="不通过">
+									</div>
+								</div>
+								<!--搜索结束-->
+								<div class="layui-col-md12">
+									<!--表单开始-->
+									<table class="layui-hide" id="trainingdetaillist" lay-filter="trainingdetaillist"></table>
+									<script type="text/html" id="toolbar">
+<!--										<div class="layui-inline">-->
+											<input type="checkbox" name="resultCheck" value="{{d.id}}" lay-skin="switch" lay-text="通过|未通过" lay-filter="operation" {{ d.result == 1 ? 'checked' : '' }}>
+<!--										</div>-->
+									</script>
+									<!--表单结束-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--结果录入结束-->
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="trainingdetaillistbtn" id="trainingdetaillistbtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<!--<a href="#"></a>-->
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<div th:replace="/access/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const entityId = [[${entityId}]];
+			const entityType = [[${entityType}]];
+			// const entityType = 'DEV'
+		</script>
+		<script th:src="@{/modules/access/trainingDetailList.js}"></script>
+	</body>
+</html>​​​

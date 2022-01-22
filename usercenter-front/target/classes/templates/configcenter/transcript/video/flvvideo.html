@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>flv播放</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/expandReview.css}" media="all">
+		<!--当前页单独查看辅助样式-->
+		<style>
+			body {
+				margin: 0;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<video name="videoElement" id="flvvideo" class="live_box" controls></video>
+		<script type="text/javascript" th:src="@{/plugins/ckplayer/flv.js}"></script>
+		<script type="text/javascript">
+			if(flvjs.isSupported()) {
+				startVideo()
+			}
+			function startVideo() {
+				var videoElement = document.getElementById('flvvideo');
+				var flvPlayer = flvjs.createPlayer({
+					type: 'flv',
+					isLive: true,
+					hasAudio: true,
+					hasVideo: true,
+					autoplay: false,
+					enableStashBuffer: true,
+					url:'http://img.ksbbs.com/asset/Mon_1704/15868902d399b87.flv'
+				});
+				flvPlayer.attachMediaElement(videoElement);
+				flvPlayer.load();
+				flvPlayer.play();
+			}
+
+			/*videoElement.addEventListener('click', function(){
+			    alert( '是否支持点播视频：' + flvjs.getFeatureList().mseFlvPlayback + ' 是否支持httpflv直播流：' + flvjs.getFeatureList().mseLiveFlvPlayback )
+			})*/
+
+			function destoryVideo() {
+				flvPlayer.pause();
+				flvPlayer.unload();
+				flvPlayer.detachMediaElement();
+				flvPlayer.destroy();
+				flvPlayer = null;
+			}
+
+			function reloadVideo() {
+				destoryVideo()
+				startVideo()
+			}
+		</script>
+	</body>
+
+</html>

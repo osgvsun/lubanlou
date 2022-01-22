@@ -1,0 +1,155 @@
+#option_tap{
+    width: 100%;
+}
+.option_tap{
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+    line-height: 30px;
+    background-color: #ff9900;
+}
+.intro{
+    height: 20%;
+    padding-top: 30px;
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+}
+.intro_left{
+    display: inline-block;
+    vertical-align:middle;
+    width: 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.intro_right{
+    display: inline-block;
+    vertical-align:top;
+    width: 65%;
+    float: right;
+    line-height: 30px;
+}
+.intro_right:hover{
+    text-decoration: none;
+}
+.intro_right li{
+    list-style: none;
+    word-wrap: break-word;
+    word-break: normal;
+}
+.deBasicInfo{
+    background: #e4e4e4;
+    padding: 10px;
+    margin-bottom: 20px;
+    height: 171.3px;
+}
+.infor_table1{
+    width: 100%;
+    text-align: left;
+}
+.infor_table1 tr{
+    line-height: 35px;
+}
+.infor_table1 tr td:nth-child(2){
+    width: 75%;
+}
+.name table{
+    width: 100%;
+    text-align: center;
+}
+
+.img{
+    height: 100%;
+    margin: 0px;
+    /*padding: 60% 0 0 0;*/
+    /*position: relative;*/
+}
+.infor{
+    line-height: 50px;
+    font-size: 18px;
+}
+.person_infor{
+    padding: 0 10px 0 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin-bottom: 25px;
+    -webkit-line-clamp: 4; //文本行数
+}
+.intro_left img{
+    max-width: 100%;
+    /*position: absolute;*/
+    top: 0;
+    margin: 0;
+    vertical-align:middle;
+
+}
+.introduce{
+    margin-top: 30px;
+}
+.detail_left{
+    display: inline-block;
+    vertical-align:top;
+    width: 20%;
+}
+.detail_left img{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    vertical-align: middle;
+    padding: 0px;
+}
+.detail_right{
+    display: inline-block;
+    vertical-align:middle;
+    height:100%;
+    width: 79%;
+}
+.basic_item{
+    width: 47%;
+    display: inline-block;
+    padding: 0 1%;
+    vertical-align: top;
+}
+.basic_item_div{
+    width: 100%;
+    white-space: normal;
+    /*text-overflow: ellipsis;*/
+    display: -webkit-box;
+    display: inline-block;
+    line-height: 25px;
+}
+.detail_img{
+    height: 100%;
+    width: 80%;
+    padding: 106% 0 0 0;
+    margin: 0px;
+    background: #8a939c21;
+    position: relative;
+}
+.name{
+    background: #e4e4e4;
+    padding: 10px;
+    margin-bottom: 20px;
+    /*display: none;*/
+}
+.infor_table tr{
+    border:none;
+}
+@media only screen and (max-width: 950px)and (min-width:100px) {
+    .detail_right{
+        width: 70%;
+    }
+    .infor_table1 tr td:nth-child(2) {
+        width: 70%;
+    }
+    .basic_item {
+        width: 100%;
+    }
+    .deBasicInfo{
+        height: auto;
+    }
+
+}

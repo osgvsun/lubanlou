@@ -1,0 +1,28 @@
+<configuration>
+    <contextName>transcript</contextName>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="redisAppender" class="com.cwbase.logback.RedisAppender">
+        <source>${log_school:-gvsun}-transcript</source>
+        <host>${log_redis_host:-localhost}</host>
+        <port>${log_redis_port:-6379}</port>
+        <password>${log_redis_password:-123456)}</password>
+        <channel>microservices</channel>
+    </appender>
+
+    <root level="${log_level:-info}">
+        <appender-ref ref="consoleAppender"/>
+        <if condition='property("enable_logging").equals("true")'>
+            <then>
+                <appender-ref ref="redisAppender"/>
+            </then>
+        </if>
+    </root>
+
+    <logger name="net.gvsun.datasource.ClientDataSourceRouter" level="info"/>
+</configuration>

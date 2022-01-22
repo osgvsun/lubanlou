@@ -1,0 +1,68 @@
+{
+	"code": 0,
+	"data": [
+		{
+			"id": 1,
+			"label": "目录1",
+			"children": [
+				{
+					"id": 2,
+					"label": "目录1.1",
+					"children": [
+						{
+							"id": 3,
+							"label": "目录1.1.1"
+						}, {
+							"id": 4,
+							"label": "目录1.1.2",
+							"checked": true
+						}
+					]
+				}, {
+					"id": 22,
+					"label": "目录1.2",
+					"children": [
+						{
+							"id": 23,
+							"label": "目录1.2.1"
+						}, {
+							"id": 24,
+							"label": "目录1.2.2",
+							"checked": true
+						}
+					]
+				}
+			]
+		}, {
+			"id": 5,
+			"label": "目录2",
+			"children": [
+				{
+					"id": 6,
+					"label": "目录2.1"
+				}
+			]
+		}, {
+			"id": 10,
+			"label": "目录3",
+			"children": [
+				{
+					"id": 11,
+					"label": "目录3.1"
+				}, {
+					"id": 12,
+					"label": "目录3.2",
+					"children": [
+						{
+							"id": 13,
+							"label": "目录3.2.1"
+						}, {
+							"id": 14,
+							"label": "目录3.2.2"
+						}
+					]
+				}
+			]
+		}
+	]
+}

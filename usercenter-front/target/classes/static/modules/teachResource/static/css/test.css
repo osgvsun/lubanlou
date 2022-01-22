@@ -1,0 +1,3184 @@
+/*最低层级样式控制*/
+
+* {
+	font-size: 12px;
+	color: #606266;
+	margin: 0;
+	padding: 0;
+	outline: none;
+	list-style: none;
+	text-decoration: none;
+	font-family: "微软雅黑";
+}
+
+
+/*所有字体不可复制*/
+
+
+/** {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}*/
+
+body {
+	background: #fff;
+}
+
+img {
+	border: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+
+/*所有样式 box-sizing: border-box;基础*/
+
+.button {
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	/*上部有叠层
+    margin:5px 0 0 5px;*/
+	border-radius: 3px;
+}
+
+.big_button {
+	padding: 0 20px;
+	line-height: 29px;
+	height: 30px;
+}
+
+.small_button {
+	height: 18px;
+	line-height: 17px;
+}
+
+
+/*表单内按钮,同色系,字体normal*/
+
+
+/*提示按钮/字符,同色系,height:18px;line-height: 17px;border-radius: 100%;*/
+
+
+/*select,*/
+
+
+/*input[type="text"],*/
+
+
+/*input[type="password"],*/
+
+
+/*input[type="number"],*/
+
+
+/*input[type="tel"]{*/
+
+
+/*border-radius: 3px;*/
+
+
+/*border: 1px solid #dcdfe6;*/
+
+
+/*width: 160px;*/
+
+
+/*height: 24px;*/
+
+
+/*line-height: 23px;*/
+
+
+/*padding: 0 7px;*/
+
+
+/*}*/
+
+textarea {
+	resize: none;
+	line-height: 19px;
+	padding: 6px 7px;
+}
+
+
+/*组合搜索标签栏目与按钮组合之间magin为10px*/
+
+
+/*按钮样式统一*/
+
+
+/*.layui-btn {*/
+
+
+/*display: inline-block;*/
+
+
+/*height: 34px;*/
+
+
+/*line-height: 34px;*/
+
+
+/*padding: 0 18px;*/
+
+
+/*background-color: #009688;*/
+
+
+/*color: #fff;*/
+
+
+/*white-space: nowrap;*/
+
+
+/*text-align: center;*/
+
+
+/*font-size: 14px;*/
+
+
+/*border: 1px;*/
+
+
+/*cursor: pointer;*/
+
+
+/*border-radius: 2px;*/
+
+
+/*}*/
+
+
+/*.layui-btn, .layui-input, .layui-select, .layui-textarea, .layui-upload-button {*/
+
+
+/*outline: 0;*/
+
+
+/*-webkit-appearance: none;*/
+
+
+/*transition: all .3s;*/
+
+
+/*-webkit-transition: all .3s;*/
+
+
+/*box-sizing: border-box;*/
+
+
+/*}*/
+
+
+/*.layui-btn, .layui-disabled, .layui-icon, .layui-unselect {*/
+
+
+/*-webkit-user-select: none;*/
+
+
+/*-ms-user-select: none;*/
+
+
+/*-moz-user-select: none;*/
+
+
+/*}*/
+
+
+/*.layui-btn, .layui-inline, img {*/
+
+
+/*vertical-align: middle;*/
+
+
+/*}*/
+
+
+/*button, input {*/
+
+
+/*font-family: inherit;*/
+
+
+/*font-size: inherit;*/
+
+
+/*line-height: inherit;*/
+
+
+/*margin: 0;*/
+
+
+/*font: inherit;*/
+
+
+/*color: inherit;*/
+
+
+/*font-style: inherit;*/
+
+
+/*font-weight: inherit;*/
+
+
+/*outline: 0;*/
+
+
+/*}*/
+
+
+/*button, html input[type=button], input[type=reset], input[type=submit] {*/
+
+
+/*-webkit-appearance: button;*/
+
+
+/*cursor: pointer;*/
+
+
+/*}*/
+
+
+/*button {*/
+
+
+/*text-transform: none;*/
+
+
+/*overflow: visible;*/
+
+
+/*text-align: center;*/
+
+
+/*border: none;*/
+
+
+/*outline: none;*/
+
+
+/*}*/
+
+
+/*******************************************************************************************************************************/
+
+
+/******************************************************* table标签样式合集***************************************/
+
+
+/******单双色table*******************/
+
+.f-table {
+	border: 1px solid #e2e2e2;
+	width: 100%;
+	margin: 10px 0;
+	background-color: #fff;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+
+/*******************************/
+
+.layui-table[lay-skin=line] {
+	border: 0px solid #e2e2e2;
+}
+
+.layui-table {
+	width: 100%;
+	margin: 10px 0;
+	background-color: #fff;
+}
+
+table {
+	background-color: transparent;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+
+/************系统管理-教务课程管理(bootstrap-table插件)************************/
+
+.bootstrap-table .table,
+.bootstrap-table .table>tbody>tr>td,
+.bootstrap-table .table>tbody>tr>th,
+.bootstrap-table .table>tfoot>tr>td,
+.bootstrap-table .table>tfoot>tr>th,
+.bootstrap-table .table>thead>tr>td {
+	padding: 8px!important;
+}
+
+.bootstrap-table .table {
+	margin-bottom: 0!important;
+	border-bottom: 0 solid #e4eaec;
+	border-collapse: collapse!important;
+}
+
+.fixed-table-container table {
+	width: 100%;
+}
+
+.table-bordered {
+	border: 0px solid #ddd;
+}
+
+.table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+
+table {
+	background-color: transparent;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.s-table {
+	padding: 8px!important;
+	margin-bottom: 0!important;
+	border-bottom: 1px solid #e4eaec;
+	width: 100%;
+	border: 1px solid #ddd;
+	max-width: 100%;
+	background-color: transparent;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+
+/******************课表table*****************/
+
+.dm_right_tab {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #bbb;
+}
+
+table {
+	background-color: transparent;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.dm_right_tab tbody tr:hover th,
+.dm_right_tab tbody tr:hover td,
+.td_line,
+.dm_right_tab tbody .td_line:nth-child(odd),
+.dm_right_tab tbody .td_line:nth-child(even) {
+	background: #feffe8;
+}
+
+.td_select,
+.dm_right_tab tbody .td_select:nth-child(odd),
+.dm_right_tab tbody .td_select:nth-child(even),
+.dm_right_tab thead th:nth-child(odd):hover,
+.dm_right_tab thead th:nth-child(even):hover,
+.dm_right_tab tbody th:nth-child(odd):hover,
+.dm_right_tab tbody th:nth-child(even):hover,
+.dm_right_tab tbody td:nth-child(odd):hover,
+.dm_right_tab tbody td:nth-child(even):hover {
+	background: #fdffc0;
+}
+
+
+/***************************/
+
+.t-table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #bbb;
+	background-color: transparent;
+	border-spacing: 0;
+}
+
+
+/********************************技能里的table********************/
+
+.skill_ta {
+	position: absolute;
+	top: 50px;
+	left: 0;
+	background: #ffffff !important;
+	z-index: 999;
+}
+
+.layui-table {
+	width: 100%;
+	margin: 10px 0;
+	background-color: #fff;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+
+/*********************************************        Tr标签集合        ******************************************/
+
+
+/**************单双色**********************/
+
+.f-tr {
+	background-color: #f2f2f2;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+}
+
+.f-tr tr:nth-child(odd) td {
+	background: #f4f4f5;
+	;
+}
+
+
+/***********************************/
+
+.layui-table thead tr,
+.layui-table-fixed-l tr {
+	background-color: #ffffff;
+	line-height: 20px;
+	text-align: left;
+	padding: 7px;
+}
+
+.layui-table thead tr:hover,
+.layui-table tbody tr:hover {
+	background-color: #f2f2f2 !important;
+}
+
+.layui-table tr {
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	line-height: 20px;
+	text-align: left;
+	padding: 2px;
+}
+
+.layui-table tr:nth-child(odd) td {
+	background: #f4f4f5;
+}
+
+
+/************系统管理-教务课程管理(bootstrap-table插件)************************/
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+	background-color: #fff;
+}
+
+
+/* *******************************************            th标签合集           ****************************************/
+
+
+/***************单双色************************/
+
+.layui-table[lay-skin=line] th {
+	text-align: center;
+	border-width: 0;
+}
+
+.layui-table th {
+	border: 0px solid #e2e2e2;
+	position: relative;
+	padding: 7px 0px;
+	min-height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	text-align: left;
+	font-weight: bold;
+}
+
+th {
+	text-align: left;
+	padding: 0;
+}
+
+
+/****************************************/
+
+.layui-table[lay-skin=line] th {
+	text-align: center;
+	border-width: 0;
+	position: relative;
+	padding: 7px 7px;
+	min-height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+
+/************系统管理-教务课程管理(bootstrap-table插件)************************/
+
+.fixed-table-container {
+	position: relative;
+	clear: both;
+	border: 0 solid #e4eaec;
+}
+
+.table>thead:first-child>tr:first-child>th {
+	border-top: 0;
+	background-color: #ffffff;
+}
+
+.table-bordered tr:nth-child(odd) td {
+	background: #f4f4f5;
+}
+
+.bootstrap-table .table thead>tr>th {
+	padding: 0;
+	margin: 0;
+	vertical-align: bottom;
+	border-bottom: 0 solid #e4eaec;
+}
+
+.fixed-table-container thead th:first-child {
+	border-left: none;
+}
+
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>th {
+	border: 0 solid #ddd;
+	border-bottom-width: 2px;
+}
+
+.table>tbody>tr>th,
+.table>tfoot>tr>th,
+.table>thead>tr>th {
+	padding: 8px;
+	line-height: 1.42857143;
+	border-top: 1px solid #ddd;
+	vertical-align: bottom;
+	border-bottom: 2px solid #ddd;
+}
+
+.fixed-table-container thead th {
+	height: 0;
+	padding: 0;
+	margin: 0;
+	border-left: 1px solid #e4eaec;
+}
+
+.table th {
+	vertical-align: middle;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+th {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	text-align: left;
+}
+
+
+/***********************************************/
+
+.s-th {
+	border-top: 0;
+	background-color: #f9f9f9;
+	padding: 0;
+	margin: 0;
+	vertical-align: bottom;
+	border-bottom: 1px solid #e4eaec;
+	border-left: none;
+	border: 1px solid #ddd;
+	line-height: 1.42857143;
+	border-top: 1px solid #ddd;
+	border-bottom: 2px solid #ddd;
+	height: 0;
+	border-left: 1px solid #e4eaec;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	text-align: left;
+}
+
+
+/***********课表th标签******************************/
+
+.dm_right_tab .head_th {
+	color: #666;
+	font-size: 1.1em;
+}
+
+.dm_right_tab th {
+	font-weight: normal;
+	text-align: center;
+	background: #f2f2f2;
+	color: #eee;
+	font-size: 0.9em;
+	letter-spacing: 1px;
+	padding: 7px 0;
+	border: 1px solid #bbb;
+	border-top: none;
+	border-left: none;
+	width: 12.5%;
+}
+
+th {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	text-align: left;
+}
+
+
+/*************************************/
+
+.t-th {
+	color: #666;
+	font-size: 1.1em;
+	font-weight: normal;
+	text-align: center;
+	background: #f2f2f2;
+	letter-spacing: 1px;
+	padding: 7px 0;
+	border: 1px solid #bbb;
+	border-top: none;
+	border-left: none;
+	width: 12.5%;
+	margin: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/******************************技能table的th************************************/
+
+.layui-table th span {
+	line-height: 24px;
+	font-weight: bold;
+}
+
+
+/************************************************           td集合          **********************************************/
+
+
+/*********************单双色*******************/
+
+.layui-table[lay-skin=line] td {
+	border-width: 1px 0 0 0;
+	text-align: center;
+}
+
+.layui-table td {
+	position: relative;
+	padding: 7px 7px;
+	min-height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.layui-table td {
+	border: 1px solid #e2e2e2;
+}
+
+td {
+	padding: 0;
+}
+
+
+/********************************/
+
+.f-td {
+	text-align: center;
+	position: relative;
+	padding: 9px 15px;
+	min-height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	border: 1px solid #e2e2e2;
+}
+
+
+/************系统管理-教务课程管理(bootstrap-table插件)************************/
+
+.fixed-table-container tbody tr:first-child td {
+	border-top: 1px solid #ddd;
+}
+
+.bootstrap-table .table>tbody>tr>td {
+	padding: 8px!important;
+}
+
+.fixed-table-container tbody td:first-child {
+	border-left: none;
+}
+
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td,
+.table-bordered>thead>tr>td {
+	border: 1px solid #ddd;
+	border-width: 1px 0 0 0;
+}
+
+.table>tbody>tr>td,
+.table>tfoot>tr>td,
+.table>thead>tr>td {
+	padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+}
+
+.fixed-table-container tbody td {
+	border-left: 1px solid #e4eaec;
+}
+
+.table td {
+	vertical-align: middle;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+td {
+	padding: 0;
+	margin: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/************************************/
+
+.s-td {
+	border-top: none;
+	padding: 8px!important;
+	border-left: none;
+	border: 1px solid #ddd;
+	line-height: 1.42857143;
+	vertical-align: top;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/*******课表 td样式**************/
+
+.dm_right_tab td {
+	text-align: left;
+	background: #fff;
+	border: 1px solid #bbb;
+	overflow: hidden;
+	font-size: 1em;
+	width: 12.5%;
+}
+
+td {
+	padding: 0;
+	margin: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/****************************/
+
+.t-td {
+	text-align: left;
+	background: #fff;
+	border: 1px solid #bbb;
+	overflow: hidden;
+	font-size: 1em;
+	width: 12.5%;
+	padding: 0;
+	margin: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/*************************技能td标签************************************/
+
+.skill-table table tr td {
+	color: #606266;
+	font-size: 12px;
+}
+
+
+/*************************cms管理和系统管理中的新建或编辑页面的table样式*************************/
+
+.layui-table_edit {
+	width: 100%;
+	margin: 10px 0;
+	background-color: #fff;
+}
+
+.layui-table_edit td,
+.layui-table_edit th {
+	position: relative;
+	padding: 9px 15px;
+	min-height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+}
+
+.layui-table_edit td,
+.layui-table_edit th,
+.layui-table_edit[lay-skin=row],
+.layui-table_edit[lay-skin=line] {
+	border: 0px solid #e2e2e2;
+}
+
+.layui-table_edit th {
+	text-align: left;
+	font-weight: 400;
+	width: 15%;
+}
+
+.course_box_edit {
+	width: auto;
+	height: auto;
+	float: left;
+	position: relative;
+	margin: 0;
+	overflow: hidden;
+	background-color: rgba(220, 38, 38, 0);
+	/* box-shadow: -0.4em 0.45em 0.5em #A7A7A7; */
+}
+
+.layui-table_edit .layui-form-select {
+	position: relative;
+	display: inline-block;
+}
+
+
+/*******************************************************************************************************************************/
+
+
+/*查看搜索按钮*/
+
+.new_project_title>button .layui-btn,
+.layui-btn {
+	display: inline-block;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 18px;
+	background-color: #009688;
+	color: #fff;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 12px;
+	border: 1px;
+	cursor: pointer;
+	border-radius: 2px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	vertical-align: middle;
+	font-family: inherit;
+	margin: 0;
+	text-transform: none;
+	overflow: visible;
+	/*something-new*/
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #fff;
+	background-color: #409EFF;
+	border-color: #409EFF;
+	/*上部有叠层
+    margin:5px 0 0 5px;*/
+	border-radius: 3px;
+}
+
+.new_project_title button {
+	/* background: transparent; */
+	background-color: #409EFF;
+	float: right;
+}
+
+.layui-btn:hover {
+	opacity: .8;
+	filter: alpha(opacity=80);
+	color: #fff;
+}
+
+
+/*取消按钮*/
+
+.layui-btn-primary {
+	display: inline-block;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 18px;
+	background-color: #fff;
+	color: #409EFF;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 14px;
+	border: 1px solid #409EFF;
+	cursor: pointer;
+	border-radius: 2px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	vertical-align: middle;
+	font-family: inherit;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	/*something-new*/
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	/*上部有叠层
+    margin:5px 0 0 5px;*/
+	border-radius: 3px;
+}
+
+
+/*课程内的定位卡片*/
+
+.top_nav a:active,
+.top_nav .top_nav_select {
+	float: left;
+	display: block;
+	font-weight: normal;
+	text-decoration: none;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	font-size: 12px;
+	font-family: inherit;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: 0;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #fff;
+	background-color: #409EFF;
+	border-color: #409EFF;
+	border-radius: 3px;
+	color: #fff;
+}
+
+.top_nav .top_nav_select:hover {
+	opacity: .8;
+	background-color: #409EFF;
+	color: #fff;
+}
+
+.top_nav a:hover {
+	opacity: .8;
+	color: #409EFF;
+	text-decoration: none;
+	background-color: #ecf5ff;
+}
+
+
+/*课程内的定位卡片*/
+
+.top_nav a {
+	float: left;
+	display: block;
+	font-size: 12px;
+	color: #cc0000;
+	font-weight: normal;
+	background: #ffffff;
+	border: 1px solid #b3d8ff;
+	padding: 5px 17px;
+	border-radius: 32px;
+	margin: 2px 15px 0 0;
+	text-decoration: none;
+	/*something-new*/
+	height: 24px;
+	line-height: 21px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #409EFF;
+	background: #fff;
+	/*上部有叠层
+    margin:5px 0 0 5px;*/
+	border-radius: 3px;
+}
+
+
+/************知识内的定位卡片***************/
+
+.main_btn button:nth-child(1) {
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	font-size: 12px;
+	font-family: inherit;
+	-webkit-appearance: button;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: 0;
+	/*something-new*/
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #fff;
+	background-color: #409EFF;
+	border-color: #409EFF;
+	/*上部有叠层
+    margin:5px 0 0 5px;*/
+	border-radius: 3px;
+	color: #409EFF;
+	background-color: #fff;
+	border-radius: 3px;
+	border: 1px solid #b3d8ff;
+}
+
+.main_btn button:nth-child(1):hover {
+	opacity: .8;
+	filter: alpha(opacity=80);
+	color: #409EFF;
+}
+
+.main_btn button:nth-child(1).activeBox {
+	background: #409EFF;
+	color: #fff;
+	border-color: #409EFF;
+}
+
+
+/*************课程信息按钮******************/
+
+.part_content .layui-btn {
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	font-size: 12px;
+	font-family: inherit;
+	-webkit-appearance: button;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: 0;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #fff;
+	background-color: #409EFF;
+	border-color: #409EFF;
+	border-radius: 3px;
+	color: #409EFF;
+	background-color: #fff;
+	border-radius: 3px;
+	border: 1px solid #b3d8ff;
+}
+
+
+/*********************知识-章节资源-添加按钮**********************/
+
+.upload_type li button {
+	border: 1px solid #bbb;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 2px 8px;
+	background: transparent;
+	margin-left: 10px;
+	line-height: 20px;
+	font-family: inherit;
+	font-size: inherit;
+	-webkit-appearance: button;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	outline: none;
+	color: inherit;
+	outline: 0;
+}
+
+.upload_type li a button {
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	font-size: 12px;
+	font-family: inherit;
+	-webkit-appearance: button;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: 0;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #fff;
+	background-color: #409EFF;
+	border-color: #409EFF;
+	border-radius: 3px;
+	color: #409EFF;
+	background-color: #fff;
+	border-radius: 3px;
+	border: 1px solid #b3d8ff;
+}
+
+
+/*********************知识-章节资源-添加按钮二级页面-按钮**********************/
+
+.btn_new .layui-btn {
+	padding: 0 30px;
+	position: inherit !important;
+	padding: 0 20px;
+	line-height: 29px;
+	height: 30px;
+}
+
+
+/*********************技能-按钮**********************/
+
+.main_btn1 button:nth-child(1) {
+	margin-left: 0px;
+	padding: 5px 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-family: inherit;
+	line-height: inherit;
+	-webkit-appearance: button;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: none;
+	outline: 0;
+	/*something-new*/
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #409EFF;
+	background-color: #fff;
+	border: 1px solid #b3d8ff;
+	/*上部有叠层
+    margin:5px 0 0 5px;*/
+	border-radius: 3px;
+}
+
+.main_btn1 button:nth-child(1):hover {
+	opacity: .8;
+	filter: alpha(opacity=80);
+	color: #409EFF;
+}
+
+.main_btn1 button:nth-child(1).activeBox {
+	background: #409EFF;
+	color: #fff;
+}
+
+
+/************知识和技能面板下拉页面的按钮********************/
+
+.know_td_i {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #409EFF;
+	text-align: center;
+	line-height: 24px!important;
+	color: #fff;
+	margin-right: 10px;
+}
+
+.know_td_i1 {
+	width: 0px;
+	height: 0px;
+	border-radius: 50%;
+	background: #409EFF;
+	text-align: center;
+	line-height: 24px!important;
+	color: #fff;
+	margin-right: 24px;
+}
+
+.know_content button {
+	background: transparent;
+	margin-left: 10px;
+	height: 24px;
+	line-height: 24px;
+}
+
+.know_content1 li .knowUl:nth-child(1) {
+	float: left;
+	width: 100%;
+	padding-left: 3px;
+	padding-top: 15px;
+}
+
+.viewRefe {
+	font-size: 12px;
+	background: #409EFF !important;
+	color: #fff;
+	border-radius: 4px;
+	padding: 0px 6px;
+	margin-left: 20px !important;
+}
+
+.know_content button:hover {
+	opacity: .8;
+}
+
+.line_line {
+	position: absolute;
+	left: 11px;
+	top: 0;
+	width: 1.5px;
+	height: 100%;
+	background: #409EFF;
+	z-index: -10;
+}
+
+
+/*********************技能-编辑概要按钮**********************/
+
+.title_btn button {
+	float: left;
+	margin-left: 6px;
+	background: transparent;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	-webkit-appearance: button;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: none;
+	color: inherit;
+	outline: 0;
+}
+
+
+/*********************技能-视频地图按钮**********************/
+
+.main_btn button {
+	padding: 5px 10px;
+	margin-left: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	background: #1aa1e1;
+	color: #fff;
+	font-family: inherit;
+	line-height: inherit;
+	-webkit-appearance: button;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: none;
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/**************************体验-发布到首页按钮****************************/
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: none;
+	margin: 0;
+	color: inherit;
+	outline: 0;
+}
+
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+
+/********************************表单内-删除样式****************************************/
+
+.layui-table td span a {
+	color: #f56c6c;
+}
+
+
+/**************************资源容器-查询-取消按钮****************************/
+
+.rc_tool_box input[type=button],
+.rc_tool_box a {
+	display: inline-block;
+	font-size: 13px;
+	box-sizing: border-box;
+	height: 30px;
+	line-height: 28px;
+	background: #fff;
+	padding: 0 5px;
+	border: 1px solid #abbac3;
+	border-bottom-width: 2px;
+	border-radius: 4px;
+	color: #80909a;
+	transition: all 0.3s;
+	-webkit-appearance: button;
+	cursor: pointer;
+	font-family: inherit;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	outline: none;
+	margin: 0;
+	outline: 0;
+	outline: none;
+	outline: 0;
+	outline: none;
+	outline: 0;
+}
+
+
+/**************************课程复制-课程一键复制按钮****************************/
+
+button,
+input,
+select {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: none;
+	margin: 0;
+	color: inherit;
+	outline: 0;
+	outline: none;
+	outline: 0;
+	outline: none;
+	outline: 0;
+}
+
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	text-transform: none;
+	overflow: visible;
+	text-align: left;
+	border: none;
+	outline: none;
+	margin: 0;
+	color: inherit;
+	outline: 0;
+	outline: none;
+	outline: 0;
+	outline: none;
+	outline: 0;
+}
+
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+
+/**************************编辑-确定按钮****************************/
+
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	margin: 0;
+	color: inherit;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/**************************系统管理-取消按钮****************************/
+
+.layui-btn+.layui-btn {
+	margin-left: 10px;
+}
+
+.layui-btn-primary:hover {
+	border-color: #1E9FFF !important;
+}
+
+.layui-btn-primary:hover {
+	border-color: #009688;
+	color: #333;
+	/*something-new*/
+	color: #409EFF;
+	border-color: #c6e2ff;
+	background-color: #ecf5ff;
+}
+
+
+/**************************系统管理-新建按钮****************************/
+
+.layui-btn+.layui-btn {
+	margin-left: 5px;
+}
+
+
+/**************************系统管理-教学课程管理-发布创新课程按钮****************************/
+
+.inner-style1 {
+	width: 20%;
+}
+
+
+/**************************系统管理-教学课程管理-发布创新课程按钮****************************/
+
+.layui-btn+.layui-btn.inner-style2 {
+	width: 37.5%;
+	margin-left: 0px;
+}
+
+
+/**************************系统管理-教学课程管理-生成二维码按钮****************************/
+
+.layui-btn+.layui-btn.inner-style3 {
+	width: 39%;
+	margin-left: 0px;
+}
+
+
+/**************************系统管理-undifined1-删除按钮****************************/
+
+.layui-btn-danger {
+	background-color: #FF5722;
+}
+
+
+/**************************系统管理-undifined2-信息展示按钮****************************/
+
+.listuser-style1 {
+	width: 25%;
+	padding-left: 13px;
+}
+
+
+/*************************系统管理-undifined2-加入黑名单按钮***************************/
+
+.listuser-style2 {
+	width: 28%;
+}
+
+
+/************************系统管理-undifined2-从黑名移除单按钮**************************/
+
+.listuser-style3 {
+	width: 35%;
+}
+
+
+/************************系统管理-undifined2-设置学校按钮**************************/
+
+.listuser-style4 {
+	width: 25%;
+}
+
+
+/**********************cms管理--活动日历--新建按钮**************************/
+
+.layui-btn2 {
+	display: inline-block;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 18px;
+	background-color: #009688;
+	color: #fff;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 12px;
+	border: 1px;
+	cursor: pointer;
+	border-radius: 2px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	vertical-align: middle;
+	font-family: inherit;
+	margin: 0;
+	text-transform: none;
+	overflow: visible;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #fff;
+	background-color: #409EFF;
+	border-color: #409EFF;
+	border-radius: 3px;
+}
+
+
+/************************切换权限-保存按钮**************************/
+
+button,
+input,
+optgroup,
+option,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	outline: 0;
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/*******************************************************/
+
+.ex-table td span input:first-child {
+	margin-left: 0px;
+	background: transparent;
+	color: #409EFF;
+	border: none;
+	outline: none;
+}
+
+.ex-table td span input:first-child:hover {
+	text-decoration: underline;
+}
+
+
+/*********************浏览提交作业-返回按钮***********************************/
+
+.part_title button {
+	background: transparent;
+	margin-left: 5px;
+	padding: 0 20px;
+	line-height: 29px;
+	height: 30px;
+	color: #666 !important;
+}
+
+
+/**********************表单内的操作按钮***************************/
+
+a {
+	color: #409EFF;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+a:focus,
+a:hover {
+	color: #409EFF;
+	text-decoration: underline;
+}
+
+a:active,
+a:hover {
+	outline: 0;
+}
+
+a:hover {
+	color: #409EFF;
+}
+
+a:active,
+a:hover {
+	outline: 0;
+}
+
+a {
+	color: #409EFF;
+	text-decoration: none;
+}
+
+a {
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.widget .ministat .label {
+	font-size: 12px;
+	font-style: normal;
+	color: #409EFF;
+	font-weight: unset;
+}
+
+.widget .ministat .label:hover {
+	font-size: 12px;
+	font-style: normal;
+	color: #409EFF;
+	font-weight: 700;
+}
+
+
+/************资源容器按钮**********/
+
+.search_text .search_start {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	font-size: 15px;
+	font-style: normal;
+	color: #fff;
+	letter-spacing: 1px;
+	height: 34px;
+	line-height: 34px;
+	padding: 0px 18px;
+	margin: 0;
+	background: #409EFF;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.tag_select,
+.part1 button:hover,
+.part1 button:focus {
+	color: #409EFF!important;
+}
+
+#nav1_all li a {
+	color: #409EFF;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	padding: 0 20px 0 20px;
+	_padding: 0 10px;
+	height: 39px;
+	line-height: 39px;
+	white-space: nowrap;
+}
+
+#nav1_all ul li a {
+	background-image: none;
+	padding: 0px 10px;
+	margin: 0px;
+	height: 32px;
+	line-height: 32px;
+	color: #fff;
+	font-weight: normal;
+	background: #409EFF;
+	border: none;
+}
+
+
+/********************************input**************************************************************************************************************/
+
+
+/********************************input输入框**************************************/
+
+.layui-form .col-md-3 .layui-input {
+	font-size: 13px;
+	display: block;
+	width: 160px;
+	padding: 0 7px;
+	height: 24px;
+	line-height: 23px;
+	border: 1px solid #dcdfe6;
+	background-color: #fff;
+	border-radius: 3px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+.search_text input[type="text"] {
+	box-sizing: border-box;
+	position: absolute;
+	top: 0px;
+	right: 0;
+	font-size: 13px;
+	height: 34px;
+	line-height: 32px;
+	letter-spacing: 0.5px;
+	width: 100%;
+	padding: 0 66px 0 15px;
+	border: none;
+	color: #494949;
+	border: 1px solid #dcdfe6;
+	background-color: #fff;
+	;
+	transition: all 0.3s;
+}
+
+.layui-input {
+	display: block;
+	width: 160px;
+	padding: 0 7px;
+	height: 24px;
+	line-height: 23px;
+	border: 1px solid #dcdfe6;
+	background-color: #fff;
+	border-radius: 3px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+tr>td .layui-input {
+	display: inline-block;
+	width: 160px;
+	padding: 0 7px;
+	height: 24px;
+	line-height: 23px;
+	border: 1px solid #dcdfe6;
+	background-color: #fff;
+	border-radius: 3px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+.layui-input:hover,
+.layui-input:focus {
+	border: 1px solid #409eff!important;
+}
+
+input {
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	outline: 0;
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	line-height: inherit;
+	color: inherit;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	border: none;
+	outline: none;
+}
+
+
+/***********************/
+
+.global-input {
+	display: block;
+	width: 160px;
+	padding-left: 10px;
+	height: 34px;
+	line-height: 1.3;
+	line-height: 34px\9;
+	border: 1px solid #e6e6e6;
+	background-color: #fff;
+	border-radius: 2px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	margin: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	color: inherit;
+	text-transform: none;
+	overflow: visible;
+	text-align: left;
+	outline: none;
+}
+
+
+/**********************************layui输入框前的div*************************************/
+
+.layui-form-item .layui-input-inline {
+	float: none;
+	width: 160px;
+	margin-right: 0px;
+}
+
+.layui-input-inline {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.layui-input-block,
+.layui-input-inline {
+	position: relative;
+}
+
+
+/**********************************layui输入框前的label*************************************/
+
+.layui-form-label {
+	width: auto;
+	float: left;
+	display: block;
+	padding: 0 10px;
+	font-weight: 400;
+	text-align: right;
+	line-height: 23px;
+	height: 24px;
+	position: relative;
+}
+
+label {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 0px;
+	font-weight: 700;
+}
+
+
+/********************************学习管理layui输入框前的li标签************************************/
+
+.learn_student li {
+	float: left;
+	width: auto;
+	margin-right: 10px;
+}
+
+li {
+	list-style: none;
+}
+
+
+/********************************体验学生分组layui输入框前的li标签************************************/
+
+.student_cname li {
+	float: left;
+	width: auto;
+}
+
+
+/****************************资源容器输入框**************************/
+
+.rc_tool_box input[type=text]:focus,
+.rc_sub_line_tab textarea:focus {
+	background: #ffffff;
+	border: 1px solid #409eff;
+}
+
+.rc_tool_box input[type=text]:hover,
+.rc_sub_line_tab textarea:hover {
+	border: 1px solid #409eff;
+}
+
+.rc_tool_box input[type=text] {
+	box-sizing: border-box;
+	font-size: 13px;
+	width: 160px;
+	height: 24px;
+	line-height: 23px;
+	border-radius: 3px;
+	padding: 0 5px;
+	border: 1px solid #e4e5e7;
+	margin: 0 10px 0 5px;
+	transition: all 0.3s;
+	text-align: left;
+}
+
+
+/*******************资源容器输入框前的label标签***************************/
+
+.rc_tool_box label {
+	display: inline-block;
+	font-size: 12px;
+	white-space: nowrap;
+	margin: 0 10px 0 0;
+}
+
+
+/************************资源容器日期输入框****************************/
+
+.rc_tool_box input[type=date] {
+	width: 160px;
+	height: 24px;
+	line-height: 23px;
+	border-radius: 3px;
+	padding: 0 5px;
+	border: 1px solid #e4e5e7;
+	margin: 0 0 0 5px;
+}
+
+.layui-inline {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+
+/*****************************************************************************************************************************************/
+
+
+/****************************系统管理---课程库管理分页****************************************************************/
+
+.ex_page {
+	margin-top: 20px;
+	float: right;
+}
+
+.ex_page>li:first-child {
+	border-left: 0px solid #ffff!important;
+}
+
+.ex_page>li {
+	float: left;
+	line-height: 34px;
+	padding: 0 16px;
+	border: 0px solid #ffff;
+	border-left: none;
+}
+
+.ex_page li a {
+	color: #409EFF;
+	text-decoration: none;
+}
+
+.ex_page li a:hover {
+	color: #1aa1e1;
+	border-bottom: 1px solid #409EFF;
+}
+
+
+/***************************系统管理--教学课程管理分页样式*************************************/
+
+.layui-laypage {
+	display: block;
+	vertical-align: middle;
+	margin: 10px 0;
+	font-size: 0;
+	text-align: right;
+}
+
+.layui-box,
+.layui-box * {
+	box-sizing: content-box;
+}
+
+.layui-laypage {
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 0;
+	border: none;
+}
+
+.layui-laypage>:first-child {
+	margin-left: 0!important;
+	float: left;
+}
+
+.layui-laypage a {
+	text-decoration: none;
+}
+
+.layui-laypage a,
+.layui-laypage span {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+	padding: 0 15px;
+	height: 28px;
+	line-height: 28px;
+	margin: 0 -1px 5px 0;
+	background-color: #fff;
+	color: #409EFF;
+	font-size: 12px;
+}
+
+.layui-laypage a,
+.layui-laypage button,
+.layui-laypage input,
+.layui-laypage select,
+.layui-laypage span {
+	border: 0px solid #e2e2e2;
+}
+
+.layui-box,
+.layui-box * {
+	box-sizing: content-box;
+}
+
+.layui-disabled,
+.layui-disabled:hover {
+	color: #1aa1e1;
+	border-bottom: 1px solid #409EFF;
+}
+
+.layui-laypage a:hover {
+	color: #1aa1e1;
+	border-bottom: 1px solid #409EFF;
+}
+
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+	position: absolute;
+	left: -1px;
+	top: -1px;
+	padding: 1px;
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff;
+	border-bottom: 1px solid #409EFF;
+}
+
+.layui-laypage .layui-laypage-curr em {
+	position: relative;
+	color: #409EFF;
+}
+
+.layui-laypage em {
+	font-style: normal;
+}
+
+.layui-laypage span {
+	color: #606266;
+}
+
+.layui-laypage button {
+	margin-left: 10px;
+	padding: 0 10px;
+	cursor: pointer;
+}
+
+.layui-laypage button,
+.layui-laypage input {
+	height: 30px;
+	line-height: 30px;
+	border: 0px solid #e2e2e2;
+	border-radius: 2px;
+	vertical-align: top;
+	background-color: #fff;
+	box-sizing: border-box;
+	color: #409EFF;
+}
+
+.layui-laypage button:hover {
+	color: #1aa1e1;
+	border-bottom: 1px solid #409EFF;
+}
+
+.layui-laypage .layui-laypage-skip {
+	height: 30px;
+	line-height: 30px;
+	color: #606266;
+}
+
+
+/**************学习管理分页字体***************/
+
+.ex_page>li span {
+	font-size: 12px;
+}
+
+
+/****************************************************************************************************/
+
+
+/*********************课程内左侧栏样式************************************/
+
+.courseInfo {
+	background: #ffffff;
+	width: 100%;
+	height: 50px;
+}
+
+.know {
+	background: #ffffff;
+	width: 50px;
+	height: 50px;
+}
+
+.skillType {
+	background: #ffffff;
+	width: 50px;
+	height: 50px;
+}
+
+.experience {
+	background: #ffffff;
+	width: 50px;
+	height: 50px;
+}
+
+.notice {
+	background: #ffffff;
+	width: 50px;
+	height: 50px;
+}
+
+.study {
+	background: #ffffff;
+	width: 50px;
+	height: 50px;
+}
+
+.resource {
+	background: #ffffff;
+	width: 50px;
+	height: 50px;
+}
+
+.edit {
+	background: #ffffff;
+	width: 50px;
+	height: 50px;
+}
+
+.copy {
+	background: #ffffff;
+	width: 50px;
+	height: 50px;
+}
+
+nav {
+	background: #ffffff;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	/* -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1); */
+}
+
+nav ul {
+	border-right: 1px solid #e6e6e6;
+}
+
+nav ul li:hover {
+	width: 100%;
+	height: 50px;
+	background-color: #ecf5ff
+}
+
+nav ul li a:hover {
+	color: #409EFF;
+}
+
+.course-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	/*3/28*/
+	filter: brightness(0.8);
+}
+
+.know-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+.type-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+.experience-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+.notice-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+.study-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+.resource-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+.copy-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+.edit-icon {
+	position: absolute;
+	margin-left: 0px;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+nav ul li a {
+	position: absolute;
+	width: 86%;
+	height: 50px;
+	text-decoration: none !important;
+	color: #555;
+	padding: 15px 0 0 24%;
+	font-size: 13px;
+}
+
+
+/************************系统管理的侧边栏*******************************/
+
+.lessons-icon {
+	position: absolute;
+	margin-left: 0;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+.lessons {
+	background: #fff;
+	width: 50px;
+	height: 50px;
+}
+
+.edu {
+	background: #fff;
+	width: 50px;
+	height: 50px;
+}
+
+.authority {
+	background: #fff;
+	width: 50px;
+	height: 50px;
+}
+
+.authority-icon {
+	position: absolute;
+	margin-left: 0;
+	padding-top: 12px;
+	filter: brightness(0.8);
+}
+
+
+/************************ul-样式*****************************/
+
+.courses_box {
+	width: 100%;
+	height: 230px;
+}
+
+blockquote,
+body,
+button,
+dd,
+div,
+dl,
+dt,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/*************************li-样式*********************************/
+
+.course_box {
+	/*float: left;*/
+	/*width: 260px;*/
+	/*height: 230px;*/
+	position: relative;
+	/*margin: 10px 20px 12px 10px;*/
+	overflow: hidden;
+	background-color: rgba(220, 38, 38, 0);
+	/* box-shadow: -0.4em 0.45em 0.5em #A7A7A7; */
+	float: left;
+	width: 18%;
+	/* padding: 0 11px; */
+	margin: 0 0 20px 2.5%;
+}
+
+.course_box:nth-child(5n+1) {
+	float: left;
+	/*width: 260px;*/
+	/*height: 230px;*/
+	position: relative;
+	/*margin: 10px 20px 12px 10px;*/
+	overflow: hidden;
+	background-color: rgba(220, 38, 38, 0);
+	margin-left: 0;
+	/* box-shadow: -0.4em 0.45em 0.5em #A7A7A7; */
+}
+
+blockquote,
+body,
+button,
+dd,
+div,
+dl,
+dt,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/************************single-box样式***************************/
+
+.hashadow1 {
+	box-shadow: 0 0 0 #000;
+	transition: all .3s;
+	box-sizing: border-box;
+	position: relative;
+	padding: 60% 0 0;
+	background: #f5f6f7;
+	border: 1px solid #ddd;
+	overflow: hidden;
+}
+
+
+/*******************************img-box样式*************************************/
+
+.img-box {
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.img-box img {
+	height: 100%;
+	width: 100%;
+}
+
+.term_title span {
+	font-size: 17px;
+}
+
+
+/*************************************************知识面板框******************************************/
+
+.know_title_box {
+	background: #f4f4f5;
+	padding: 1px;
+	border-radius: 5px;
+	box-shadow: none;
+}
+
+
+/******知识选项卡按钮****/
+
+.main_btn_fixed {
+	position: fixed;
+	background: white;
+	width: 100%;
+	padding: 20px 0 8px 0px;
+	margin: -65px 0 0 0px;
+	z-index: 1000;
+}
+
+
+/****************table外的边框********************/
+
+.ex_box {
+	border: 1px solid #d0d6dc;
+	margin-top: 20px;
+}
+
+.ex_box li:first-child {
+	padding: 0 2% 0;
+}
+
+
+/****************技能页面table样式***************************/
+
+.skill-table table tbody tr {
+	border-top: 1px solid #e2e2e2;
+	border-bottom: 1px solid #e2e2e2;
+}
+
+
+/*****************************************标题-竖线及其样式*******************************************/
+
+.term_title {
+	font-size: 0px;
+	font-weight: unset;
+	border-left: 4px #409EFF solid;
+	padding-left: 5px;
+	margin-bottom: 20px;
+}
+
+
+/**********课程信息-标题样式*************/
+
+.part_title {
+	position: relative;
+	margin-top: 20px;
+	border-left: 4px #409EFF solid;
+	padding-left: 5px;
+	font-weight: unset;
+	margin-bottom: 20px;
+	padding-bottom: 0px;
+}
+
+.part_title>span {
+	font-size: 17px;
+	line-height: 20px;
+}
+
+
+/******************************/
+
+.part_title {
+	position: relative;
+	margin-top: 20px;
+	border-left: 4px #409EFF solid;
+	padding-left: 5px;
+	font-weight: unset;
+	margin-bottom: 20px;
+	height: 22px;
+	border-radius: 0px;
+}
+
+.week_book {
+	float: left;
+	padding-top: 2px;
+	color: #000;
+	font-size: 15px;
+}
+
+.week_change {
+	color: #0f0f0f;
+	font-size: 12px;
+	float: left;
+	padding-top: 2px;
+	float: left;
+	padding-top: 2px;
+}
+
+
+/***********************选项卡****************/
+
+.view_box_title {
+	border-bottom: 1px solid #ccc;
+	height: 35px;
+}
+
+.col-md-10>div .main_btn {
+	float: none;
+}
+
+
+/************学习管理成绩页面table***************/
+
+.new_table {
+	overflow-x: auto;
+	margin-top: 20px;
+	border: 1px solid #d0d6dc;
+	height: 600px;
+}
+
+.learn_student {
+	background: #f4f4f5;
+	padding: 10px;
+}
+
+.table_box {
+	padding: 0 2% 0;
+}
+
+.line_line {
+	position: absolute;
+	left: 11px;
+	top: 0;
+	width: 1.5px;
+	height: 100%;
+	background: #409EFF;
+	z-index: -10;
+}
+
+
+/******************表格内的按钮******************/
+
+.layui-table td a {
+	display: inline-block;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 12px;
+	border: 0px;
+	cursor: pointer;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	vertical-align: middle;
+	font-family: inherit;
+	text-transform: none;
+	overflow: visible;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #409EFF;
+	background-color: transparent;
+	border-color: #409EFF;
+	border-radius: 3px;
+}
+
+.layui-table td a:hover {
+	color: #409EFF;
+	opacity: 1;
+}
+
+.layui-table td button {
+	display: inline-block;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 12px;
+	border: 0px;
+	cursor: pointer;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	vertical-align: middle;
+	font-family: inherit;
+	text-transform: none;
+	overflow: visible;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #409EFF;
+	background-color: transparent;
+	border-color: #409EFF;
+	border-radius: 3px;
+}
+
+.layui-table td .layui-btn-danger {
+	color: #f56c6c;
+}
+
+.layui-table td button:hover {
+	color: #409EFF;
+	opacity: 1;
+	text-decoration: underline;
+}
+
+.layui-table td div button {
+	display: inline-block;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 18px;
+	background-color: #009688;
+	color: #fff;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 12px;
+	border: 1px;
+	cursor: pointer;
+	border-radius: 2px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	vertical-align: middle;
+	font-family: inherit;
+	margin: 0;
+	text-transform: none;
+	overflow: visible;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #fff;
+	background-color: #409EFF;
+	border-color: #409EFF;
+	border-radius: 3px;
+}
+
+.layui-table td div button:hover {
+	opacity: .8;
+	color: #fff;
+}
+
+.layui-table td div .layui-btn-primary:hover {
+	opacity: .8;
+	color: #409EFF;
+}
+
+.layui-table td div .layui-btn-primary {
+	display: inline-block;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 18px;
+	background-color: #fff;
+	color: #409EFF;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 14px;
+	border: 1px solid #409EFF;
+	cursor: pointer;
+	border-radius: 2px;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	vertical-align: middle;
+	font-family: inherit;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	text-align: center;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	border-radius: 3px;
+}
+
+
+/******************************图标颜色**********************************/
+
+.nav_li i {
+	color: white!important;
+}
+
+.nav_li {
+	position: relative;
+	display: block;
+}
+
+.more_link li {
+	line-height: 35px!important;
+}
+
+.sub_user li {
+	line-height: 35px!important;
+	width: 100%!important;
+}
+
+.moreTab {
+	margin-right: 30px;
+}
+
+.fa {
+	color: #409EFF;
+	font-size: 1.33333333em;
+	line-height: .75em;
+}
+
+
+/***************编辑权限信息table样式******************/
+
+.edit-table tbody tr td {
+	border: 0px solid #e2e2e2;
+}
+
+.edit-table tr:nth-child(odd) td {
+	background: #fff;
+}
+
+.edit-table thead tr:hover,
+.edit-table tbody tr:hover {
+	background-color: #fff !important;
+}
+
+
+/*****************用户管理table样式***************/
+
+.listuser-table td a {
+	width: 25%;
+	display: inline-block;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 12px;
+	border: 0px;
+	cursor: pointer;
+	outline: 0;
+	-webkit-appearance: none;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	vertical-align: middle;
+	font-family: inherit;
+	text-transform: none;
+	overflow: visible;
+	height: 24px;
+	line-height: 23px;
+	padding: 0 7px;
+	margin: 0 0 0 5px;
+	color: #409EFF;
+	background-color: transparent;
+	border-color: #409EFF;
+	border-radius: 3px;
+}
+
+
+/*******************编辑实验室页面**************************/
+
+.page-title {
+	font-size: 17px;
+	border-left: 4px #409EFF solid;
+	font-weight: bold;
+	padding-left: 5px;
+	margin-bottom: 20px;
+}
+
+
+/**************可视化模板管理************************/
+
+#table_manager tr td span {
+	color: #409EFF;
+}
+
+#table_manager tr td span:hover {
+	text-decoration: underline;
+}
+
+
+/**************可视化模板管理分页****************/
+
+.page_btn {
+	margin: 0 0 0 5px;
+	position: relative;
+	cursor: pointer;
+}
+
+.page_btn,
+.page_select {
+	display: inline-block;
+	height: 23px;
+	line-height: 23px;
+	padding: 0px 5px;
+	letter-spacing: 2px;
+	margin: 0 0 0 5px;
+	background: transparent;
+	border: 0px solid #e2e2e2;
+	border-radius: 5px;
+	color: #409EFF;
+	overflow: hidden;
+}
+
+.page_info,
+.page_select,
+.page_select select {
+	color: #333;
+}
+
+.page_btn:hover,
+.page_btn:focus,
+.page_select:focus {
+	color: #409EFF;
+	border: 0px solid #bfbfbf;
+	text-decoration: underline;
+}
+
+.page_select:hover {
+	color: #409EFF;
+	border: 0px solid #bfbfbf;
+	text-decoration: none;
+}
+
+.page_select input[type="text"] {
+	text-align: center;
+	background: #fff;
+	border: 0px solid #e2e2e2;
+	width: 30px;
+}
+
+.page_select input[type="text"]:hover {
+	border: 0px solid #cfcfcf;
+}
+
+.page_select input[type="text"]:focus {
+	border: 0px solid #81C5EC;
+}
+
+
+/*******************导航栏logo********************/
+
+.logo img {
+	width: auto;
+	height: auto!important;
+	min-height: 10px;
+	max-height: 40px;
+	display: block;
+}
+
+.logo {
+	float: left;
+	width: auto;
+	margin-top: 20px;
+	margin-left: 45px;
+}
+
+.layui-form-selected dl {
+	width: max-content;
+}
+
+.edit-table tr input[type=button] {
+	-webkit-appearance: button;
+	color: #409EFF;
+	cursor: pointer;
+	background: #fff;
+}
+
+.edit-table th {
+	width: 15%;
+}
+
+.sideBar {
+	padding: 14px 0 10px 171px;
+	position: absolute;
+}
+
+@media only screen and (max-width: 1024px) {
+	.logo {
+		margin: 16px 0 0 4.5%!Important;
+	}
+	.logo img {
+		display: inline-block!important;
+		margin: -9px 0 0 35px!important;
+		height: 20px!important;
+	}
+	nav ul {
+		border: none!Important;
+	}
+	nav ul li a {
+		position: relative!important;
+		width: 100%!important;
+		height: 50px!important;
+		text-decoration: none!important;
+		color: #555!Important;
+		padding: 0!Important;
+	}
+	.col-md-2 nav li span+a {
+		display: inline-block!Important;
+		position: relative!important;
+		color: #606266!important;
+		width: 30px!important;
+		height: auto!important;
+		padding: 0!important;
+	}
+	.col-md-2 nav li {
+		box-sizing: border-box;
+		text-align: center;
+		height: auto!important;
+		min-height: 44px;
+		width: 44px!important;
+		padding: 4px 0;
+		margin: 0 0 5px;
+		background: #f4f4f5;
+	}
+	.navbar_top {
+		background: #0095ff!important;
+		z-index: 9999;
+	}
+	.navbar_close {
+		color: #fff!important;
+	}
+	.top_nav a:hover,
+	.top_nav a:active,
+	.top_nav .top_nav_select,
+	.top_nav a {
+		border: 1px solid #409eff!important;
+	}
+	.navbar-nav,
+	.nav_main {
+		padding: 150px 15px 0!important;
+		z-index: 999999999999;
+	}
+	.navbar-nav .moreTab>a {
+		display: none!important;
+	}
+	.moreTab {
+		margin: 0!important;
+	}
+	.more_link {
+		display: block!important;
+		position: relative!important;
+		top: 0!important;
+		height: auto!important;
+		background: transparent!important;
+		width: 100%!important;
+	}
+	.more_link a {
+		text-align: left!important;
+	}
+	.head_box .currentUser .current {
+		display: none!important;
+	}
+	.currentUser {
+		position: absolute!important;
+		top: 49px!important;
+		left: 0!important;
+		margin: 0!important;
+		padding: 0!important;
+		width: 100%!important;
+		height: 87px!important;
+		box-shadow: none;
+	}
+	.currentUser>.fa-user {
+		display: none!Important;
+	}
+	.sub_ul {
+		box-shadow: none!important;
+	}
+	.subTop_li {
+		height: 100px!important;
+		background: #0095ff!important;
+		padding: 0 12px 0 15px!Important;
+	}
+	.sub_user {
+		display: block!important;
+		position: relative!important;
+		top: 0!important;
+		right: 0!important;
+		height: 100px!important;
+	}
+	.sub_user:after {
+		display: none!important;
+	}
+	.subTop_li img {
+		height: 80px!important;
+		margin: 1px 10px 0 0!Important;
+	}
+	.userSub_infor {}
+	.subUsername {
+		margin: 0 0 6px!important;
+		padding: 15px 0 0;
+	}
+	.subUserRole {
+		display: inline-block!important;
+		padding: 0!important;
+		margin: 0 0 0 5px!important;
+		color: #fff!important;
+	}
+	.sub_user .logout {
+		position: absolute!important;
+		top: 42px!important;
+		right: 15px!important;
+		display: inline-block!important;
+		width: auto!important;
+		height: 30px!important;
+		padding: 0 10px!important;
+		background: #fff!important;
+		border: none!important;
+		border-radius: 4px!important;
+	}
+	.sub_user .logout a {
+		color: #0095ff!important;
+		padding: 0!Important;
+		line-height: 30px!important;
+	}
+	.exhibiteBox {
+		box-shadow: none;
+		margin: 0 0 30px;
+		padding: 15px 0 0;
+		border-radius: 3px;
+		overflow: hidden;
+	}
+	.exhibiteBox>* {
+		width: 100%;
+	}
+	.exhibiteBox .authorComment {
+		float: left;
+		height: auto;
+		margin: 0;
+		padding: 15px 0 15px;
+		border: none;
+		border-bottom: 1px solid #888;
+		overflow: hidden;
+	}
+	.exhibiteBox .authorComment:last-child {
+		border-bottom: none;
+	}
+	.exhibite-radio *,
+	.authorComment * {
+		font-size: 14px!important;
+	}
+	.exhibite-radio {
+		padding: 0 0 15px;
+		border-bottom: 1px solid #888;
+	}
+	.exhibite-radio video {
+		width: 100%!important;
+		height: auto!important;
+	}
+	.authorComment img {
+		height: auto;
+		margin: 0 0 7px;
+	}
+	.authorComment>* {
+		float: left;
+		padding: 0;
+		margin: 0!Important;
+		font-size: 14px!important;
+	}
+	.main_btn>a,
+	.main_btn>button {
+		margin: 0 3px 3px 0!important
+	}
+	.ex_box li,
+	.ex_box table {
+		padding: 0!important;
+		margin: 0!important;
+	}
+	.top {
+		right: 0;
+		bottom: 0;
+		border-radius: 0;
+		width: 40px;
+		height: 40px;
+		line-height: 45px;
+	}
+	.top:hover {
+		background: #409eff;
+	}
+	.navbar-nav li .current:before,
+	.nav_main li .current:before {
+		color: #0095ff;
+	}
+	.content .col-md-2 {
+		z-index: 4;
+	}
+}
+
+@media (min-width: 992px) {
+	.col-md-2 {
+		width: 12.666667%;
+	}
+	.col-md-10 {
+		width: 86.5%;
+		float: right;
+	}
+}

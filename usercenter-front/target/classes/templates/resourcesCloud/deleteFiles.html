@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/resourcesCloud/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-label {
+            box-sizing: border-box;
+            width: 42px;
+            padding: 9px 0;
+        }
+
+        .layui-input-block {
+            margin-left: 52px;
+        }
+    </style>
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box heightauto">
+    <form class="layui-form" action="" lay-filter="deletefilesbox" id="deletefilesbox">
+        <div class="layui-col-lg12">
+            是否要永久删除此文件？
+        </div>
+        <!--操作按钮开始-->
+        <div class="layui-col-lg12 bottom_btnbox layui-hide">
+            <input type="button" lay-filter="deletefilesbtn" id="deletefilesbtn" class="layui-btn" lay-submit
+                   value="立即提交"/>
+            <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+        </div>
+        <!--操作按钮结束-->
+    </form>
+</div>
+<!--主体结束-->
+<script th:src="@{/modules/resourcesCloud/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'resourcesCloud/deleteFiles']);
+</script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: 69px;
+        }
+
+        .layui-input-block {
+            margin-left: 69px;
+        }
+        .mix_short_input {
+            vertical-align: middle;
+            margin: 10px 12px 0 -7px;
+        }
+        .new_nav_box {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="main_content_box">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="newotherfieldbox" id="newotherfieldbox">
+            <div class="layui-row layui-col-space10">
+                <input type="hidden" th:value="${uid}" name="instrumentUid">
+                <input type="hidden" th:value="${configUid}" name="configUid">
+                <div class="layui-col-lg8">
+                    <label class="layui-form-label">字段名称</label>
+                    <div class="layui-input-block">
+                        <input class="layui-input" name="fieldName" autocomplete="on" lay-verify="required"
+                               placeholder="请输入字段名称"/>
+                    </div>
+                </div>
+                <div class="layui-col-lg8">
+                    <label class="layui-form-label">字段类型</label>
+                    <div class="layui-input-block">
+                        <select name="displayStyle" lay-filter="type">
+                            <option value="0">请选择</option>
+                            <option value="TEXT">输入框</option>
+                            <option value="RADIO">单选框</option>
+                            <option value="CHECKBOX">复选框</option>
+                            <option value="SELECT">下拉框</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-col-lg8" style="display: none">
+                    <label class="layui-form-label">类型内容</label>
+<!--                    <label class="layui-icon layui-icon-add-1 short_btn h30 lh30 va_middle addmodule" data-method="addmodule" lay-tips="新增自定义关联模块"></label>-->
+
+                    <!--新增按钮结束-->
+                    <!--单次模块开始-->
+                    <div class="layui-inline add_nav_box hide">
+                        <div class="mix_short_input add_nav_single">
+                            <input class="layui-input" name="content" placeholder="请输入功能名称" />
+                            <label class="layui-icon layui-icon-close delete_nav " onClick="deletenav(this);" lay-tips="删除此功能菜单"></label>
+                        </div>
+                    </div>
+                    <!--单次模块结束-->
+                    <!--新增功能菜单区域开始-->
+                    <div class="layui-inline new_nav_box">
+                        <!--新增功能菜单区域结束-->
+                        <label class="layui-icon layui-icon-add-1 short_btn h30 lh30 va_middle addnav" data-method="addnav" lay-tips="新增自定义功能菜单"></label>
+                    </div>
+                </div>
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">是否必填:</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="necessary" value="1" title="是" checked="">
+                        <input type="radio" name="necessary" value="0" title="否">
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" name="note" placeholder="请输入备注"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="newotherfieldbtn" id="newotherfieldbtn" class="layui-btn" lay-submit
+                       value="立即提交"/>
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+            </div>
+            <!--操作按钮结束-->
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <!--<a href="#"><br/></a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script type="text/javascript" th:src="@{/modules/openReservation/newOtherField.js}"></script>
+</body>
+</html>​​​

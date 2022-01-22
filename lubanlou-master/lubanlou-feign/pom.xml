@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>net.gvsun.lubanlou</groupId>
+        <artifactId>lubanlou-master</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>lubanlou-feign</artifactId>
+    <version>1.4.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <release.version>0.0.1-SNAPSHOT</release.version>
+        <!-- 标签线 -->
+        <tag.version>beta</tag.version>
+    </properties>
+
+    <dependencies>
+        <!--feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--通用dto包-->
+        <dependency>
+            <groupId>net.gvsun.lubanlou</groupId>
+            <artifactId>lubanlou-common</artifactId>
+        </dependency>
+
+        <!--多数据源依赖-->
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>datasource</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>RBAC</artifactId>
+            <version>0.0.4-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Defines plugins that are used in the modules. -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <configuration>
+                        <from>
+                            <image>registry.cn-shanghai.aliyuncs.com/gvsun/jdk:8u141</image>
+                        </from>
+                        <to>
+                            <image>lbl-${tag.version}/lubanlou-feign:${project.version}</image>
+                        </to>
+                        <skip>true</skip>
+                        <!--容器相关的属性-->
+                        <!--允许非https-->
+                        <allowInsecureRegistries>true</allowInsecureRegistries>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

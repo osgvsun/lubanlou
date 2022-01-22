@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="equipmenttimechargebox" id="equipmenttimechargebox">
+				<div class="layui-fluid">
+					<blockquote class="layui-elem-quote layui-quote-nm tag_box">
+						<fieldset class="layui-elem-field layui-field-title">
+							<legend class="deviceName">设备名称（这里是设备编号）</legend>
+							<span class="layui-breadcrumb breadcrumb_top" lay-separator="|">
+				                <a href="equipmentList" class="breadcrumb_btn">返回设备列表</a>
+							</span>
+						</fieldset>
+						<div class="li_cell_box">
+							<div class="li_cell"><i class="layui-icon layui-icon-auz"></i>设备型号：</div>
+							<div class="li_cell"><i class="layui-icon layui-icon-console"></i>所属学院：</div>
+							<div class="li_cell"><i class="layui-icon layui-icon-location"></i>所在实验室：</div>
+							<div class="li_cell"><i class="layui-icon layui-icon-user"></i>生产厂家：</div>
+							<div class="li_cell"><i class="layui-icon layui-icon-rmb"></i>价格：</div>
+						</div>
+						<div class="field_btn_box">
+							<a th:href="@{/instrumentmanagement/equipmentBasicInfo(uid=${uid})}">基本信息</a>
+							<a th:href="@{/instrumentmanagement/equipmentReserve(uid=${uid})}">预约设置</a>
+							<a href="javascript: void(0)" class="field_btn_select">机时预约</a>
+							<a th:href="@{/instrumentmanagement/equipmentSampleInspection(uid=${uid})}">送样检测</a>
+							<a th:href="@{/instrumentmanagement/noticeManage(uid=${uid})}">仪器公告</a>
+							<a th:href="@{/instrumentmanagement/powerControllerSet(uid=${uid})}">电源控制器</a>
+						</div>
+					</blockquote>
+					<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+						<ul class="layui-tab-title">
+							<li>
+								<a th:href="@{/instrumentmanagement/equipmentTimeBooking(uid=${uid})}">基础设置</a>
+							</li>
+							<li class="layui-this">
+								<a href="javascript: void(0)">收费设置</a>
+							</li>
+						</ul>
+						<div class="layui-tab-content">
+							<div class="layui-tab-item layui-show">
+								<!--附加收费开始-->
+								<div id="timeextracharge_box" class="layui-card">
+									<div class="layui-card-header">附加收费
+										<label class="layui-icon layui-icon-add-1 newtimeextracharge header_btn" data-method="newtimeextracharge" lay-tips="新增附加收费"></label>
+									</div>
+									<div class="layui-card-body">
+										<div class="layui-row layui-col-space10">
+											<!--搜索开始-->
+											<div class="layui-col-md12 search_line">
+												<div class="layui-inline">
+													<input class="layui-input" name="timeextrachargesearchid" id="timeextrachargesearchbox" autocomplete="on" placeholder="请输入搜索内容" />
+												</div>
+												<input type="button" class="layui-btn timeextrachargesearch" data-type="reload" value="搜索" />
+												<input type="reset" class="layui-btn layui-btn-primary" value="取消">
+											</div>
+											<!--搜索结束-->
+											<div class="layui-col-md12">
+												<!--表单开始-->
+												<table class="layui-hide" id="timeextracharge" lay-filter="timeextracharge"></table>
+												<script type="text/html" id="timeextrachargetoolbar">
+													<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+												</script>
+												<!--表单结束-->
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--附加收费结束-->
+								<!--收费项目开始-->
+								<div id="chargeitem_box" class="layui-card">
+									<div class="layui-card-header">收费项目
+										<label class="layui-icon layui-icon-add-1 newchargeitem header_btn" data-method="newchargeitem" lay-tips="新增收费项目"></label>
+									</div>
+									<div class="layui-card-body">
+										<div class="layui-row layui-col-space10">
+											<!--搜索开始-->
+											<div class="layui-col-md12 search_line">
+												<div class="layui-inline">
+													<input class="layui-input" name="chargeitemsearchid" id="chargeitemsearchbox" autocomplete="on" placeholder="请输入搜索内容" />
+												</div>
+												<input type="button" class="layui-btn chargeitemsearch" data-type="reload" value="搜索" />
+												<input type="reset" class="layui-btn layui-btn-primary" value="取消">
+											</div>
+											<!--搜索结束-->
+											<div class="layui-col-md12">
+												<!--表单开始-->
+												<table class="layui-hide" id="chargeitem" lay-filter="chargeitem"></table>
+												<script type="text/html" id="chargeitemtoolbar">
+													<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+												</script>
+												<!--表单结束-->
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--收费项目结束-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<a href="#timeextracharge_box">附加<br/>收费</a>
+			<a href="#chargeitem_box">收费<br/>项目</a>
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<div th:replace="/instrumentManagement/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const uid = [[${uid}]];
+		</script>
+		<script th:src="@{/modules/instrumentManagement/equipmentTimeCharge.js}"></script>
+	</body>
+
+</html>​​​

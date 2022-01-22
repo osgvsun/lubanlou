@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+		<script type="text/javascript" src="../layuiadmin/layui/layui.js"></script>
+		<!-- expand -->
+		<link rel="stylesheet" href="../layuiadmin/static/css/font-awesome.min.css" media="all">
+		<link rel="stylesheet" href="../layuiadmin/static/css/expand.css" media="all">
+		<style>
+			.detail_item .layui-form-label {
+				width: 86px;
+			}
+			
+			.detail_item .layui-input-block {
+				margin-left: 86px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="myexaminedetailbox" id="myexaminedetailbox">
+				<div class="layui-fluid">
+					<!--基础信息开始-->
+					<div class="layui-card" id="info">
+						<div class="layui-card-header">基础信息</div>
+						<div class="layui-card-body">
+							<div class="detail_item">
+								<div class="layui-row">
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">实验名称</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="name" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">项目状态</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="state" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">所属课程</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lesson" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">所属学期</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="term" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">所属学科</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="subject" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验要求</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="experimentalrequirement" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">所属实验室</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="labroom" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验学时数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="classhour" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验总学时</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="classsumhour" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">课程总学时</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lessonclasssumhour" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验者人数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="person" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验组数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="team" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">每组人数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="teammember" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验类别</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="type" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验类型</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="kind" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验性质</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="nature" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验者类型</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="experimenterkind" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">变动状态</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="changestatus" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">开放范围</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="openscope" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">获奖等级</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="awardlevel" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">所属专业</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="major" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">主讲教师</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lecturer" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">辅导教师</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="tutor" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">指导书名称</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="instructionname" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">编者</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="editor" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">考核方法</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="assessmentmethod" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">开课周次</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="classstart" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">实验内容</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="experimentcontent" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">课前准备</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="preparation" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!--基础信息结束-->
+					<!--材料使用开始-->
+					<div class="layui-card" id="materialmodel">
+						<div class="layui-card-header">材料使用</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="materialusedetail" lay-filter="materialusedetail"></table>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--材料使用结束-->
+					<!--仪器设备开始-->
+					<div class="layui-card" id="equipmentmodel">
+						<div class="layui-card-header">仪器设备</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="equipmentdetail" lay-filter="equipmentdetail"></table>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--仪器设备结束-->
+					<!--查看附件开始-->
+					<div class="layui-card" id="enclosuredetailmodel">
+						<div class="layui-card-header">附件</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="enclosuredetail" lay-filter="enclosuredetail"></table>
+							<script type="text/html" id="enclosuredetailtoolbar">
+								<a class="layui-btn layui-btn-xs" href="myexaminedetail.html" download="myexaminedetail.html">下载</a>
+							</script>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--查看附件结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line">
+			<a href="#info">基础<br/>信息</a>
+			<a href="#materialmodel">材料<br/>使用</a>
+			<a href="#equipmentmodel">仪器<br/>设备</a>
+			<a href="#enclosuredetailmodel">查看<br/>附件</a>
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script type="text/javascript" src="../layuiadmin/static/js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../layuiadmin/static/js/global.js"></script>
+		<script>
+			layui.config({
+					base: '../layuiadmin/' //静态资源所在路径
+				}
+
+			).extend({
+					index: 'lib/index' //主入口模块
+				}
+
+			).use(['index', 'myExamineDetail']);
+		</script>
+	</body>
+
+</html>​​​

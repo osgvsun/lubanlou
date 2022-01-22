@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+</head>
+<body>
+    <div class="content_box">
+        <form class="layui-form lesson_card" action="" lay-filter="newothercontentbox" id="newothercontentbox">
+            <div class="layui-row layui-col-space10">
+                <input type="hidden" th:value="${uid}" name="instrumentUid">
+                <input type="hidden" th:value="${configUid}" name="configUid">
+                <div class="layui-col-lg8">
+                    <label class="layui-form-label">字段名称</label>
+                    <div class="layui-input-block">
+                        <input class="layui-input" name="fieldName" autocomplete="on" lay-verify="required"
+                               placeholder="请输入字段名称"/>
+                    </div>
+                </div>
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">是否必填:</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="necessary" value="1" title="是" checked="">
+                        <input type="radio" name="necessary" value="0" title="否">
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" name="note" placeholder="请输入备注"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="newothercontentbtn" id="newothercontentbtn" class="layui-btn" lay-submit value="立即提交" />
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+            </div>
+            <!--操作按钮结束-->
+        </form>
+    </div>
+    <div th:replace="/instrumentManagement/globalscript"></div>
+    <!--主体结束-->
+    <script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+    <script th:src="@{/modules/instrumentManagement/newOtherContent.js}"></script>
+</body>
+</html>

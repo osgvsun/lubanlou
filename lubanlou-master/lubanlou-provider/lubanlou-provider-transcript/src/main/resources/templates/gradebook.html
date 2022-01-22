@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      >
+<head>
+    <meta name="contextPath" th:content="${#httpServletRequest.getContextPath()}"/>
+    <link rel="stylesheet" href="/lubanlou-provider-transcript/css/experimentNewProject.css"/>
+    <link rel="stylesheet" href="/lubanlou-provider-transcript/css/skill.css"/>
+    <link rel="stylesheet" href="/lubanlou-provider-transcript/css/experience.css"/>
+    <link rel="stylesheet" href="/lubanlou-provider-transcript/css/learnManage.css"/>
+    <link rel="stylesheet" href="/lubanlou-provider-transcript/css/mainPage.css"/>
+    <link rel="stylesheet" href="/lubanlou-provider-transcript/css/demo.css"/>
+    <script type="text/javascript" src="/lubanlou-provider-transcript/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/lubanlou-provider-transcript/layui/layui.js"></script>
+    <script type="text/javascript" src="/lubanlou-provider-transcript/js/gradebook.js"></script>
+    <script type="text/javascript" src="/lubanlou-provider-transcript/js/learnManage.js"></script>
+    <link href="/lubanlou-provider-transcript/css/global_static.css" rel="stylesheet" type="text/css"/>
+    <link href="/lubanlou-provider-transcript/css/global_tms.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<div  layout:fragment="content">
+    <div class="main_btn">
+
+    </div>
+    <div class="main_part1" >
+        <div class="learn">
+            <div class="top"></div>
+            <div class="bottom"></div>
+            <script type="application/javascript" src="/lubanlou-provider-transcript/js/demo.js"></script>
+            <div class="view_box_content">
+                <form class="layui-form"    method="POST">
+                    <ul class="learn_student">
+                        <li>
+                            <!--<div class="layui-form-item">-->
+                                <!--<label class="layui-form-label">姓名：</label>-->
+                                <!--<div class="layui-input-inline">-->
+                                    <!--<input type="text" name="cname" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<div class="layui-form-item">-->
+                                <!--<label class="layui-form-label">学号：</label>-->
+                                <!--<div class="layui-input-inline">-->
+                                    <!--<input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<button class="layui-btn layui-btn-sm layui-btn-normal">查询</button>-->
+                            <!--<button class="layui-btn layui-btn-primary layui-btn-sm">取消</button>-->
+                            成绩列表
+                        </li>
+                        <div class="clearfix"></div>
+                    </ul>
+                </form>
+                <form id="saveScore"  method="post">
+                    <div class="new_table">
+                        <input type="hidden" id="saveFlag" name="saveFlag" value=""/>
+                        <input type="hidden" id="typeFlag" name="typeFlag" value=""/>
+                        <div class="table_box">
+                        <table class="layui-table ex-table" lay-skin="line" width="100%" >
+                            <thead>
+                            <tr>
+                                <th style="width:5%;">姓名</th>
+                                <th style="width:5%;">学号</th>
+                                <th:block  th:if="${achievements.title!=null }" style="width:56%;">
+                                    <th th:each="tGradeObject,tGradeObjectStat:${#strings.listSplit(achievements.title,',')}" th:style="${'width:'+56/tGradeObjectStat.size+'%;'}">
+                                        <span th:text="${tGradeObject}"></span>
+                                        <span class="layui-table-sort layui-inline"><!--作业-->
+                                        <a class="layui-edge layui-table-sort-asc" title="升序"  th:href="@{/gradebook/gradebookListBySort(module='knowledge',siteId=${siteId},type='assignment',sort='individualGradeAscending', index=${tGradeObjectStat.index})}"></a>
+                                        <a class="layui-edge layui-table-sort-desc" title="降序"   th:href="@{/gradebook/gradebookListBySort(module='knowledge',siteId=${siteId},type='assignment',sort='individualGradeDescending', index=${tGradeObjectStat.index})}"></a>
+                                        </span>
+                                    </th>
+                                </th:block>
+
+
+                                <!--<th style="width:8%;">权重成绩-->
+                                    <!--<span class="layui-table-sort layui-inline">&lt;!&ndash;作业&ndash;&gt;-->
+                                    <!--<a  class="layui-edge layui-table-sort-asc" title="升序" th:href="@{/gradebook/gradebookListBySort(module='knowledge',siteId=${siteId},type='assignment',sort='weightAscending')}"></a>-->
+                                    <!--<a class="layui-edge layui-table-sort-desc" title="降序" th:href="@{/gradebook/gradebookListBySort(module='knowledge',siteId=${siteId},type='assignment',sort='weightDescending')}"></a>-->
+                                    <!--</span>-->
+                                <!--</th>-->
+                                <!--<th style="width:10%;" th:if="${#strings.contains(buttonString,'额外打分')}">额外打分-->
+                                    <!--<span class="layui-table-sort layui-inline" th:if="${type=='assignment' &amp;&amp; module=='knowledge'}">&lt;!&ndash;作业&ndash;&gt;-->
+                                    <!--<a class="layui-edge layui-table-sort-asc" title="升序" th:href="@{/gradebook/gradebookListBySort(module='knowledge',siteId=${siteId},type='assignment',sort='extraGradeAscending')}"></a>-->
+                                    <!--<a class="layui-edge layui-table-sort-desc" title="降序" th:href="@{/gradebook/gradebookListBySort(module='knowledge',siteId=${siteId},type='assignment',sort='extraGradeDescending')}"></a>-->
+                                    <!--</span>-->
+                                <!--</th>-->
+                                <!--<th style="width:8%;">最终成绩-->
+                                    <!--<span class="layui-table-sort layui-inline" th:if="${type=='assignment' &amp;&amp; module=='knowledge'}">&lt;!&ndash;作业&ndash;&gt;-->
+                                    <!--<a class="layui-edge layui-table-sort-asc" title="升序" th:href="@{/gradebook/gradebookListBySort(module='knowledge',siteId=${siteId},type='assignment',sort='totalGradeAscending')}"></a>-->
+                                    <!--<a class="layui-edge layui-table-sort-desc" title="降序" th:href="@{/gradebook/gradebookListBySort(module='knowledge',siteId=${siteId},type='assignment',sort='totalGradeDescending')}"></a>-->
+                                    <!--</span>-->
+                                <!--</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${achievements.transcriptInfoVos.size()!=0 }" th:each="achievement,testStat:${achievements.transcriptInfoVos}" >
+                                <td >
+                                    <span th:text="${achievement.cname}"/>
+                                </td>
+                                <td>
+                                    <span th:text="${achievement.username}"/>
+                                </td>
+                                <td th:each="achieve,achieveStat:${#strings.listSplit(achievement.results,',')}" >
+                                    <span th:text="${achieve}"></span>
+                                </td>
+                                <!--<td>-->
+                                    <!--<span th:text="${achievement.weightResult}"/>-->
+                                <!--</td>-->
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/lubanlou-provider-transcript/js/experience.js"></script>
+</div>
+<script type="text/javascript" src="/lubanlou-provider-transcript/js/global_tms.js"></script>
+</body>
+</html>

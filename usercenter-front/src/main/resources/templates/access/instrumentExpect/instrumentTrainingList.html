@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 180px;
+				text-align: left;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="instrumenttrainingbox" id="instrumenttrainingbox">
+				<div class="main_content">
+					<div class="layui-fluid">
+						<blockquote class="layui-elem-quote layui-quote-nm tag_box">
+							<div class="field_btn_box">
+								<a th:href="@{/access/instrumentTrainingList}">仪器培训</a>
+							</div>
+						</blockquote>
+<!--						<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">-->
+							<div id="specifications_box" class="layui-card">
+								<div class="layui-card-header">
+									<span class="layui-breadcrumb">
+										<a><cite>仪器预约</cite></a>
+										<a><cite>仪器培训</cite></a>
+									</span>
+								</div>
+								<div class="layui-card-body">
+									<div class="layui-row layui-col-space10">
+										<!--搜索开始-->
+										<div class="layui-col-md12 search_line">
+											<div class="layui-inline">
+												<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+											</div>
+											<input type="button" class="layui-btn" data-type="reload" value="查询" />
+											<input type="reset" class="layui-btn layui-btn-primary" value="取消">
+										</div>
+										<!--搜索结束-->
+										<div class="layui-col-md12">
+											<!--表单开始-->
+											<table class="layui-hide" id="instrumenttraining" lay-filter="instrumenttraining"></table>
+											<script type="text/html" id="toolbar">
+												{{# if(d.status === 1 &&  $.cookie("count") > 0) { }}
+												<span>已参加该培训</span>
+												{{# } }}
+												{{# if(d.status !== 1 &&  $.cookie("count") < 1) { }}
+													{{# if(([[${new java.util.Date().getTime()}]] > new Date(d.trainingDateTime).getTime())) { }}
+														<span>报名时间已过</span>
+													{{# } }}
+													{{# if(([[${new java.util.Date().getTime()}]] < new Date(d.trainingDateTime).getTime()) && $.cookie("count") === d.maxNumber) { }}
+														<span>报名时间未过 人数已满</span>
+													{{# } }}
+													{{# if(([[${new java.util.Date().getTime()}]] > new Date(d.trainingDateTime).getTime()) && $.cookie("count") < d.maxNumber) { }}
+														<a class="layui-btn layui-btn-xs" lay-event="signUp">报名</a>
+													{{# } }}
+												{{# } }}
+											</script>
+											<!--表单结束-->
+										</div>
+
+										<span>目前未过期培训已满，如果您需要新的培训，请选择期望培训日期！</span>
+										<div class="layui-col-md12">
+
+											<div class="layui-inline">
+												<label class="layui-form-label">请选择期望培训日期：</label>
+												<div class="layui-input-inline">
+													<input type="text" class="layui-input" id="expectDate" placeholder="yyyy-MM-dd">
+												</div>
+												<button type="button" class="layui-btn layui-btn-normal addExpect">确定</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+<!--				</div>-->
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/access/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const entityId = [[${entityId}]];
+			const entityType = [[${entityType}]];
+			// const entityType = 'DEV'
+		</script>
+		<script th:src="@{/modules/access/instrumentExpect/instrumentTrainingList.js}"></script>
+	</body>
+</html>​​​

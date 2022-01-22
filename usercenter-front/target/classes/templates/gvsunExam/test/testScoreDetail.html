@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/style/admin.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+    <style>
+        .detail_item .layui-form-label {
+            box-sizing: border-box;
+            width: 75px;
+        }
+
+        .detail_item .layui-input-block {
+            margin-left: 75px;
+        }
+
+        .layui-table-cell {
+            height: auto;
+            white-space: normal;
+            word-break: break-all;
+        }
+
+        .search_line {
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="testscoredetailbox" id="testscoredetailbox">
+        <div class="layui-fluid">
+            <div classs="layui-row layui-col-space20">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">测试信息详情
+                            <a href="#" class="fa fa-download header_btn" lay-tips="导出客观题考试信息详情"
+                               id="testScoreDetailExcel"></a>
+                            <a href="#" class="fa fa-download header_btn" lay-tips="导出主观题考试信息详情"
+                               id="objectiveDetailExcel" style="display: none"></a>
+                            <!--搜索开始-->
+                            <div class="fr search_line search_line_subjectvity" style="display: none">
+                                <div class="layui-inline">
+                                    <input class="layui-input" name="searchid" id="searchSubjectivityBox"
+                                           autocomplete="on" placeholder="请根据主管题题目搜索"/>
+                                </div>
+                                <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                            </div>
+                            <div class="fr search_line search_line_objectivity">
+                                <div class="layui-inline">
+                                    <input class="layui-input" name="searchid" id="searchObjectivityBox"
+                                           autocomplete="on" placeholder="请根据客管题题目搜索"/>
+                                </div>
+                                <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                            </div>
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-col-md12 mb20 detail_item" action="" lay-filter="labdetailbox">
+                                <div class="layui-row">
+                                    <div class="layui-col-lg8">
+                                        <label class="layui-form-label">测试名称</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="name"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">教师</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="nickname"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">开始时间</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="englishname"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4">
+                                        <label class="layui-form-label">截止时间</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="address"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg2">
+                                        <label class="layui-form-label">总分</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="floor"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg2">
+                                        <label class="layui-form-label">得分</label>
+                                        <div class="layui-input-block">
+                                            <input type="button" class="layui-input readinputbtn" name="area"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md12">
+                                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                                    <ul class="layui-tab-title">
+                                        <li class="layui-this" id="objective">客观题</li>
+                                        <li id="subjectivity">主观题</li>
+                                    </ul>
+                                    <div class="layui-tab-content" style="height: 100px;">
+                                        <div class="layui-tab-item layui-show">
+                                            <div class="layui-col-md12">
+                                                <!--表单开始-->
+                                                <table class="layui-hide" id="testscoredetail"
+                                                       lay-filter="testscoredetail"></table>
+                                                <!--表单结束-->
+                                            </div>
+                                        </div>
+                                        <div class="layui-tab-item">
+                                            <div class="layui-col-md12">
+                                                <!--表单开始-->
+                                                <table class="layui-hide" id="subjectivedetail"
+                                                       lay-filter="subjectivedetail"></table>
+                                                <!--表单结束-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--										&lt;!&ndash;表单开始&ndash;&gt;-->
+                                <!--										<table class="layui-hide" id="testscoredetail" lay-filter="testscoredetail"></table>-->
+                                <!--										&lt;!&ndash;表单结束&ndash;&gt;-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--主体结束-->
+<div th:replace="/gvsunExam/globalscript"></div>
+<script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/myProject.js}"></script>
+<script th:inline="javascript">
+    var assignmentId = [[${assignmentId}]];
+    var username = [[${username}]];
+    var gradingId = [[${gradingId}]];
+    var cnameOn = [[${cname}]];
+</script>
+<script th:src="@{/modules/gvsunExam/test/testScoreDetail.js}"></script>
+</body>
+</html>

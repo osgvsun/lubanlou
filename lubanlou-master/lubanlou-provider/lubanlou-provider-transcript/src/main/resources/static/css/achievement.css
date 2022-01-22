@@ -1,0 +1,214 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	list-style: none;
+	text-decoration: none;
+}
+
+*,
+a,
+font,
+span,
+label,
+input,
+button {
+	font-family: "微软雅黑";
+}
+
+
+/*所有字体不可复制*/
+
+* {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+html {
+	font-family: sans-serif;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%
+}
+
+img {
+	border: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.ovh {
+	overflow: hidden;
+}
+
+
+/*主体*/
+
+.main_content {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 20px 8%;
+}
+
+.tab_font {
+	display: inline-block;
+	font-size: 13px;
+	color: #fff;
+	margin: 0 0 0 4px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	background: #b2b2b2;
+	border-radius: 100%;
+}
+
+
+/*修改layui css*/
+
+.searchline .layui-btn {
+	height: 30px;
+	line-height: 30px;
+}
+
+.searchline .layui-input,
+.searchline .layui-select {
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #ccc;
+}
+
+.searchline .layui-input:focus,
+.searchline .layui-select:focus {
+	border: 1px solid #f58a2e!important;
+}
+
+.layui-tab-content {
+	padding: 20px 0 0;
+}
+
+.layui-tab-title.special_tab {
+	height: 31px;
+	line-height: 31px;
+	border-bottom: 4px solid #ededed;
+}
+
+.layui-tab-title.special_tab li {
+	font-size: 14px;
+	line-height: 31px;
+	padding: 0;
+	color: #999;
+}
+
+.layui-tab-title.special_tab .layui-this {
+	color: #333;
+	font-weight: 700;
+}
+
+.layui-tab-title.special_tab .layui-this:after {
+	height: 35px;
+	border-bottom: 4px solid #f58a2e;
+}
+
+.layui-table tbody tr:hover,
+.layui-table thead tr,
+.layui-table-click,
+.layui-table-header,
+.layui-table-hover,
+.layui-table-mend,
+.layui-table-patch,
+.layui-table-tool,
+.layui-table-total,
+.layui-table-total tr,
+.layui-table[lay-even] tr:nth-child(even) {
+	background-color: #f5f5f5;
+}
+
+.layui-table-view .layui-table td,
+.layui-table-view .layui-table th {
+	padding: 7px 0;
+}
+
+.layui-btn,
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+	background: #f58a2e;
+}
+
+.layui-form.layui-border-box.layui-table-view {
+	border: none;
+}
+
+.layui-table {
+	color: #333;
+}
+
+.layui-table,
+.layui-table-view {
+	margin: 20px 0;
+}
+
+.layui-table-box {
+	border-top: 1px solid #ddd;
+}
+
+.layui-table-body {
+	margin: 0!important;
+}
+
+.layui-table td {
+	border-color: #ddd;
+}
+
+.layui-table-fixed-l {
+	box-shadow: none;
+}
+
+.layui-table-fixed-r {
+	right: 0!important;
+	box-shadow: -1px 0 4px rgba(0, 0, 0, .08);
+}
+
+.layui-table-view .layui-table[lay-skin=line] {
+	border-width: 0;
+}
+
+.layui-table-edit,
+.layui-table-edit:hover,
+.layui-table-edit:focus {
+	background: #ffffe5;
+	border: 1px solid #f58a2e!important;
+}
+
+.layui-table-page {
+	border: none;
+	padding: 0;
+	text-align: right;
+	margin: 20px 0;
+}
+
+
+/*新增编辑表格样式*/
+
+.layui-table-edit,
+.layui-table-edit:hover,
+.layui-table-edit:focus {
+	background: #ffffe5;
+	border: 1px dashed #f58a2e!important;
+	box-shadow: none;
+}
+
+.layui-table-main tbody td .layui-table-cell:hover {
+	color: #f58a2e;
+	height: 42px;
+	line-height: 30px;
+	padding: 5px 14px!Important;
+	margin: -7px 0!important;
+	background: #fff;
+	border: 1px dashed #f58a2e!Important;
+}
+
+.layui-table-main tbody td .layui-table-cell:hover .tab_font {
+	background: #f58a2e;
+}

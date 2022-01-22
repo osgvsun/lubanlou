@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/configcenter/organization/css/expand.css}" media="all">
+		<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+		<script th:src="@{/js/initOAuth2.js}"></script>
+		<script th:src="@{/js/jquery.cookie.js}"></script>
+		<script th:src="@{/layui/layui.js}"></script>
+		<!--树形组件-->
+		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/eletree/eleTree.css}" media="all">
+		<!-- vis -->
+		<script th:src="@{/plugins/graphVis/js/visgraph.min.js}"></script>
+		<script th:src="@{/plugins/graphVis/js/visgraph-layout.min.js}"></script>
+		<!-- expand -->
+		<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/expandCommon.css}" media="all">
+		<script th:inline="javascript">
+			var uid = [[${uid}]];
+			var userCenterHost = [[${session.userCenterHost}]];
+			var currentUsername = [[${session.user.username}]];
+			var apiGateWayHost = [[${session.apiGateWayHost}]];
+			var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+			var encryptUsername=[[${session.encryptUsername}]];
+			var currentsiteEnName = [[${session.siteEnName}]];
+			var currentsiteSecret = [[${session.siteSecret}]];
+			var oauth2Host = [[${session.oauth2}]];
+			var resourceContainerHost = [[${session.resourceContainerHost}]];
+			var resourceContainerHostForUpload = [[${session.resourceContainerHostForUpload}]];
+			var task;
+			const configCenterHost = apiGateWayHost+"/configcenter/";
+		</script>
+		<style>
+			.content_box {
+				padding: 0;
+				height: 100%;
+				position: initial;
+				overflow: initial;
+			}
+			#graph-panel {
+				width: 100%;
+				height: 100%;
+				background: #f2f2f2;
+			}
+			.c-mini-toolbar {
+				width: 44px;
+				position: absolute;
+				top: 68px;
+				right: 15px;
+				z-index: 999;
+				border: #bbbbbb solid 1px;
+				background-color: #ffffff;
+				box-shadow: 0px 0px 8px #cccccc;
+				box-sizing: border-box;
+			}
+			.c-mb-button {
+				height: 44px;
+				width: 42px;
+				margin-top: 0px;
+				background-color: #ffffff;
+				border-top: #efefef solid 1px;
+				opacity: 1;
+				text-align: center;
+				padding-top: 3px;
+				cursor: pointer;
+				color: #999999;
+				font-size: 18px;
+				float: left;
+				box-sizing: border-box;
+				line-height: 21px;
+			}
+			.c-mb-button:hover {
+				background-color: #2988ea;
+				color: #fff;
+			}
+			.c-mb-button:hover .c-mb-text {
+				color: #fff;
+			}
+			.rg-icon {
+				width: 16px;
+				height: 16px;
+				vertical-align: -3px;
+				fill: currentColor;
+				overflow: hidden;
+			}
+			.c-mb-button .c-mb-text {
+				display: inline-block;
+				height: 14px;
+				width: 42px;
+				font-size: 12px;
+				line-height: 12px;
+				margin-top: 24px;
+				margin-left: -28px;
+				position: absolute;
+				color: #262626;
+			}
+			#left {
+				left: -200px;
+			}
+			.left_btn,.right_btn{
+				position: fixed;
+				z-index: 999999;
+				width: 30px;
+				height: 40px;
+				line-height: 31px;
+				margin-bottom: 1px;
+				text-align: center;
+				cursor: pointer;
+				font-size: 30px;
+				background-color: #fff;
+				color: #000000;
+				border-top: 1px solid #dde5ed;
+				border-right: 1px solid #dde5ed;
+				border-bottom: 1px solid #dde5ed;
+				border-radius: 2px;
+			}
+			.left_btn {
+				left: 200px;
+				bottom: 50%;
+			}
+			.right_btn {
+				left: 0;
+				bottom: 50%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="main_content_box">
+			<div class="layui-card-header" style="top: 20px;left: 20px;">多维资源地图</div>
+<!--			<div class="main_box">-->
+			<!--左中工具栏开始-->
+			<div class="main_tit_sub" id="left">
+				<!--引用框架搭桥开始-->
+				<!--					<iframe class="soniframe" id="soniframe" src="" name="i"></iframe>-->
+				<!--引用框架搭桥结束-->
+				<div class="layui-row layui-col-space10">
+					<div class="layui-col-md12">
+						<!--树形目录搜索开始-->
+						<input type="text" placeholder="请输入关键字进行搜索" autocomplete="off" class="layui-input eleTree-search1">
+						<!--树形目录搜索结束-->
+					</div>
+					<div class="layui-col-md12">
+						<!--树形目录开始-->
+						<div class="eleTree ele1 spec_tree_one" lay-filter="data1"></div>
+						<!--树形目录结束-->
+					</div>
+					<!--树形目录调试按钮，已隐藏，不调试可删除，开始-->
+					<div class="layui-col-md12">
+						<div class="eleTree layui-form ele_control_box">
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="renderAfterExpand" lay-skin="primary" checked>是否在第一次展开某个树节点后才渲染其子节点</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="highlightCurrent" lay-skin="primary">是否高亮当前选中节点，默认值是 false</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="defaultExpandAll" lay-skin="primary" checked>是否默认展开所有节点</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="expandOnClickNode" lay-skin="primary" checked="">是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="checkOnClickNode" lay-skin="primary">是否在点击节点的时候选中节点，默认值为 false，即只有在点击复选框时才会选中节点</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="defaultExpandedKeys" lay-skin="primary">默认展开的节点的 key 的数组</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="autoExpandParent" lay-skin="primary" checked>展开子节点的时候是否自动展开父节点</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="showCheckbox" lay-skin="primary" checked>节点是否可被选择</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="checkStrictly" lay-skin="primary">在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="defaultCheckedKeys" lay-skin="primary">默认勾选的节点的 key 的数组</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="accordion" lay-skin="primary">是否每次只打开一个同级树节点展开（手风琴效果）</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="indent" lay-skin="primary">相邻级节点间的水平缩进，单位为像素</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="lazy" lay-skin="primary">是否懒加载子节点，需与 load 方法结合使用</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="load" lay-skin="primary">加载子树数据的方法，仅当 lazy 属性为true 时生效</div>
+							<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="draggable" lay-skin="primary" checked="">是否开启拖拽节点功能</div>
+							<div class="inp">
+								<h3>contextmenuList</h3>
+								<input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="copy" lay-skin="primary" checked>
+								<input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="add" lay-skin="primary" checked>
+								<input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="edit" lay-skin="primary" checked>
+								<input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="remove" lay-skin="primary" checked>
+							</div>
+							<div class="inp">
+								<h3>indent</h3>
+								<div class="slideTest"></div>
+							</div>
+						</div>
+					</div>
+					<!--树形目录调试按钮，已隐藏，不调试可删除，结束-->
+				</div>
+			</div>
+			<div class="left_btn" style="display: none"><i class="layui-icon layui-icon-prev"></i></div>
+			<div class="right_btn"><i class="layui-icon layui-icon-next"></i></div>
+			<!--左中工具栏结束-->
+						<div class="main_box">
+				<!--主体开始-->
+				<div class="content_box">
+					<div class="full_box">
+
+						<!--页面中需要包裹画布的元素-->
+						<div id="graph-panel"></div>
+						<div class="c-mini-toolbar">
+							<div id="zoomout" class="c-mb-button">
+								<i class="rg-icon layui-icon layui-icon-add-circle"></i>
+								<span class="c-mb-text">放大</span>
+							</div>
+							<div id="zoomin" class="c-mb-button">
+								<i class="rg-icon layui-icon layui-icon-reduce-circle"></i>
+								<span class="c-mb-text">缩小</span>
+							</div>
+							<div id="movecenter" class="c-mb-button">
+								<i class="rg-icon layui-icon layui-icon-align-center"></i>
+								<span class="c-mb-text">1:1</span>
+							</div>
+							<div id="zoomauto" class="c-mb-button" style="margin-top: 0px;">
+								<i class="rg-icon layui-icon layui-icon-snowflake"></i>
+								<span class="c-mb-text">缩放</span>
+							</div>
+							<div id="saveimage" class="c-mb-button">
+								<i class="rg-icon layui-icon layui-icon-download-circle"></i>
+								<span class="c-mb-text">保存</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--主体结束-->
+			</div>
+		</div>
+		<script th:src="@{/modules/configcenter/organization/eleTree.js}"></script>
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/static/js/mainindex.js}"></script>
+		<script th:src="@{/modules/configcenter/organization/visualShow.js}"></script>
+		<script type="text/javascript">
+			$(function(){
+				$a = $(window).height();
+				// $("#left").height($a);
+				$(".left_btn").click(function(){
+					$("#left").animate({left:'-200px'});
+					$(".left_btn").hide();
+					// $(".right_btn").show();
+					// $(".left_btn").animate({left:'0'});
+					$(".right_btn").delay(500).animate({left:'0'});
+				});
+				$(".right_btn").click(function(){
+					$(".right_btn").animate({left:'-50px'});
+					$("#left").delay(500).animate({left:'0'})
+					// $(".left_btn").delay(600).animate({left:'200px'})
+					$(".left_btn").delay(1000).animate({display:'block'});
+				});
+			});
+		</script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'configcenter/organization/mainindex']);-->
+<!--		</script>-->
+	</body>
+
+</html>

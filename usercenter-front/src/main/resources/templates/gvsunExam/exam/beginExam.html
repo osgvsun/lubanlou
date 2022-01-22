@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="_csrf_parameter" content="_csrf"/>
+    <meta name="_csrf_header" content="X-CSRF-TOKEN"/>
+    <meta name="_csrf" content="e62835df-f1a0-49ea-bce7-bf96f998119c"/>
+    <meta name="description" content="overview &amp; stats"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <!--下面这一行是为了获取项目的contextPath-->
+    <meta name="contextPath" th:content="${#httpServletRequest.getContextPath()}"/>
+    <title></title>
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/common/reset.css}">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/common/style.css}">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/common/jquery.classycountdown.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{${resourceContainerHost} +  '/shareApi/resourceContainer.css'}"/>
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <!--资源容器-->
+    <style>
+        .myForm {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body style="background-color:#f8f8f8;">
+<div class="content">
+    <h1></h1>
+    <div class="content_l">
+        <div class="cont  ent_box1">
+            <ul class="content_l_t">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="instro"><h1>说明</h1></div>
+            <ul class="had">
+                <li>
+                    <div></div>
+                </li>
+                <li>已答</li>
+                <li>
+                    <div></div>
+                </li>
+                <li>未答</li>
+                <div class="clearfix"></div>
+            </ul>
+            <table class="table_a" id="questionindex">
+                    <tr></tr>
+            </table>
+        </div>
+        <div id="countdown9" class="ClassyCountdownDemo"></div>
+    </div>
+    <form class="myForm" id="myForm" name="myForm">
+        <div class="content_m">
+            <div class="content_box1">
+                <ul class="content_m_title">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <div class="content_m_c">
+                    <h3>总共 <span></span> 道题</h3>
+                        <div class="content_m_e"></div>
+                </div>
+
+
+                <div id="page" style="display: inline-block; width: 70%"></div>
+
+                <div class="add_button1">
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/jquery.blockUI.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/jquery.json-2.4.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/jquery.knob.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/jquery.throttle.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/jquery.classycountdown.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/jquery.cookie.js}"></script>
+<script type="text/javascript" th:src="@{/teachPublic/layui/layui.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var time = $("#examTime").val();
+        $('#countdown9').ClassyCountdown({
+            end: time,
+            now: '0',
+            labels: true,
+            style: {
+                element: "",
+                textResponsive: .5,
+                days: {
+                    gauge: {
+                        thickness: .05,
+                        bgColor: "rgba(0,0,0,0)",
+                        fgColor: "#1abc9c",
+                        lineCap: 'round'
+                    },
+                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+                },
+                hours: {
+                    gauge: {
+                        thickness: .05,
+                        bgColor: "rgba(0,0,0,0)",
+                        fgColor: "#2980b9",
+                        lineCap: 'round'
+                    },
+                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+                },
+                minutes: {
+                    gauge: {
+                        thickness: .05,
+                        bgColor: "rgba(0,0,0,0)",
+                        fgColor: "#8e44ad",
+                        lineCap: 'round'
+                    },
+                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+                },
+                seconds: {
+                    gauge: {
+                        thickness: .05,
+                        bgColor: "rgba(0,0,0,0)",
+                        fgColor: "#f39c12",
+                        lineCap: 'round'
+                    },
+                    textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+                }
+
+            },
+            onEndCallback: function () {
+                alert("考试时间到！请提交试卷！");
+                submitExam(0, 0);
+            }
+        });
+
+
+    });
+</script>
+<script th:inline="javascript">
+    $(".content_m_c_e li:eq(1)").click(function () {
+        $(".content_m_c").show()
+    })
+</script>
+<script type="text/javascript" th:inline="javascript">
+    //<![CDATA[
+    const examId = [[${examId}]];
+    const simulation = [[${simulation}]];
+    const siteId = [[${session.cid}]];
+    const httpBaseUrl = /*[[${gvsunExam}]]*/'';
+    var resourceContainerHost = [[${resourceContainerHost}]];
+    var currentUsername = [[${session.user.username}]];
+    resourceContainer.initResourceContainer({
+        oauth2Host: [[${oauth2Host}]],
+        resourceContainerHost: resourceContainerHost + "/gvsunResource",
+        directoryEngineHost: resourceContainerHost + "/gvsunDirectory",
+        siteName: "教学平台",
+        username: currentUsername,
+        authorizationURL: resourceContainerHost + "/shareApi/getAuthorization",
+        resourceContainerHostForUpload: [[${resourceContainerHostForUpload}]]
+    });
+</script>
+<script th:src="@{/modules/gvsunExam/exam/beginExam.js}"></script>
+</body>
+</html>

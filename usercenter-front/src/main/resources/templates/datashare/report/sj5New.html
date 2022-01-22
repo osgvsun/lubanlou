@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>SJ5</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.css}">
+    <script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.js}"></script>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName= localStorage['roleCname'];
+    </script>
+</head>
+<body>
+<div class="toolbar">
+    <b>总数：<span id="total"></span></b>
+</div>
+<table id="table"
+       data-search="true"
+       data-toolbar=".toolbar"
+>
+    <thead>
+    <tr>
+        <th data-field="personnelNumber">人员编号</th>
+        <th data-field="laboratoryNumber">实验室编号</th>
+        <th data-field="laboratoryName">实验室名称</th>
+        <th data-field="name">姓名</th>
+        <th data-field="gender">性别</th>
+        <th data-field="birthDate">出生年月</th>
+        <th data-field="belongingSubject">所属学科</th>
+        <th data-field="specializedJob">专业技术职务</th>
+        <th data-field="education">文化程度</th>
+        <th data-field="expertCategory">专家类别</th>
+        <th data-field="educationalTimeDomesticTraining">学历教育时间（国内培训）</th>
+        <th data-field="nonEducationTimeDomesticTraining">非学历教育时间（国内培训）</th>
+        <th data-field="educationalTimeAbroadTraining">学历教育时间（国外培训）</th>
+        <th data-field="nonEducationTimeAbroadTraining">非学历教育时间（国外培训）</th>
+    </tr>
+    </thead>
+</table>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        let $table = $('#table')
+        let yearCode = [[${yearCode}]];
+        let system = [[${system}]];
+        $.ajax({
+            url: datashareHost + "getSJ5New",
+            method: "get",
+            data: {
+                limsAuth: $.cookie('currentAuthBydatashare'),
+                yearCode: yearCode,
+                system: system
+            },
+            dataType: "json",
+            success: function (data) {
+                $('#total').text(data.length);
+                $table.bootstrapTable({data: data});
+            }
+        });
+    })
+</script>
+</body>
+</html>

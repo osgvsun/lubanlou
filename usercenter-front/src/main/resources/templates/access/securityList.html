@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="securitylistbox" id="securitylistbox">
+				<div class="layui-fluid">
+					<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+						<ul class="layui-tab-title">
+							<li>
+								<a th:href="@{/access/equipmentAdmittanceMode(entityId=${entityId}, entityType=${entityType})}">准入方式</a>
+							</li>
+							<li class="exam" style="display: none">
+								<a th:href="@{/access/equipmentExamManage(entityId=${entityId})}">考试管理</a>
+							</li>
+							<li class="training" style="display: none">
+								<a th:href="@{/access/equipmentTrainingManage(entityId=${entityId}, entityType=${entityType})}">培训管理</a>
+							</li>
+							<li>
+								<a th:href="@{/access/equipmentSecurityProtocol(entityId=${entityId}, entityType=${entityType})}">安全协议书管理</a>
+							</li>
+							<li>
+								<a th:href="@{/access/accessList(entityId=${entityId}, entityType=${entityType})}">准入/等级名单</a>
+							</li>
+							<li>
+								<a th:href="@{/access/examFreeList(entityId=${entityId}, entityType=${entityType})}">免考试名单</a>
+							</li>
+							<li class="layui-this">
+								<a th:href="@{/access/securityList(entityId=${entityId}, entityType=${entityType})}">安全协议书</a>
+							</li>
+						</ul>
+						<div class="layui-tab-content">
+							<div class="layui-tab-item layui-show">
+								<!--仪器安全协议书已阅读人员管理开始-->
+								<div class="layui-card">
+									<div class="layui-card-header">仪器安全协议书已阅读人员管理
+										<label class="layui-icon layui-icon-add-1 newsecurity header_btn" data-method="newsecurity" lay-tips="新增安全协议书"></label>
+										<label class="layui-icon layui-icon-download-circle header_btn export_list" lay-tips="导出仪器安全协议书已阅读人员">名单导出</label>
+									</div>
+									<div class="layui-card-body">
+										<div class="layui-row layui-col-space10">
+											<!--搜索开始-->
+											<div class="layui-col-md12 search_line">
+												<div class="layui-inline">
+													<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入阅读人员搜索" />
+												</div>
+												<input type="button" class="layui-btn" data-type="reload" value="搜索" />
+												<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+											</div>
+											<!--搜索结束-->
+											<div class="layui-col-md12">
+												<!--表单开始-->
+												<table class="layui-hide" id="securitylist" lay-filter="securitylist"></table>
+												<!--表单结束-->
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--仪器安全协议书已阅读人员管理结束-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<!--<a href="#"><br/></a>-->
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<div th:replace="/access/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:src="@{/modules/access/securityList.js}"></script>
+	</body>
+</html>​​​

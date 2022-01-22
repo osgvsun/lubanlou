@@ -1,0 +1,181 @@
+.main_btn1 button{
+	padding:5px 10px;
+	margin-left:10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size:12px;
+}
+.main_btn1 button:nth-child(1){
+	margin-left:0px;
+}
+.main_btn1 a{
+	margin-left:10px;
+	color:#444;
+}
+.ex_part1{
+	margin:20px 0 15px 0;
+}
+.main_btn1 .activeBox{
+	background: #C10D0C;
+	color:#fff;
+}
+.skill_title{
+	line-height: 24px;
+}
+.skill_title .fa-circle-o{
+	color:#C10D0C;
+	margin-right:5px;
+}
+.skill_title span{
+	font-weight:bold;
+	font-size:16px;
+}
+.title_btn{
+	float:right;
+}
+.title_btn button{
+	float:left;
+	margin-left:6px;
+	background: transparent;
+}
+.skill_dec{
+	margin:10px 0 10px 20px;
+
+}
+.skill_dec p{
+	font-size:14px;
+	line-height:24px;
+}
+#outline,#postingsBox{
+	display: none;
+	padding:30px;
+}
+.outline_title h1{
+	font-size:16px;
+	line-height:24px;
+	border-bottom: 1px solid #d7d7d7;
+	margin:0;
+	padding-bottom:6px;
+}
+.layui-form-label{
+	width:auto;
+}
+.outline_col{
+	margin-top:20px;
+}
+.outline_btn{
+	float:right;
+}
+.layui-btn-primary:hover{
+	border-color:#1E9FFF;
+}
+.skill_list{
+	margin:20px 0 0 22px;
+	/*padding:20px;*/
+}
+.skill_list .fa-list-ul{
+	margin-right:5px;
+	line-height:24px;
+}
+.skill_list span{
+	line-height:24px;
+}
+.main_btn{
+	float:right;
+}
+.main_btn button{
+	padding:5px 10px;
+	margin-left:10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size:12px;
+	background: #1aa1e1;
+	color:#fff;
+}
+.skill-table{
+	position: relative;
+	margin-top:20px;
+}
+.skill-table img{
+	width:100%;
+	display: block;
+}
+.skill-table table tr{
+	background: transparent !important;
+	border-bottom:1px solid #d7d7d7;
+}
+.skill-table table tr td{
+	color:#fff;
+	font-size: 12px;
+}
+.skill-table table tr:last-child{
+	border-bottom:0px;
+}
+.layui-table tbody tr:hover, .layui-table-hover{
+	background-color:transparent !important;
+}
+.skill-table tr td i{
+	color:#1aa1e1;
+}
+.skill-table tr td button{
+	padding:3px 10px;
+	margin-left:10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size:12px;
+	background: #5c86a6;
+	color:#fff;
+}
+/*.skill-table tr td button:last-child{
+	background: #ce5043;
+}*/
+.skill_ta{
+	position: absolute;
+	top:50px;
+	left:0;
+	background: rgba(0,0,0,0.6) !important;
+	z-index: 999;
+}
+.skills-video{
+	top:0%;
+	left:50%;
+	z-index: 999;
+	padding:5px 24px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	text-align:center;
+	position: absolute;
+	background: rgba(255,255,255,0.6);
+	box-shadow: 0.5px 0.5px 7px #707070;
+	font-size:12px;
+	margin-left:-48px;
+}
+.rooms-btn{
+	padding-top:20px;
+}
+.rooms-btn li{
+	float:left;
+	padding:5px 6px;
+	margin-left:10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size:12px;
+	background: #5c86a6;
+	color:#fff;
+	cursor: pointer;
+}
+.rooms-btn li:nth-child(1){
+	margin-left:0px;
+}
+.radio-visual{
+	margin:20px 0 0 22px;
+}
+.img_back{
+	img:url(../images/visualization/floor/yuanxingxuan.png);
+	line-height:12px;
+}

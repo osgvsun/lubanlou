@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!--layout:decorator="/timetable/iframe"-->
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="Generator" content="GVSUN" />
+    <meta name="Author" content="chenyawen" />
+    <meta name="Keywords" content="" />
+
+    <meta name="Description" content="" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <script th:src="@{/js/directoryEngine/directoryEngine-core.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/modules/timetable/static_limsproduct/js/layerSilica.js}"></script>
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/style/admin.css}" media="all">
+<!--    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/plugins/formselect/formSelects-v4.css}" media="all">-->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/font-awesome.min.css}" media="all">-->
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/expand.css}" media="all">
+    <style type="text/css">
+        .btn_save {
+            position: absolute;
+            top: -26px;
+            right: 0px;
+            width: 50%;
+            float: right;
+        }
+        .clear {
+            clear:both
+        }
+        /*.layui-table-cell:hover {*/
+            /*color: black!important;*/
+            /*border: none!important;*/
+        /*}*/
+    </style>
+    <script th:inline="javascript">
+        // 定义全局变量-排课方式入口配置
+        var username = [[${session.user.username}]];
+        var role = [[${session.selected_role}]];
+        var academyNumber = [[${session.selected_academy}]];
+    </script>
+</head>
+
+<body layout:fragment="timetable">
+<div class="main_content">
+    <input type="hidden" id="zuulServerUrl" th:value="${zuulServerUrl}" />
+    <input type="hidden" id="timetableStyle" th:value="${timetableStyle}" />
+    <input type="hidden" id="termid" th:value="${term}" />
+    <input type="hidden" id="academyNumber" th:value="${academyNumber}" />
+    <input type="hidden" id="courseNo" name="courseNo" th:value="${courseNo}">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md12">
+            <!--步骤开始-->
+            <div class="step_box">
+                <div class="step_content finish_step_content">
+                    <label class="layui-icon"></label>
+                    <div class="step_text">
+                        <div>
+                            <font>步骤一</font>
+                        </div>
+                        <span>选择排课时间段</span>
+                    </div>
+                </div>
+                <div class="step_content">
+                    <label class="layui-icon"></label>
+                    <div class="step_text">
+                        <div>
+                            <font>步骤二</font>
+                        </div>
+                        <span>选择教师，可跳过，于排课页面细化</span>
+                    </div>
+                </div>
+                <div class="step_content">
+                    <label class="layui-icon"></label>
+                    <div class="step_text">
+                        <div>
+                            <font>步骤三</font>
+                        </div>
+                        <span>选择实验室，可跳过,于排课页面细化</span>
+                    </div>
+                </div>
+                <div class="step_content select_step_content">
+                    <label class="layui-icon"></label>
+                    <div class="step_text">
+                        <div>
+                            <font>步骤四</font>
+                        </div>
+                        <span>排课</span>
+                    </div>
+                </div>
+            </div>
+            <!--步骤结束-->
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">已安排时间段</div>
+                <div class="layui-card-body">
+                    <div class="layui-col-md12 btn_save">
+                    <div class="fr">
+                        <!--<input type="button" class="layui-btn layui-btn-warm saveAllRecords" data-method="saveAllRecords" value="一键排课" />-->
+                    </div>
+                    </div>
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-md12">
+                            <!--已安排时间段表格开始-->
+                            <table class="layui-hide edit_tab" id="definiteListStepFour" lay-filter="definiteListStepFour"></table>
+                            <script type="text/html" id="line_toolbar">
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                            </script>
+                            <!--已安排时间段表格结束-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12" id="remove_uncourse">
+            <div class="layui-card">
+                <div class="layui-card-header">未安排时间段
+                    <div class="layui-form switch-button" style="display: inline;">
+
+
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space20">
+                        <form class="lesson_card" action="" lay-filter="" id="">
+                            <div class="layui-col-md12 btn_save">
+                                <!--未安排时间段排课选择开始-->
+                                <!--<div class="layui-inline">-->
+                                    <!--<input type="radio" name="weekselect" value="单周" title="单周" />-->
+                                    <!--<input type="radio" name="weekselect" value="双周" title="双周" />-->
+                                    <!--<input type="radio" name="weekselect" value="全选" title="全选" />-->
+                                <!--</div>-->
+                                <!--<input type="button" class="layui-btn layui-btn-sm" value="保存" />-->
+                                <!--<input type="button" class="layui-btn layui-btn-red layui-btn-sm" value="删除" />-->
+                                <!--<input type="reset" class="layui-btn layui-btn-primary layui-btn-sm" value="重置" />-->
+                                <!--未安排时间段排课选择结束-->
+                                <!--其他排课操作开始-->
+                                <div class="fr">
+                                    <!--<input type="button" class="layui-btn layui-btn-green addlesson" data-method="addlesson" value="添加其他时间段排课" />-->
+                                    <input type="button" class="layui-btn showLabRoomConflictDetail" data-method="showLabRoomConflictDetail" value="实验室判冲详情" />
+                                    <input type="button" class="layui-btn layui-btn-warm saveAllRecords" data-method="saveAllRecords" value="一键排课" />
+                                </div>
+                                <!--其他排课操作结束-->
+                            </div>
+                            <div class="project_head layui-row layui-col-space20 unassigned_times" id="unassigned_times">
+
+                            </div>
+                            <div class="pages" id="timetable_page">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--步骤完成交接开始-->
+<div class="step_bottom">
+    排课设置完成
+    <a class="layui-btn saveAllRecords" data-method="saveAllRecords">一键排课</a>
+    <!--<a class="layui-btn" href="definiteListStepThree.html">上一步</a>-->
+    <a class="layui-btn previousStep" data-method="previousStep">上一步</a>
+</div>
+<!--步骤完成交接结束-->
+<script th:src="@{/modules/timetable/layui_admin/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/timetable/layui_admin/layui/layui.js}"></script>
+<script th:src="@{/modules/configcenter/static/xm-select.js}"></script>
+<!--<script th:src="@{/modules/timetable/layui_admin/static/plugins/formselect/formSelects-v4.min.js}"></script>-->
+<script th:src="@{/modules/timetable/layui_admin/static/js/global.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.cookie.js}"></script>
+<script th:src="@{/modules/timetable/layui_admin/modules/definiteListStepFour.js}"></script>
+
+<!--<script>-->
+<!--    layui.config({-->
+<!--            base: '/layui_admin/' //静态资源所在路径-->
+<!--        }-->
+
+<!--    ).extend({-->
+<!--            index: 'lib/index' //主入口模块-->
+<!--        }-->
+
+<!--    ).use(['index', 'definiteListStepFour']);-->
+<!--</script>-->
+</body>
+
+</html>

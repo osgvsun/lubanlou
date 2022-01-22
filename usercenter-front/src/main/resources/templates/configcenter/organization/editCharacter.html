@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+		<script type="text/javascript" src="../layuiadmin/layui/layui.js"></script>
+		<script type="text/javascript" src="../layuiadmin/static/js/jquery-1.11.0.min.js"></script>
+		<!-- expand -->
+		<link rel="stylesheet" href="../layuiadmin/static/css/font-awesome.min.css" media="all">
+		<link rel="stylesheet" href="../layuiadmin/static/css/expand.css" media="all">
+		<style>
+			.layui-form-label {
+				width: 65px;
+			}
+			
+			.layui-input-block {
+				margin-left: 65px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="main_content_box">
+			<div class="full_box">
+				<!--主体开始-->
+				<form class="layui-form lesson_card" action="" lay-filter="editcharacterbox" id="editcharacterbox">
+					<div class="layui-row layui-col-space10">
+						<div class="layui-col-lg8">
+							<label class="layui-form-label">角色名称</label>
+							<div class="layui-input-block">
+								<input type="text" name="name" autocomplete="on" class="layui-input" lay-verify="required" placeholder="请输入角色名称" />
+							</div>
+						</div>
+						<div class="layui-col-lg4">
+							<label class="layui-form-label">权限级别</label>
+							<div class="layui-input-block">
+								<select name="authority" lay-search lay-verify="required">
+									<option value="">请选择权限级别</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-col-lg12">
+							<label class="layui-form-label">人员</label>
+							<div class="layui-input-block float_dd">
+								<!--人员穿梭数据开始-->
+								<div id="personselected"></div>
+								<!--人员穿梭数据结束-->
+							</div>
+						</div>
+					</div>
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="editcharacterbtn" id="editcharacterbtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</form>
+				<!--主体结束-->
+			</div>
+		</div>
+		<script src="../layuiadmin/static/js/global.js"></script>
+		<script>
+			layui.config({
+					base: '../layuiadmin/' //静态资源所在路径
+				}
+
+			).extend({
+					index: 'lib/index' //主入口模块
+				}
+
+			).use(['index', 'editCharacter']);
+		</script>
+	</body>
+
+</html>

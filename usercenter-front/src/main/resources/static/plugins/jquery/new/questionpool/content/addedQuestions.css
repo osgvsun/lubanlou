@@ -1,0 +1,36 @@
+.addly{
+	width:90%;
+	margin:0 auto;
+	padding-top:20px;
+}
+.addly_select select{
+	height:32px;
+	line-height: 32px;
+	padding:0 30px 0 10px ;
+}
+.m-list>li .opt .icon-plus-add-box{
+	width:16px;
+	height:16px;
+	background: url(../../../images/questionpool/add_box.png) 0 0 no-repeat;
+}
+.m-list>li .opt .icon-plus-cancel{
+	width:16px;
+	height:16px;
+	background: url(../../../images/questionpool/cancel1.png) 0 0 no-repeat;
+}
+.layui-btn{
+	padding:0 30px !important;
+	margin-left:12px;
+	height:34px !important;
+	line-height:34px !important;
+	background-color: #0087ff !important;
+	color:#fff;
+	cursor: pointer;
+	border-radius: 3px;
+}
+button.layui-btn-primary{
+	background: #f7f7f7 !important;
+	line-height:32px !important;
+	color:#666 !important;
+	border:1px solid #C9C9C9;
+}

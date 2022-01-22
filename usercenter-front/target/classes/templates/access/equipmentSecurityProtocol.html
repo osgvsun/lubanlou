@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="equipmentsecurityprotocolbox" id="equipmentsecurityprotocolbox">
+				<div class="main_content">
+					<div class="layui-fluid">
+						<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+							<ul class="layui-tab-title">
+								<li>
+									<a th:href="@{/access/equipmentAdmittanceMode(entityId=${entityId}, entityType=${entityType})}">准入方式</a>
+								</li>
+								<li class="exam" style="display: none">
+									<a th:href="@{/access/equipmentExamManage(entityId=${entityId})}">考试管理</a>
+								</li>
+								<li class="training" style="display: none">
+									<a th:href="@{/access/equipmentTrainingManage(entityId=${entityId}, entityType=${entityType})}">培训管理</a>
+								</li>
+								<li class="layui-this">
+									<a th:href="@{/access/equipmentSecurityProtocol(entityId=${entityId}, entityType=${entityType})}">安全协议书管理</a>
+								</li>
+								<li>
+									<a th:href="@{/access/accessList(entityId=${entityId}, entityType=${entityType})}">准入/等级名单</a>
+								</li>
+								<li>
+									<a th:href="@{/access/examFreeList(entityId=${entityId}, entityType=${entityType})}">免考试名单</a>
+								</li>
+								<li>
+									<a th:href="@{/access/securityList(entityId=${entityId}, entityType=${entityType})}">安全协议书</a>
+								</li>
+							</ul>
+							<div class="layui-tab-content">
+								<div class="layui-tab-item layui-show">
+									<!--设备安全协议开始-->
+									<div class="layui-card">
+										<div class="layui-card-header">设备安全协议</div>
+										<div class="layui-card-body">
+											<textarea id="protocol" style="display: none;"></textarea>
+										</div>
+									</div>
+									<!--设备安全协议结束-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--操作按钮开始-->
+				<div class="step_bottom">
+					<input type="button" lay-filter="equipmentsecurityprotocolbtn" id="equipmentsecurityprotocolbtn" class="layui-btn" lay-submit value="立即提交" />
+					<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+				</div>
+				<!--操作按钮结束-->
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/access/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const entityId = [[${entityId}]];
+			const entityType = [[${entityType}]];
+			// const entityType = 'DEV';
+		</script>
+		<script th:src="@{/modules/access/equipmentSecurityProtocol.js}"></script>
+	</body>
+</html>​​​

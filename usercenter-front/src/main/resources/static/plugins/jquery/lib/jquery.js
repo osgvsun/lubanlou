@@ -1,0 +1,1 @@
+(function(){var g=document.location.search.slice(1).split("&"),e=g.length,a=document.getElementsByTagName("script"),h=a[a.length-1].src,d=0,f,b="3.1.1",c="http://code.jquery.com/jquery-git.js";for(;d<e;d++){f=g[d].split("=");if(f[0]==="jquery"){b=f[1];break}}if(b!="git"){c=h.replace(/jquery\.js$/,"jquery-"+b+".js")}document.write("<script src='"+c+"'><\/script>")})();

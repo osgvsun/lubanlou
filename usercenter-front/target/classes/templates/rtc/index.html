@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FACE TO FACE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding: 12px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        #body {
+            padding: 20px 0;
+        }
+
+        #body div {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div>
+    创建/加入频道<input type="text" id="channelInput" placeholder="">
+    <button id="joinBtn">加入/创建</button>
+    <button id="leaveBtn">离开当前频道</button>
+    当前频道：<span id="currentChannel"></span>
+</div>
+<div id="controlMenu">
+    <!--操作-->
+</div>
+<div id="body"></div>
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script src="https://ardw.anyrtc.io/sdk/web/ArRTC%40latest.js"></script>
+<script th:src="@{/modules/rtc/test.js}"></script>
+</body>
+</html>

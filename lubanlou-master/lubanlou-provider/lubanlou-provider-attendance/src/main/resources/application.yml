@@ -1,0 +1,51 @@
+server:
+  port: 8844
+  tomcat:
+    #tomcat接受排队的最大数量
+    accept-count: 200
+    #tomcat处理的最大连接数
+    max-connections: 2000
+    connection-timeout: 5s
+    threads:
+      max: 1000
+      min-spare: 100
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 90 # 过期时间
+    lease-renewal-interval-in-seconds: 30 # 续约时间
+  client:
+    serviceUrl:
+      defaultZone: ${eureka_host:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+
+spring:
+  application:
+    name: attendance
+  flyway:
+    enabled: false
+    encoding: UTF-8
+    baseline-on-migrate: false
+    validate-on-migrate: false
+  redis:
+    host: ${redis_host:localhost}
+    port: ${redis_port:6379}
+    password: ${redis_password:123456}
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1s
+        max-idle: 8
+        min-idle: 0
+
+datasource:
+  projectName: attendance
+  strictMode: ${datasource_strict_mode:false}
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+debug: true

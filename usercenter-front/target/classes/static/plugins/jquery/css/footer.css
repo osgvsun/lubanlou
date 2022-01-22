@@ -1,0 +1,21 @@
+@charset "utf-8";
+.footer{
+    width:100%;
+    height:80px;
+    background-color: rgba(0,0,0,0.8);
+    margin-top:44px;
+}
+.footer_content{
+    width:85%;
+    margin:0 auto;
+}
+.footer_content p,.footer_content p a{
+    color:#ddd;
+    line-height:80px;
+    text-align: center;
+    font-size: 12px;
+}
+.footer_content p a:hover{
+    text-decoration: underline;
+    color:#f13a32;
+}

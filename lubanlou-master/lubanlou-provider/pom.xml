@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- springboot父级依赖，省去常用包version标签 -->
+    <parent>
+        <groupId>net.gvsun.lubanlou</groupId>
+        <artifactId>lubanlou-master</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>net.gvsun.lubanlou.provider</groupId>
+    <artifactId>lubanlou-provider</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>lubanlou-provider-auditserver</module>
+        <module>lubanlou-provider-message</module>
+        <module>lubanlou-provider-oauth2</module>
+        <module>lubanlou-provider-transcript</module>
+        <module>lubanlou-provider-gsexam</module>
+        <module>lubanlou-provider-gswork</module>
+        <module>lubanlou-provider-attendance</module>
+        <module>lubanlou-provider-gsquestionpool</module>
+    </modules>
+
+    <!-- pom常量 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- =========================== 所有依赖管理 ===========================-->
+        <!--通用dto包-->
+        <dependency>
+            <groupId>net.gvsun.lubanlou</groupId>
+            <artifactId>lubanlou-common</artifactId>
+        </dependency>
+
+        <!--feign接口声明-->
+        <dependency>
+            <groupId>net.gvsun.lubanlou</groupId>
+            <artifactId>lubanlou-feign</artifactId>
+        </dependency>
+
+        <!--资源容器工具包-->
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>new-resource-service</artifactId>
+        </dependency>
+
+        <!--认证工具包-->
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>oauth2-service</artifactId>
+        </dependency>
+
+        <!--多数据源依赖jar-->
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>datasource</artifactId>
+        </dependency>
+
+        <!--缓存相关包-->
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>EasyCache</artifactId>
+        </dependency>
+
+        <!--通用kafka包-->
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>gvsun-kafka</artifactId>
+        </dependency>
+
+        <!-- ===========================以下为springboot父级依赖自带配置 ===========================-->
+        <!-- springcloud服务调用-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- eureka-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <!-- 该包会导致系统接口返回数据类型为xml而不是json-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.dataformat</groupId>
+                    <artifactId>jackson-dataformat-xml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 核心Spring Boot starter ,包括自动配置支持，日志和YAML -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--  对全栈web开发的支持，包括Tomcat和spring-webmvc-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--  对spring -security模板引擎的支持-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!--  对REDIS键值数据存储的支持，包括Spring-redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- 自动配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!-- 对java持久化API的支持，包括Spring-data-jpa,spring-orm和Hibernate -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- mysql-connector，默认版本8.0.20  -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- httpclient，默认版本4.5.12  -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <!-- kafka，默认版本2.5.2.RELEASE  -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <!-- lombok，默认版本1.18.12  -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!--=========================== 以下为自定义配置 ===========================-->
+        <!-- mybatisplus  -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+        </dependency>
+
+        <!-- 阿里excel导出工具包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
+
+        <!-- flyway-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <!-- fastjson  -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>http://library.gvsun.net/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>http://library.gvsun.net/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!--来源公司库配置 -->
+    <repositories>
+        <repository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>http://library.gvsun.net/nexus/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>local-nexus</id>
+            <url>http://library.gvsun.net/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!-- 打包相关 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

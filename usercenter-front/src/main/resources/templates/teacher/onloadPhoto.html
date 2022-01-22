@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN" id="index"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script th:src="@{/modules/personalInfo.js}"></script>
+    <title>图片裁剪</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        #clipArea {
+            height: 300px;
+            width: 50%;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        #file,
+        #clipBtn {
+            margin: 20px;
+        }
+
+        #view {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .info {
+            width: 0px;
+            height: 20px;
+            background: #ec5710;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .progressTar {
+            display: inline-block;
+            width: 60%;
+            text-align: center;
+            position: relative;
+        }
+
+        .progress {
+            display: inline-block;
+            width: 100%;
+            margin: 0 30px;
+            height: 20px;
+            background: #ddd;
+            position: relative;
+        }
+
+        #result {
+            position: absolute;
+            top: 0;
+        }
+
+        .progress:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent));
+            background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+            background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+            background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+            border-radius: 20px;
+            overflow: hidden;
+            z-index: 1;
+        }
+    </style>
+    <script th:src="@{/modules/common.js}"></script>
+</head>
+<body ontouchstart="">
+<div id="clipArea"></div>
+<div id="view"></div>
+<form style="display: inline-block" enctype="multipart/form-data">
+    <input type="file" id="file">
+    <input type="reset">
+</form>
+<div class="progressTar">
+    <div class="progress">
+        <div class="info" id="info">
+        </div>
+    </div>
+    <span id="result">
+
+    </span>
+</div>
+<div id="resource-container"></div>
+
+<button id="clipBtn" class="layui-btn">截取</button>
+<button class="layui-btn" onclick="uploadImg()">上传</button>
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/jsImg/iscroll-zoom.js}"></script>
+<script th:src="@{/jsImg/hammer.js}"></script>
+<script th:src="@{/jsImg/lrz.all.bundle.js}"></script>
+<script th:src="@{/jsImg/jquery.photoClip.js}"></script>
+<!--资源容器-->
+<script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+<!--资源容器-->
+<script th:src="@{/layui/layui.js}"></script>
+<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+
+<script th:inline="javascript">
+    var userCenterHost = [[${session.userCenterHost}]];
+    var currentUsername = [[${session.user.username}]];
+    var apiGateWayHost = [[${session.apiGateWayHost}]];
+    var encryptUsername=[[${session.encryptUsername}]];
+    var currentsiteEnName = [[${session.siteEnName}]];
+    var currentsiteSecret = [[${session.siteSecret}]];
+    var oauth2 = [[${session.oauth2}]];
+    var resourceContainerHost = [[${resourceContainerHost}]];
+    var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+
+    resourceContainer.initResourceContainer({
+        oauth2Host: oauth2,
+        resourceContainerHost: resourceContainerHost + "/gvsunResource",
+        directoryEngineHost: resourceContainerHost + "/gvsunDirectory",
+        siteName: "用户中心",
+        authorizationURL: resourceContainerHost + "/shareApi/getAuthorization",
+        username: currentUsername,
+        resourceContainerHostForUpload: resourceContainerHostForUpload,
+        unfixed: true
+    });
+    var upDataUrl;
+
+    //图片上传弹框js
+    function dataURLtoFile(dataurl, filename) {
+        var arr = dataurl.split(',');
+        var mime = arr[0].match(/:(.*?);/)[1];
+        var bstr = atob(arr[1]);
+        var n = bstr.length;
+        var u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        //转换成file对象
+        return new File([u8arr], filename, {type: mime});
+        //转换成成blob对象
+        //return new Blob([u8arr],{type:mime});
+    }
+
+    var clipArea = new bjj.PhotoClip("#clipArea", {
+        size: [150, 200],
+        outputSize: [600, 800],
+        file: "#file",
+        view: "#view",
+        ok: "#clipBtn",
+        loadStart: function () {
+            console.log("照片读取中");
+        },
+        loadComplete: function () {
+            console.log("照片读取完成");
+        },
+        clipFinish: function (dataURL) {
+            upDataUrl = dataURL;
+        }
+    });
+
+    //上传图片到资源容器
+    function uploadImg() {
+        var file = dataURLtoFile(upDataUrl, 'photo.jpeg');
+        //上传文件，选完文件后不自动上传,点击开始上传按钮上传
+        //获取目录id
+        resourceContainer.getDirectoryIdByPath({
+            path: '用户中心/用户图像',
+            success: function (directoryId) {
+                var formData = new FormData();
+                formData.append('siteName', '用户中心');
+                formData.append('username', currentUsername);
+                formData.append('fileTags', '证件照');
+                formData.append('files', file);
+                formData.append('directoryId', directoryId);
+                formData.append('width', 800);
+                resourceContainer.uploadFile({
+                    formData: formData,
+                    progress : function(data) { //获取ajaxSettings中的xhr对象，为它的upload属性绑定progress事件的处理函数  
+                        var progressRate = (data.loaded / data.total) * 100 + '%';
+                        //通过设置进度条的宽度达到效果
+                        $('.progress > div').css('width', progressRate);
+                        var oRes = document.getElementById("result");
+                        oRes.innerHTML = progressRate
+                    },
+                    afterUploadSuccess: function (data) {
+                        parent.$(".img_fileId").val(data.fileIds[0]);
+                        console.log(data);
+                        alert("上传成功");
+                    }, uploadFail: function (reason) {
+                        alert("上传失败:" + reason);
+                    }
+                });
+            },
+            fail: function (reason) {
+                alert("获取目录id失败:" + reason);
+            }, needToken: true
+        });
+
+        function progressHandlingFunction(e) {
+            if (e.lengthComputable) {
+                $('progress').attr({
+                    value : e.loaded,
+                    max : e.total
+                }); //更新数据到进度条  
+                var percent = e.loaded / e.total * 100;
+                $('#progress').html(percent.toFixed(2) + "%");
+            }
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/layui/css/layui.css}">
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName = localStorage['roleCname'];
+    </script>
+</head>
+<body>
+<div>
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>第一步：选择数据来源</legend>
+    </fieldset>
+    <div>
+        <form class="layui-form" id="form1">
+            <div class="layui-form-item">
+                <label>数据源：</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" lay-filter="form1Checkbox" lay-skin="primary" name="dataSources"
+                           value="dataShare" title="共享中心">
+                    <input id="sj4IsShowLims_input" type="checkbox"
+                           lay-filter="form1Checkbox" lay-skin="primary"
+                           name="dataSources"
+                           value="lims" title="项目库">
+                    <input type="hidden" id="limsAuth" name="limsAuth">
+                    <input type="hidden" id="currYear" name="currYear">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="display: none" id="secondStep">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>第二步：选择不同数据源，ID重复时，列获取值的优先级</legend>
+        </fieldset>
+        <form class="layui-form" action="" id="form2">
+            <div class="layui-form-item">
+                <label>共享中心数据：</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="experimentalName" title="实验名称">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="experimentalType" title="实验类别">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="experimentalClass" title="实验类型">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="experimentalSubject"
+                           title="实验所属学科">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="experimentalDemand" title="实验要求">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="experimenterGender" title="实验者性别">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="experimenterNumber" title="实验者人数">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="groupNumber" title="每组人数">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="experimentalHours" title="实验学时数">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="laboratoryNumber" title="实验室编号">
+                    <input type="checkbox" lay-skin="primary" name="dataShare" value="laboratoryName" title="实验室名称">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label>项目库数据：</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="experimentalName" title="实验名称">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="experimentalType" title="实验类别">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="experimentalClass" title="实验类型">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="experimentalSubject" title="实验所属学科">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="experimentalDemand" title="实验要求">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="experimenterGender" title="实验者性别">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="experimenterNumber" title="实验者人数">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="groupNumber" title="每组人数">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="experimentalHours" title="实验学时数">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="laboratoryNumber" title="实验室编号">
+                    <input type="checkbox" lay-skin="primary" name="lims" value="laboratoryName" title="实验室名称">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-input-block">
+        <button type="button" onclick="generateSJ4Reports()" class="layui-btn">确定</button>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/layui/layui.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script>
+    layui.use('form', function () {
+        let form = layui.form;
+        form.on('checkbox(form1Checkbox)', function (data) {
+            let length = $("input[name='dataSources']:checked").length;
+            if (length > 1) {
+                $("#secondStep").show();
+            } else {
+                $("#secondStep").hide();
+            }
+        });
+    });
+
+    function generateSJ4Reports() {
+        $("#limsAuth").val($.cookie('currentAuthBydatashare'));
+        $("#currYear").val(localStorage.currYear);
+        let length = $("input[name='dataSources']:checked").length;
+        if (length === 0) {
+            layui.layer.alert("请选择生成报表所需的数据源头");
+            return false;
+        }
+        $.ajax({
+            url: datashareHost + "generateSJ4Reports",
+            method: "post",
+            data: $('#form1').serialize() + "&" + $('#form2').serialize(),
+            dataType: "json",
+            success: function (res) {
+                if (res.code === 0) {
+                    window.parent.tableRender();
+                    window.parent.layui.layer.closeAll();
+                }
+                window.parent.layui.layer.alert(res.msg);
+            },
+            error: function () {
+                layui.layer.msg("出错啦");
+            }
+        });
+    }
+
+    let configData = JSON.parse(localStorage.getItem("datashare_configData"))
+    if (!configData || !configData['sj4IsShowLims']) {
+        $("#sj4IsShowLims_input").remove();
+        $("#sj4IsShowLims_input+.layui-form-checkbox").remove();
+    }
+</script>
+</body>
+</html>

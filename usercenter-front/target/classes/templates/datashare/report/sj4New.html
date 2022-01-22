@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>SJ4</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.css}">
+    <script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.js}"></script>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName= localStorage['roleCname'];
+    </script>
+</head>
+<body>
+<div class="toolbar">
+    <b>总数：<span id="total"></span></b>
+</div>
+<table id="table"
+       data-search="true"
+       data-toolbar=".toolbar"
+>
+    <thead>
+    <tr>
+        <th data-field="experimentalNumber">实验编号</th>
+        <th data-field="experimentalName">实验名称</th>
+        <th data-field="experimentalType">实验类别</th>
+        <th data-field="experimentalClass">实验类型</th>
+        <th data-field="experimentalSubject">实验所属学科</th>
+        <th data-field="experimentalDemand">实验要求</th>
+        <th data-field="experimenterGender">实验者类别</th>
+        <th data-field="experimenterNumber">实验者人数</th>
+        <th data-field="groupNumber">每组人数</th>
+        <th data-field="experimentalHours">实验学时数</th>
+        <th data-field="laboratoryNumber">实验室编号</th>
+        <th data-field="laboratoryName">实验室名称</th>
+    </tr>
+    </thead>
+</table>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        let $table = $('#table')
+        let yearCode = [[${yearCode}]];
+        let system = [[${system}]];
+        $.ajax({
+            url: datashareHost + "getSJ4New",
+            method: "get",
+            data: {
+                limsAuth: $.cookie('currentAuthBydatashare'),
+                yearCode: yearCode,
+                system: system
+            },
+            dataType: "json",
+            success: function (data) {
+                $('#total').text(data.length);
+                $table.bootstrapTable({data: data});
+            }
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: 99px;
+        }
+
+        .layui-input-block {
+            margin-left: 99px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="main_content_box">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="newauditfreelistbox" id="newauditfreelistbox">
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">人员学号/姓名</label>
+                    <div class="layui-input-block">
+                        <select name="nameid" lay-search lay-verify="required">
+                            <option value="">请选择人员学号/姓名</option>
+                            <option value="1">111111学生一</option>
+                            <option value="2">222222学生二</option>
+                            <option value="3">333333学生三</option>
+                            <option value="4">444444学生四</option>
+                            <option value="5">555555学生五</option>
+                            <option value="6">666666学生六</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="newauditfreelistbtn" id="newauditfreelistbtn" class="layui-btn"
+                       lay-submit value="立即提交"/>
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+            </div>
+            <!--操作按钮结束-->
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <!--<a href="#"><br/></a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'openReservation/newAuditFreeList']);
+</script>
+</body>
+
+</html>​​​

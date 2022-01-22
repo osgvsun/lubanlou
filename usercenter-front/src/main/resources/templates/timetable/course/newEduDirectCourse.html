@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/timetable/iframe">
+<head>
+
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <!-- 样式的引用 -->
+    <link th:href="@{/plugins/bootstrap3/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/select2/select2.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/select2/select2-bootstrap4.css}" rel="stylesheet">
+    <!-- jquery的js引用 -->
+    <script th:src="@{/modules/timetable/layui_admin/static/js/jquery-1.11.0.min.js}"></script>
+<!--    <script src="/jquery/lib/jquery.js}" type="text/javascript"></script>-->
+    <!-- select2的js引用 -->
+    <script th:src="@{/plugins/select2/select2.full.js}"></script>
+    <!-- jquery的页面验证 -->
+    <script th:src="@{/plugins/jquery/jquery.validate.js}" type="text/javascript"></script>
+    <script th:src="@{/plugins/jquery/messages_zh.js}" type="text/javascript"></script>
+    <!-- 页面业务的js引用 -->
+    <script th:src="@{/modules/timetable/js/course/newEduDirectCourse.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/js/directoryEngine/directoryEngine-core.js}" type="text/javascript"></script>
+    <style type="text/css">
+        label { width: 10em; float: left; }
+        label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+        p { clear: both; }
+        .submit { margin-left: 12em; }
+    </style>
+    <script th:inline="javascript">
+        var auditOrNot = [[${auditOrNot}]];
+        var username = [[${session.user.username}]];
+        var role = [[${session.selected_role}]];
+        var academyNumber = [[${session.selected_academy}]];
+    </script>
+</head>
+
+<body layout:fragment="timetable">
+<br>
+
+<form id="form_lab" action="" method="post" >
+    <input type="hidden" id="zuulServerUrl" th:value="${zuulServerUrl}" />
+    <input type="hidden" id="academyNumber" name="academyNumber" th:value="${academyNumber}">
+    <input type="hidden" id="courseNo" name="courseNo" th:value="${courseNo}">
+    <input type="button" id="submitButton" name="deviceButton" value=" 确定 " class="btn btn-primary"  style="float:right">
+    <hr>
+    <br>
+    <table border="0" align="center" style="width:100%;">
+        <tr>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="80%"></td>
+        </tr>
+        <th:block th:if="${softManage eq 'true'}">
+        <tr>
+            <td width="5%"></td>
+            <td align=left width="17%" ><h5>软件筛选：<input type="checkbox" name="select_check" value="SOFTWARE" onclick="checkSelected()" /></h5></td>
+            <td width="80%"></td>
+        </tr>
+        </th:block>
+        <tr style="display:none" id="tr_soft">
+            <td width="5%"></td>
+            <td align=left width="17%" ><h5>选择软件<font color="red"> *</font>：</h5></td>
+            <td >
+                <select id="soft_id" name="soft_id" multiple="multiple" >
+                </select>
+                <label for="soft_id"></label>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%"></td>
+            <td align=left width="17%"><h5>请选择实验室<font color="red"> *</font>：</h5></td>
+            <td>
+                <select id="labRoom_id" name="labRoom_id"  multiple="multiple" required>
+                </select>
+                <label for="labRoom_id"></label>
+            </td>
+        </tr>
+        <th:block th:if="${virtual eq 'true'}">
+            <tr>
+                <td width="5%"></td>
+                <td align=left width="17%"><h5>虚拟镜像：</h5></td>
+                <td>
+                    <select id="virtualId" name="virtualId">
+                        <option value="">请选择虚拟镜像...</option>
+                        <th:block th:each="curr,i:${virtualImageList}">
+                            <option th:value="${curr.id}" th:text="${curr.name}"></option>
+                        </th:block>
+                    </select>
+                    <label for="virtualId"></label>
+                </td>
+            </tr>
+        </th:block>
+        <tr>
+            <td width="5%"></td>
+            <td align=left width="17%"><h5>请选择授课教师<font color="red"> *</font>：</h5></td>
+            <td>
+                <select id="teacherRelated" name="teacherRelated"  multiple="multiple" required>
+                    <option th:value="${schoolCourse.userByTeacher.username}" selected="selected" th:text="${schoolCourse.userByTeacher.cname+'(学工号：'+schoolCourse.userByTeacher.username+';学院：'+schoolCourse.schoolAcademy.academyName+')'}"></option>
+                </select>
+                <label for="teacherRelated"></label>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%"></td>
+            <td align=left width="17%"><h5>请选择辅导：</h5></td>
+            <td>
+                <select id="tutorRelated" name="tutorRelated"  multiple="multiple">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align=right> </td>
+            <td>
+             </td>
+        </tr>
+    </table>
+    <hr/>
+</form>
+
+</body>
+</html>
+

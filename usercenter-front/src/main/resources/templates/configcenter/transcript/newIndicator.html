@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增/编辑指标</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/newExpand.css}">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<!--    <script th:src="@{/js/jquery.cookie.js}"></script>-->
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var proId = [[${proId}]];
+        var configType = [[${configType}]];
+        var sourceProject = [[${sourceProject}]];
+    </script>
+</head>
+<style>
+    .myData .layui-form-item{
+        margin: 20px 100px 10px 45px;
+    }
+    .myData .layui-form-label{
+        /*width: 85px;*/
+    }
+    .layui-input-block {
+        margin-left: 120px;
+    }
+    .layui-icon-delete {
+        color: #fff!important;
+    }
+</style>
+<body>
+
+<form class="layui-form myData" action="save" method="post" lay-filter="stuform">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级指标：</label>
+        <div class="layui-input-block">
+            <input type="text" name="parentId" id="tree2" lay-filter="tree2" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">指标内容：</label>
+        <div class="layui-input-block">
+<!--            <textarea type="text" lay-verify="required" name="name" class="layui-textarea" ></textarea>-->
+            <input type="text" lay-verify="required" name="name" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">参考内容：</label>
+        <div class="layui-input-block">
+<!--            <textarea type="text" lay-verify="required" name="name" class="layui-textarea" ></textarea>-->
+            <input type="text" name="comment" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-form-item" >
+        <label class="layui-form-label">标准分：</label>
+        <div class="layui-input-block">
+            <input type="text" lay-verify="number" name="score" class="layui-input" />
+        </div>
+    </div>
+<!--    <div class="layui-form-item" >-->
+<!--        <label class="layui-form-label">排序：</label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input type="text" name="idx" value="0" class="layui-input" />-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="layui-form-item tutor-block layui-hide">
+        <div class="layui-input-block">
+            <button type="button" id="saveNew" class="layui-btn" lay-submit lay-filter="formVerify">保存</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+    </div>
+</form>
+</body>
+<script th:inline="javascript">
+    layui.config({
+        base: "../modules/"
+    }).extend({
+        treeSelect: "treeSelect"
+    });
+    layui.use(["treeSelect", "form"], function () {
+        var form = layui.form;
+        form.render('select');
+        var treeSelect = layui.treeSelect;
+        var evaluationHost =apiGateWayHost+"/configcenter/";
+        var ndata = [];
+        var templateId;
+        var parentId = 0;
+        var sort = sort;
+        form.on('submit(formVerify)', function (data) {
+            var field = data.field;
+            var templateDTO = new Object();
+            if(templateId==undefined){
+                templateDTO['configTypeId'] = configType;
+                templateDTO['templateCname'] = '评分项模板('+proId+')';
+                templateDTO['businessId'] = proId;
+                templateDTO['sourceProject'] = sourceProject;
+                templateDTO['processStep'] = 1;
+                templateDTO['processCname'] = '打分';
+            }else{
+                templateDTO['processStep'] = 1;
+                templateDTO['templateId'] = templateId;
+            }
+            // var configIndicatorDTO = new Object();
+            // configIndicatorDTO['indicatorName'] = 'localVariable';
+            // configIndicatorDTO['indicatorCname'] = '评定指标项';
+            // configIndicatorDTO['configType'] = configType ;
+            // configIndicatorDTO['contentType'] = 'localObject' ;
+            // configIndicatorDTO['sort'] = 1 ;
+            // configIndicatorDTO['processStep'] = 1 ;
+            var configIndicatorDTOs = [];
+            var configIndicatorDTO = new Object();
+            configIndicatorDTO['sort'] = sort ;
+            if(parentId!=0){
+                configIndicatorDTO['parentId'] = parentId;
+            }
+            configIndicatorDTO['indicatorCname'] = field['name'];
+            configIndicatorDTO['comment'] = field['comment'];
+            configIndicatorDTO['configType'] = configType ;
+            configIndicatorDTO['processStep'] = 1;
+            configIndicatorDTO['standardScore'] = field['score'] ;
+            // configIndicatorDTO['configIndicatorDTOS'] = sonConfigIndicatorDTO ;
+            configIndicatorDTOs.push(configIndicatorDTO)
+            templateDTO['configIndicatorDTOS'] = configIndicatorDTOs;
+            var d = JSON.stringify(templateDTO);
+            $.ajax({
+                // url:zuulUrl+'api/meetingProcess/saveMeetingProcess',
+                url:evaluationHost+'api/template/templateAndIndicator',
+                dataType: 'json',
+                data: d,
+                type: 'post',
+                async: false,
+                contentType:"application/json;charset=utf-8",
+                success:function (res) {
+                    console.log(res);
+                    if(res.code == '200'){
+                        window.parent.location.reload();
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    }
+                },
+                error: function () {
+                    alert("后台保存数据报错");
+                    return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                }
+            });
+            return false;
+        });
+        getInfoByBusinessIdAndConfigType();
+        function getInfoByBusinessIdAndConfigType(){
+            $.ajax({
+                url: evaluationHost + 'api/template/infoByBusinessIdAndConfigType?configType='+configType+'&BusinessId='+proId,
+                type:'get',
+                async: false,
+                success:function (res){
+                    console.log(res);
+                    if(res.code=='200'){
+                        if(res.data.length>0){
+                            templateId = res.data[0].id;
+                            getConfigIndicatorByTemplateId();
+                        }else{
+                            // templateId = 0;
+                            getConfigIndicatorByTemplateId();
+                        }
+
+                    }else{
+                        layer.msg("获取template信息失败！");
+                    }
+                },
+                error:function () {
+                    layer.msg("获取template信息失败！");
+                }
+            });
+        }
+        function getConfigIndicatorByTemplateId(){
+            if(templateId!=undefined){
+                $.ajax({
+                    url: evaluationHost+'api/configIndicator/list?templateId='+ templateId +'&step=1&page=1&limit=999',
+                    dataType: 'json',
+                    async: false,
+                    type: 'get',
+                    success: function (res) {
+                        console.log(res);
+                        ndata = res.data;
+                        sort = res['total']+1;
+                    },
+                    error:function () {
+                        alert("获取配置项失败！");
+                    }
+                });
+            }else{
+                sort = 1;//没有新建模板时
+                ndata = [];
+            }
+
+        }
+        var parseData= getdata();
+        treeSelect.render({
+            // 选择器
+            elem: '#tree2',
+            // 数据
+            parseData: parseData,
+            data: "",
+            // 异步加载方式：get/post，默认get
+            // type: 'get',
+            // 占位符
+            placeholder: '上级菜单',
+            // 是否开启搜索功能：true/false，默认false
+            search: true,
+            // 一些可定制的样式
+            style: {
+                folder: {
+                    enable: true
+                },
+                line: {
+                    enable: true
+                }
+            },
+            // 加载完成后的回调函数
+            success: function (d) {
+            },
+            click: function(d){
+                // console.log(d);
+                // console.log(d.treeId); // 得到组件的id
+                // console.log(d.current); // 得到点击节点的treeObj对象
+                // console.log(d.data); // 得到组成树的数据
+                parentId = d.current.id;
+                // if(d.current.children!=null){
+                //     $.each(d.current.children, function (index, item) {
+                //         sort = item['sort']+1;
+                //     })
+                // }else{
+                //     sort = 1;
+                // }
+            },
+        });
+        function childrenTreeData(d) {
+            var data = new Object();
+            data['name'] = d.indicatorCname;
+            data['id'] = d.id;
+            data['sort'] = d.sort;
+            if(d.configIndicatorDTOS.length>0){
+                data['children'] = [];
+                $.each(d.configIndicatorDTOS,function (i,d) {
+                    data['children'].push(childrenTreeData(d));
+                })
+            }
+            return data;
+        }
+        function getdata(){
+            var data = [];
+            if(ndata.length==0){
+                return data;
+            }else {
+                $.each(ndata, function (index, item) {
+                    // sort = item['sort']+1;
+                    var firstConfig = new Object();
+                    firstConfig['id'] = item.id;
+                    firstConfig['name'] = item.indicatorCname;
+                    firstConfig['sort'] = item.sort;
+                    if(index==0){
+                        firstConfig['open'] = true;
+                    }
+                    if (item.configIndicatorDTOS.length > 0) {
+                        firstConfig['children'] = [];
+                        $.each(item.configIndicatorDTOS, function (i, d) {
+                            firstConfig['children'].push(childrenTreeData(d));
+                        })
+                    }
+                    data.push(firstConfig);
+                })
+            }
+            return data;
+        }
+    });
+</script>
+</html>

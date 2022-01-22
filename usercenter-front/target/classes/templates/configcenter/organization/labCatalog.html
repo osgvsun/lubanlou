@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <link th:href="@{/images/favicon.ico}" type="image/x-icon" rel="icon">
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/bootstrap/js/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+    <!--树形组件-->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/plugins/eletree/eleTree.css}" media="all">
+    <!--masonry模块管理-->
+    <link rel="stylesheet" th:href="@{/plugins/masonry/masonry-docs.css}" media="all">
+    <script type="text/javascript" th:src="@{/plugins/masonry/masonry.pkgd.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+    <script th:inline="javascript">
+        var ip = [[${ip}]];
+        var iotHost = [[${iotHost}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var username = [[${session.user.username}]];
+    </script>
+</head>
+
+<body>
+<div class="main_content_box">
+    <div class="full_box">
+        <!--主体开始-->
+        <div class="content_box">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <!--title-->
+                        <span></span>
+                        <!--右侧工具栏开始-->
+<!--                        <a href="labMain" class="layui-btn header_edit" lay-tips="返回实验分室列表">返回实验分室列表</a>-->
+                        <!--右侧工具栏结束-->
+                    </div>
+                    <div class="layui-card-body">
+                        <form class="layui-form" action="" lay-filter="labcatalogbox" id="labcatalogbox">
+                            <div class="layui-row layui-col-space20">
+                                <!--搜索开始-->
+<!--                                <div class="layui-col-md12 tabsearch search_line">-->
+<!--                                    <div class="layui-col-lg4 search_top">-->
+<!--                                        <input class="layui-input" name="searchid" id="searchbox" autocomplete="on"-->
+<!--                                               placeholder="请输入搜索内容" oninput="labRoomChannelSearch()">-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash;<input type="button" class="layui-btn" data-type="reload" value="搜索"/>&ndash;&gt;-->
+<!--                                </div>-->
+                                <!--搜索结束-->
+                                <div class="layui-col-md12">
+                                    <div class="card_tag_box">
+                                        <div class="card_bag">
+                                            <div class="card_bag_tit" lay-tips="时间校准">信息详情</div>
+                                            <div class="card_bag_content" id="informationDetails">
+                                                <div class="card_tag doorState" data-method="doorState"
+                                                     lay-tips="查看门锁状态">
+                                                    <img th:src="@{/modules/configcenter/static/images/doorState.png}"/>
+                                                    <div>门锁状态</div>
+                                                </div>
+                                                <div class="card_tag openDoor" data-method="openDoor"
+                                                     lay-tips="远程开门">
+                                                    <img th:src="@{/modules/configcenter/static/images/doorState.png}"/>
+                                                    <div>远程开门</div>
+                                                </div>
+                                                <div class="card_tag timeCorrect" data-method="timeCorrect" lay-tips="时间校准">
+                                                    <img th:src="@{/modules/configcenter/static/images/timeCorrect.png}"/>
+                                                    <div>时间校准</div>
+                                                </div>
+                                                <div class="card_tag logUpload" data-method="logUpload"
+                                                     lay-tips="日志上传">
+                                                    <img th:src="@{/modules/configcenter/static/images/logUpload.png}"/>
+                                                    <div>日志上传</div>
+                                                </div>
+                                                <div class="card_tag dataDistribute" data-method="dataDistribute"
+                                                     lay-tips="计划数据下发">
+                                                    <img th:src="@{/modules/configcenter/static/images/dataDistribute.png}"/>
+                                                    <div>计划数据下发</div>
+                                                </div>
+                                                <div class="card_tag regcard" data-method="regcard"
+                                                     lay-tips="当天预约下发">
+                                                    <img th:src="@{/modules/configcenter/static/images/regcard.png}"/>
+                                                    <div>当天预约下发</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script>
+    // layui.extend({
+    //     index:'../../lib/index'
+    // }).use(['index']);
+    // layui.config({
+    //         base: '../../' //静态资源所在路径
+    //     }
+    // ).extend({
+    //         index: 'lib/index' //主入口模块
+    //     }
+    // ).use(['index', 'configcenter/organization/labCatalog']);
+</script>
+<script th:src="@{/modules/labBranch/static/js/global.js}"></script>
+<script th:src="@{/modules/configcenter/organization/labCatalog.js}"></script>
+
+</body>
+
+</html>

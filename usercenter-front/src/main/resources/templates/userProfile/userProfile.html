@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户档案</title>
+    <link rel="stylesheet" th:href="@{/css/userProfile/info.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/userProfile/schollInformation.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}" media="all">
+</head>
+<body>
+    <div class="wide">
+        <div>
+            <div class="mian" id="main">
+                <div class="content">
+                    <div class="left">
+                        <div class="change_style">
+                            <div class="list_menu">
+                                <a href="#" class="p">用户档案</a>
+                            </div>
+                        </div>
+                        <div class="shut">❌</div>
+                        <ul class="m_s_l_ul">
+                            <div class="left_level">
+                                <li style="cursor:pointer" onclick="outstandingTalents()" class="talents">杰出人才</li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="show">
+                        <div class="title_div">
+                        </div>
+                        <div class="show_content">
+                            <div id="option_tap">
+
+                            </div>
+                            <div class="introduce">
+
+                            </div>
+                            <table border="2" id="peopleTable">
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+<!
+    <script th:inline="javascript">
+        var siteEnName = [[${siteEnName}]];
+        var siteSecret = [[${siteSecret}]];
+        var usercenterHost = [[${usercenterHost}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var oauth2 = [[${oauth2}]];
+        const httpBaseUrl = /*[[@{/}]]*/'';
+    </script>
+    <script th:src="@{/modules/userProfile/resourceContainer.js}"></script>
+    <script th:src="@{/modules/userProfile/userprofile.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>评审列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/newExpand.css}">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/jquery.cookie.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var iotHost = [[${session.iotHost}]];
+        var configType = [[${configType}]];
+        var targetUser = [[${targetUser}]];
+        const evaluationHost =apiGateWayHost+"/configcenter/";
+        var serverHostArray = document.location.href.split('/');
+        var serverHost = serverHostArray[0] + "//" + serverHostArray[2] + "/" + serverHostArray[3] + "/";
+        function logout() {
+            localStorage.clear();
+            $.cookie('currauth', '');
+            $.cookie('currentauthName', '');
+            location.href = serverHost + 'logout';
+        }
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+</head>
+<style>
+    .layui-table{
+        text-align:center;
+    }
+    .layui-add{
+        height: 30px;
+        width: 100%;
+        margin: 10px;
+    }
+    .form_input{
+        margin: 30px;
+    }
+    #timetable_tool {
+        background-color: rgb(251, 251, 251);
+        width: 90%;
+        display: inline-block;
+    }
+    .layui-card {
+        border: none;
+        padding: 40px!important;
+    }
+    .layui-card .layui-tab-brief .layui-tab-title {
+        height: 42px;
+        border-bottom: 3px solid #e2e7ec;
+    }
+    .layui-btn + .layui-btn {
+        margin: 0;
+    }
+    .tabsearch {
+        margin-top: 10px;
+    }
+    .reload-btn {
+        margin-bottom: 5px;
+    }
+</style>
+<body>
+<div class="layui-card">
+<!--    <div class="layui-card-header">-->
+<!--        评审列表-->
+<!--&lt;!&ndash;        <a class="layui-btn table_edit" lay-demo="toScore">去打分</a>&ndash;&gt;-->
+<!--    </div>-->
+    <div class="layui-col-md12 common_header">
+        <blockquote class="layui-elem-quote layui-quote-nm tag_box">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend class="multi_legend">
+                    <a class="legend_select" href="javascript:void(0)">评审列表</a>
+                </legend>
+                <div class="breadcrumb_top breadcrumb_division">
+                    <a class="breadcrumb_select changeAuth layui-hide" data-type="changeAuth" href="javascript:void(0)">切换权限</a>
+                    <a class="breadcrumb_select" href="javascript:void(0)" onclick="logout()">退出登录</a>
+                </div>
+            </fieldset>
+        </blockquote>
+    </div>
+    <div>
+        <!--<div class="layui-add">-->
+        <!--<button class="layui-btn" data-type="addTimetable">新建</button>-->
+        <!--</div>-->
+        <!--搜索盒子开始-->
+        <div>
+            <form class="layui-form">
+                <input id="clientId" type="hidden"/>
+                <div class="layui-form-item tabsearch display">
+                    <div class="layui-inline timetable_tool">
+                        <label class="layui-form-label" style="width: auto;">选择项目(工种):</label>
+                        <div class="layui-input-inline">
+                            <select name="template" id="template"  lay-search="" lay-filter="allTemplates">
+                                <option value="">全显示</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" name="id" id="search_box" autocomplete="off" placeholder="请输入搜索关键字" />
+                    </div>
+                    <!--<input type="button" class="layui-btn" data-type="reload" value="搜索" />-->
+                    <button class="layui-btn reload-btn" type="button" data-type="reload">
+                        <i class="layui-icon layui-icon-search"></i>搜索
+                    </button>
+<!--                    <button class="layui-btn changeAuth layui-hide" style="float: right;margin-right: 5px;" type="button" data-type="changeAuth">-->
+<!--                        <i class="layui-icon layui-icon-refresh"></i>切换权限-->
+<!--                    </button>-->
+                    <!--</div>-->
+                </div>
+
+            </form>
+        </div>
+        <!--搜索盒子结束-->
+        <table class="add_progress layui-table" id="reviewlisttab" lay-filter="reviewlisttab"></table>
+        <script type="text/html" id="toolbar">
+            {{# if(d.reportAuth){ }}
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="reviewReport">查看评审报表</a>
+            {{# } }}
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="reviewDetail">查看评审结果</a>
+            {{# if(d.isInitiator){ }}
+            <a class="layui-btn layui-btn-xs"  lay-event="startReview">开始评审</a>
+            {{# } }}
+            <!--未评审状态-->
+<!--            <a class="font_grey">/</a>-->
+        </script>
+    </div>
+</div>
+</body>
+<script th:src="@{/modules/configcenter/transcript/reviewList.js}"></script>
+<!--<script>-->
+<!--    layui.config({-->
+<!--//        version: true, //一般用于更新模块缓存，默认不开启。设为 true 即让浏览器不缓存。也可以设为一个固定的值，如：201610-->
+<!--        base:'../'-->
+<!--    }).extend({-->
+<!--        index:'lib/index'-->
+<!--    }).use(['index','configcenter/transcript/reviewList'])-->
+<!--</script>-->
+
+</html>

@@ -1,0 +1,46 @@
+.myWrap {
+    display:none;
+    border: 3px;
+    border-color: #3e96ff;
+    border-style:solid;
+	background-color:#eee;
+    overflow:auto;
+	margin: 0px;
+    padding: 0px;
+}
+.myWrap .myTi{
+	background-image:url(../images/ti_b2.gif) ;
+
+	height:26px;
+
+}
+.myWrap .myTi_l{
+	display: block; 
+	position:relative;
+	float:left;	
+	color:#fff;	
+	padding-top:7px;
+	font-size:12px;
+	text-indent:10px;
+	font-weight:bold;
+
+	white-space:nowrap; 
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+.myWrap .myTi_r{
+	position:relative;
+	float:right;
+	width:100px;
+	height:50px;
+	margin-top:2px;
+	cursor:pointer;
+}
+.myWrap .close_on{
+	background-image:url(../images/close_on.gif);
+	background-repeat:no-repeat;
+}
+.myWrap .close_out{
+	background-image:url(../images/close2.gif);
+	background-repeat:no-repeat;
+}

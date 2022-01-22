@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="Generator" content="GVSUN" />
+    <meta name="Author" content="chenyawen" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{${resourceContainerHost} +  '/shareApi/resourceContainer.css'}"/>
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+</head>
+<body>
+    <div class="marking_box">
+        <div class="marking_operation scrollbar">
+            <div class="layui-card marking_btn">
+                <div class="layui-btn" style="width: 10%; border: none; color: black">图标：</div>
+                <div class="layui-btn" style="width: 25%;margin: 8px 0 0 3%;" onclick="setSize(1)"><i class="fa fa-search-minus"></i>小</div>
+                <div class="layui-btn" style="width: 25%;margin: 8px 0 0 3%;" onclick="setSize(2)"><i class="fa fa-search"></i>中</div>
+                <div class="layui-btn" style="width: 25%;margin: 8px 0 0 3%;" onclick="setSize(3)"><i class="fa fa-search-plus"></i>大</div>
+                <div class="layui-btn marking_btn_select" onclick="setType(0)"><i class="fa fa-mouse-pointer"></i>鼠标</div>
+                <div class="layui-btn" onclick="setType(1)"><i class="fa fa-square-o"></i>矩形</div>
+                <div class="layui-btn" onclick="setType(2)"><i class="fa fa-window-minimize"></i>直线</div>
+                <div class="layui-btn" onclick="setType(3)" id="circle"><i class="fa fa-circle-thin"></i>圆形</div>
+                <div class="layui-btn" onclick="setType(4)"><i class="fa fa-check"></i>对号</div>
+                <div class="layui-btn" onclick="setType(5)"><i class="fa fa-times"></i>错号</div>
+                <div class="layui-btn" onclick="setType(6)"><i class="fa fa-question"></i>问号</div>
+                <div class="layui-btn" onclick="setType(7)"><i class="fa fa-pencil"></i>批注</div>
+                <div class="layui-btn" onclick="setType(8)"><i class="fa fa-chain-broken"></i>阅</div>
+                <div class="withdraw_btn" onclick="turnback()"><i class="fa fa-reply"></i>撤回</div>
+                <div class="withdraw_btn" onclick="setType(10)" title="小(50×50),中(80×80),小(100×100)"><i class="fa fa-times"></i>擦除痕迹</div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">评价内容</div>
+                <textarea id="comments" name="comments" lay-verify="required" autocomplete="on" placeholder="请填写评价内容" class="layui-textarea" th:text="${comment}"></textarea>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">评价分数</div>
+                <div class="layui-card-body">
+                    <input type="number" id="finalScore" name="finalScore" lay-verify="required" autocomplete="on" th:value="${grading}" class="layui-input" placeholder="请填写评价分数">
+                </div>
+            </div>
+            <div class="layui-submit layui-hide">
+                <button type="button" class="layui-btn layui-btn-radius layui-btn-normal layui-btn-sm" id="submitMarking" onclick="submitOnlineMarking()">提交</button>
+                <button type="button" class="layui-btn layui-btn-radius layui-btn-primary layui-btn-sm">返回</button>
+            </div>
+        </div>
+
+        <div class="marking_content">
+            <div><font color="red">提示：请用鼠标选中需要批改的页，拖动至右侧区域进行修改</font></div>
+            <div class="marking_content_scroll scrollbar" id="showPdfArea" style="width: 50%;display: inline-block;vertical-align: top;">
+                <div class="marking_page_box">
+                    <div class="marking_page" id="marking_page">
+                        <div id="report">
+
+                        </div>
+                        <div id="reportImg">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="markArea" class="marking_content_scroll scrollbar" style="width: 49%;height: 100%;display: inline-block;overflow: auto;" ondrop="drop(event)"
+                 ondragover="allowDrop(event)">
+
+            </div>
+        </div>
+    </div>
+    <!--主体结束-->
+    <div th:replace="/gvsunWork/globalscript"></div>
+    <script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/onlineMarking/pdf.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/onlineMarking/pdf.worker.js}"></script>
+    <script th:inline="javascript">
+        // let parentData;
+        // var adder;
+        // function child(d, adders){
+        //     parentData = d;
+        //     adder = adders;
+        // }
+        // console.log(adder)
+        let username = [[${username}]];
+        let assignmentId = [[${assignmentId}]];
+        let siteId = [[${session.cid}]];
+        let gradingId = [[${gradingId}]];
+        let fileUrl = [[${fileUrl}]];
+        let currentUsername = [[${session.user.username}]];
+        let siteEnName = [[${siteEnName}]];
+        let siteSecret = [[${siteSecret}]];
+        resourceContainer.initResourceContainer({
+            oauth2Host: [[${oauth2Host}]],
+            siteName: "教学平台",
+            username: currentUsername
+        });
+        const httpRootUrl = /*[[@{/}]]*/'';
+    </script>
+    <script type="text/javascript" th:src="@{/modules/gvsunWork/onlineMarking.js}"></script>
+</body>
+</html>

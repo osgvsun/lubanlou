@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 68px;
+			}
+			
+			.layui-input-block {
+				margin-left: 68px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="sethomeworkbox" id="sethomeworkbox">
+				<div class="layui-fluid">
+					<!--基础设置开始-->
+					<div class="layui-card" id="info">
+						<div class="layui-card-header">基础设置</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space20">
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">关联模块</label>
+									<div class="layui-input-block inline_inside">
+										<!--新增模块区域开始-->
+<!--										<div class="layui-inline new_module_box">-->
+											<input type="radio" name="title" title="知识" value="knowledge" checked lay-filter="radioModule"/>
+											<input type="radio" name="title" title="技能" value="skill" lay-filter="radioModule"/>
+											<input type="radio" name="title" title="体验" value="experience" lay-filter="radioModule"/>
+<!--										</div>-->
+										<!--新增模块区域结束-->
+										<!--新增按钮开始-->
+<!--										<label class="layui-icon layui-icon-add-1 short_btn h30 lh30 va_middle addmodule" data-method="addmodule" lay-tips="新增自定义关联模块"></label>-->
+<!--										&lt;!&ndash;新增按钮结束&ndash;&gt;-->
+<!--										&lt;!&ndash;单次模块开始&ndash;&gt;-->
+<!--										<div class="add_module_box hide">-->
+<!--											<div class="mix_short_input add_module_single">-->
+<!--												<input class="layui-input" name="" placeholder="请输入模块名称" />-->
+<!--												<label class="layui-icon layui-icon-close delete_module " onClick="deletemodule(this);" lay-tips="删除此模块"></label>-->
+<!--											</div>-->
+<!--										</div>-->
+										<!--单次模块结束-->
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">功能名称</label>
+									<div class="layui-input-block inline_inside">
+										<!--单次功能菜单开始-->
+<!--										<div class="layui-inline add_nav_box">-->
+<!--											<div class="mix_short_input add_nav_single">-->
+<!--												<input class="layui-input" name="" placeholder="请输入功能名称" />-->
+<!--												<label class="layui-icon layui-icon-close delete_nav " onClick="deletenav(this);" lay-tips="删除此功能菜单"></label>-->
+<!--											</div>-->
+											<input type="radio" name="type" title="作业" value="assignment" checked/>
+											<input type="radio" name="type" title="报告" value="report"/>
+											<input type="radio" name="type" title="实验数据" value="data"/>
+<!--										</div>-->
+										<!--单次功能菜单结束-->
+										<!--新增功能菜单区域开始-->
+<!--										<div class="layui-inline new_nav_box">-->
+<!--										</div>-->
+<!--										&lt;!&ndash;新增功能菜单区域结束&ndash;&gt;-->
+<!--										&lt;!&ndash;新增按钮开始&ndash;&gt;-->
+<!--										<label class="layui-icon layui-icon-add-1 short_btn h30 lh30 va_middle addnav" data-method="addnav" lay-tips="新增自定义功能菜单"></label>-->
+										<!--新增按钮结束-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--基础设置结束-->
+					<!--作业设置开始-->
+					<div class="layui-card" id="homework">
+						<div class="layui-card-header">作业设置</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space20">
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">字段显示</label>
+									<div class="layui-input-block fieldDisplay">
+										<input type="checkbox" name="chapter" title="章节" value="1" checked lay-filter="configuration"/>
+										<input type="checkbox" name="lesson" title="小节" value="1" lay-filter="configuration"/>
+										<input type="checkbox" name="experiment" title="实验项目" value="1" lay-filter="configuration" disabled/>
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">附件类型</label>
+									<div class="layui-input-block">
+										<div class="basic_enclosure">
+											<input type="checkbox" name="noLimit" title="不限制" value="1"/>
+											<input type="checkbox" name="pdf" title="pdf" value="1"/>
+											<input type="checkbox" name="word" title="word" value="1"/>
+											<input type="checkbox" name="txt" title="txt" value="1"/>
+											<input type="checkbox" name="excel" title="excel" value="1"/>
+											<input type="checkbox" name="pic" title="图片" value="1"/>
+										</div>
+										<div class="lh36 font_grey online_enclosure hide">
+											<input type="checkbox" name="pdf" title="pdf" value="1" class="online_enclosure_checkbox" lay-filter="online_enclosure_checkbox"/>
+										</div>
+
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">重复作业:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="repeatAssignment" value="1" title="开启" checked="">
+										<input type="radio" name="repeatAssignment" value="0" title="不开启">
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">在线批阅:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="onlineMarking" value="1" title="开启" lay-filter="online">
+										<input type="radio" name="onlineMarking" value="0" title="不开启" lay-filter="online" checked="">
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">查重:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="duplicateChecking" value="1" title="开启" checked="">
+										<input type="radio" name="duplicateChecking" value="0" title="不开启">
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">成绩册:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="transcript" value="1" title="联动" checked="">
+										<input type="radio" name="transcript" value="0" title="不联动">
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">小组模式:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="group" value="1" title="开启" checked="">
+										<input type="radio" name="group" value="0" title="不开启">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--作业设置结束-->
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="sethomeworkbtn" id="sethomeworkbtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line">
+			<a href="#info">基础<br/>设置</a>
+			<a href="#homework">作业<br/>设置</a>
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<div th:replace="/gvsunWork/globalscript"></div>
+		<script th:src="@{/modules/gvsunWork/static/js/global.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/titleHash.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/timeTransformation.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/setHomework.js}"></script>
+	</body>
+</html>​​​

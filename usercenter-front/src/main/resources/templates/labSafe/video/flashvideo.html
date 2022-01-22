@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>flash播放</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/modules/labSafe/css/expand.css}" media="all">
+    <!--当前页单独查看辅助样式-->
+    <style>
+        body {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+<div id="flashvideo" class="live_box"></div>
+<script type="text/javascript" th:src="@{/plugins/ckplayer/ckplayer.js}" charset="UTF-8"></script>
+<script type="text/javascript">
+    let cameraURL = sessionStorage.getItem("cameraURL");
+    var videoObject = {
+        container: '#flashvideo', //“#”代表容器的ID，“.”或“”代表容器的class
+        variable: 'player', //该属性必需设置，值等于下面的new chplayer()的对象
+        autoplay: true, //自动播放
+        live: true,
+        video: cameraURL
+    };
+    var player = new ckplayer(videoObject);
+</script>
+</body>
+
+</html>

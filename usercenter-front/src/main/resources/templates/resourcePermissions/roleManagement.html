@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+    <!--    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">-->
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="content_box">
+        <form class="layui-form lesson_card" action="" lay-filter="creditcardrecordsattendcebox" id="creditcardrecordsattendcebox">
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space20">
+                    <button type="button" class="layui-btn layui-btn-normal addRole"><i class="layui-icon layui-icon-addition"></i>新增</button>
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>角色中文名</th>
+                            <th>角色英文名</th>
+                            <th>角色分组</th>
+                            <th>创建人</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="role_list">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--顶层节点新增-->
+    <div class="model_add_role" style="display: none; margin: 20px">
+        <form class="layui-form add_role_form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色中文名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nameRole" required  lay-verify="required" placeholder="请输入角色中文名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色英文名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ename" required  lay-verify="required" placeholder="请输入角色英文名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色分组</label>
+                <div class="layui-input-block">
+                    <input type="text" name="type" required  lay-verify="required" placeholder="角色分组" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/teachPublic/layui/layui.js}"></script>
+    <script th:inline="javascript">
+        const oauth2Host = [[${oauth2Host}]];
+        // const oauth2Host = 'http://localhost:8765/uaa';
+        const name = [[${session.user.cname}]];
+    </script>
+    <script th:src="@{/modules/resourcePermissions/roleManagement.js}"></script>
+</body>
+</html>

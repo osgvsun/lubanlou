@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+    <style>
+        .full_box {
+            padding: 0 0 42px;
+        }
+        .savebtn, .resetbtn{
+            margin: 20px 5px 0 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main_content_box">
+    <div class="full_box">
+        <!--主体开始-->
+        <div class="content_box">
+            <form class="layui-form lesson_card" action="" lay-filter="riskpointbox" id="riskpointbox">
+                <div class="layui-card">
+                    <div class="layui-card-header">设备安全
+                        <input type="button" class="layui-btn layui-btn-mid editbtn" value="编辑"/>
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="fill_box_content">
+                                <div class="fbc_info">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-md12">
+                                            <input type="checkbox" lay-skin="primary" name="typeone" value="高压、大电流设备"
+                                                   title="高压、大电流设备" checked=""/>
+                                            <input type="checkbox" lay-skin="primary" name="typeone" value="高温设备"
+                                                   title="高温设备"/>
+                                            <input type="button" class="btn_article typeinfo_show" name="typeinfothree"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"
+                                                   placeholder="请输入其他安全设备">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fill_box">
+                            <div class="fill_box_content">
+                                <div class="fbc_info">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-md12">
+                                            <input type="checkbox" lay-skin="primary" name="typetwo" value="转基因相关研究"
+                                                   title="转基因相关研究" checked=""/>
+                                            <input type="button" class="btn_article typeinfo_show" name="typeinfothree"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"
+                                                   placeholder="请输入其他相关研究">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fill_box">
+                            <div class="fill_box_content">
+                                <div class="fbc_info">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-md12">
+                                            <input type="checkbox" lay-skin="primary" name="typethree" value="粉尘和气溶胶"
+                                                   title="粉尘和气溶胶"/>
+                                            <input type="button" class="btn_article typeinfo_show" name="typeinfothree"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"
+                                                   placeholder="请输入其他材料">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="button" class="layui-btn layui-btn-mid savebtn hide"
+                               value="提交"/>
+                        <input type="button"
+                               class="layui-btn layui-btn-mid layui-btn-primary resetbtn hide"
+                               value="取消编辑"/>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">生物类安全
+                        <input type="button" class="layui-btn layui-btn-mid editbtn" value="编辑"/>
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="fill_box_content">
+                                <div class="fbc_info">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-md12">
+                                            <input type="checkbox" lay-skin="primary" name="typefour" value="第三类病原微生物"
+                                                   title="第三类病原微生物"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefour" value="普通微生物"
+                                                   title="普通微生物"/>
+                                            <input type="button" class="btn_article typeinfo_show" name="typeinfothree"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"
+                                                   placeholder="请输入其他生物安全类">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fill_box_content">
+                                <div class="fbc_tit">实验动物</div>
+                                <div class="fbc_info">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-md12">
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="兔"
+                                                   title="兔"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="小鼠"
+                                                   title="小鼠"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="大鼠"
+                                                   title="大鼠"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="羊"
+                                                   title="羊"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="蟾蜍"
+                                                   title="蟾蜍"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="无脊椎动物"
+                                                   title="无脊椎动物"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="鱼类"
+                                                   title="鱼类"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="鸟类"
+                                                   title="鸟类"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="其他动物"
+                                                   title="其他动物"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="实验植物"
+                                                   title="实验植物"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="血液、体液样本"
+                                                   title="血液、体液样本"/>
+                                            <input type="checkbox" lay-skin="primary" name="typefive" value="人体及人体组织标本"
+                                                   title="人体及人体组织标本"/>
+                                            <input type="button" class="btn_article typeinfo_show" name="typeinfothree"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"
+                                                   placeholder="请输入其他研究动物">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" class="layui-btn layui-btn-mid savebtn hide"
+                                   value="提交"/>
+                            <input type="button"
+                                   class="layui-btn layui-btn-mid layui-btn-primary resetbtn hide"
+                                   value="取消编辑"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">实验操作安全
+                        <input type="button" class="layui-btn layui-btn-mid editbtn" value="编辑"/>
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="fill_box_content">
+                                <div class="fbc_info">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-md12">
+                                            <input type="checkbox" lay-skin="primary" name="typesix" value="生成危险产物"
+                                                   title="生成危险产物"/>
+                                            <input type="checkbox" lay-skin="primary" name="typesix" value="强烈放热反应"
+                                                   title="强烈放热反应"/>
+                                            <input type="checkbox" lay-skin="primary" name="typesix" value="使用明火"
+                                                   title="使用明火"/>
+                                            <input type="checkbox" lay-skin="primary" name="typesix" value="使用锐器"
+                                                   title="使用锐器"/>
+                                            <input type="button" class="btn_article typeinfo_show" name="typeinfothree"
+                                                   autocomplete="off" disabled="disabled" readonly="readonly"
+                                                   placeholder="请输入其他实验安全操作">
+                                            <input type="button" class="layui-btn layui-btn-mid savebtn hide"
+                                                   value="提交"/>
+                                            <input type="button"
+                                                   class="layui-btn layui-btn-mid layui-btn-primary resetbtn hide"
+                                                   value="取消编辑"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script th:src="@{/modules/labBranch/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'labBranch/riskPoint']);
+</script>
+</body>
+
+</html>

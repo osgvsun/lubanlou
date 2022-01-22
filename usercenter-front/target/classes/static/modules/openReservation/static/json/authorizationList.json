@@ -1,0 +1,33 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"id": "test1",
+			"name": "test2",
+			"college": "test3",
+			"timerange": "test4"
+		}, {
+			"id": "test1",
+			"name": "test2",
+			"college": "test3",
+			"timerange": "test4"
+		}, {
+			"id": "test1",
+			"name": "test2",
+			"college": "test3",
+			"timerange": "test4"
+		}, {
+			"id": "test1",
+			"name": "test2",
+			"college": "test3",
+			"timerange": "test4"
+		}, {
+			"id": "test1",
+			"name": "test2",
+			"college": "test3",
+			"timerange": "test4"
+		}
+	]
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>测试</title>
+    <script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{${OAuth2Host} + '/oauth/OAuth2.js'}"></script>
+    <script th:inline="javascript">
+        //尽早初始化
+        OAuth2.initOAuth2({
+            oauth2Host: [[${OAuth2Host}]],
+            clientDetail: {
+                clientId: 'GvsunTeach',
+                clientSecret: 'ENFq65LU%6ZonS^Yizd4m*e@@lUsAqWFcaXLss8o2VWb67#yUdsffMFY%72MC@9RYi#$feCu4JjEmrbbROXQ58u%we00e!sjUAMEWECHwx21$cQeCD91185l&LJu#lz@'
+            },
+            interceptRequest: true,     //是否拦截请求，默认为true
+            needToken: function (url) { //一个函数，返回true时拦截Ajax请求并添加Authorization，否则不添加，函数的第一个参数为你发起Ajax请求的url地址
+                console.log('url=' + url);
+                if (url === 'http://localhost:8765/uaa/enabled/20189190') {
+                    console.log('不带令牌');
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        //后续的ajax请求会被拦截并根据初始化时的参数决定是否添加Authorization头信息
+        $.ajax({
+            type: "GET",
+            async: false,
+            url: OAuth2.oauth2Host + "/enabled/" + '20189190',
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+
+</head>
+
+<body>
+<div class="main_content_box">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="mycreditscorebox" id="mycreditscorebox">
+            <div class="layui-card">
+                <div class="layui-card-header">我的信誉积分</div>
+                <div class="layui-card-body">
+                    <div class="process_left">
+                        <div class="layui-row layui-col-space10">
+                            <!--搜索开始-->
+                            <div class="layui-col-md12 search_line">
+                                <div class="layui-input-inline">
+                                    <label class="layui-form-label">实验室名称(编号)</label>
+                                    <div class="layui-inline">
+                                        <select name="lab" lay-search>
+                                            <option value="">请选择实验室名称(编号)</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                                <input type="reset" class="layui-btn layui-btn-primary" value="取消">
+                            </div>
+                            <!--搜索结束-->
+                            <div class="layui-col-md12">
+                                <!--表单开始-->
+                                <table class="layui-hide" id="mycreditscore" lay-filter="mycreditscore"></table>
+                                <!--表单结束-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--扣分历史记录开始-->
+                    <div class="process_right">
+                        <div class="decoration_box">
+                            <div class="big_title">信誉积分记录</div>
+                            <div class="item_box_bg">
+                                <div class="item_box_limit">
+                                    <!--示例1开始-->
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>日期&nbsp;时间</span>
+                                            <span>人员身份&nbsp;姓名</span>
+                                        </div>
+                                        <div class="item-content loading_item">严重信息</div>
+                                    </div>
+                                    <!--示例1结束-->
+                                    <!--示例2开始-->
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>日期&nbsp;时间</span>
+                                            <span>人员身份&nbsp;姓名</span>
+                                        </div>
+                                        <div class="item-content solve_item">预警信息</div>
+                                    </div>
+                                    <!--示例2结束-->
+                                    <!--示例3开始-->
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>日期&nbsp;时间</span>
+                                            <span>人员身份&nbsp;姓名</span>
+                                        </div>
+                                        <div class="item-content">普通信息</div>
+                                    </div>
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>日期&nbsp;时间</span>
+                                            <span>人员身份&nbsp;姓名</span>
+                                        </div>
+                                        <div class="item-content pass_item">
+                                            <div>通过信息</div>
+                                        </div>
+                                    </div>
+                                    <!--示例3结束-->
+                                    <!--示例4开始-->
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>日期&nbsp;时间</span>
+                                            <span>人员身份&nbsp;姓名</span>
+                                        </div>
+                                        <div class="item-content pass_item">
+                                            <div>通过信息标题</div>
+                                            <div class="pass_item_reply">通过信息详情</div>
+                                        </div>
+                                        <div class="item_danger"><i>※&nbsp;其他重要提示</i></div>
+                                    </div>
+                                    <!--示例4结束-->
+                                    <!--测试用示例开始-->
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>2017-11-16&nbsp;19:29</span>
+                                            <span>10223122（张三）</span>
+                                        </div>
+                                        <div class="item-content loading_item">
+                                            <div>迟到:扣除10分</div>
+                                            <div>信誉积分：90分</div>
+                                        </div>
+                                    </div>
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>2017-11-21&nbsp;10:10</span>
+                                            <span>10223122（张三）</span>
+                                        </div>
+                                        <div class="item-content loading_item">
+                                            <div>延迟：扣除15分</div>
+                                            <div>信誉积分：75分</div>
+                                        </div>
+                                    </div>
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>2017-11-25&nbsp;09:00</span>
+                                            <span>10223122（张三）</span>
+                                        </div>
+                                        <div class="item-content loading_item">
+                                            <div>延迟:扣除15分</div>
+                                            <div>信誉积分:75分</div>
+                                        </div>
+                                    </div>
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>2017-11-26&nbsp;09:00</span>
+                                            <span>10223122（张三）</span>
+                                        </div>
+                                        <div class="item-content loading_item">
+                                            <div>延迟:扣除20分</div>
+                                            <div>信誉积分:55分</div>
+                                        </div>
+                                        <div class="item_danger"><i>※&nbsp;信誉积分低于60分，后续无法预约。</i></div>
+                                    </div>
+                                    <div class="item_box">
+                                        <div class="item-header">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                            <span>2017-11-27&nbsp;09:00</span>
+                                            <div>学生重新准入</div>
+                                        </div>
+                                        <div class="item-content pass_item">
+                                            <div>信誉积分恢复100分</div>
+                                        </div>
+                                    </div>
+                                    <!--测试用示例结束-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--扣分历史记录结束-->
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <!--<a href="#"><br/></a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'openReservation/myCreditScore']);
+</script>
+</body>
+
+</html>​​​

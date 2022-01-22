@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+    <!--多选-->
+    <link rel="stylesheet" th:href="@{/modules/instrumentManagement/plugins/formselect/formSelects-v4.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: 98px;
+        }
+
+        .layui-input-block {
+            margin-left: 98px;
+        }
+
+        div[xm-select-skin=normal] .xm-select-title div.xm-select-label > span {
+            min-width: 75px;
+        }
+    </style>
+
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="equipmentreservebox" id="equipmentreservebox">
+        <div class="main_content">
+            <div class="layui-fluid">
+                <blockquote class="layui-elem-quote layui-quote-nm tag_box">
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend class="deviceName">设备名称（这里是设备编号）</legend>
+                        <span class="layui-breadcrumb breadcrumb_top" lay-separator="|">
+				                <a href="equipmentList.html" class="breadcrumb_btn">返回设备列表</a>
+							</span>
+                    </fieldset>
+                    <div class="li_cell_box">
+                        <div class="li_cell"><i class="layui-icon layui-icon-auz"></i>设备型号：</div>
+                        <div class="li_cell"><i class="layui-icon layui-icon-console"></i>所属学院：</div>
+                        <div class="li_cell"><i class="layui-icon layui-icon-location"></i>所在实验室：</div>
+                        <div class="li_cell"><i class="layui-icon layui-icon-user"></i>生产厂家：</div>
+                        <div class="li_cell"><i class="layui-icon layui-icon-rmb"></i>价格：</div>
+                    </div>
+                    <div class="field_btn_box">
+                        <a th:href="@{/instrumentmanagement/equipmentBasicInfo(uid=${uid})}">基本信息</a>
+                        <a href="#" class="field_btn_select">预约设置</a>
+                        <a th:href="@{/instrumentmanagement/equipmentTimeBooking(uid=${uid})}">机时预约</a>
+                        <a th:href="@{/instrumentmanagement/equipmentSampleInspection(uid=${uid})}">送样检测</a>
+                        <a th:href="@{/instrumentmanagement/noticeManage(uid=${uid})}">仪器公告</a>
+                        <a th:href="@{/instrumentmanagement/powerControllerSet(uid=${uid})}">电源控制器</a>
+                    </div>
+                </blockquote>
+                <!--预约基础设置开始-->
+                <div class="layui-card">
+                    <div class="layui-card-header">设备预约基础设置</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">机时预约:</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="resvIsHour" value="1" title="是" lay-filter="timeorder"
+                                               checked="">
+                                        <input type="radio" name="resvIsHour" value="0" title="否"
+                                               lay-filter="timeorder">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">送样检测:</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="resvIsSpecimen" value="1" title="是"
+                                               lay-filter="sampleinspection" checked="">
+                                        <input type="radio" name="resvIsSpecimen" value="0" title="否"
+                                               lay-filter="sampleinspection">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">最低信誉积分:</label>
+                                    <div class="layui-input-block">
+                                        <input class="layui-input" type="number" name="resvCreditScore"
+                                               autocomplete="on" lay-verify="required" placeholder="请输入最低信誉积分"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">预约接待对象:</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="openScope" value="1" title="院内开放"
+                                               lay-filter="receptiontarget">
+                                        <input type="radio" name="openScope" value="2" title="校外开放"
+                                               lay-filter="receptiontarget">
+                                        <input type="radio" name="openScope" value="3" title="校内外开放"
+                                               lay-filter="receptiontarget">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 collagechoose" style="display: none">
+                                    <label class="layui-form-label">校内开放学院:</label>
+                                    <div class="layui-input-block">
+                                        <select name="college" id="college" xm-select="college" xm-select-skin="normal"
+                                                xm-select-search="" lay-filter="" lay-search="">
+                                            <option value="">请选择校内开放学院</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--预约基础设置结束-->
+            </div>
+        </div>
+        <div class="step_bottom">
+            <input type="button" lay-filter="equipmentreservebtn" id="equipmentreservebtn" class="layui-btn"
+                   lay-submit="" value="保存">
+            <input type="reset" class="layui-btn layui-btn-primary" value="取消">
+        </div>
+    </form>
+</div>
+<!--主体结束-->
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <!--<a href="#"></a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript"
+        th:src="@{/modules/instrumentManagement/plugins/formselect/formSelects-v4.min.js}"></script>
+<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+<script th:inline="javascript">
+    const uid = [[${uid}]];
+    const username = [[${session.user.username}]];
+    const httpDeviceUrl = /*[[${deviceHost}]]*/'';
+    // const  httpDeviceUrl = 'http://localhost:8844/'
+</script>
+<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/common.js}"></script>
+<script type="text/javascript" th:src="@{/modules/instrumentManagement/equipmentReserve.js}"></script>
+</body>
+
+</html>

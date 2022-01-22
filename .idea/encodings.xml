@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/lubanlou-master" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-feign/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-attendance" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-attendance/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-attendance/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-auditserver" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-auditserver/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-auditserver/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gsexam" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gsexam/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gsexam/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gsquestionpool" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gsquestionpool/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gsquestionpool/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gswork" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gswork/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-gswork/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-message" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-message/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-message/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-oauth2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-oauth2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-oauth2/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-transcript" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-transcript/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lubanlou-master/lubanlou-provider/lubanlou-provider-transcript/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/usercenter-front/src/main/java" charset="UTF-8" />
+  </component>
+</project>

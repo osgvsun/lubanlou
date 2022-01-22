@@ -1,0 +1,227 @@
+{
+  "code": 0,
+  "data": [
+    {
+      "id": "5192_14_5",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "邵建坪",
+      "classDate": "2021-12-03",
+      "weeks": "14",
+      "weekday": "5",
+      "classes": null,
+      "startClass": "2",
+      "endClass": "2",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:30:00",
+      "endTime": "09:00:00"
+    },
+    {
+      "id": "5191_14_4",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "乐玥",
+      "classDate": "2021-12-02",
+      "weeks": "14",
+      "weekday": "4",
+      "classes": null,
+      "startClass": "2",
+      "endClass": "2",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:30:00",
+      "endTime": "09:00:00"
+    },
+    {
+      "id": "5190_14_3",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "毕瑶瑶",
+      "classDate": "2021-12-01",
+      "weeks": "14",
+      "weekday": "3",
+      "classes": null,
+      "startClass": "2",
+      "endClass": "2",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:30:00",
+      "endTime": "09:00:00"
+    },
+    {
+      "id": "5189_14_2",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "倪欣",
+      "classDate": "2021-11-30",
+      "weeks": "14",
+      "weekday": "2",
+      "classes": null,
+      "startClass": "2",
+      "endClass": "2",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:30:00",
+      "endTime": "09:00:00"
+    },
+    {
+      "id": "5188_14_1",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "王清欢",
+      "classDate": "2021-11-29",
+      "weeks": "14",
+      "weekday": "1",
+      "classes": null,
+      "startClass": "2",
+      "endClass": "2",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:30:00",
+      "endTime": "09:00:00"
+    },
+    {
+      "id": "5187_14_7",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "王清欢",
+      "classDate": "2021-12-05",
+      "weeks": "14",
+      "weekday": "7",
+      "classes": null,
+      "startClass": "1",
+      "endClass": "1",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:00:00",
+      "endTime": "08:30:00"
+    },
+    {
+      "id": "5186_14_6",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "高叶嵘",
+      "classDate": "2021-12-04",
+      "weeks": "14",
+      "weekday": "6",
+      "classes": null,
+      "startClass": "1",
+      "endClass": "1",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:00:00",
+      "endTime": "08:30:00"
+    },
+    {
+      "id": "5185_14_5",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "郑东捷",
+      "classDate": "2021-12-03",
+      "weeks": "14",
+      "weekday": "5",
+      "classes": null,
+      "startClass": "1",
+      "endClass": "1",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:00:00",
+      "endTime": "08:30:00"
+    },
+    {
+      "id": "5184_14_4",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "陈水琴",
+      "classDate": "2021-12-02",
+      "weeks": "14",
+      "weekday": "4",
+      "classes": null,
+      "startClass": "1",
+      "endClass": "1",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:00:00",
+      "endTime": "08:30:00"
+    },
+    {
+      "id": "5183_14_3",
+      "courseNo": "ops34",
+      "courseName": "公司营运管理",
+      "lpName": null,
+      "academyName": "上海大区",
+      "labName": "上海松江厅(会议室)",
+      "teacher": "齐欢欢",
+      "classDate": "2021-12-01",
+      "weeks": "14",
+      "weekday": "3",
+      "classes": null,
+      "startClass": "1",
+      "endClass": "1",
+      "termName": null,
+      "hardwareIp": null,
+      "hardwareIps": [
+        "123"
+      ],
+      "startTime": "08:00:00",
+      "endTime": "08:30:00"
+    }
+  ],
+  "msg": null,
+  "count": 158
+}

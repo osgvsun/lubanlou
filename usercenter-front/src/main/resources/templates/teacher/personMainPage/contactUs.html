@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>个人主页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/modules/common.js}"></script>
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+
+
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var oauth2 = [[${session.oauth2}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+
+        resourceContainer.initResourceContainer({
+            oauth2Host: oauth2,
+            resourceContainerHost: resourceContainerHost,
+            siteName: "用户中心",
+            username: currentUsername,
+            resourceContainerHostForUpload: resourceContainerHostForUpload,
+        });
+    </script>
+</head>
+
+<body>
+
+<div class="layui-fluid">
+   <div>
+       <div class="layui-card-header">栏目</div>
+       <form lay-filter="menu" id="menuShow">
+           <div class="menuSet">
+               <input type="checkbox" id="checkAll">全选/全不选
+               <div style="width: 60%;display: inline-block">
+                   <div class="layui-btn-group">
+                       <button type="button" class="layui-btn layui-btn-sm" data-type="addMenu">增加</button>
+                       <button type="button" lay-submit class="layui-btn layui-btn-sm" lay-filter="menu" data-type="batchDeleteMenu">批量删除</button>
+                   </div>
+               </div>
+           </div>
+           <div id="addMenu" style="display: none;background-color: #fbfbfb">
+               <div class="menuSet">
+                   <label>栏目名称：</label>
+                   <div class='addMenuInput'>
+                       <input class="layui-input" id="menuName" name="menuName"/>
+                   </div>
+
+               </div>
+               <div class="layui-card-body1">
+                   <form class="layui-form" action="" lay-filter="researchDevelopment">
+                       <div class="editor" id="editor" style="width:1024px;height:500px;margin: 0 auto"></div>
+                       <div style="width:1024px;margin: 15px auto;text-align: right">
+                           <div class="layui-input-block">
+                               <button type="button" class="layui-btn" onclick="addMenu(this) ">立即提交</button>
+                               <button type="reset" class="layui-btn layui-btn-primary edit_hide" onclick="cancel()">取消</button>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+           </div>
+
+       </form>
+   </div>
+</div>
+
+<script th:src="@{/plugins/ueditor/ueditor.config.js}"></script>
+<script th:src="@{/plugins/ueditor/ueditor.all.js}"></script>
+<script th:src="@{/plugins/ueditor/lang/zh-cn/zh-cn.js}"></script>
+<script th:src="@{/js/useUEditor.js}"></script>
+<script>
+    layui.config({
+        base: '../../' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'personMainPage'])
+</script>
+</body>
+</html>

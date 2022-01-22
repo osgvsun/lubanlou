@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/modules/timetable/static/css/style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/icon.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/gray/easyui.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/modules/timetable/static/css/global_static.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/modules/timetable/js/course/auditTimetableList.js}" type="text/javascript"></script>
+    <script th:inline="javascript">
+        // 定义全局变量-排课方式入口配置
+        var username = [[${session.user.username}]];
+        var role = [[${session.selected_role}]];
+        var academyNumber = [[${session.selected_academy}]];
+        var zuulServerUrl = [[${zuulServerUrl}]];
+    </script>
+    <!--<title>Edit <fmt:message key="project.title"/></title>
+    <link rel="stylesheet" type="text/css" href="/jquery/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/jquery/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/jquery/css/demo.css">
+    <script type="text/javascript" src="/jquery/js/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" src="/jquery/js/jquery.easyui.min.js}"></script>
+    <script type="text/javascript" src="/jquery/locale/easyui-lang-zh_CN.js}"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <link th:href="@{/modules/timetable/static_limsproduct/css/global_static.css}" rel="stylesheet" type="text/css">-->
+</head>
+
+<body style="overflow:hidden">
+<!-- 结项申报列表 -->
+<!-- <div class="tab"> -->
+<div class="right-content">
+    <div id="TabbedPanels1" class="TabbedPanels">
+        <div class="TabbedPanelsContentGroup">
+            <div class="TabbedPanelsContent">
+                <div class="content-box">
+                    <!--未审核时显示-->
+                    <th:block th:if="${curStage <= state && isAudit == 0 && curStage > 0}">
+                        <table id="listTable" width="50%" cellpadding="0" cellspacing="0" class="tablesorter" >
+                            <tr><td colspan="8"><font style="color: red">审核人列表</font></td></tr>
+                            <th:block th:each="isAuditUser,i:${isAuditUser}" >
+                                <tr>
+                                    <td>审核人：</td>
+                                    <td th:text="${isAuditUser.cname }"></td>
+                                    <td>工号:</td>
+                                    <td th:text="${isAuditUser.username }"></td>
+                                    <td>部门:</td>
+                                    <td th:text="${isAuditUser.schoolAcademy.academyName }"></td>
+                                    <td>联系方式:</td>
+                                    <td th:text="${isAuditUser.telephone }"></td>
+                                </tr>
+                            </th:block>
+                        </table>
+                    </th:block>
+                    <!--审核时显示-->
+                    <th:block th:if="${curStage == state && isAudit == 1}">
+                        <table>
+                            <tr>
+                                <td>审核：</td>
+                                <td colspan="4">
+                                    <input type="radio" name="auditResult"  value="1" checked="true"/>通过
+                                    <input type="radio" name="auditResult"  value="0" />退回修改
+                                    <input type="hidden" id="businessAppUid" th:value="${businessAppUid}" />
+                                    <input type="hidden" id="zuulServerUrl" th:value="${zuulServerUrl}" />
+                                    <input type="hidden" id="businessType" th:value="${businessType}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>审核意见：</td><td colspan="4"><input type="text" id="remark"  /> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5"><input type="button" value="提交" onclick="saveTimetableAudit()"> </td>
+                            </tr>
+                        </table>
+                    </th:block>
+                    <!--审核后显示-->
+                    <th:block th:if="${curStage gt state  || curStage < 1}">
+                        <table id="listTable" width="50%" cellpadding="0" cellspacing="0" class="tablesorter" >
+                            <tr><td colspan="6">审核信息 </td></tr>
+
+                            <tr align="center" >
+                                <th>审核人：</th>
+                                <td th:text="|${userInfo[0].cname}[${userInfo[0].username}]|"></td>
+                                <th>部门:</th>
+                                <td th:text="${userInfo[0].schoolAcademy.academyName }"></td>
+                                <th>联系方式:</th>
+                                <td th:text="${userInfo[0].telephone }"></td>
+                            </tr>
+                            <tr align="center" >
+                                <th>审核结果</th>
+                                <td th:text="${userInfo[1]}"></td>
+                                <th>审核意见:</th>
+                                <td th:text="${userInfo[2]}"></td>
+                                <th>审核时间:</th>
+                                <td th:text="${#dates.format(userInfo[3], 'yyyy-MM-dd')}"></td>
+                            </tr>
+                        </table>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

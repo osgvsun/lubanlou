@@ -1,0 +1,472 @@
+{
+  "nodes":[
+    {
+      "id":1,
+      "label":"商品期权交易理论与实务",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(255,203,91)"
+    }, {
+      "id":2,
+      "label":"基金管理",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(255,203,91)"
+    }, {
+      "id":3,
+      "label":"量化交易程序设计",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(255,203,91)"
+    }, {
+      "id":4,
+      "label":"课件",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":5,
+      "label":"课程视频",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":6,
+      "label":"镜像资源",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":7,
+      "label":"数据库",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":8,
+      "label":"软件",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":9,
+      "label":"课件",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    },  {
+      "id":11,
+      "label":"镜像资源",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":12,
+      "label":"数据库",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":13,
+      "label":"软件",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":14,
+      "label":"课件",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":15,
+      "label":"课程视频",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":16,
+      "label":"镜像资源",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":17,
+      "label":"数据库",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":18,
+      "label":"软件",
+      "size":39,
+      "scale":"1.8",
+      "color":"rgb(71,168,216)"
+    }, {
+      "id":19,
+      "label":"商品期权ppt, 期末报告模板等",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":20,
+      "label":"商品期权课程视频",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":21,
+      "label":"商品期权与程序化交易虚拟桌面",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":22,
+      "label":"同花顺iFind终端虚拟应用",
+      "type":"操作",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":23,
+      "label":"聚源金融终端虚拟应用",
+      "type":"操作",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":24,
+      "label":"聚源落地数据库-SQLserver",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":25,
+      "label":"希斯玛市场通落地数据库-SQLserver",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":26,
+      "label":"天相落地数据库-SQLserver",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":27,
+      "label":"海豚分部式数据库平台",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":28,
+      "label":"同花顺iFind金融终端",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":29,
+      "label":"simnow快期软件",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":30,
+      "label":"国泰君安仿真股票期权软件",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":31,
+      "label":"Visual Studio 2013",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":32,
+      "label":"海豚大数据分析平台",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":34,
+      "label":"Jupyter notebook",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":35,
+      "label":"基金管理ppt，期末报告模板等",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":36,
+      "label":"基金管理课程视频",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":37,
+      "label":"Trade-Lab基金管理系统",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }, {
+      "id":38,
+      "label":"量化交易ppt，程序源码等",
+      "size":39,
+      "shape":"rect",
+      "height":30,
+      "width":140,
+      "font": "12px",
+      "scale":"1.8",
+      "color":"rgb(109,210,138)"
+    }
+  ],
+  "links":[
+    {
+      "source":1,
+      "target":4
+    },
+    {
+      "source":1,
+      "target":5
+    },
+    {
+      "source":1,
+      "target":6
+    },
+    {
+      "source":1,
+      "target":7
+    },
+    {
+      "source":1,
+      "target":8
+    },{
+      "source":3,
+      "target":9
+    },
+    {
+      "source":3,
+      "target":11
+    },
+    {
+      "source":3,
+      "target":12
+    },
+    {
+      "source":3,
+      "target":13
+    },{
+      "source":2,
+      "target":14
+    },
+    {
+      "source":2,
+      "target":15
+    },
+    {
+      "source":2,
+      "target":16
+    },
+    {
+      "source":2,
+      "target":17
+    },
+    {
+      "source":2,
+      "target":18
+    },
+    {
+      "source":4,
+      "target":19
+    },
+    {
+      "source":5,
+      "target":20
+    },
+    {
+      "source":6,
+      "target":21
+    },
+    {
+      "source":6,
+      "target":22
+    },
+    {
+      "source":6,
+      "target":23
+    },
+    {
+      "source":7,
+      "target":24
+    },
+    {
+      "source":7,
+      "target":25
+    },
+    {
+      "source":7,
+      "target":26
+    },
+    {
+      "source":8,
+      "target":27
+    },
+    {
+      "source":8,
+      "target":28
+    },
+    {
+      "source":8,
+      "target":29
+    },
+    {
+      "source":8,
+      "target":30
+    },
+    {
+      "source":8,
+      "target":31
+    },
+    {
+      "source":8,
+      "target":32
+    },
+    {
+      "source":8,
+      "target":34
+    },
+    {
+      "source":14,
+      "target":35
+    },
+    {
+      "source":15,
+      "target":36
+    },
+    {
+      "source":16,
+      "target":21
+    },
+    {
+      "source":16,
+      "target":22
+    },
+    {
+      "source":17,
+      "target":25
+    },
+    {
+      "source":17,
+      "target":26
+    },
+    {
+      "source":18,
+      "target":37
+    },
+    {
+      "source":18,
+      "target":28
+    },
+    {
+      "source":18,
+      "target":30
+    },
+    {
+      "source":9,
+      "target":38
+    },
+    {
+      "source":11,
+      "target":21
+    },
+    {
+      "source":12,
+      "target":25
+    },
+    {
+      "source":12,
+      "target":26
+    },
+    {
+      "source":13,
+      "target":31
+    }
+
+  ]
+}

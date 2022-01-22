@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/expand.css}" media="all">
+
+    <script th:inline="javascript">
+        var attendanceHost = [[${attendanceHost}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var currentUsername = [[${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}]];
+    </script>
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="reservationattendancebox"
+          id="reservationattendancebox">
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">预约考勤
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-md12">
+                                    <!--搜索开始-->
+                                    <div class="search_line">
+                                        <div class="layui-inline">
+                                            <input class="layui-input" name="searchbox" id="searchbox" autocomplete="on"
+                                                   placeholder="请输入姓名/学号"/>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <select name="timetableType" lay-search>
+                                                <option value="">请选择</option>
+<!--                                                <option value="RESERVATION">实验室预约</option>-->
+<!--                                                <option value="STATIONBOOKING">工位预约</option>-->
+<!--                                                <option value="INSTRUMENT">大仪预约</option>-->
+<!--                                                <option value="DEVICEBOOKING">设备预约</option>-->
+                                            </select>
+                                        </div>
+                                        <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                                        <input type="reset" class="layui-btn layui-btn-primary" data-type="reset"
+                                               value="取消"/>
+                                    </div>
+                                    <!--搜索结束-->
+                                </div>
+                                <div class="layui-col-md12">
+                                    <!--表单开始-->
+                                    <table class="layui-hide" id="reservationAttendance"
+                                           lay-filter="reservationAttendance"></table>
+                                    <script type="text/html" id="toolbar">
+                                        <div class="twoword_radio_box">
+                                            <input type="radio" name="{{d.id+'-'+d.username}}" value="1" title="出勤" lay-filter="stateRadio">
+                                            <input type="radio" name="{{d.id+'-'+d.username}}" value="6" title="未到" lay-filter="stateRadio">
+                                        </div>
+                                    </script>
+                                    <!--表单结束-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="reservationAttendancebtn" id="reservationAttendancebtn"
+                       class="layui-btn" lay-submit value="立即提交"/>
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+            </div>
+            <!--操作按钮结束-->
+        </div>
+    </form>
+</div>
+<!--主体结束-->
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/global.js}"></script>
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/titleHash.js}"></script>
+<script th:src="@{/modules/iotAttendance/reservationAttendance.js}"></script>
+</body>
+
+</html>

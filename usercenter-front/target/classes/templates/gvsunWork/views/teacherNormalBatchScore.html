@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 68px;
+			}
+			
+			.layui-input-block {
+				margin-left: 68px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="teachernormalbatchscorebox" id="teachernormalbatchscorebox">
+				<div class="layui-fluid">
+					<div class="layui-card">
+						<div class="layui-card-header">选择学生</div>
+						<div class="layui-card-body">
+							<!--穿梭数据开始-->
+							<div id="student"></div>
+							<!--穿梭数据结束-->
+						</div>
+					</div>
+					<div class="layui-card">
+						<div class="layui-card-header">填写分数</div>
+						<div class="layui-card-body">
+							<input type="number" class="layui-input" name="score" autocomplete="off" lay-verify="required" placeholder="请输入评分" />
+						</div>
+					</div>
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="teachernormalbatchscorebtn" id="teachernormalbatchscorebtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/gvsunWork/globalscript"></div>
+		<script th:src="@{/modules/gvsunWork/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			let siteId = [[${session.cid}]];
+			let username = [[${session.username}]];
+			let parentData;  //函数用于接收父页面参数
+			function child(d){
+				parentData = d;
+			};
+		</script>
+		<script th:src="@{/modules/gvsunWork/teacherNormalBatchScore.js}"></script>
+	</body>
+
+</html>​​​

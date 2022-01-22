@@ -1,0 +1,48 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"person": "test1",
+			"equipment": "test2",
+			"project": "test3",
+			"time": "test4",
+			"teacher": "test5",
+			"deductscore": "test6",
+			"creditscore": "test7"
+		}, {
+			"person": "test1",
+			"equipment": "test2",
+			"project": "test3",
+			"time": "test4",
+			"teacher": "test5",
+			"deductscore": "test6",
+			"creditscore": "test7"
+		}, {
+			"person": "test1",
+			"equipment": "test2",
+			"project": "test3",
+			"time": "test4",
+			"teacher": "test5",
+			"deductscore": "test6",
+			"creditscore": "test7"
+		}, {
+			"person": "test1",
+			"equipment": "test2",
+			"project": "test3",
+			"time": "test4",
+			"teacher": "test5",
+			"deductscore": "test6",
+			"creditscore": "test7"
+		}, {
+			"person": "test1",
+			"equipment": "test2",
+			"project": "test3",
+			"time": "test4",
+			"teacher": "test5",
+			"deductscore": "test6",
+			"creditscore": "test7"
+		}
+	]
+}

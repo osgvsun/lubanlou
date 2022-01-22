@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>出版专著信息组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/layui/layui.js}"></script>
+
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+
+    <!--资源容器-->
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${usercenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var oauth2 = [[${session.oauth2}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+
+        resourceContainer.initResourceContainer({
+            oauth2Host: oauth2,
+            resourceContainerHost: resourceContainerHost + "/gvsunResource",
+            directoryEngineHost: resourceContainerHost + "/gvsunDirectory",
+            siteName: "用户中心",
+            authorizationURL: resourceContainerHost + "/shareApi/getAuthorization",
+            username: currentUsername,
+            resourceContainerHostForUpload: resourceContainerHostForUpload
+        })
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+    <style>
+        .fill_box {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!--新增表单-->
+<div class="fill_box" id="publicationInfoAdd">
+    <form class="layui-form" action="" lay-filter="publicationInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="publicationName" lay-verify="required"
+                           autocomplete="off" class="layui-input publicationName">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">ISBN号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="isbnNumber" lay-verify="required" autocomplete="off"
+                           class="layui-input isbnNumber">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">出版社</label>
+                <div class="layui-input-block">
+                    <input type="text" name="press" lay-verify="required" autocomplete="off"
+                           class="layui-input press">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">出版时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="publishTime" id="publishTime_add" lay-verify="required"
+                           autocomplete="off" class="layui-input publishTime">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">本人角色</label>
+                <div class="layui-input-block">
+                    <select name="characters" class="characters" lay-filter="required" lay-search>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">本人排名</label>
+                <div class="layui-input-block">
+                    <select name="personRank" class="personRank" lay-filter="required" lay-search>
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">完成字数(万)</label>
+                <div class="layui-input-block">
+                    <input type="number" name="wordCount" lay-verify="required|number"
+                           autocomplete="off" class="layui-input wordCount">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">封面</label>
+                <div class="layui-input-block mix_uploadbox">
+                    <div class="layui-upload">
+                        <div class="layui-upload-drag cover">
+                            <i class="layui-icon"></i>
+                            <p>点击选择文件，或将文件拖拽到此处</p>
+                        </div>
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody class="coverList" name="coverList"></tbody>
+                            </table>
+                            <div class="upload_btn">
+                                <button type="button" class="layui-btn coverbtn">开始上传</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-lg12" style="display: none">
+                <input class="cover_fileId" name="coverFileIds" id="coverAddfileId" value=" "/>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">扉页</label>
+                <div class="layui-input-block mix_uploadbox">
+                    <div class="layui-upload">
+                        <div class="layui-upload-drag titlePage">
+                            <i class="layui-icon"></i>
+                            <p>点击选择文件，或将文件拖拽到此处</p>
+                        </div>
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody class="tpList" name="tpList"></tbody>
+                            </table>
+                            <div class="upload_btn">
+                                <button type="button" class="layui-btn tpbtn">开始上传</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-lg12" style="display: none">
+                <input class="title_fileId" name="titlePageFileIds" id="titleAddfileId" value=" "/>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">封底</label>
+                <div class="layui-input-block mix_uploadbox">
+                    <div class="layui-upload">
+                        <div class="layui-upload-drag backCover">
+                            <i class="layui-icon"></i>
+                            <p>点击选择文件，或将文件拖拽到此处</p>
+                        </div>
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody class="bcList" name="bcList"></tbody>
+                            </table>
+                            <div class="upload_btn">
+                                <button type="button" class="layui-btn bcbtn">开始上传</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-lg12" style="display: none">
+                <input class="back_fileId" name="backCoverFileIds" id="backAddfileId" value=" "/>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button type="reset" style="display: none" class="clearForm"></button>
+                    <button class="layui-btn" lay-submit lay-filter="publicationInfo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="publicationinfo">
+    <div class="publicationInput" style="margin-bottom: 10px;">
+        教材名称：
+        <div class="layui-inline">
+            <input class="layui-input" name="publicationName" id="publicationNameInput" autocomplete="off">
+        </div>
+        出版社：
+        <div class="layui-inline">
+            <input class="layui-input" name="press" id="pressInput" autocomplete="off">
+        </div>
+        出版时间：
+        <div class="layui-inline">
+            <input class="layui-input" name="publishTime" id="publishTimeInput" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload_publication">搜索</button>
+        <button class="layui-btn header_edit" style="float: right">新增</button>
+    </div>
+    <table class="layui-hide" id="publicationInfo" lay-filter="publicationInfo"></table>
+</div>
+<!--出版专著编辑-->
+<div id="edit_publicationInfo" style="display: none">
+    <form class="layui-form" action="" lay-filter="publicationInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-block">
+                    <input type="text" id="publicationName" name="publicationName"
+                           lay-verify="required" autocomplete="off" class="layui-input publicationName">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">ISBN号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="isbnNumber" id="isbnNumber" lay-verify="required"
+                           autocomplete="off" class="layui-input isbnNumber">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">出版社</label>
+                <div class="layui-input-block">
+                    <input type="text" name="press" id="press" lay-verify="required"
+                           autocomplete="off" class="layui-input press">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">出版时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="publishTime" id="publishTime" lay-verify="required"
+                           autocomplete="off" class="layui-input publishTime">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">本人角色</label>
+                <div class="layui-input-block">
+                    <select name="characters" class="characters" id="characters" lay-filter="required" lay-search>
+
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">本人排名</label>
+                <div class="layui-input-block">
+                    <select name="personRank" class="personRank" id="personrank" lay-filter="required" lay-search>
+                        <!--<option value=""></option>-->
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">完成字数(万)</label>
+                <div class="layui-input-block">
+                    <input type="number" name="wordCount" id="wordCount"
+                           lay-verify="required|number" autocomplete="off" class="layui-input wordCount">
+                </div>
+            </div>
+            <div class="layui-col-lg4" style="display: none">
+                <label class="layui-form-label">ID</label>
+                <div class="layui-input-block" id="publicationInfo_uid">
+                    <input type="text" name="id" id="id"  autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">封面</label>
+                <div class="layui-input-block mix_uploadbox">
+                    <div class="layui-upload">
+                        <div class="layui-upload-drag cover_edit">
+                            <i class="layui-icon"></i>
+                            <p>点击选择文件，或将文件拖拽到此处</p>
+                        </div>
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody class="coverList" name="coverList"></tbody>
+                            </table>
+                            <div class="upload_btn">
+                                <button type="button" class="layui-btn coverbtn">开始上传</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-lg12" style="display: none">
+                <input class="cover_fileId" name="coverFileIds" id="coverFileIds" value=" "/>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">扉页</label>
+                <div class="layui-input-block mix_uploadbox">
+                    <div class="layui-upload">
+                        <div class="layui-upload-drag titlePage_edit">
+                            <i class="layui-icon"></i>
+                            <p>点击选择文件，或将文件拖拽到此处</p>
+                        </div>
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody name="tpList" class="tpList"></tbody>
+                            </table>
+                            <div class="upload_btn">
+                                <button type="button" class="layui-btn tpbtn">开始上传</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-lg12" style="display: none">
+                <input class="title_fileId" name="titlePageFileIds" id="titlePageFileIds" value=" "/>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">封底</label>
+                <div class="layui-input-block mix_uploadbox">
+                    <div class="layui-upload">
+                        <div class="layui-upload-drag backCover_edit">
+                            <i class="layui-icon"></i>
+                            <p>点击选择文件，或将文件拖拽到此处</p>
+                        </div>
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody name="bcList" class="bcList"></tbody>
+                            </table>
+                            <div class="upload_btn">
+                                <button type="button" class="layui-btn bcbtn_edit">开始上传</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-lg12" style="display: none">
+                <input class="back_fileId" name="backCoverFileIds" id="backCoverFileIds" value=" "/>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="publicationInfo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="resource-container"></div>
+<div class="layui-upload" id="fileList" style="display: none">
+    <div class="layui-upload-list">
+        <table class="layui-table">
+            <thead>
+            <tr><th>文件名</th>
+                <th>大小</th>
+                <th>更新时间</th>
+                <th>操作</th>
+            </tr></thead>
+            <tbody id="demoList">
+            <td colspan="4" style="text-align: center">暂时没有上传文件</td>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    layui.config({
+            base: '../../../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'scientificDetailTab']);
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var beShowUsername=GetQueryString("username");
+
+</script>
+<script type="text/html" id="edit1">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="showFile">
+    <a lay-event="coverShowFile"><i class="fa fa-eye" aria-hidden="true"></i>封面</a>
+    <a lay-event="titleShowFile"><i class="fa fa-eye" aria-hidden="true"></i>扉页</a>
+    <a lay-event="backShowFile"><i class="fa fa-eye" aria-hidden="true"></i>封底</a>
+</script>
+</body>
+</html>

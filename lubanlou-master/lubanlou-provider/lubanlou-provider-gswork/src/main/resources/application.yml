@@ -1,0 +1,124 @@
+##################################################自定义配置开始##################################################
+#统一域名
+serverHost: ${server_host:http://localhost}
+#资源容器地址 http://localhost:31183
+resourceContainerHostForUpload: ${resource_container_host:http://localhost:31183}
+#获取远程主机信息地址
+remoteHostUrl: ${remote_host_url:http://localhost:9019}
+#产品线
+projectName: ${project_name:proteach}
+datasource:
+  projectName: proteach
+  strictMode: ${datasource_strict_mode:false}
+
+#默认系统采用的课程库选项
+schoolNumber: ${school_number:100100}
+#oauth2用户操作接口
+showShareTag: ${show_share_tag:true}
+##################################################自定义配置结束##################################################
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate.enable_lazy_load_no_trans: true
+  thymeleaf:
+    cache: false
+  servlet:
+    multipart:
+      max-file-size: 2048MB
+      max-request-size: 2048MB
+  redis:
+    host: ${redis_host:localhost}
+    port: ${redis_port:6379}
+    password: ${redis_password:123456}
+  flyway:
+    enabled: true
+    baseline-on-migrate: false
+    validate-on-migrate: false
+  kafka:
+    bootstrap-servers: ${boot_strap_servers:127.0.0.1:9092}
+    consumer:
+      group-id: gsteachwork
+      auto-startup: true
+  application:
+    name: gvsunWork
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: ${eureka_host:http://localhost:8761/eureka}
+    register-with-eureka: true
+    fetch-registry: true
+
+server:
+  port: 8001
+  servlet:
+    context-path: /gvsunWork
+    session:
+      timeout: 3h
+  tomcat:
+    accept-count: 200
+    max-connections: 2000
+    connection-timeout: 5s
+    threads:
+      max: 1000
+      min-spare: 100
+###############################################默认配置（一般不改）开始################################################
+EasyCache:
+  redis:
+    host: ${spring.redis.host}
+    port: ${spring.redis.port}
+    password: ${spring.redis.password}
+    database: 1
+
+#网关
+apiGateWayHost: ${serverHost}/api
+#项目管理
+XMGLHost: ${serverHost}/gvsunxmgl
+#统一身份认证
+oauth2Host: ${serverHost}/uaa
+#共享数据中心
+dataShareHost: ${serverHost}/datashare
+#用户中心前端
+userCenterFrontHost: ${serverHost}/teacherInformationCenter
+#实验室
+limsHost: ${serverHost}/limsproduct
+#ES地址
+es:
+  host: ${es_host:${apiGateWayHost}/esearch}
+  #是否向ES推送日报
+  enable: ${es_enable:true}
+
+#统一身份认证-开始
+uia:
+  url: ${uia_host:${serverHost}/uia}
+  #是否使用统一身份认证 true or false
+  isUia: ${isUia:false}
+  #统一身份认证登录路径
+  loginUrl: ${uia.url}/signon
+  #统一身份认证退出路径
+  logoutUrl: ${uia.url}/signout
+  #密匙
+  secretKey: gvsun
+app:
+  url: ${app_url:${serverHost}/gvsunWork}
+  #成功后回调地址
+  redirectUrl: ${app.url}/webapp/login
+  #时效（以秒为单位）
+  timeDiff: 120
+#统一身份认证-结束
+
+authorization:
+  siteEnName: GvsunTeach
+  siteSecret:
+#在线批阅在Linux下的临时目录，如果在本地使用在线批阅功能，把路径改成本地磁盘的其他目录
+pdfDirector: /tmp/
+###############################################默认配置（一般不改）结束################################################

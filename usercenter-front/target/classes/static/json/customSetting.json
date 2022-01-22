@@ -1,0 +1,38 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"name": "test1",
+			"sql": "test2",
+			"type": "test3",
+			"use": "√",
+			"required": "×"
+		}, {
+			"name": "test1",
+			"sql": "test2",
+			"type": "test3",
+			"use": "√",
+			"required": "×"
+		}, {
+			"name": "test1",
+			"sql": "test2",
+			"type": "test3",
+			"use": "√",
+			"required": "×"
+		}, {
+			"name": "test1",
+			"sql": "test2",
+			"type": "test3",
+			"use": "√",
+			"required": "×"
+		}, {
+			"name": "test1",
+			"sql": "test2",
+			"type": "test3",
+			"use": "√",
+			"required": "×"
+		}
+	]
+}

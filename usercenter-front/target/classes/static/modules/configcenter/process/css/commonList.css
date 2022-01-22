@@ -1,0 +1,84 @@
+.layui-fluid {
+    padding: 30px!important;
+}
+.layui-table{
+    text-align:center;
+}
+.layui-add{
+    height: 30px;
+    width: 100%;
+    margin: 10px;
+}
+.form_input{
+    margin: 30px;
+}
+#timetable_tool {
+    background-color: rgb(251, 251, 251);
+    width: 90%;
+    display: inline-block;
+}
+.layui-card {
+    border: none;
+}
+.layui-card .layui-tab-brief .layui-tab-title {
+    height: 42px;
+    border-bottom: 3px solid #e2e7ec;
+}
+.layui-btn + .layui-btn {
+    margin: 0;
+}
+.tabsearch {
+    margin-top: 10px;
+}
+[lay-id = 'exprortTable'] {
+    display: none;
+}
+.layui-form-item td .layui-btn {
+    margin: 0!important;
+}
+body .layer-demo-class .layui-layer-content{
+    position: relative;
+    color: #999;
+    width: 200px;
+    padding: 10px;
+    margin: auto;
+    font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+    text-align: center;
+    /* just for this demo */
+
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+    /*opacity: 0;*/
+    transition: opacity 0.4s;
+}
+body .layer-demo-class .layui-layer-content i{
+    border-bottom-color: #fff;
+}
+.layer-demo-class ul,
+.layer-demo-class li,
+.layer-demo-class li a {
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+.layer-demo-class li a {
+    padding: 5px;
+    color: #888;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.layer-demo-class li a:hover,
+.layer-demo-class li a:focus {
+    /* demo styles */
+
+    background: #409eff;
+    color: #fff;
+}
+.layer-demo-class p,
+.layer-demo-class p a {
+    font-size: 12px;
+    text-align: center;
+    color: #888;
+}

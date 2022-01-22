@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 99px;
+			}
+			
+			.layui-input-block {
+				margin-left: 99px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="newexamfreelistbox" id="newexamfreelistbox">
+				<div class="layui-row layui-col-space20">
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">人员学号/姓名</label>
+						<div class="layui-input-block" id="username">
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">开始时间</label>
+						<div class="layui-input-block">
+							<input type="text" name="datetime" class="layui-input" id="datetime" placeholder="yyyy-MM-dd HH:mm:ss">
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">截止时间</label>
+						<div class="layui-input-block">
+							<input type="text" name="endDateTime" class="layui-input" id="endDateTime" placeholder="yyyy-MM-dd HH:mm:ss">
+						</div>
+					</div>
+					<div class="layui-col-lg4" style="display: none">
+						<label class="layui-form-label">安全准入等级</label>
+						<div class="layui-input-block">
+							<select name="rank" lay-search>
+								<option value="">请选择安全准入等级</option>
+								<option value="A">A</option>
+								<option value="B">B</option>
+								<option value="C">C</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-col-lg4" style="display: none">
+						<label class="layui-form-label">原因</label>
+						<div class="layui-input-block">
+							<textarea name="reason" placeholder="请输入内容" class="layui-textarea"></textarea>
+						</div>
+					</div>
+					<div class="layui-col-lg12 font_red prompt_black" style="display: none">（拉入黑名单后，该学生会从其他名单中被移除。请谨慎操作！）</div>
+				</div>
+				<!--操作按钮开始-->
+				<div class="layui-col-lg12 bottom_btnbox layui-hide">
+					<input type="button" lay-filter="newexamfreelistbtn" id="newexamfreelistbtn" class="layui-btn" lay-submit value="立即提交" />
+					<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+				</div>
+				<!--操作按钮结束-->
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/access/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const entityId = [[${entityId}]];
+			const entityType = [[${entityType}]];
+			// const entityType = 'DEV'
+			const flag = [[${flag}]];
+			const parentTable = [[${parentTable}]];
+			const oauth2Host = [[${oauth2Host}]];
+		</script>
+		<script th:src="@{/modules/access/newExamFreeList.js}"></script>
+	</body>
+</html>​​​

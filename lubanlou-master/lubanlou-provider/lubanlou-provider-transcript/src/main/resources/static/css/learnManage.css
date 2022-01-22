@@ -1,0 +1,72 @@
+.learn_student li{
+	float:left;
+	width:33.33%;
+}
+.learn_student .layui-form-item{
+	margin-bottom:0px !important;
+}
+.layui-form-radio span{
+	display: none !important;
+}
+.ex-table td button{
+	 background: transparent;
+	 margin-left:10px;
+ }
+.learn{
+	padding:0 15px 15px 15px;
+}
+.view_box_content{
+	margin-top:20px;
+}
+.learn_title li{
+	width:10%;
+	text-align: center;
+}
+.input-box{
+	width:86%;
+	height:26px;
+	display: inline-block;
+	margin-right:4px;
+}
+.ex-table td span input{
+	background: transparent;
+	border:none;
+	outline: none;
+	margin-left:8px;
+}
+.ex-table td span input:first-child{
+	margin-left:0px;
+}
+.btn_group{
+	margin-top:20px;
+	display: inline-block;
+	float: right;
+}
+.outline_title h1{
+	font-size:16px;
+	line-height:24px;
+	border-bottom: 1px solid #d7d7d7;
+	margin:0;
+	padding-bottom:6px;
+}
+.excelm{
+	margin-top:10px;
+}
+.explain p{
+	font-size: 14px;
+}
+.explain{
+	width:100%;
+}
+.explain img{
+	width:50%;
+	display: block;
+}
+.explain h1{
+	font-size: 14px;
+	font-weight: bold;
+	margin-top:10px;
+}
+.arrangement_con{
+	margin:20px 0;
+}

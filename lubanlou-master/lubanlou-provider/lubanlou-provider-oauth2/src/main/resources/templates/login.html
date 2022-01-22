@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>用户登录</title>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content=""/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=0.5, maximum-scale=1"/>
+    <link th:href="@{/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/favicon.ico}" rel=icon>
+    <link th:href="@{/plugins/tuesday.min.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"></script>
+    <script th:src="@{/plugins/layer/layer.js}"></script>
+    <script th:src="@{/js/plugin/crypto-js.min.js}"></script>
+    <script th:inline="javascript">
+        window.resourceContainerHost = [[${resourceContainerHost}]];
+        window.wechatEnable = [[${session.wechatEnable}]]
+    </script>
+    <script>
+        if (window != top) {
+            console.log("top.location.href=" + top.location.href);
+            console.log("location.href=" + location.href);
+            if (location.href.indexOf("localhost") !== -1)
+                top.location.href = location.href + "?redirect_uri=http://localhost/uia/oauth/authorization_code_callback&response_type=code&state=xvvvf&client_id=acme";
+            if (location.href.indexOf("localhost") !== -1)
+                top.location.href = location.href + "?redirect_uri=http://localhost/uia/oauth/authorization_code_callback&response_type=code&state=xvvvf&client_id=acme";
+        }
+    </script>
+
+    <script th:inline="javascript">
+        var redirect_uri = [[${redirect_uri}]];
+        var authorize_uri = [[${authorize_uri}]];
+        var state = [[${state}]];
+        var client_id = [[${client_id}]];
+        var response_type = [[${response_type}]];
+        var SUFEEnable = [[${session.SUFEEnable}]];
+        var SUFEAutoskip = [[${session.SUFEAutoskip}]];
+        var ZISUEnable = [[${session.ZISUEnable}]];
+        var ZISUAutoskip = [[${session.ZISUAutoskip}]];
+        var DLJTEnable = [[${session.DLJTEnable}]];
+        var DLJTAutoskip = [[${session.DLJTAutoskip}]];
+        var WZEnable = [[${session.WZEnable}]];
+        var WZAutoskip = [[${session.WZAutoskip}]];
+        var SKDEnable = [[${session.SKDEnable}]];
+        var SKDAutoskip = [[${session.SKDAutoskip}]];
+        var CDEnable = [[${session.CDEnable}]];
+        var CDAutoskip = [[${session.CDAutoskip}]];
+        var passwordEncode = [[${session.passwordEncode}]];
+        var outSchool = [[${session.outSchool}]];
+        var forgetPassword = [[${session.forgetPassword}]];
+        var error =[[${error}]];
+        var AES_KEY = [[${AES_KEY}]];
+        var AES_IV = "1954682168745975";
+        var XAAUEnable = [[${session.XAAUEnable}]];
+        var XAAUAutoskip = [[${session.XAAUAutoskip}]];
+        var HUSTEnable = [[${session.HUSTEnable}]];
+        var HUSTAutoskip = [[${session.HUSTAutoskip}]];
+        var SWUFEEnable = [[${session.SWUFEEnable}]];
+        var SWUFEAutoskip = [[${session.SWUFEAutoskip}]];
+
+        $(function () {
+            if (!error && outSchool === true) {
+                $("#out_school").show();
+            } else {
+                gvsunLogin()
+            }
+            // 忘记密码
+            if(forgetPassword === 2){
+                $(".forget-password").attr("href","javascript:void(0)").click(function(){
+                    layer.msg("请联系管理员获取密码")
+                })
+            }
+        });
+
+        function gvsunLogin(smooth = 0) {
+            $("#out_school").hide();
+            if(!smooth){
+                $("#not_out_school").show();
+            }else{
+                $("#not_out_school").addClass("animated tdFadeInRight").show();
+            }
+        }
+
+        function gitlabLogin() {
+            document.location.href = "/uaa/gitlab/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function qqLogin() {
+            document.location.href = "/uaa/qq/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function wechatLogin() {
+            document.location.href = "/uaa/wechat/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function SJTULogin() {
+            document.location.href = "/uaa/SJTU/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function HDULogin() {
+            document.location.href = "/uaa/HDU/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function SUFELogin() {
+            document.location.href = "/uaa/SUFE/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function ZISULogin() {
+            document.location.href = "/uaa/zisu/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function DLJTLogin() {
+            document.location.href = "/uaa/dljt/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function WZLogin() {
+            document.location.href = "/uaa/wz/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function SKDLogin() {
+            document.location.href = "/uaa/skd/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function CDLogin() {
+            document.location.href = "/uaa/cd/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function XAAULogin() {
+            document.location.href = "/uaa/xaau/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function HUSTLogin() {
+            document.location.href = "/uaa/hust/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        function SWUFELogin() {
+            document.location.href = "/uaa/swufe/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+        }
+
+        if (SUFEEnable === true && SUFEAutoskip === true) {
+            SUFELogin();
+        }
+
+        if (ZISUEnable === true && ZISUAutoskip === true) {
+            ZISULogin();
+        }
+
+        if (DLJTEnable === true && DLJTAutoskip === true) {
+            DLJTLogin();
+        }
+
+        if (WZEnable === true && WZAutoskip === true) {
+            WZLogin();
+        }
+
+        if (SKDEnable === true && SKDAutoskip === true) {
+            SKDLogin();
+        }
+
+        if (CDEnable === true && CDAutoskip === true) {
+            CDLogin();
+        }
+
+        if (XAAUEnable === true && XAAUAutoskip === true) {
+            XAAULogin();
+        }
+
+        if (HUSTEnable === true && HUSTAutoskip === true) {
+            HUSTLogin();
+        }
+
+        if (SWUFEEnable === true && SWUFEAutoskip === true) {
+            SWUFELogin();
+        }
+
+        $(function () {
+            // 设置地址
+            if (wechatEnable) {
+                wechatIframeSet();
+            }
+        })
+
+        function wechatIframeSet() {
+            let iframeUrl = "/uaa/wechat/login?redirect_uri=" + redirect_uri + "&state=" + state + "&client_id="
+                + client_id + "&response_type=" + response_type + "&authorize_uri=" + authorize_uri;
+            // css样式代码转换base64格式
+            let content =
+                `.impowerBox .qrcode {width: 140px;}
+             .impowerBox .title {display: none;}
+             .impowerBox .status {text-align: center;}`;
+            iframeUrl += "&href=" + `data:text/css;charset=utf-8;base64,${window.btoa(content)}`;
+            $("#qrcode_iframe").attr("src", iframeUrl);
+        }
+
+        // 其他学校认证窗口弹出
+        function openOtherLogin() {
+            layer.open({
+                type: 1,
+                title: "第三方认证",
+                shadeClose: true,
+                resize: false,
+                fixed: false,
+                move: false,
+                maxWidth: 400,
+                content: $('.otherLogin')
+            });
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <div class="logo" onclick="javascript:window.open(location.origin)"></div>
+</header>
+
+<div class="banner">
+    <div class="w">
+        <!--开启校外登陆看到的页面-->
+        <div class="login_form" id="out_school">
+            <div class="login_type_btn">
+                <div index="1" class="login_type_btn_choose" style="width:100%;">登录选项</div>
+            </div>
+            <div class="login_detail">
+                <div class="account_login">
+                    <a href="javascript:void(0)" onclick="gvsunLogin(1)" title="庚商认证？">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>庚商认证</span>
+                    </a>
+                    <th:block th:if="${session.qqEnable}">
+                        <a href="javascript:void(0)" onclick="qqLogin()" title="QQ登录？">
+                            <i class="fa fa-qq"></i>
+                            <span>QQ</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.wechatEnable}">
+                        <a href="javascript:void(0)" onclick="wechatLogin()" title="微信登录？">
+                            <i class="fa fa-weixin"></i>
+                            <span>wechat</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.gitlabEnable}">
+                        <a href="javascript:void(0)" onclick="gitlabLogin()" title="GitLab登录？">
+                            <i class="fa fa-gitlab"></i>
+                            <span>gitlab</span>
+                        </a>
+                    </th:block>
+                    <p class="other_login_title">更多登录</p>
+                    <th:block th:if="${session.SJTUEnable}">
+                        <a href="javascript:void(0)" onclick="SJTULogin()" title="上交登录？" class="other_login">
+                            <span>上交大</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.HDUEnable}">
+                        <a href="javascript:void(0)" onclick="HDULogin()" title="杭电登录？" class="other_login">
+                            <span>杭电</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.SUFEEnable}">
+                        <a href="javascript:void(0)" onclick="SUFELogin()" title="上财登录？" class="other_login">
+                            <span>上财</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.ZISUEnable}">
+                        <a href="javascript:void(0)" onclick="ZISULogin()" title="浙江外国语登录？" class="other_login">
+                            <span>浙江外国语</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.DLJTEnable}">
+                        <a href="javascript:void(0)" onclick="DLJTLogin()" title="大连交通大学" class="other_login">
+                            <span>大连交通大学</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.WZEnable}">
+                        <a href="javascript:void(0)" onclick="WZLogin()" title="温州大学" class="other_login">
+                            <span>温州大学</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.SKDEnable}">
+                        <a href="javascript:void(0)" onclick="SKDLogin()" title="陕西科技大学" class="other_login">
+                            <span>陕西科技大学</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.CDEnable}">
+                        <a href="javascript:void(0)" onclick="CDLogin()" title="成都电子科技大学" class="other_login">
+                            <span>成都电子科技大学</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.XAAUEnable}">
+                        <a href="javascript:void(0)" onclick="XAAULogin()" title="西安航空学院" class="other_login">
+                            <span>西安航空学院</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.HUSTEnable}">
+                        <a href="javascript:void(0)" onclick="HUSTLogin()" title="华中科技大学" class="other_login">
+                            <span>华中科技大学</span>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${session.SWUFEEnable}">
+                        <a href="javascript:void(0)" onclick="SWUFELogin()" title="西南财经" class="other_login">
+                            <span>西南财经</span>
+                        </a>
+                    </th:block>
+                    <a href="javascript:void(0)" onclick="openOtherLogin()" title="更多登录？"
+                       class="other_login other_login_more">
+                        <i class="fa fa-list"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!--不开启校外登陆看到的页面-->
+        <div class="login_form" id="not_out_school">
+            <div class="login_type_btn">
+                <div index="1" th:class="${error==null?'login_type_btn_choose':''}" th:if="${session.wechatEnable}">
+                    扫码登录
+                </div>
+                <div index="2" th:class="${(error!=null||!session.wechatEnable)?'login_type_btn_choose':''}"
+                     th:style="${!session.wechatEnable?'width:100%;':''}">账号登录
+                </div>
+            </div>
+            <div class="login_detail">
+                <div class="qrcode" th:style="${(error!=null||!session.wechatEnable)?'display: none;':''}">
+                    <div class="qrcode_main">
+                        <iframe id="qrcode_iframe" height="230" scrolling="no" src=""
+                                frameborder="0"></iframe>
+                    </div>
+                </div>
+                <div class="account_login" th:style="${error==null&&!!session.wechatEnable?'display: none;':''}">
+                    <form th:action="@{/login}" id="loginForm" method="post">
+                        <input type="hidden" name="redirect_uri" th:value="${redirect_uri}"/>
+                        <input type="hidden" name="authorize_uri" th:value="${authorize_uri}"/>
+                        <input type="hidden" name="state" th:value="${state}"/>
+                        <input type="hidden" name="client_id" th:value="${client_id}"/>
+                        <input type="hidden" name="response_type" th:value="${response_type}"/>
+                        <div class="msg" th:style="${error != null?'visibility:visible':''}">
+                            <div>
+                                <i class="fa fa-minus-circle"></i>
+                            </div>
+                            <div>
+                                <span id="error_text" th:text="${error}"></span>
+                            </div>
+                        </div>
+                        <div class="item item_force">
+                            <label class="item_label" for="login_name">
+                                <i class="fa fa-user"></i>
+                            </label>
+                            <input th:if="${enableLoginByPhone}" type="text" id="login_name" name="username"
+                                   class="itext" placeholder="请输入手机号">
+                            <input th:if="${!enableLoginByPhone}" type="text" id="login_name" name="username"
+                                   class="itext" placeholder="请输入用户名">
+                        </div>
+                        <div class="item item_force">
+                            <label class="item_label" for="login_password">
+                                <i class="fa fa-lock"></i>
+                            </label>
+                            <input type="password" id="login_password" class="itext" placeholder="请输入密码">
+                            <input type='hidden' name='password' id='encode_password'/>
+                        </div>
+                        <div class="item item_code_pic">
+                            <input type="text" name="captcha" class="item_force" id="login_code" placeholder="验证码">
+                            <img th:src="@{/images/imagecode}" onclick="reloadImg();" alt="验证码"
+                                 title="更新验证码" class="code_pic">
+                            <a title="点击此处可以重置密码。" th:href="@{/security/resetPassword}" class="forget-password">忘记密码</a>
+                        </div>
+                        <div class="item_btn">
+                            <button onclick="verSubmit()" type="button" id="login_form_btn">登 <span
+                                    style="margin-left:10px;"></span>
+                                录
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="coagent">
+                <ul>
+                    <li th:if="${session.qqEnable}">
+                        <a href="javascript:void(0)" onclick="qqLogin()" title="QQ登录？"><i
+                                class="fa fa-qq"></i><span>QQ</span></a>
+                        <span class="line">|</span>
+                    </li>
+                    <li th:if="${session.wechatEnable}">
+                        <a href="javascript:void(0)" onclick="wechatLogin()" title="微信登录？"><i
+                                class="fa fa-weixin"></i><span>wechat</span></a>
+                        <span class="line">|</span>
+                    </li>
+                    <li th:if="${session.gitlabEnable}">
+                        <a href="javascript:void(0)" onclick="gitlabLogin()" title="GitLab登录？"><i
+                                class="fa fa-gitlab"></i><span>gitlab</span></a>
+                        <span class="line">|</span>
+                    </li>
+                    <li th:if="${session.SJTUEnable || session.HDUEnable || session.SUFEEnable
+                    || session.ZISUEnable || session.DLJTEnable || session.WZEnable || session.SKDEnable
+                    || session.CDEnable || session.XAAUEnable || session.HUSTEnable || session.SWUFEEnable}">
+                        <a href="javascript:void(0)" onclick="openOtherLogin()" title="第三方认证登录？"><i
+                                class="fa fa-sjtu fa-graduation-cap"></i><span>第三方认证</span></a>
+                    </li>
+                    <!--<li class="register_btn">
+                        <a href="/teacherInformationCenter/register" target="_blank">
+                            <i class="fa fa-chevron-right"></i>
+                            注册
+                        </a>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Copyright © 2020 庚商教育智能科技 沪ICP备14016833号</p>
+        <p>
+            <img th:src="@{/images/login/bei.png}" alt="">
+            <span>沪公网安备 31011702007343号</span>
+        </p>
+    </footer>
+</div>
+
+<!--第三方学校登录-->
+<div class="otherLogin">
+    <ul>
+        <li th:if="${session.SJTUEnable}">
+            <a href="javascript:void(0)" onclick="SJTULogin()" title="上交登录？"><span>上交大</span></a>
+        </li>
+        <li th:if="${session.HDUEnable}">
+            <a href="javascript:void(0)" onclick="HDULogin()" title="杭电登录？"><span>杭电</span></a>
+        </li>
+        <li th:if="${session.SUFEEnable}">
+            <a href="javascript:void(0)" onclick="SUFELogin()" title="上财登录？"><span>上财</span></a>
+        </li>
+        <li th:if="${session.ZISUEnable}">
+            <a href="javascript:void(0)" onclick="ZISULogin()" title="浙江外国语登录？"><span>浙江外国语</span></a>
+        </li>
+        <li th:if="${session.DLJTEnable}">
+            <a href="javascript:void(0)" onclick="DLJTLogin()" title="大连交通大学"><span>大连交通大学</span></a>
+        </li>
+        <li th:if="${session.WZEnable}">
+            <a href="javascript:void(0)" onclick="WZLogin()" title="温州大学"><span>温州大学</span></a>
+        </li>
+        <li th:if="${session.SKDEnable}">
+            <a href="javascript:void(0)" onclick="SKDLogin()" title="陕西科技大学"><span>陕西科技大学</span></a>
+        </li>
+        <li th:if="${session.CDEnable}">
+            <a href="javascript:void(0)" onclick="CDLogin()" title="成都电子科技大学"><span>成都电子科技大学</span></a>
+        </li>
+        <li th:if="${session.XAAUEnable}">
+            <a href="javascript:void(0)" onclick="XAAULogin()" title="西安航空学院"><span>西安航空学院</span></a>
+        </li>
+        <li th:if="${session.HUSTEnable}">
+            <a href="javascript:void(0)" onclick="HUSTLogin()" title="华中科技大学"><span>华中科技大学</span></a>
+        </li>
+        <li th:if="${session.SWUFEEnable}">
+            <a href="javascript:void(0)" onclick="SWUFELogin()" title="西南财经"><span>西南财经</span></a>
+        </li>
+    </ul>
+</div>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/login.js}"></script>
+<script th:src="@{/js/cmsSetting.js}"></script>
+</body>
+</html>

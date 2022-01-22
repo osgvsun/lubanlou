@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>坐班答疑</title>
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/expand.css}" media="all">
+    <style>
+        .address_course span, .address_course:last-child{
+            display: inline-block;
+            /*justify-content: space-between;*/
+        }
+        .inTable {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="content_box">
+        <form class="layui-form lesson_card" action="" lay-filter="creditcardrecordsattendcebox" id="creditcardrecordsattendcebox">
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space20">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">坐班答疑
+                                <button type="button" class="layui-btn header_edit changeAuth" lay-tips="切换权限">切换权限</button>
+                            </div>
+
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-md12">
+                                        <!--头部搜索-->
+                                        <div class="search_line">
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">综合查询: </label>
+                                                <div class="layui-input-inline">
+                                                    <div class="layui-input-inline">
+                                                         <input type="text" required lay-verify="required" placeholder="请输入关键信息" autocomplete="off" class="layui-input search_all">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">学期: </label>
+                                                <div class="layui-input-inline" id="semester">
+
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">类型: </label>
+                                                <div class="layui-input-inline" id="type">
+<!--                                                    <select name="type" id="type">-->
+<!--                                                        <option value="0">写作</option>-->
+<!--                                                        <option value="1">阅读</option>-->
+<!--                                                    </select>-->
+                                                </div>
+                                            </div>
+<!--                                            <div class="layui-inline">-->
+<!--                                                <label class="layui-form-label">导师: </label>-->
+<!--                                                <div class="layui-input-inline" id="teacher">-->
+<!--&lt;!&ndash;                                                    <div class="layui-input-inline">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <input type="text" required lay-verify="required" placeholder="请输入导师" autocomplete="off" class="layui-input">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                            <input type="button" class="layui-btn sureSearch" data-type="reload" value="查询"/>
+                                            <input type="reset" class="layui-btn layui-btn-primary" data-type="reset"
+                                                   value="取消"/>
+                                            <input type="button" class="layui-btn newAdd" value="新建"/>
+                                        </div>
+                                        <!--搜索结束-->
+                                        <div class="layui-col-md12" style="margin: 10px 0">
+                                            <!--表单开始-->
+                                            <table class="layui-table" id="student" style="display: none">
+                                                <thead>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>答疑内容</th>
+<!--                                                        <th>选课信息</th>-->
+                                                        <th width="100px">导师</th>
+                                                        <th width="200px">坐班房间号</th>
+                                                        <th width="200px">坐班时间</th>
+<!--                                                        <th>名单</th>-->
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table_list">
+
+                                                </tbody>
+                                            </table>
+
+                                            <!--表单结束-->
+
+                                            <!--其他权限列表-->
+                                            <table class="layui-table" id="other" style="display: none">
+                                                <thead>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>答疑内容</th>
+                                                        <th>导师</th>
+                                                        <th width="200px">坐班房间号</th>
+                                                        <th width="200px">坐班时间</th>
+                                                        <th>名单</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="other_list">
+
+                                                </tbody>
+                                            </table>
+                                            <div id="page" style="float: right"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:replace="/answering/globalscript"></div>
+    <script th:inline="javascript">
+        const datashareHost = [[${datashareHost}]];
+    </script>
+    <script th:src="@{/modules/answering/static/js/common.js}"></script>
+    <script th:src="@{/modules/answering/mainIndex.js}"></script>
+</body>
+</html>

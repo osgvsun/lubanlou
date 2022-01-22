@@ -1,0 +1,28 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": "5",
+  "data": [
+      {
+        "id":"1",
+        "title":"推送所有设备",
+        "planName": "regalldevice"
+      }, {
+        "id":"2",
+        "title": "推送所有预约数据",
+        "planName": "regallreservation"
+      }, {
+        "id":"3",
+        "title": "推送班牌数据",
+        "planName": "regclasscarddata"
+      }, {
+        "id":"4",
+        "title": "读取设备日志信息数据",
+        "planName": "readdevicelog"
+      }, {
+        "id":"5",
+        "title": "推送考勤数据",
+        "planName": "regallattendanceuser"
+      }
+  ]
+}

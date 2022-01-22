@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/resourcesCloud/static/css/expand.css}" media="all">
+    <script th:inline="javascript">
+        //设置面包屑第一级
+        let folderType = [[${folderType}]];
+        top.sessionStorage.setItem("folderType", folderType.toString());
+        parent.window.resourcesCloudBreadCrumb.setFirstFolder(folderType);
+    </script>
+    <style>
+        .content_box > .user_detail {
+            opacity: unset;
+            top: unset;
+            left: unset;
+            right: unset;
+            bottom: unset;
+            min-width: unset;
+            height: unset;
+            display: none;
+            transition: unset;
+        }
+
+        .menu_line {
+            border-bottom: 1px solid #c1c1c1;
+        }
+
+        .operation_mid {
+            padding: unset;
+        }
+
+        .operation_mid > a {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form content_form" action="" lay-filter="filelistbox" id="filelistbox">
+        <div class="layui-fluid">
+            <input type="text" class="startvalue" hidden="" placeholder="shift键选择"/>
+            <input type="text" class="ivalue" hidden="" placeholder="ctrl键选择"/>
+            <input type="text" class="cacheRequestUrl" hidden="" placeholder="当前列表在缓存中的路径"/>
+            <div class="pictext_box opacity_box">
+                <!--文件列表-->
+            </div>
+        </div>
+    </form>
+    <!--操作菜单-->
+    <div class="user_detail">
+        <div class="operation_mid">
+            <!--<a class="folder file space" data-method="" data-menu-index="999">测试按钮</a>-->
+            <a class="folder file" data-method="" data-menu-index="0">打开</a>
+            <a class="file" data-method="" data-menu-index="1">下载</a>
+            <!--<a class="folder file" data-method="" data-menu-index="2">分享</a>-->
+            <!--<a class="" data-method="" data-menu-index="3">复制</a>-->
+            <!--<a class="" data-method="" data-menu-index="4">剪切</a>-->
+            <a class="folder file" data-method="" data-menu-index="5">移动到</a>
+            <a class="folder file" data-method="" data-menu-index="6">删除</a>
+            <a class="folder file" data-method="" data-menu-index="7">重命名</a>
+            <a class="folder" data-method="" data-menu-index="8">详情信息</a>
+            <a class="space" data-method="" data-menu-index="9">上传</a>
+            <a class="space" data-method="" data-menu-index="10">新建文件夹</a>
+            <a class="folder" data-method="" data-menu-index="11">打包下载</a>
+            <a class="folder file" data-method="" data-menu-index="12">名字复制</a>
+        </div>
+    </div>
+</div>
+<!--主体结束-->
+<script th:src="@{/modules/resourcesCloud/static/js/global.js}"></script>
+<script th:src="@{/modules/resourcesCloud/static/js/fileEvent.js}"></script>
+<script>
+    // 缩小文件显示宽度
+    // $('<style>.pictext_net{width:100px;}</style>').appendTo(document.body)
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'resourcesCloud/fileList']);
+</script>
+</body>
+
+</html>

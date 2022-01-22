@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/layui/css/layui.css}">
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName = localStorage['roleCname'];
+    </script>
+</head>
+<body>
+<div>
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>第一步：选择数据来源</legend>
+    </fieldset>
+    <div>
+        <form class="layui-form" id="form1">
+            <div class="layui-form-item">
+                <label>数据类型：</label>
+                <div class="layui-input-block">
+                    <input type="radio" lay-filter="form1Checkbox" lay-skin="primary" name="dataSources"
+                           value="uploadData" title="导入数据">
+                    <input id="sj7IsShowLims_input" type="radio"
+                           lay-filter="form1Checkbox" lay-skin="primary"
+                           name="dataSources"
+                           value="collectData" title="汇总数据">
+                    <input type="hidden" id="limsAuth" name="limsAuth">
+                    <input type="hidden" id="currYear" name="currYear">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-input-block">
+        <button type="button" onclick="generateSJ7Reports()" class="layui-btn">确定</button>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/layui/layui.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script>
+    layui.use('form', function () {
+        let form = layui.form;
+        form.on('checkbox(form1Checkbox)', function (data) {
+            let length = $("input[name='dataSources']:checked").length;
+            if (length > 1) {
+                $("#secondStep").show();
+            } else {
+                $("#secondStep").hide();
+            }
+        });
+    });
+
+    function generateSJ7Reports() {
+        $("#currYear").val(localStorage.currYear);
+        let length = $("input[name='dataSources']:checked").length;
+        if (length === 0) {
+            layui.layer.alert("请选择生成报表所需的数据源头");
+            return false;
+        }
+        $.ajax({
+            url: datashareHost + "generateSJ7Reports",
+            method: "post",
+            data: $('#form1').serialize() + "&" + $('#form2').serialize(),
+            dataType: "json",
+            success: function (res) {
+                if (res.code === 0) {
+                    window.parent.tableRender();
+                    window.parent.layui.layer.closeAll();
+                }
+                window.parent.layui.layer.alert(res.msg);
+            },
+            error: function () {
+                layui.layer.msg("出错啦");
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

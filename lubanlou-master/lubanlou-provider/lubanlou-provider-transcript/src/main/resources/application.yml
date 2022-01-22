@@ -1,0 +1,63 @@
+server:
+  port: 8770
+  tomcat:
+      accept-count: 200  #tomcat接受排队的最大数量
+      max-threads: 1000 #tomcat工作线程数量
+      max-connections: 2000 #tomcat处理的最大连接数
+      min-spare-threads: 100 # 最小工作空闲线程数，默认10。（适当增大一些，以便应对突然增长的访问量）
+      connection-timeout: 5000
+      max-http-header-size: 4048576
+eureka:
+  instance:
+    prefer-ip-address: true #以IP地址注册到服务中心，相互注册使用IP地址
+    status-page-url: http://localhost:${server.port}/swagger-ui.html
+  client:
+    serviceUrl:
+      defaultZone: ${eureka_host:http://localhost:8761/eureka/}
+debug: true
+spring:
+  application:
+    name: transcript
+
+  flyway:
+    baseline-on-migrate: true
+
+  kafka:
+    bootstrap-servers: ${boot_strap_servers:127.0.0.1:9092}
+    consumer:
+      group-id: transcript
+      auto-startup: true
+
+  redis:
+    host: ${redis_host:localhost}
+    port: ${redis_port:6379}
+    password: ${redis_password:123456}
+
+
+  jpa:
+    show-sql: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+authorization:
+  siteEnName: GvsunTranscript
+  siteSecret:
+
+apiGateWayHost: ${apiGateWay_host:http://localhost/api}                               #网关地址
+# 资源容器只需要apiGateWayHost和resourceContainerHostForUpload，其他地址与资源容器无关
+resourceContainerHostForUpload: ${resource_container_host:http://localhost:32008}     #资源容器地址
+# 资源容器地址 http://localhost:32008
+serverHost: ${server_host:http://localhost}
+datasource:
+  projectName: transcript
+  strictMode: ${datasource_strict_mode:true}
+gvsun:
+  security:
+    secretCode:
+    mapping:
+      ignore: /**

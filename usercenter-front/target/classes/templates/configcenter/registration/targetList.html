@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/timetable/iframe">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="Generator" content="GVSUN" />
+    <meta name="Author" content="chenyawen" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+    <script th:src="@{/js/directoryEngine/directoryEngine-core.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/modules/timetable/static_limsproduct/js/layerSilica.js}"></script>
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/expand.css}" media="all">
+    <script th:inline="javascript">
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var timetableId = [[${timetableId}]];
+        var type = [[${type}]];
+    </script>
+</head>
+
+<body layout:fragment="timetable">
+<div class="main_content">
+    <div class="layui-row layui-col-space20">
+        <!--搜索开始-->
+        <div class="layui-col-md12 tabsearch search_line">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+                </div>
+            </div>
+            <button class="layui-btn" data-type="reload">搜索</button>
+        </div>
+        <!--搜索结束-->
+        <div class="layui-col-md12">
+            <!--表格开始-->
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+            <!--表格结束-->
+        </div>
+    </div>
+</div>
+<script th:src="@{/modules/timetable/layui_admin/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+<script th:src="@{/js/initOAuth2.js}"></script>
+<script th:src="@{/modules/timetable/layui_admin/layui/layui.js}"></script>
+<script th:src="@{/modules/configcenter/static/global.js}"></script>
+<script th:src="@{/modules/configcenter/registration/targetList.js}"></script>
+</body>
+
+</html>

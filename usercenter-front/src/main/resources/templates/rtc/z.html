@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>anyrtc</title>
+    <link
+            rel="stylesheet"
+            href="https://www.layuicdn.com/layui/css/layui.css"
+    />
+    <script src="https://www.layuicdn.com/layui-v2.5.7/layui.js"></script>
+    <script>
+        layui.use(["layer"], function () {
+            window.layer = layui.layer;
+        });
+    </script>
+    <link
+            crossorigin="anonymous"
+            integrity="sha512-f73UKwzP1Oia45eqHpHwzJtFLpvULbhVpEJfaWczo/ZCV5NWSnK4vLDnjTaMps28ocZ05RbI83k2RlQH92zy7A=="
+            href="//lib.baomitu.com/font-awesome/5.15.1/css/all.css"
+            rel="stylesheet"
+    />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .userBox {
+            display: inline-block;
+            position: relative;
+            margin: 0 5px;
+        }
+
+        .userVideo {
+            width: 233px;
+            height: 233px;
+            display: inline-block;
+            vertical-align: top;
+            border: 1px solid;
+        }
+
+        .userData {
+            position: absolute;
+            z-index: 1;
+            font-size: 123%;
+            background-color: white;
+            left: 1px;
+            top: 1px;
+        }
+
+        .localVideo {
+            /* 视频镜像 */
+            transform: scaleX(-1);
+        }
+
+        .editMenu {
+            width: 100%;
+            text-align: right;
+        }
+
+        .editMenu > a {
+            font-size: 200%;
+            margin: 0 5px;
+        }
+
+        .gray {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+<h6>请用谷歌浏览器访问</h6>
+<input type="button" value="个人加入" onclick="startBasicCall()"/>
+<input type="button" value="个人退出" onclick="leaveCall()"/>
+<input type="button" value="个人禁音" onclick="mutedSign('off')"/>
+<input type="button" value="个人声音打开" onclick="mutedSign('on')"/>
+<input type="button" value="个人画面开关" onclick="toggleEye()"/>
+<input type="button" value="测试麦克风" onclick="listenYourselfAudio()"/>
+<!-- <input type="button" value="全部禁音" onclick="mutedAll('off')" /> -->
+<!-- <input type="button" value="全部声音放开" onclick="mutedAll('on')" /> -->
+<br/>
+<select name="" id="pSet">
+    <option value="480p">480p</option>
+    <option value="720p">720p</option>
+</select>
+<!-- <span>当前通话质量：（<span id="callState"></span>）</span> -->
+<span>当前频道：<span id="currentChannel"></span></span>
+<!-- <br />
+<span style="color: red">禁音功能现在只是自己不听别人说话（sdk的原因</span>
+<a
+  href="./images/reason.png"
+  target="_blank"
+  style="text-decoration: underline"
+  >查看详情</a
+> -->
+<hr/>
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script
+        crossorigin="anonymous"
+        integrity="sha384-eITc5AorI6xzkW7XunGaNrcA0l6qrU/kA/mOhLQOC5thAzlHSClQTOecyzGK6QXK"
+        src="//lib.baomitu.com/js-cookie/2.2.1/js.cookie.min.js"
+></script>
+<script src="https://ardw.anyrtc.io/sdk/web/ArRTC@latest.js"></script>
+<script th:src="@{/modules/rtc/z.js}"></script>
+</body>
+</html>

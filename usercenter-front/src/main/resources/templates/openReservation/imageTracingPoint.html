@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>工位标注</title>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        .main_content_box {
+            margin: 0 auto;
+        }
+        .full_box {
+            /*position: relative;*/
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        div>span:nth-of-type(1) {
+            color: #46a82c;
+        }
+        div>span:nth-of-type(2) {
+            color: #e1a42a;
+        }
+        div>span:nth-of-type(3) {
+            color: #e63522;
+        }
+        div>span:nth-of-type(4) {
+            color: #7d7d7d;
+        }
+        div>.rad:nth-of-type(1) {
+            background: #46a82c;
+        }
+        div>.rad:nth-of-type(2) {
+            background: #e1a42a;
+        }
+        div>.rad:nth-of-type(3) {
+            background: #e63522;
+        }
+        div>.rad:nth-of-type(4) {
+            background: #7d7d7d;
+        }
+        .rad {
+            display: inline-block;
+            margin-left: 20px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .title {
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+
+        #map {
+            overflow: hidden;
+            position: relative;
+            height: 600px;
+            border: 1px dashed #ccc;
+        }
+        .zoom-icon-wrapper {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            z-index: 1000;
+        }
+        .zoom-icon-plus {
+            width: 30px;
+            height: 30px;
+            line-height: 20px;
+            text-align: center;
+            border: 3px solid #6495ED;
+            font-size: 20px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            color: #FF8C00;
+            cursor: pointer;
+        }
+        .zoom-icon-plus:hover {
+            border-color: #4169E1;
+        }
+        .zoom-icon-minus {
+            margin-top: 6px;
+            width: 30px;
+            height: 30px;
+            line-height: 20px;
+            text-align: center;
+            border: 3px solid #6495ED;
+            font-size: 25px;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            color: #FF8C00;
+            cursor: pointer;
+        }
+        .zoom-icon-minus:hover {
+            border-color: #4169E1;
+        }
+        .flag_btn {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main_content_box" id="app">
+        <!--主体开始-->
+        <form class="layui-form lesson_card" action="" lay-filter="imagetrancingpointbox" id="imagetrancingpointbox">
+            <div class="title">
+<!--                <div class="rad"></div>-->
+                <span>空闲</span>
+                <button type="button" class="layui-btn layui-btn-primary flag_btn" @click="setMode('POINT', 1)">
+                    <i class="layui-icon layui-icon-radio" style="color: #46a82c"></i>
+                </button>
+<!--                <div class="rad"></div>-->
+                <span>半空闲</span>
+                <button type="button" class="layui-btn layui-btn-primary flag_btn" @click="setMode('POINT', 2)">
+                    <i class="layui-icon layui-icon-radio" style="color: #e1a42a"></i>
+                </button>
+<!--                <div class="rad"></div>-->
+                <span>忙碌</span>
+                <button type="button" class="layui-btn layui-btn-primary flag_btn" @click="setMode('POINT', 3)">
+                    <i class="layui-icon layui-icon-radio" style="color: #e63522"></i>
+                </button>
+<!--                <div class="rad"></div>-->
+                <span>不开放</span>
+                <button type="button" class="layui-btn layui-btn-primary flag_btn" @click="setMode('POINT', 4)">
+                    <i class="layui-icon layui-icon-radio" style="color: #7d7d7d"></i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-primary" @click="setMode('PAN')">平移</button>
+<!--                <div class="layui-input-inline">-->
+<!--                    <select name="status" class="status">-->
+<!--                        <option value="#46a82c">空闲</option>-->
+<!--                        <option value="#e1a42a">半空闲</option>-->
+<!--                        <option value="#e63522">忙碌</option>-->
+<!--                        <option value="#7d7d7d">不开放</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+            </div>
+<!--            <div class="full_box">-->
+<!--                <img class="resource-img" th:src="@{/images/register_bg.jpg}" alt="">-->
+<!--            </div>-->
+            <div class="step_bottom" style="display: none">
+                <input type="button" lay-filter="imagetracingpointbtn" id="imagetracingpointbtn" class="layui-btn"
+                       value="保存" @click="savebtn">
+                <input type="reset" class="layui-btn layui-btn-primary" value="清空表单">
+            </div>
+
+            <div id="map">
+                <div class="zoom-icon-wrapper">
+                    <div class="zoom-icon-plus" @click="zoomIn();">+</div>
+                    <div class="zoom-icon-minus"  @click="zoomOut();">-</div>
+                </div>
+            </div>
+            <div>注：在绘制模式时，选择对应标记位进行标记，双击图形可进行选中编辑；单击未选中图形区域或切换mode模式会取消选中</div>
+        </form>
+    </div>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/modules/openReservation/static/js/ailabel.js}"></script>
+    <script th:src="@{/modules/openReservation/static/js/vue.min.js}"></script>
+    <script th:src="@{/js/cookie.js}"></script>
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <script th:inline="javascript">
+        let currentUsername = [[${session.user.username}]];
+        resourceContainer.initResourceContainer({
+            resourceContainerHost: [[${resourceContainerHost}]],
+            oauth2Host: [[${oauth2Host}]],
+            siteName: "开放预约",
+            username: currentUsername
+        });
+    </script>
+    <script th:src="@{/modules/openReservation/imageTracingPoint.js}"></script>
+</body>
+</html>

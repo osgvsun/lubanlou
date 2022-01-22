@@ -1,0 +1,116 @@
+{
+    "code": 0,
+    "data": [
+        {
+            "id": 1,
+            "label": "1校区",
+            "children": [
+                {
+                    "id": 11,
+                    "label": "1-A楼",
+                    "children": [
+                        {
+                            "id": 111,
+                            "label": "第一层"
+                        },
+                        {
+                            "id": 112,
+                            "label": "第二层",
+                            "checked": true
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "label": "1-B楼",
+                    "children": [
+                        {
+                            "id": 121,
+                            "label": "第一层"
+                        },
+                        {
+                            "id": 122,
+                            "label": "第二层",
+                            "checked": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "label": "2校区",
+            "children": [
+                {
+                    "id": 21,
+                    "label": "2-A楼",
+                    "children": [
+                        {
+                            "id": 211,
+                            "label": "第一层"
+                        },
+                        {
+                            "id": 212,
+                            "label": "第二层",
+                            "checked": true
+                        },
+                        {
+                            "id": 213,
+                            "label": "第三层",
+                            "checked": true
+                        }
+                    ]
+                },{
+                    "id": 22,
+                    "label": "2-B楼",
+                    "children": [
+                        {
+                            "id": 221,
+                            "label": "第一层"
+                        },
+                        {
+                            "id": 222,
+                            "label": "第二层",
+                            "checked": true
+                        },
+                        {
+                            "id": 223,
+                            "label": "第三层",
+                            "checked": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "label": "3校区",
+            "children": [
+                {
+                    "id": 31,
+                    "label": "3-A楼",
+                    "children": [
+                        {
+                            "id": 211,
+                            "label": "第一层"
+                        }
+                    ]
+                },
+                {
+                    "id": 32,
+                    "label": "3-B楼",
+                    "children": [
+                        {
+                            "id": 321,
+                            "label": "第一层"
+                        },
+                        {
+                            "id": 322,
+                            "label": "第二层"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,118 @@
+.layui-table{
+    text-align:center;
+}
+.layui-add{
+    height: 30px;
+    width: 100%;
+    margin: 10px;
+}
+.form_input{
+    margin: 30px;
+}
+.detail_item {
+    border:none;
+}
+.layui-form-danger+.layui-form-select .layui-input,
+.layui-form-danger:focus {
+    border: 1px solid #FF5722!important
+}
+.detail_item .layui-form-label {
+    white-space: normal;
+    width: 150px;
+}
+.detail_item .layui-input-block {
+    margin-left: 150px;
+}
+.detail_item .layui-row {
+    border-left: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+}
+.localObject + .layui-form-select {
+    width: 160px;
+    margin: 0;
+    float: left;
+}
+.layui-tab-content {
+    padding:0!important;
+}
+.jump_to_step {
+    cursor:pointer;
+}
+.jump_to_step:hover {
+    color: #409eff;
+}
+.right_decoration:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.mobile_btn {
+    display: none;
+}
+.last_choose {
+    padding-top: 7px;
+}
+.layui-form-checkbox[lay-skin="primary"] span {
+    background: 0 0;
+    color: #666;
+}.layui-form-checkbox[lay-skin="primary"]:hover span {
+     background: 0 0;
+     color: #666;
+ }
+.layui-fixbar {
+    display: inline-flex;
+}
+.layui-textarea {
+    resize: vertical!important;
+}
+.quick_line a{
+    height: auto;
+}
+tbody tr .layui-table-cell{
+    overflow: visible !important;
+}
+.layui-table-box{
+    overflow:visible;
+}
+.layui-table-body{
+    /*overflow:visible;*/
+}
+@media print {
+    .noprint,.step_bottom,.layui-fixbar {
+        display: none
+    }
+}
+@media screen and (max-width: 768px) {
+    .adc_right {
+        position: static;
+        width: 100%;
+    }
+    .mobile_btn {
+        display: block;
+    }
+    .detail_item .layui-form-label {
+        white-space: normal;
+    }
+    .detail_item .layui-form-label {
+        width: 110px;
+    }
+    .detail_item .layui-input-block {
+        margin-left: 110px;
+    }
+}
+.laydate-time-list ol {
+    height: 150px!important;
+}
+.quick_line {
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    padding-left: 33px;
+}
+.quick_line a {
+    height: auto;
+    width: auto;
+    padding: 5px 8px;
+    float: none;
+}

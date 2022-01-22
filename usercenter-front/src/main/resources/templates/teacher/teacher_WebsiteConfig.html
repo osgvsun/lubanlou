@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>教师菜单配置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+
+
+</head>
+<style>
+    table{
+        width: 100%;
+        padding: 10px;
+        word-break:break-all;
+    }
+    td{
+        min-width: 200px;
+        max-width: 500px;
+        height: 60px;
+        line-height: 35px;
+        text-align: center;
+    }
+    .detailInfo td{
+        min-width: auto;
+    }
+    .detailInfo td:first-child{
+        width: 30px;
+    }
+    .detailInfo tr:first-child{
+       background: #efefef;
+    }
+</style>
+<script th:inline="javascript">
+    var userCenterHost = [[${session.userCenterHost}]];
+    var currentUsername = [[${session.user.username}]];
+    var apiGateWayHost = [[${session.apiGateWayHost}]];
+    var encryptUsername=[[${session.encryptUsername}]];
+    var currentsiteEnName = [[${session.siteEnName}]];
+    var currentsiteSecret = [[${session.siteSecret}]];
+</script>
+<script th:src="@{/modules/common.js}"></script>
+
+<body>
+<div class="layui-tab layui-tab-brief" lay-filter="demo">
+    <ul class="layui-tab-title">
+        <li class="layui-this">基本信息</li>
+        <li>学历</li>
+        <li>工作经历</li>
+        <li>项目情况</li>
+        <li>代表作</li>
+        <li>获奖情况</li>
+        <li>专利</li>
+    </ul>
+    <div class="layui-tab-content" style="height: 100px;">
+        <div class="layui-tab-item layui-show">
+            <button class="layui-btn" onclick="editConfigResult()"  style="margin: 30px 0 ">保存配置</button>
+            <table border="2">
+                <tr id="menu0">
+                </tr>
+            </table >
+        </div>
+        <div class="layui-tab-item">
+            <button class="layui-btn" onclick="editeduResult()"  style="margin: 30px 0 ">保存学历配置</button>
+            <table border="2" id="eduTable">
+                <tr id="eduInfo">
+
+                </tr>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <button class="layui-btn" onclick="editworkResult()"  style="margin: 30px 0 ">保存工作经历配置</button>
+            <table border="2" id="workTable">
+                <tr id="workInfo">
+
+                </tr>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <button class="layui-btn" onclick="edithorizontalSubjectResult()"  style="margin: 30px 0 ">保存横向项目信息配置</button>
+            <table border="2" id="horizontalSubjectTable">
+                <tr id="horizontalSubjectInfo">
+
+                </tr>
+            </table>
+            <button class="layui-btn" onclick="editlongitudinalSubjectResult()"  style="margin: 30px 0 ">保存纵向项目信息配置</button>
+            <table border="2" id="longitudinalSubjectTable">
+                <tr id="longitudinalSubjectInfo">
+
+                </tr>
+            </table>
+            <button class="layui-btn" onclick="editteachingSubjectTableResult()"  style="margin: 30px 0 ">保存教学项目信息配置</button>
+            <table border="2" id="teachingSubjectTable">
+                <tr id="teachingSubjectInfo">
+
+                </tr>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <button class="layui-btn" onclick="editMasterResult()"  style="margin: 30px 0 ">保存代表作配置</button>
+            <table border="2" id="table2">
+                <tr id="menu1">
+
+                </tr>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <button class="layui-btn" onclick="editscienceAwardResult()"  style="margin: 30px 0 ">保存科研获奖信息配置</button>
+            <table border="2" id="scientificAwardTable">
+                <tr id="scientificAwardInfo">
+
+                </tr>
+            </table>
+            <button class="layui-btn" onclick="editeducateAwardResult()"  style="margin: 30px 0 ">保存教学获奖信息配置</button>
+            <table border="2" id="educateAwardTable">
+                <tr id="educateAwardInfo">
+
+                </tr>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <button class="layui-btn" onclick="editPatentResult()"  style="margin: 30px 0 ">保存专利配置</button>
+            <table border="2" id="patentTable">
+                <tr id="patentInfo">
+
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+<script type="text/html" id="edit_roleManage">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+<script>
+    //提交编辑结果(代表作)
+    function editMasterResult(){
+        var all_checked = true;
+        $("#table2 input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserMasterWorkInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserMasterWorkInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+        table.reload('masterWorkInfo');
+    }
+    //提交专利结果(代表作)
+    function editPatentResult(){
+        var all_checked = true;
+        $("#patentTable input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserAuthorizedPatentInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserAuthorizedPatentInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+    }
+    //提交学历信息配置结果
+    function editeduResult(){
+        var all_checked = true;
+        $("#eduTable input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserEdubgInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserEdubgInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+    }
+    //提交工作经历信息配置结果
+    function editworkResult(){
+        var all_checked = true;
+        $("#workTable input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserWorkHistoryInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserWorkHistoryInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+    }
+    //提交科研获奖信息配置结果
+    function editscienceAwardResult(){
+        var all_checked = true;
+        $("#scientificAwardTable input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserResearchAwardInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserResearchAwardInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+    }
+    //提交教学获奖信息配置结果
+    function editeducateAwardResult(){
+        var all_checked = true;
+        $("#educateAwardTable input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserEducationAwardInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserEducationAwardInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+    }
+    //提交横向项目信息配置结果
+    function edithorizontalSubjectResult(){
+        var all_checked = true;
+        $("#horizontalSubjectTable input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost +  '/usercenter/saveUserHorizontalSubjectInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost +  '/usercenter/saveUserHorizontalSubjectInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+    }
+    //提交纵向项目信息配置结果
+    function editlongitudinalSubjectResult(){
+        var all_checked = true;
+        $("#longitudinalSubjectTable input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost +'/usercenter/saveUserLongitudinalSubjectInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserLongitudinalSubjectInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+    }
+    //提交教學项目信息配置结果
+    function editteachingSubjectTableResult(){
+        var all_checked = true;
+        $("#teachingSubjectTable input[type=checkbox]").each(function(){
+            if(this.checked == true){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserEducationProjectInfo',
+                    data:{
+                        selfSetting:1,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+            if(this.checked == false){
+                var id=$(this).attr("id");
+                $.ajax({
+                    url: userCenterHost + '/usercenter/saveUserEducationProjectInfo',
+                    data:{
+                        selfSetting:0,
+                        id:id,
+                    },
+                    async:'false',
+                    dataType: 'json',
+                    method: 'POST'
+                    ,success: function(res){
+                        if(!res.code){
+                            parent.layer.alert("提交成功！");
+                            // table.reload('masterWorkInfo');
+                        }
+                        else{
+                            console.log(res.msg);
+                            parent.layer.alert("提交失败")
+                        }
+                    }
+                })
+            }
+        });
+    }
+
+</script>
+
+<script>
+    layui.config({
+        base: '../' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index','teacher_WebsiteConfig']);
+</script>
+</body>
+</html>

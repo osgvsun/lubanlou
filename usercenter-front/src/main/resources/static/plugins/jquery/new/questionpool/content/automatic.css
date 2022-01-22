@@ -1,0 +1,19 @@
+.layui-form-label{
+	width:auto !important;
+}
+.layui-form-item .layui-input-inline{
+	width:80% !important;
+}
+.layui-form-selected dl{
+	z-index: 999999;
+}
+.layui-table th span .fa-plus{
+	margin-left:5%;
+	cursor: pointer;
+}
+.u-all-btn{
+	margin-left:6%;
+}
+.u-all-btn:nth-child(1){
+	margin-left:0px;
+}

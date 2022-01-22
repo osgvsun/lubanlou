@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div class="layui-col-md12">
+    <input type="hidden" id="apiGateWayHost" th:value="${apiGateWayHost}"/>
+<table class="layui-hide" id="demo" lay-filter="demo" ></table>
+</div>
+<script type="text/javascript" th:src="@{${apiGateWayHost} + '/message/layui/layui.js'}"></script>
+<link rel="stylesheet"  th:href="@{${apiGateWayHost} + '/message/layui/css/layui.css'}" media="all">
+<script type="text/javascript" th:src="@{${apiGateWayHost} +'/message/js/jquery-1.11.0.min.js'}"></script>
+<script th:src="@{${apiGateWayHost} + '/message/js/index.js'}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>院系维护</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/modules/common.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername = [[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+    </script>
+</head>
+<style>
+    .layui-table {
+        text-align: center;
+    }
+
+    .layui-add {
+        height: 30px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .form_input {
+        margin: 30px;
+    }
+</style>
+<body>
+<div class="layui-card">
+    <div class="layui-card-header">学院信息</div>
+    <div>
+        <!-- 增加学院 -->
+<!--        <div class="layui-add">-->
+<!--            <button class="layui-btn" data-type="addMenu">增加学院</button>-->
+<!--        </div>-->
+        <div id="addMenu" style="display:none;background-color: #fbfbfb">
+            <div class="menuSet">
+                <label>学院名称：</label>
+                <div class='addMenuInput'>
+                    <input class="layui-input" id="menuName" name="menuName"/>
+                </div>
+
+            </div>
+            <div>
+                <form class="layui-form">
+                    <div style="margin: 15px auto 0;text-align: right">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" data-type="add">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary edit_hide" data-type="cancel">取消
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <table class="layui-table" id="menu" lay-filter="menuList">
+        </table>
+    </div>
+</div>
+<div id="edit_department" style="display: none">
+    <div class="layui-form">
+        <div class="form_input">
+            <label class="layui-form-label">学院名称:</label>
+            <input class="layui-input" id="department_edit" style="width: 60%"/>
+        </div>
+        <div class="form_input">
+            <label class="layui-form-label">排序:</label>
+            <input class="layui-input" id="sequence" style="width: 60%">
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/html" id="edit">
+    <a data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <div style="display: inline-block;margin: 0 10px">
+        <a lay-event="asc"> <i class="fa fa-long-arrow-up" aria-hidden="true"></i></a>
+        <a lay-event="desc"> <i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
+    </div>
+</script>
+<script>
+    layui.config({
+        base: '../'
+    }).extend({
+        index: 'lib/index'
+    }).use(['index', 'collegeMaintenance'])
+</script>
+
+</html>

@@ -1,0 +1,33 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"startrange": "test1",
+			"endrange": "test2",
+			"state": "test3",
+			"score": "test4"
+		}, {
+			"startrange": "test1",
+			"endrange": "test2",
+			"state": "test3",
+			"score": "test4"
+		}, {
+			"startrange": "test1",
+			"endrange": "test2",
+			"state": "test3",
+			"score": "test4"
+		}, {
+			"startrange": "test1",
+			"endrange": "test2",
+			"state": "test3",
+			"score": "test4"
+		}, {
+			"startrange": "test1",
+			"endrange": "test2",
+			"state": "test3",
+			"score": "test4"
+		}
+	]
+}

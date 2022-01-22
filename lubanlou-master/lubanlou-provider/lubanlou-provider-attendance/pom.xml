@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lubanlou-provider</artifactId>
+        <groupId>net.gvsun.lubanlou.provider</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lubanlou-provider-attendance</artifactId>
+    <name>lubanlou-provider-attendance</name>
+    <version>${release.version}</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <release.version>1.0.0-SNAPSHOT</release.version>
+        <!-- 标签线 -->
+        <tag.version>beta</tag.version>
+    </properties>
+
+    <dependencies>
+        <!--排除父pom依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+            </plugin>
+            <!-- 谷歌·jib 镜像打包插件 -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <from>
+                        <image>registry.cn-shanghai.aliyuncs.com/gvsun/jdk:8u141</image>
+                    </from>
+                    <to>
+                        <image>lbl-${tag.version}/attendance:${project.version}</image>
+                    </to>
+                    <!--容器相关的属性-->
+                    <container>
+                        <mainClass>net.gvsun.attendance.AttendanceApplication</mainClass>
+                    </container>
+                    <!--允许非https-->
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

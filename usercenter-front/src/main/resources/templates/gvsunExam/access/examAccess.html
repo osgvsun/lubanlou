@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="Generator" content="GVSUN" />
+    <meta name="Author" content="chenyawen" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/examAccess.css}" media="all">
+    <script th:src="@{/modules/gvsunExam/static/js/html2canvas.js}"></script>
+    <script th:src="@{/modules/gvsunExam/static/js/jspdf.debug.js}"></script>
+</head>
+<body>
+    <!--主体开始-->
+    <div class="content_box">
+        <form class="layui-form lesson_card" action="" lay-filter="examAccessListbox" id="examAccessListbox">
+            <div class="layui-fluid">
+                <div classs="layui-row layui-col-space20">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">考试准入
+<!--                                <label class="layui-icon layui-icon-export newtest header_btn" id="examAccessPicture" lay-tips="导出全部照片"></label>-->
+                                <label class="layui-icon layui-icon-print newtest header_btn" id="examAccessExcel" lay-tips="打印全部基本信息"></label>
+                                <!--搜索开始-->
+                                <div class="fr search_line searchbox">
+                                    <div class="layui-inline" id="site">
+<!--                                        <select name="site" id="site" lay-search>-->
+<!--                                            <option value="">请选择站点</option>-->
+<!--                                        </select>-->
+                                    </div>
+                                    <input type="button" class="layui-btn" data-type="reload" value="切换课程" />
+                                </div>
+                                <!--搜索结束-->
+                            </div>
+                            <div class="layui-card-body">
+                                <div class="layui-col-md12">
+                                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                                        <th:block>
+                                            <!--搜索开始-->
+                                            <div class="layui-col-md12 tabsearch search_line">
+                                                <div class="layui-inline">
+                                                    <div class="layui-input-inline">
+                                                        <input class="layui-input" name="searchid" id="searchbox" autocomplete="on"
+                                                               placeholder="请输入搜索内容"/>
+                                                    </div>
+                                                </div>
+                                                <input type="button" class="layui-btn" data-type="reload" value="搜索" id="searchCont"/>
+                                            </div>
+                                        </th:block>
+
+                                        <div class="layui-tab-content">
+                                            <div class="layui-tab-item layui-show">
+                                                <div class="layui-col-md12">
+                                                    <!--表单开始-->
+                                                    <table class="layui-hide" id="examAccessList" lay-filter="examAccessList"></table>
+                                                    <script type="text/html" id="toolbar">
+                                                        <th:block>
+                                                            <a class="layui-btn layui-btn-green layui-btn-xs" lay-event="print">打印准考证</a>
+                                                            <a class="layui-btn layui-btn-green layui-btn-xs" lay-event="picture">下载准考证图片</a>
+                                                        </th:block>
+                                                    </script>
+                                                    <!--表单结束-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="admissionTicket" class="admission_ticket_container" style="display: none">
+        <div class="admission_ticket_container_in">
+            <div id="title" class="admission_ticket_title">全国幼儿及青少年人工智能素养等级测评准考证</div>
+            <div id="exam_name_first">
+                <h4>考生姓名</h4><h4 id="cname">xxx</h4><h4>性别</h4><h4 id="sex">x</h4>
+            </div>
+            <div id="exam_name_second">
+                <h4>所在学校</h4><h4 id="userSchool">xxxxxx</h4><h4>所在机构</h4><h4 id="userGor">xxxxxx</h4>
+            </div>
+            <div id="exam_name_third">
+                <h4>身份证号</h4><h4 class="card_number" id="cardNumber">xxxxxxxxxxxxxxxxx</h4>
+            </div>
+            <div id="exam_name_fourth">
+                <h4>测评等级</h4><h4 id="assessmentLevel">青少年二级</h4><h4>测评方向</h4><h4 id="evaluate">xxxx</h4>
+            </div>
+            <div id="exam_name_fifth">
+                <h4>测评日期</h4><h4 id="appraisalDate">2020年x月x日</h4><h4>测评地点</h4><h4 id="appraisalAddress">(123)1234</h4>
+            </div>
+            <div>
+                <div id="exam_name_left">
+                    <h4>测评科目</h4><h4>测评时间</h4><br/><h4 id="subject1">实际操作</h4><h4 id="time1">08:30-09:30</h4><br/><h4 id="subject2">面试环节</h4><h4 id="time2">09:40-10:10</h4>
+                </div>
+                <div id="exam_name_right">
+                    <h4>考场名称</h4><h4 class="exam_name_title_cont">座位号</h4><h4 class="exam_name_left_cont" id="room">考场（xxx）</h4><h4 class="exam_name_right_cont" id="seat">考场（x）</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--主体结束-->
+    <div th:replace="/gvsunExam/globalscript"></div>
+    <script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+    <script th:inline="javascript">
+        const siteId = [[${session.cid}]];
+        const username = [[${session.user.username}]];
+    </script>
+    <script th:src="@{/modules/gvsunExam/common.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/gvsunExam/access/examAccess.js}"></script>
+</body>
+</html>

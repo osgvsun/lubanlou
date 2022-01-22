@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Notice</title>
+</head>
+<style>
+    * {
+        font-size: 16px;
+        line-height: 35px;
+        color: #606266;
+        margin: 0;
+        padding: 0;
+        outline: none;
+        list-style: none;
+        text-decoration: none;
+        font-family: "微软雅黑";
+    }
+    div{
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .main{
+        padding: 20px;
+    }
+    .content{
+        padding-left: 50px;
+    }
+    span{
+        color: red;
+    }
+    a{
+        color:#409effcc;
+    }
+    a:hover {
+        color: blue;
+        text-decoration: none;
+    }
+</style>
+<body>
+<div>
+    <div class="main">
+        <div class="content">
+            <div>您好，来自<span th:text="${cname}"></span>的信息，您有新的学生<span th:text="${studentName}"></span>,请及时登录平台查看,localhost/<span th:text="${url}"></span></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

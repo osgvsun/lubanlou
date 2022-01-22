@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/timetable/iframe">
+<head>
+
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <!-- 样式的引用 -->
+    <link th:href="@{/plugins/bootstrap3/css/bootstrap.css}" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet"
+          th:href="@{/plugins/bootstrap3/css/plugins/bootstrap-table/bootstrap-table.min.css}"/>
+    <!-- jquery的js引用 -->
+    <script th:src="@{/js/jquery-2.1.1.min.js}" type="text/javascript"></script>
+    <!-- 弹出框插件的引用 -->
+    <script th:src="@{/plugins/layer-v2.2/layer/layer.js}" type="text/javascript"></script>
+    <script th:src="@{/plugins/layer-v2.2/layer/extend/layer.ext.js}"
+            type="text/javascript"></script>
+    <link th:href="@{/plugins/bootstrap3/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/select2/select2.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/select2/select2-bootstrap4.css}" rel="stylesheet">
+
+    <!-- select2的js引用 -->
+    <script th:src="@{/plugins/select2/select2.full.js}"></script>
+    <script th:src="@{/plugins/bootstrap3/bootstrap-table/bootstrap-table.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/plugins/bootstrap3/bootstrap-table/bootstrap-table-mobile.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/plugins/bootstrap3/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"
+            type="text/javascript"></script>
+
+    <script th:src="@{/plugins/jquery/jquery.validate.js}" type="text/javascript"></script>
+    <script th:src="@{/plugins/jquery/messages_zh.js}" type="text/javascript"></script>
+    <!-- 页面业务的js引用 -->
+    <script th:src="@{/modules/timetable/js/course/updateEduAdjustCourse.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/js/directoryEngine/directoryEngine-core.js}" type="text/javascript"></script>
+    <style type="text/css">
+        label {width: 10em;float: left;}
+        label.error {float: none;color: red;padding-left: .5em;vertical-align: top;}
+        p {clear: both;}
+        .submit {margin-left: 12em;}
+        .table.table-bordered > tr > td {height: 20px;max-height: 20px;}
+        .layui-table-cell {height: 20px  !important;line-height: 20px;}
+        .layui-table tr {height: 20px !important;}
+        body{
+            font-size: 13px;
+        }
+    </style>
+    <script th:inline="javascript">
+        var username = [[${session.user.username}]];
+        var role = [[${session.selected_role}]];
+        var academyNumber = [[${session.selected_academy}]];
+    </script>
+</head>
+
+<body layout:fragment="timetable">
+<br>
+<div style="height:70%;width:90%;margin:0 auto;">
+    <form id="form_lab" action="" method="post">
+        <input type="hidden" id="zuulServerUrl" th:value="${zuulServerUrl}" />
+        <input type="hidden" id="academyNumber" name="academyNumber" th:value="${academyNumber}">
+        <input type="hidden" id="courseNo" name="courseNo" th:value="${courseNo}">
+        <input type="hidden" id="courseNumber" name="courseNumber" th:value="${courseNumber}">
+        <input type="hidden" id="timetableStyle" name="courseNo" th:value="${timetableStyle}">
+        <input type="hidden" id="groupId" name="groupId" th:value="${groupId}">
+        <input type="hidden" id="courseDetailNo" name="courseDetailNo">
+        <input type="hidden" id="term" name="term" th:value="${term}">
+        <input type="hidden" id="sameNumberId" name="sameNumberId" th:value="${timetableAppointmentSameNumber.id}">
+        <br>
+        <div style="width:95%;">
+            <h3><b>
+                <th:block th:if="${null == timetableAppointmentSameNumber}">开始排课选择</th:block>
+                <th:block th:if="${null != timetableAppointmentSameNumber}">编辑排课选择</th:block>
+            </b></h3>
+            软件筛选<input type="checkbox" name="select_check" value="SOFTWARE" onclick="checkSelected()" >
+            <input type="button" id="submitButton" name="submitButton" value=" 确定 " class="btn btn-primary btn-lg"
+                   style="float:right">
+        </div>
+
+        <!-- schoolCourseDetail的no -->
+        <hr>
+        <table border="0" align="center" style="width:100%;border-collapse:separate; border-spacing:0px 10px;">
+            <tr style="overflow: hidden">
+                <td align=left width="12%"><h3>授课教师<font color="red"> *</font>：</h3></td>
+                <td>
+                    <select id="teacherRelated" name="teacherRelated" multiple="multiple" required>
+                        <th:block th:if="${null == timetableAppointmentSameNumber}">
+                            <option th:value="${schoolCourse.userByTeacher.username}" selected="selected" th:text="${schoolCourse.userByTeacher.cname}+'(学号：'+${schoolCourse.userByTeacher.username}+';学院：'+${schoolCourse.schoolAcademy.academyName}+')'"></option>
+                        </th:block>
+                        <th:block th:if="${null != timetableAppointmentSameNumber}">
+                            <th:block th:each="curr,i:${timetableAppointmentSameNumber.timetableAppointment.timetableTeacherRelateds}">
+                                <option th:value="${curr.user.username}" selected="selected" th:text="${curr.user.cname}+'(学号：'+${curr.user.username}+';学院：'+${curr.user.schoolAcademy.academyName}+')'"></option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                    <label for="teacherRelated"></label>
+                </td>
+                <td align=left width="10%"><h3>辅导：</h3></td>
+                <td>
+                    <select id="tutorRelated" name="tutorRelated" multiple="multiple">
+                        <th:block th:if="${null != timetableAppointmentSameNumber}">
+                            <th:block th:each="curr,i:${timetableAppointmentSameNumber.timetableAppointment.timetableTutorRelateds}">
+                                <option th:value="${curr.user.username}" selected="selected" th:text="${user.cname}+'(学号：'+${curr.user.username}+';学院：'+${curr.user.schoolAcademy.academyName}+')'"></option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                </td>
+            </tr>
+
+            <tr style="overflow: hidden">
+
+                <td align=left width="12%"><h3>星期<font color="red"> *</font>：</h3></td>
+                <td width="39%">
+                    <select id="weekday" name="weekday" required>
+                        <th:block th:if="${null != timetableAppointmentSameNumber}">
+                            <option th:value="${timetableAppointmentSameNumber.timetableAppointment.schoolCourseDetail.courseDetailNo}" selected="selected" th:text="|星期${timetableAppointmentSameNumber.timetableAppointment.schoolCourseDetail.getWeekday()}(${timetableAppointmentSameNumber.timetableAppointment.schoolCourseDetail.getStartClass()}-${timetableAppointmentSameNumber.timetableAppointment.schoolCourseDetail.getEndClass()}节;${timetableAppointmentSameNumber.timetableAppointment.schoolCourseDetail.getStartWeek()}-${timetableAppointmentSameNumber.timetableAppointment.schoolCourseDetail.getEndWeek()}周)|">
+                            </option>
+                        </th:block>
+                    </select>
+                    <label for="weekday"></label>
+                </td>
+                <td align=left width="10%"><h3>选择节次<font color="red"> *</font>：</h3></td>
+                <td width="39%">
+                    <select id="classes" name="classes" multiple="multiple" required>
+                        <th:block th:if="${null == timetableAppointmentSameNumber}">
+                        </th:block>
+                        <th:block th:if="${null != timetableAppointmentSameNumber}">
+                            <th:block th:each="curr:${#numbers.sequence(timetableAppointmentSameNumber.startClass,timetableAppointmentSameNumber.endClass)}">
+                                <option th:value="${curr}" selected="selected" th:text="${curr}"></option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                    <label for="classes"></label>
+                </td>
+            </tr>
+            <tr style="display:none" id="tr_soft">
+                <td align=left width="12%" ><h3>选择软件<font color="red"> *</font>：</h3></td>
+                <td colspan="3">
+                    <select id="soft_id" name="soft_id" multiple="multiple" >
+                        <th:block th:if="${null != timetableAppointmentSameNumber}">
+                            <th:block th:each="curr,i:${timetableAppointmentSameNumber.timetableAppointment.timetableSoftwareRelateds}">
+                                <option th:value="${curr.software.id}" selected="selected" th:text="${curr.software.name}+'(学号：'+${curr.software.code}+')'"></option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                    <label for="soft_id"></label>
+                </td>
+            </tr>
+            <tr>
+                <td align=left width="12%"><h3>实验项目：</h3></td>
+                <td colspan="3">
+                    <select id="items" name="items" multiple="multiple">
+                        <th:block th:if="${null != timetableAppointmentSameNumber}">
+                            <th:block th:each="curr,i:${timetableAppointmentSameNumber.timetableAppointment.timetableItemRelateds}">
+                                <option th:value="${curr.operationItem.id}" selected="selected" th:text="${curr.operationItem.lpName}"></option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                    <label for="items"></label>
+                </td>
+            </tr>
+            <tr>
+                <td align=left width="12%"><h3>实验室<font color="red"> *</font>：</h3></td>
+                <td colspan="3">
+                    <select id="labRoom_id" name="labRoom_id" multiple="multiple" required>
+                        <th:block th:if="${null != timetableAppointmentSameNumber}">
+                            <th:block th:each="curr:${timetableAppointmentSameNumber.timetableAppointment.timetableLabRelateds}">
+                                <option th:value="${curr.labRoom.id}" selected="selected" th:text="${curr.labRoom.labRoomName}"></option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                    <label for="labRoom_id"></label>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td align=left width="12%"><h3>选择周次<font color="red"> *</font>：</h3></td>
+                <td colspan="3">
+                    <select id="weeks" name="weeks" multiple="multiple" required>
+                        <th:block th:if="${null != timetableAppointmentSameNumber}">
+                            <th:block th:each="curr:${#numbers.sequence(timetableAppointmentSameNumber.startWeek,timetableAppointmentSameNumber.endWeek)}">
+                                <option th:value="${curr}" selected="selected" th:text="${curr}"></option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                    <label for="weeks"></label>
+                </td>
+            </tr>
+            <tr>
+                <td align=left></td>
+                <td>
+                </td>
+            </tr>
+        </table>
+        <hr/>
+        <br>
+    </form>
+</div>
+</body>
+</html>
+

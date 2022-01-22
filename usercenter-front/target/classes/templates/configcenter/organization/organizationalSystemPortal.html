@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title></title>
+	<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="Generator" content="GVSUN" />
+	<meta name="Author" content="chenyawen" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+	<!-- layui -->
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/organization/css/expand.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/organization/css/organizationalSystemPortal.css}" media="all">
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+	<script th:src="@{/js/initOAuth2.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<script th:src="@{/js/jquery.textareafullscreen.js}"></script>
+	<script th:src="@{/modules/configcenter/static/js/jquery.flexText.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/textareafullscreen.css}" media="all">
+	<!--筛选栏-->
+	<script th:src="@{/modules/configcenter/static/plugins/filter/filter.js}"></script>
+	<link rel="stylesheet" th:href="@{/modules/configcenter/static/plugins/filter/fliter.css}" media="all" />
+
+	<!-- expand -->
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<!--多选-->
+	<script th:src="@{/modules/configcenter/static/xm-select.js}"></script>
+	<script th:inline="javascript">
+		var uid = [[${uid}]];
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = '';
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var oauth2Host = [[${session.oauth2}]];
+		var resourceContainerHost = [[${session.resourceContainerHost}]];
+		var resourceContainerHostForUpload = [[${session.resourceContainerHostForUpload}]];
+		var task;
+		const configCenterHost = apiGateWayHost+"/configcenter/";
+	</script>
+	<!--资源容器-->
+<!--	<link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/default/easyui.css}">-->
+<!--	<link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/icon.css}">-->
+	<script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.easyui.min.js}"></script>
+	<link rel="stylesheet" th:href="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.css'}" media="all">
+	<script type="text/javascript" th:src="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.js'}"></script>
+	<script th:src="@{/modules/configcenter/static/commonResource.js}"></script>
+	<style>
+		/*body {*/
+		/*	overflow-y: hidden;*/
+		/*}*/
+		th {
+			width: 83px;
+		}
+
+		.detail_item .layui-form-label {
+			width: 93px;
+		}
+
+		.detail_item .layui-input-block {
+			margin-left: 93px;
+		}
+		.content_box {
+			overflow: visible;
+		}
+		.layui-form-label {
+			width: 95px;
+			word-wrap: break-word;
+			word-break: break-all;
+		}
+		.layui-input-block {
+			margin-left: 95px;
+		}
+		.normal_content_box .content-local .block {
+			display: block;
+		}
+		.radio a.selected {
+			background-color: #409eff!important;
+		}
+		.loading{
+			height:100%;width:100%;position:static;background:rgba(255,255,255,0.95);
+		}
+		.loading >p{position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;height:30px;width:120px;}
+		.loading >p i{display: block;float:left;margin:0 5px; width:5px;height:30px;background:#409eff;transform:scaleY(0.3);
+			animation:loading 1s ease infinite alternate;
+		}
+		.loading >p i:nth-child(2){animation-delay:0.1s;}
+		.loading >p i:nth-child(3){animation-delay:0.2s;}
+		.loading >p i:nth-child(4){animation-delay:0.3s;}
+		.loading >p i:nth-child(5){animation-delay:0.4s;}
+		@keyframes loading{
+			0%,40%,100%{
+				transform:scaleY(0.3)
+			}
+			20%{
+				transform:scaleY(1)
+			}
+		}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div class="normal_content_box">
+			<form class="layui-form" action="" lay-filter="organizationalsystemportalbox" id="organizationalsystemportalbox">
+				<!--主体开始-->
+				<div class="layui-row layui-col-space20">
+					<!--搜索开始-->
+<!--					<div class="layui-col-md12 tc page_search_line">-->
+<!--						<input class="layui-input page_search_text" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容">-->
+<!--						<input type="button" class="layui-btn" data-type="reload" value="搜索">-->
+<!--						<input type="reset" class="layui-btn layui-btn-primary" data-type="reload" value="取消">-->
+<!--					</div>-->
+					<!--搜索结束-->
+					<div class="layui-col-md12">
+<!--						<span class="hint_tag">-->
+<!--							所有分类-->
+<!--							<label>一级栏目</label>-->
+<!--							<label>二级栏目</label>-->
+<!--						</span>-->
+						<div class="tagbox_toggle_btn">
+							<span>收起筛选<i class="layui-icon layui-icon-up"></i></span>
+							<span class="layui-hide">显示筛选<i class="layui-icon layui-icon-down"></i></span>
+						</div>
+						<blockquote class="layui-elem-quote layui-quote-nm tag_box">
+							<div id="level_1"></div>
+							<div id="level_2"></div>
+							<div id="level_3"></div>
+						</blockquote>
+					</div>
+					<!--正文开始-->
+					<div class="layui-col-md12">
+						<div class="layui-card">
+							<div class="layui-card-header">架构详情</div>
+							<div class="layui-card-body">
+								<div class="layui-tab layui-tab-brief" lay-filter="organizational_tab">
+									<ul class="layui-tab-title organizational_tab">
+										<li class="layui-this">
+											<a>一级建制</a>
+										</li>
+										<li>
+											<a>二级建制</a>
+										</li>
+										<li>
+											<a>三级建制</a>
+										</li>
+										<li>
+											<a>四级建制</a>
+										</li>
+									</ul>
+									<div class="layui-tab-content content-detail">
+										<div class="layui-tab-item layui-show content-local">
+											<div class="layui-row layui-col-space10">
+												<div class="layui-col-md12 process_content">
+													<blockquote class="layui-elem-quote layui-quote-nm line_tag_box">
+														<div class="field_btn_box subentry_tab">
+															<a class="field_btn_select">基础信息</a>
+															<a>实验室规章制度</a>
+															<a>分项名称3</a>
+															<a>分项名称4</a>
+															<a>分项名称5</a>
+														</div>
+													</blockquote>
+													<div class="mt20 process-form">
+														<div>
+															<div class="none block">
+																<div class="layui-row layui-col-space20">
+																	<div class="" >
+																		<div class="layui-col-md12" >
+																			<!--																			<div class="layui-card">-->
+																			<!--																				<div class="layui-card-header">基础信息</div>-->
+																			<!--																				<div class="layui-card-body">-->
+																			<div class="detail_item none" id="detail">
+																				<div class="layui-row">
+																					<div class="layui-col-lg12">
+																						<label class="layui-form-label">楼宇名称(编号)</label>
+																						<div class="layui-input-block">
+																							<input type="button" class="layui-input detail_input" name="buildingname" autocomplete="off" disabled="disabled" readonly="readonly" />
+																						</div>
+																					</div>
+																				</div>
+																				<div class="layui-row">
+																					<div class="layui-col-lg6">
+																						<label class="layui-form-label">所属校区</label>
+																						<div class="layui-input-block">
+																							<input type="button" class="layui-input detail_input" name="campus" autocomplete="off" disabled="disabled" readonly="readonly" />
+																						</div>
+																					</div>
+																					<div class="layui-col-lg6">
+																						<label class="layui-form-label">楼宇日程信息</label>
+																						<div class="layui-input-block">
+																							<input type="button" class="layui-input detail_input" name="schedule" autocomplete="off" disabled="disabled" readonly="readonly" />
+																						</div>
+																					</div>
+																				</div>
+																				<div class="layui-row">
+																					<div class="layui-col-lg12">
+																						<label class="layui-form-label">楼宇实验室数量</label>
+																						<div class="layui-input-block">
+																							<input type="button" class="layui-input detail_input" name="labroomnum" autocomplete="off" disabled="disabled" readonly="readonly" />
+																						</div>
+																					</div>
+																				</div>
+																				<div class="layui-row">
+																					<div class="layui-col-lg12">
+																						<label class="layui-form-label">楼宇设备数量</label>
+																						<div class="layui-input-block">
+																							<input type="button" class="layui-input detail_input" name="equipnum" autocomplete="off" disabled="disabled" readonly="readonly" />
+																						</div>
+																					</div>
+																				</div>
+																				<div class="layui-row">
+																					<div class="layui-col-lg6">
+																						<label class="layui-form-label">楼宇资源</label>
+																						<div class="layui-input-block">
+																							<input type="button" class="layui-input detail_input" name="resource" autocomplete="off" disabled="disabled" readonly="readonly" />
+																						</div>
+																					</div>
+																					<div class="layui-col-lg6">
+																						<label class="layui-form-label">所属学院</label>
+																						<div class="layui-input-block">
+																							<input type="button" class="layui-input detail_input" name="college" autocomplete="off" disabled="disabled" readonly="readonly" />
+																						</div>
+																					</div>
+																				</div>
+																				<div class="layui-row">
+																					<div class="layui-col-lg12">
+																						<label class="layui-form-label">物联硬件数量</label>
+																						<div class="layui-input-block">
+																							<input type="button" class="layui-input detail_input" name="hardwarenum" autocomplete="off" disabled="disabled" readonly="readonly" />
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<!--																				</div>-->
+																			<!--																			</div>-->
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="none">
+																<div class="layui-row layui-col-space20">
+																	<div class="layui-col-lg12">
+																		<label class="layui-form-label">制度建设</label>
+																		<div class="layui-input-block">
+																			<textarea id="systemConstruction" style="display: none;" placeholder="请输入"></textarea>
+																		</div>
+																	</div>
+																	<div class="layui-col-lg12">
+																		<label class="layui-form-label">安全建设</label>
+																		<div class="layui-input-block">
+																			<textarea id="safetyConstruction" style="display: none;" placeholder="请输入"></textarea>
+																		</div>
+																	</div>
+																	<div class="layui-col-lg12">
+																		<label class="layui-form-label">其他建设</label>
+																		<div class="layui-input-block">
+																			<textarea id="otherConstruction" style="display: none;" placeholder="请输入"></textarea>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="none">3</div>
+															<div class="none">4</div>
+															<div class="none">5</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--正文结束-->
+				</div>
+				<!--主体结束-->
+			</form>
+		</div>
+		<div class="loading">
+			<p>
+				<i></i>
+				<i></i>
+				<i></i>
+				<i></i>
+				<i></i>
+			</p>
+		</div>
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/static/js/mainindex.js}"></script>
+<!--		<script th:src="@{/modules/configcenter/organization/eleTree.js}"></script>-->
+		<script th:src="@{/modules/configcenter/static/js/myProject.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/configcenter/process/templateSP.js}"></script>
+		<script th:src="@{/modules/configcenter/organization/organizationalSystemPortal.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../layuiadmin/' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'organizationalsystemportal']);-->
+<!--		</script>-->
+	</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="数据报表中心"></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/css/font-awesome.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/css/lib.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/css/index.css}"/>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentUsername = [[${session.user.username}]];
+    </script>
+    <style type="text/css">
+        .changeAuth {
+            color: #fff;
+        }
+        .menu_list {
+            min-width: 180px;
+        }
+    </style>
+</head>
+<body class="body_limit">
+<div class="top rel">
+    <div>
+        <div class="logo_name" th:text="'数据报表中心---'+${currDbSource.schoolCname}"></div>
+    </div>
+    <div class="r top-menu">
+        <div class="l cw f12 margin-right-10px">
+            <label for="yearCode">
+                切换年份：
+                <select id="yearCode" name="yearCode" onchange="switchCurrentYear()">
+                </select>
+            </label>
+        </div>
+        <div class="l cw f12 margin-right-10px">
+            <a class="wh" th:href="@{/datashare/index}">共享数据交换中心</a>
+        </div>
+        <a href="javascript:void(0)" class="breadcrumb_select changeAuth" data-type="changeAuth">切换权限</a>
+        <div class="l cw f12 margin-right-10px" id="datashare_cname"></div>
+        <div class="l cw f12 margin-right-10px">
+            <a th:href="@{/logout}" class="nav-top">
+                <i class="fa fa-power-off" th:title="点击登出"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="nav header">
+    <div class="menu_box" id="menu_box_top">
+        <ul class="dhu-menu function-app" style="display:none;">
+            <li class="menu_list" id="sj1">
+                <a class="menu_tit iframe_href" title="基表一：教学科研仪器设备表(SJ1)" target="contentIframe" th:href="@{/datashare/sj1}">
+                    <i class="fa fa-cubes tit_icon"></i>基表一：教学科研仪器设备表(SJ1)
+                </a>
+            </li>
+
+            <li class="menu_list" id="sj2">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sj2}">
+                    <i class="fa fa-signal tit_icon"></i>基表二：教学科研仪器设备增减变动情况表(SJ2)
+                </a>
+            </li>
+
+            <li class="menu_list" id="sj3">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sj3}">
+                    <i class="fa fa-diamond tit_icon"></i>基表三：贵重仪器设备表(SJ3)
+                </a>
+            </li>
+
+            <li class="menu_list" id="sj4">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sj4}">
+                    <i class="fa fa-hourglass-start tit_icon"></i>基表四：教学实验项目表(SJ4)
+                </a>
+            </li>
+
+            <li class="menu_list" id="sj5">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sj5}">
+                    <i class="fa fa-graduation-cap tit_icon"></i>基表五：专任实验室人员表(SJ5)
+                </a>
+            </li>
+
+            <li class="menu_list" id="sj6">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sj6}">
+                    <i class="fa fa-thermometer-full tit_icon"></i>基表六：实验室基本情况表(SJ6)
+                </a>
+            </li>
+
+            <li class="menu_list" id="sj7">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sj7}">
+                    <i class="fa fa-credit-card tit_icon"></i>基表七：实验室经费情况表(SJ7)
+                </a>
+            </li>
+            <li class="menu_list" id="sj8">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sj8}">
+                    <i class="fa fa-credit-card tit_icon"></i>本科实验场所表（1-7-1）
+                </a>
+            </li>
+            <li class="menu_list" id="sj9">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sj9}">
+                    <i class="fa fa-credit-card tit_icon"></i>本科实验设备情况表（2-7）
+                </a>
+            </li>
+            <li class="menu_list" id="reportExemplarCenter">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportExemplarCenter}">
+                    <i class="fa fa-credit-card tit_icon"></i>实验教学示范中心表（2-8-1）
+                </a>
+            </li>
+            <li class="menu_list" id="reportVirtualExperiment">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportVirtualExperiment}">
+                    <i class="fa fa-credit-card tit_icon"></i>虚拟仿真实验教学项目表（2-8-2）
+                </a>
+            </li>
+            <li class="menu_list" id="reportProfessionalExperiment">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportProfessionalExperiment}">
+                    <i class="fa fa-credit-card tit_icon"></i>专业实验课情况表（5-1-4）
+                </a>
+            </li>
+            <li class="menu_list" id="reportProfessionalTeachingLaboratory">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportProfessionalTeachingLaboratory}">
+                    <i class="fa fa-credit-card tit_icon"></i>工科类专业本科教学实验室情况况表（GK-4）
+                </a>
+            </li>
+            <li class="menu_list" id="reportLabRoomUsage">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportLabRoomUsage}">
+                    <i class="fa fa-credit-card tit_icon"></i>实验室统计报表
+                </a>
+            </li>
+            <li class="menu_list" id="reportExperiment">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportExperiment}">
+                    <i class="fa fa-credit-card tit_icon"></i>实验项目统计报表
+                </a>
+            </li>
+            <li class="menu_list" id="sandauReport">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/sandauReport}">
+                    <i class="fa fa-credit-card tit_icon"></i>学期安排表
+                </a>
+            </li>
+            <li class="menu_list" id="reportTeacherEquipment">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportTeacherEquipment}">
+                    <i class="fa fa-credit-card tit_icon"></i>导师配置表
+                </a>
+            </li>
+            <li class="menu_list" id="reportGitQuestion">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportGitQuestionList}">
+                    <i class="fa fa-credit-card tit_icon"></i>Git问题追踪清单报表
+                </a>
+            </li>
+            <li class="menu_list" id="reportDutyManage">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportDutyManage}">
+                    <i class="fa fa-credit-card tit_icon"></i>值班管理报表
+                </a>
+            </li>
+            <li class="menu_list" id="reportLake">
+                <a class="menu_tit iframe_href" target="contentIframe" th:href="@{/datashare/reportLake}">
+                    <i class="fa fa-credit-card tit_icon"></i>通用报表
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="content content_case_box">
+    <div class="content_case">
+        <iframe class="w100p iStyle_Feelings_Iframe" id="contentIframe" name="contentIframe"></iframe>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/report/dataReportCenter.js}"></script>
+<script th:inline="javascript">
+
+
+    function switchCurrentYear() {
+        $.ajax({
+            url: datashareHost + "switchCurrentYear",
+            type: "post",
+            data: {
+                currYear: $('#yearCode option:selected').val()
+            },
+            success: function () {
+                document.getElementById('contentIframe').contentWindow.location.reload();
+                localStorage.currYear = $('#yearCode option:selected').val();
+            }
+        });
+    }
+
+    $.ajax({
+        url: datashareHost + "report/sessionInfo",
+        success: function (data) {
+            let optionHtml = "";
+            let {currYear, yearList,currTerm,currAcademy} = data;
+            localStorage.setItem("currYear", currYear);
+            localStorage.setItem("currTerm", currTerm);
+            localStorage.setItem("currAcademy", currAcademy);
+            for (let i of yearList) {
+                optionHtml += `<option value="${i}">${i}</option>`
+            }
+            $("#yearCode").append(optionHtml);
+        }
+    });
+
+
+</script>
+</html>

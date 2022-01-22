@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>echart</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/echarts.min.js}"></script>
+    <style>
+        .part_div{
+            border-bottom: 2px solid #ececec;
+            margin: 20px 0
+        }
+        .part_div:hover{
+            background-color: #ececec7d;
+        }
+        .part_div:hover input{
+            background-color: #ececec7d;
+        }
+        .layui-static-div{
+            width: 600px;
+            height:400px;
+           margin: 50px;
+        }
+        .echartType{
+            display: inline-block;
+            width: 45%
+        }
+        .layui-card-header{
+
+        }
+    </style>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+</head>
+<body>
+<div class="part_div">
+    <div class="layui-card-header" style="margin: 20px">人员基本情况</div>
+    <form class="layui-form"  lay-filter="pieStaticChart">
+        <div class="layui-col-lg4">
+            <label class="layui-form-label">统计类别</label>
+            <div class="layui-input-block">
+                <select id="static_pie" class="layui-form-select" name="pieChartType" lay-filter="pieStaticChart">
+                    <option value="department">部门分布</option>
+                    <option value="post">岗位类别</option>
+                    <option value="professional">职称分布</option>
+                    <option value="articalJcr">论文分区分布</option>
+                    <option value="HighestProportion">最高学位分布</option>
+                    <option value="highestDegree">海外获得学位分布</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <!--饼图-->
+    <div id="pie" class="layui-static-div" ></div>
+</div>
+<div class="part_div">
+    <div class="layui-card-header" style="margin: 20px">年龄分布情况</div>
+<!--    根据需求暂时隐掉，老师不需要修改年龄间隔-->
+<!--    <form class="layui-form">
+        <div class="layui-col-lg4">
+            <label class="layui-form-label">年龄间隔</label>
+            <div class="layui-input-block">
+                <input class="layui-input" type="number" id="ageInterval"/>
+            </div>
+        </div>
+    </form>-->
+    <div id="agePie" class="layui-static-div"></div>
+</div>
+<!--//堆积柱状图-->
+<div class="part_div">
+    <div class="layui-card-header" style="margin: 20px">项目专利情况统计</div>
+    <div class="echartType">
+        <form class="layui-form"  lay-filter="MBarStaticChart">
+            <div class="layui-col-lg4" style="width: 60%">
+                <label class="layui-form-label">统计类别</label>
+                <div class="layui-input-block">
+                    <select id="static_bar" class="layui-form-select" name="barChartType" lay-filter="MBarStaticChart">
+                        <option value="eduAward">教学获奖情况</option>
+                        <option value="scienceAward">科研获奖情况</option>
+                        <option value="eduProject">教学项目情况</option>
+                        <option value="scienceProject">科研项目情况</option>
+                        <option value="artical">论文情况</option>
+                        <option value="projectMoney">项目金额情况</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div id="Mbar" class="layui-static-div"></div>
+    </div>
+
+    <!--条形图-->
+    <div class="echartType">
+        <div id="bar" class="layui-static-div"></div>
+    </div>
+</div>
+<!--学缘结构堆积条形图-->
+<div class="part_div">
+    <div class="layui-card-header" style="margin: 20px">学缘结构情况统计</div>
+    <div>
+        <div id="MLinner" class="layui-static-div"></div>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+    layui.config({
+        base: '../' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'manager_echart']);
+</script>

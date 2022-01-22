@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/timetable/iframe">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <script th:src="@{/js/directoryEngine/directoryEngine-core.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/modules/timetable/static_limsproduct/js/layerSilica.js}"></script>
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/expand.css}" media="all">
+    <style type="text/css">
+        .save {
+            float: none !important;
+        }
+    </style>
+    <script th:inline="javascript">
+        // 定义全局变量-排课方式入口配置
+        var username = [[${session.user.username}]];
+        var role = [[${session.selected_role}]];
+        var academyNumber = [[${session.selected_academy}]];
+    </script>
+</head>
+
+<body layout:fragment="timetable">
+<div class="main_content">
+    <div class="layui-row layui-col-space20">
+        <input type="hidden" id="zuulServerUrl" th:value="${zuulServerUrl}"/>
+
+        <!--搜索开始-->
+        <div class="layui-col-md12 tabsearch search_line layui-form">
+            <!--<form class="layui-form search_line" action="" lay-filter="addTeacher" id="addTeacher">-->
+            <div class="layui-inline">
+                <label class="layui-form-label">综合查询:</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="search" id="search" autocomplete="on" placeholder="请输入工号/姓名"/>
+                </div>
+            </div>
+            <button class="layui-btn reload" data-type="reload">搜索</button>
+            <button class="layui-btn save" data-type="save">确定</button>
+            <!--</form>-->
+        </div>
+        <!--搜索结束-->
+        <div class="layui-col-md12 student_table">
+            <!--表格开始-->
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+            <!--表格结束-->
+            <!--头部工具栏-->
+            <!--<script type="text/html" id="toolbarDemo">-->
+            <!--<div class="layui-btn-container" id="groupsRadio">-->
+            <!--<input type="radio" name="sex" value="男" title="男" checked="">-->
+            <!--<input type="radio" name="sex" value="女" title="女">-->
+            <!--<input type="radio" name="sex" value="禁" title="禁用" disabled="">-->
+            <!--</div>-->
+            <!--</script>-->
+
+        </div>
+    </div>
+</div>
+<script th:src="@{/modules/timetable/layui_admin/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/timetable/layui_admin/layui/layui.js}"></script>
+<script th:src="@{/modules/timetable/layui_admin/static/js/global.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.cookie.js}"></script>
+<script>
+    layui.config({
+            base: '../../../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'timetable/layui_admin/modules/addTeacherAdjust']);
+</script>
+</body>
+
+</html>

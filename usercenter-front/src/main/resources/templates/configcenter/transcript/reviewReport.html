@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>评审列表</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          name="viewport">
+    <link media="all" rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/newExpand.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/jquery.cookie.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var iotHost = [[${session.iotHost}]];
+        const evaluationHost =apiGateWayHost+"/configcenter/";
+        // var configType = [[${configType}]];
+        const proId = window.decodeURIComponent(window.atob(getUrlParam("proId")));
+        const timetableId = window.decodeURIComponent(window.atob(getUrlParam("timetableId")));
+        const configType = window.decodeURIComponent(window.atob(getUrlParam("configType")));
+        const businessTime = window.decodeURIComponent(window.atob(getUrlParam("businessTime")));
+        const name = window.decodeURIComponent(window.atob(getUrlParam("name")));
+        var serverHostArray = document.location.href.split('/');
+        var serverHost = serverHostArray[0] + "//" + serverHostArray[2] + "/" + serverHostArray[3] + "/";
+        function logout() {
+            localStorage.clear();
+            $.cookie('currauth', '');
+            $.cookie('currentauthName', '');
+            location.href = serverHost + 'logout';
+        }
+        // 获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+</head>
+<style>
+    .layui-table{
+        text-align:center;
+    }
+    .layui-add{
+        height: 30px;
+        width: 100%;
+        margin: 10px;
+    }
+    .form_input{
+        margin: 30px;
+    }
+    #timetable_tool {
+        background-color: rgb(251, 251, 251);
+        width: 90%;
+        display: inline-block;
+    }
+    .layui-card {
+        border: none;
+        padding: 40px!important;
+    }
+    .layui-card .layui-tab-brief .layui-tab-title {
+        height: 42px;
+        border-bottom: 3px solid #e2e7ec;
+    }
+    /*.layui-btn + .layui-btn {*/
+    /*    margin: 0;*/
+    /*}*/
+    .tabsearch {
+        margin-top: 10px;
+    }
+    .reload-btn,.export_file {
+        margin-bottom: 5px;
+    }
+</style>
+<body>
+<div class="layui-card">
+<!--    <div class="layui-card-header">-->
+<!--        评审报表-->
+<!--&lt;!&ndash;        <a class="layui-btn table_edit" lay-demo="toScore">去打分</a>&ndash;&gt;-->
+<!--    </div>-->
+    <blockquote class="layui-elem-quote layui-quote-nm tag_box">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend class="multi_legend">
+                <a class="legend_select" href="javascript:void(0)">评审报表</a>
+            </legend>
+            <div class="breadcrumb_top breadcrumb_division">
+<!--                <a class="breadcrumb_select changeAuth layui-hide" data-type="changeAuth" href="javascript:void(0)">切换权限</a>-->
+<!--                <a class="breadcrumb_select" href="javascript:void(0)" onclick="logout()">退出登录</a>-->
+            </div>
+        </fieldset>
+    </blockquote>
+    <div>
+        <!--<div class="layui-add">-->
+        <!--<button class="layui-btn" data-type="addTimetable">新建</button>-->
+        <!--</div>-->
+        <!--搜索盒子开始-->
+        <div>
+            <form class="layui-form" id="myForm">
+                <div class="layui-form-item tabsearch display">
+                    <div class="layui-inline">
+                        <input autocomplete="off" class="layui-input" id="search_student" placeholder="被打分者" />
+                    </div>
+<!--                    <div class="layui-inline">-->
+<!--                        <input autocomplete="off" class="layui-input" id="search_teacher" placeholder="打分者" />-->
+<!--                    </div>-->
+                    <button class="layui-btn reload-btn" data-type="reload" type="button">
+                        <i class="layui-icon layui-icon-search"></i>搜索
+                    </button>
+                    <button class="layui-btn export_file" onclick="exportFile()" type="button">
+                        <i class="layui-icon layui-icon-export"></i>导出
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        <!--搜索盒子结束-->
+        <table class="add_progress layui-table" id="reviewReport" lay-filter="reviewReport"></table>
+    </div>
+</div>
+</body>
+<script th:src="@{/modules/configcenter/transcript/reviewReport.js}"></script>
+<!--<script>-->
+<!--    layui.config({-->
+<!--//        version: true, //一般用于更新模块缓存，默认不开启。设为 true 即让浏览器不缓存。也可以设为一个固定的值，如：201610-->
+<!--        base:'../'-->
+<!--    }).extend({-->
+<!--        index:'lib/index'-->
+<!--    }).use(['index','configcenter/transcript/reviewReport'])-->
+<!--</script>-->
+
+</html>

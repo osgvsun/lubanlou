@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+    <style>
+        .layadmin-dataview {
+            height: 314px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="main_content_box">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="appointmentoverviewbox" id="appointmentoverviewbox">
+            <!--预约进度开始-->
+            <div class="project_head layui-card">
+                <div class="layui-row layui-col-space20 ">
+                    <div class="layui-col-md3">
+                        <div class="layui-card blue_box">
+                            <div class="layui-card-body layuiadmin-card-list">
+                                <i class="layui-icon layui-icon-template-1 pjhead_icon"></i>
+                                <p class="layuiadmin-big-font">6560</p>
+                                <p>
+                                    &nbsp;
+                                    <span class="layuiadmin-span-color">今日预约：23</span>
+                                </p>
+                            </div>
+                            <div class="layui-card-header">
+                                预约记录
+                                <span class="layui-icon layui-icon-next fr"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-card green_box">
+                            <div class="layui-card-body layuiadmin-card-list">
+                                <i class="layui-icon layui-icon-chart pjhead_icon"></i>
+                                <p class="layuiadmin-big-font">5700</p>
+                                <p>
+                                    &nbsp;
+                                    <!--<span class="layuiadmin-span-color">共浏览88次</span>-->
+                                </p>
+                            </div>
+                            <div class="layui-card-header">
+                                审核通过
+                                <span class="layui-icon layui-icon-next fr"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-card orange_box">
+                            <div class="layui-card-body layuiadmin-card-list">
+                                <i class="layui-icon layui-icon-more pjhead_icon"></i>
+                                <p class="layuiadmin-big-font">846</p>
+                                <p>
+                                    &nbsp;
+                                    <!--<span class="layuiadmin-span-color">共浏览88次</span>-->
+                                </p>
+                            </div>
+                            <div class="layui-card-header">
+                                待审核
+                                <span class="layui-icon layui-icon-next fr"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-card red_box">
+                            <div class="layui-card-body layuiadmin-card-list">
+                                <i class="layui-icon layui-icon-tips pjhead_icon"></i>
+                                <p class="layuiadmin-big-font">14</p>
+                                <p>
+                                    &nbsp;
+                                    <!--<span class="layuiadmin-span-color">共浏览88次</span>-->
+                                </p>
+                            </div>
+                            <div class="layui-card-header">
+                                审核拒绝
+                                <span class="layui-icon layui-icon-next fr"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--预约进度结束-->
+            <!--实验室使用排行开始-->
+            <blockquote id="basic_bar_box" class="layui-elem-quote layui-quote-nm tag_box">
+                <fieldset class="layui-elem-field layui-field-title chartfield-title">
+                    <legend class="multi_legend small_multi_legend">
+                        <a class="legend_select">实验室使用排行</a>
+                        <a>实验室利用率</a>
+                    </legend>
+                    <div class="breadcrumb_top breadcrumb_division">
+                        <div class="layui-inline header_square">
+                            <input class="layui-input header_daterange_input" name="labdate" id="labdate"
+                                   autocomplete="on" placeholder="请选择时间段">
+                        </div>
+                        <div class="random_btn header_square">
+                            <div class="random_btn_select">今日</div>
+                            <div>本周</div>
+                            <div>本月</div>
+                            <div>全年</div>
+                        </div>
+                    </div>
+                    <div class="layui-row layui-col-space10 mt30">
+                        <div class="layui-col-md8">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="basic_bar">
+                                <div carousel-item id="basic_bar">
+                                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <span class="box_sub_title">开放预约时间排名</span>
+                            <table class="layui-hide" id="openappointmentranking"
+                                   lay-filter="openappointmentranking"></table>
+                        </div>
+                    </div>
+                </fieldset>
+            </blockquote>
+            <!--实验室使用排行结束-->
+            <!--人员使用排行开始-->
+            <blockquote id="basic_strip_box" class="layui-elem-quote layui-quote-nm tag_box">
+                <fieldset class="layui-elem-field layui-field-title chartfield-title">
+                    <legend class="multi_legend small_multi_legend">
+                        <a class="legend_select">人员使用排行</a>
+                    </legend>
+                    <div class="breadcrumb_top breadcrumb_division">
+                        <div class="layui-inline header_square">
+                            <input class="layui-input header_daterange_input" name="userdate" id="userdate"
+                                   autocomplete="on" placeholder="请选择时间段">
+                        </div>
+                        <div class="random_btn header_square">
+                            <div class="random_btn_select">今日</div>
+                            <div>本周</div>
+                            <div>本月</div>
+                            <div>全年</div>
+                        </div>
+                    </div>
+                    <div class="layui-row layui-col-space10 mt30">
+                        <div class="layui-col-md8">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="basic_strip">
+                                <div carousel-item id="basic_strip">
+                                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <span class="box_sub_title">人员使用排名</span>
+                            <table class="layui-hide" id="useruseranking" lay-filter="useruseranking"></table>
+                        </div>
+                    </div>
+                </fieldset>
+            </blockquote>
+            <!--人员使用排行结束-->
+            <!--实验室整体开放情况开始-->
+            <blockquote id="basic_line_box" class="layui-elem-quote layui-quote-nm tag_box">
+                <fieldset class="layui-elem-field layui-field-title chartfield-title">
+                    <legend class="multi_legend small_multi_legend">
+                        <a class="legend_select">实验室整体开放情况</a>
+                    </legend>
+                    <div class="breadcrumb_top breadcrumb_division">
+                        <div class="layui-inline header_square">
+                            <input class="layui-input header_daterange_input" name="labopendate" id="labopendate"
+                                   autocomplete="on" placeholder="请选择时间段">
+                        </div>
+                    </div>
+                    <div class="layui-row layui-col-space10 mt30">
+                        <div class="layui-col-md12">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="basic_line">
+                                <div carousel-item id="basic_line">
+                                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </blockquote>
+            <!--实验室整体开放情况结束-->
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <a href="#basic_bar_box">
+        <font class="small_font">实验室</font><br/>排行</a>
+    <a href="#basic_strip_box">人员<br/>排行</a>
+    <a href="#basic_line_box">
+        <font class="small_font">实验室</font><br/>开放</a>
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'openReservation/appointmentOverview']);
+</script>
+</body>
+
+</html>​​​

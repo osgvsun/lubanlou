@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>基表五：专任实验室人员表(SJ5)</title>
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/css/index.css}"/>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName = localStorage['roleCname'];
+    </script>
+</head>
+<body>
+<div>
+    <div class="layui-progress" lay-filter="sj5Bar">
+        <div class="layui-progress-bar layui-bg-blue"></div>
+    </div>
+    <div class="page-content">
+        <div class="content_t">
+            <div class="user-order mt15 mb5 f14 lh25">
+                基表五：专任实验室人员表(SJ5)
+                <div class="r">
+                    <i class="fa fa-bank"></i>
+                    <span>专任实验室人员数据报表（SJ5）</span>
+                </div>
+            </div>
+            <div class="mt20">
+                <div class="toolbar_top cf f14 w100p mb20">
+                    <span class="equip_btn_box">
+                        <span style="color: #333;line-height: 37px;float:left;margin-left: 10px">请输入关键词查询：</span>
+                        <label for="search">
+                            <input class="normal_input" id="search" name="search" placeholder="多字段查询"/>
+                        </label>
+                        <button class="layui-btn" type="button" onclick="tableRender()">查询</button>
+                        <button class="layui-btn" type="button" onclick="cancelSearch()">取消</button>
+                        <button class="layui-btn" style="background: #e1da0d;" type="button" onclick="modifyData()">确定修改</button>
+                        <button class="layui-btn" style="background: #e50606;" type="button" onclick="delCheckData()">删除选中数据</button>
+                        <button class="layui-btn" type="button" onclick="openSj5ColumnLayer()">生成报表</button>
+                        <button class="layui-btn" type="button" onclick="reportExportTxt()">导出报表(txt)</button>
+                        <button class="layui-btn" type="button" onclick="reportExportExcel()">导出报表(excel)</button>
+                    </span>
+                </div>
+                <div class="toolbar_top cf f14 w100p mb20">
+                    <table class="layui-table" id="lay_table_sj5" lay-filter="lay_table_sj5"></table>
+                </div>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <div class="equip_btn_box">
+                        <a class="layui-btn layui-btn-radius layui-btn-normal layui-icon layui-icon-upload"
+                           id="importSJ5">数据导入
+                        </a>
+                        <a class="layui-btn layui-btn-radius layui-btn-normal layui-icon layui-icon-download-circle"
+                           th:href="@{/modules/datashare/static/report/SJ5.xlsx}">模板下载
+                        </a>
+                        <a class="layui-btn layui-btn-radius layui-btn-normal layui-icon layui-icon-download-circle"
+                           th:href="@{/modules/datashare/static/report/sm5.doc}">报表说明下载
+                        </a>
+                    </div>
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend><b>共享中心数据</b></legend>
+                    </fieldset>
+                    <ul class="layui-timeline dataShareCountList">
+                    </ul>
+                </td>
+                <td class="sj5IsShowLims" style="display:none;">
+                    <div class="equip_btn_box">
+                        <a class="layui-btn layui-btn-radius layui-btn-normal layui-icon layui-icon-release"
+                           onclick="viewLimsDataForSJ5()">更新实验室数据</a>
+                    </div>
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend><b>实验室数据</b></legend>
+                    </fieldset>
+                    <ul class="layui-timeline limsCountList">
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/layui/layui.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/report/sj5.js}"></script>
+</body>
+</html>

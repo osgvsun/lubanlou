@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <title>退出</title>
+</head>
+<body>
+<script th:inline="javascript">
+    var logoutOAuth2Uri = [[${logoutOAuth2Uri}]];
+    var clientId = [[${clientId}]];
+    var clientSecret = [[${clientSecret}]];
+
+    $(function () {
+        document.location.href = logoutOAuth2Uri + "?clientId=" + clientId + "&clientSecret=" + clientSecret;
+    });
+</script>
+</body>
+</html>

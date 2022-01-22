@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>学期数据管理</title>
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/css/index.css}"/>
+    <style>
+        .layui-table-tool-self {
+            display: none;
+        }
+        .layui-form-label.required:after {
+            content: ' *';
+            color: red;
+            font-size: 15px;
+        }
+        .layui-form-item.right {
+            float: right;
+        }
+    </style>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName= localStorage['roleCname'];
+        var currentUsername = [[${session.user.username}]];
+        var lakeNumber = [[${lakeNumber}]];
+    </script>
+</head>
+<body>
+<div>
+    <form class="layui-form" action="" lay-filter="newreportinfo" id="newreportinfo">
+        <div class="layui-form-item">
+            <label class="layui-form-label required">报表编号</label>
+            <div class="layui-input-block">
+                <input type="text" id="reportNumber" name="reportNumber" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">报表名称</label>
+            <div class="layui-input-block">
+                <input type="text" id="reportName" name="reportName" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">报表表头</label>
+            <div class="layui-input-block">
+                <input type="text" id="title" name="title" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">报表字段</label>
+            <div class="layui-input-block">
+                <input type="text" id="field" name="field" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item right">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-filter="newinfobtn" id="newinfobtn" lay-submit >立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/report/newReportInfo.js}"></script>
+</body>
+</html>

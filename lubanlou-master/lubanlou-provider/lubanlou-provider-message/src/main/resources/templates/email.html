@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Notice</title>
+</head>
+<style>
+    * {
+        font-size: 16px;
+        line-height: 35px;
+        color: #606266;
+        margin: 0;
+        padding: 0;
+        outline: none;
+        list-style: none;
+        text-decoration: none;
+        font-family: "微软雅黑";
+    }
+    div{
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .main{
+        padding: 20px;
+    }
+    .content{
+        padding-left: 50px;
+    }
+    span{
+        color: red;
+    }
+    a{
+        color:#409effcc;
+    }
+    a:hover {
+        color: blue;
+        text-decoration: none;
+    }
+</style>
+<body>
+<div>
+    <div class="main">
+        <div><span style="color: #0d8ddb" th:text="${receiverName}"></span>老师:</div>
+        <div class="content">
+            <div>您好！欢迎使用<span th:text="${projectDetailName}"></span>大型仪器预约系统。</div>
+            <div><span th:text="${createCname}"></span>同学/老师预约的“<span th:text="${labRoom}"></span>”的“<span th:text="${deviceName}+'('+${deviceNumber}+')'">设备名称(编号)</span>”</div>
+            <div>使用时间为：<span th:text="${weekDay}"></span> <span th:text="${beginTime}"></span> 到 <span th:text="${endTime}"></span>：请审核！</div>
+            <div>预计金额: <span th:text="${priceExpect}"></span>元   所属导师：<span th:text="${teacher}"></span></div>
+            <div>预约内容为: <span th:text="${content}"></span>
+            <div th:if="${projectName} ne 'dhuinstruments'"><a th:href="${messageHtml}">点击该链接可进行审核（JAcount账号密码登陆即可）</a></div>
+            <div th:if="${projectName} eq 'dhuinstruments'">
+                <a th:href="${messageHtml}+'&currAuditLevel=同意&auditChecked=pass&remarks=默认&receiverUsername='+${receiverUsername}" >同意</a>
+                <a th:href="${messageHtml}+'&currAuditLevel=拒绝&auditChecked=fail&remarks=默认&receiverUsername='+${receiverUsername}" >拒绝</a>
+            </div>
+            <div>如有疑问请及时联系我们（<span th:text="${mailbox}"></span>）</div>
+            <div style="text-align: right"><span th:text="${projectDetailName}"></span></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

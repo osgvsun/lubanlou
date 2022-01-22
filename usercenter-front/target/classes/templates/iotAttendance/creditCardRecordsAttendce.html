@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>刷卡记录</title>
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/style/admin.css}" media="all">
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/expand.css}" media="all">
+    <style>
+        .datefloat {
+            float: left;
+        }
+        #page {
+            float: right;
+        }
+        .layui-btn {
+            background: #367c5d;
+        }
+        .layui-card-header {
+            border-left: 5px solid #367c5d;
+        }
+        .layui-btn-primary {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<!--creditCardRecordsAttendce-->
+<!--主体开始-->
+    <div class="content_box">
+        <form class="layui-form lesson_card" action="" lay-filter="creditcardrecordsattendcebox" id="creditcardrecordsattendcebox">
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space20">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">刷卡记录</div>
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-md12">
+                                        <!--搜索开始-->
+                                        <div class="search_line">
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">属地: </label>
+                                                <div class="layui-input-inline">
+                                                    <select name="messageName" lay-search>
+                                                        <option value="">请选择属地</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">姓名: </label>
+                                                <div class="layui-input-inline">
+                                                    <div id="usernames" class="xm-select-demo"></div>
+
+                                                    <!--                                                    <select name="usernames" lay-search>-->
+<!--                                                        <option value="">请选择姓名</option>-->
+<!--                                                    </select>-->
+                                                </div>
+                                            </div>
+<!--                                            <div class="layui-inline">-->
+<!--                                                <label class="layui-form-label">姓名: </label>-->
+<!--                                                <div class="layui-input-inline">-->
+<!--                                                    <input type="text" name="title"  placeholder="请输入姓名" autocomplete="off" class="layui-input">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">日期范围: </label>
+                                                <div class="layui-inline" id="test6">
+                                                    <div class="layui-input-inline datefloat">
+                                                        <input type="text" autocomplete="off" id="test-startDate" class="layui-input" placeholder="开始日期">
+                                                    </div>
+                                                    <div class="layui-form-mid">-</div>
+                                                    <div class="layui-input-inline">
+                                                        <input type="text" autocomplete="off" id="test-endDate" class="layui-input" placeholder="结束日期">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="button" class="layui-btn sureSearch" data-type="reload" value="搜索"/>
+                                            <input type="reset" class="layui-btn layui-btn-primary" data-type="reset"
+                                                   value="取消"/>
+                                            <input type="button" class="layui-btn exportData" value="导出"/>
+                                        </div>
+                                        <!--搜索结束-->
+                                        <div class="layui-col-md12">
+                                            <!--表单开始-->
+                                            <table class="layui-table">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>工号</th>
+                                                    <th>卡号</th>
+                                                    <th>姓名</th>
+                                                    <th>考勤时间</th>
+                                                    <th>考勤状态</th>
+                                                    <th>考勤地点</th>
+                                                    <th>考勤方式</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="creditCardRecordsAttendce">
+
+                                                </tbody>
+                                            </table>
+                                            <div id="page"></div>
+                                            <!--表单结束-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{/js/xm-select.js}"></script>
+    <script type="text/javascript" th:src="@{/teachPublic/layui/layui.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script th:inline="javascript">
+        const attendanceHost = [[${attendanceHost}]];
+        // const attendanceHost = "http://localhost:8844";
+        const apiGateWayHost = [[${session.apiGateWayHost}]]
+    </script>
+    <script th:src="@{/modules/iotAttendance/creditCardRecordsAttendce.js}"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.u-all-btn{
+	 margin-left:6%;
+ }
+.u-all-btn:nth-child(1){
+	margin-left:0px;
+}
+.layui-form-select .layui-edge{
+	right:49% !important;
+	margin-top:15px !important;
+}
+.layui-form-select dl{
+	min-width:52.6% !important;
+}
+.layui-table th span .fa-plus{
+	margin-left:5%;
+	cursor: pointer;
+}

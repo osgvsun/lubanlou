@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+</head>
+<body>
+    <div class="layui-fluid" style="padding: 16px 15px;">
+        <!--搜索开始-->
+         <div class="layui-input-block" style="margin: 5px 0">
+             <div class="layui-inline">
+                 <input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+             </div>
+             <input type="button" class="layui-btn" data-type="reload" id="searchName" value="搜索" />
+             <input type="button" class="layui-btn" data-type="reload" id="addUsername" value="添加免考成员" />
+         </div>
+        <!--搜索结束-->
+        <table class="layui-hide" id="exemptionlist" lay-filter="exemptionlist"></table>
+    </div>
+    <!--主体结束-->
+    <div th:replace="/gvsunExam/globalscript"></div>
+    <script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+    <script th:inline="javascript">
+        const examId = [[${examId}]];
+        const siteId = [[${session.cid}]];
+    </script>
+    <script type="text/javascript" th:src="@{/modules/gvsunExam/exam/exemption.js}"></script>
+</body>
+</html>

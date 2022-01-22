@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/timetable/iframe">
+<head>
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <link th:href="@{/plugins/bootstrap3/css/bootstrap.css}" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet"
+          th:href="@{/plugins/bootstrap3/css/plugins/bootstrap-table/bootstrap-table.min.css}"/>
+    <!-- 全局的引用 -->
+    <script th:src="@{/js/jquery-2.1.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}"></script>
+    <script th:src="@{/js/initOAuth2.js}"></script>
+    <script th:src="@{/plugins/bootstrap3/js/bootstrap.min.js}" type="text/javascript"></script>
+    <!-- bootstrap的引用 -->
+    <link th:href="@{/plugins/bootstrap3/bootstrap-select/css/bootstrap-select.min.css}" rel="stylesheet">
+    <script th:src="@{/plugins/bootstrap3/bootstrap-select/js/bootstrap-select.js}"></script>
+    <script th:src="@{/plugins/bootstrap3/bootstrap-table/bootstrap-table.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/plugins/bootstrap3/bootstrap-table/bootstrap-table-mobile.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/plugins/bootstrap3/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/modules/timetable/js/course/auditTimetable.js}" type="text/javascript"></script>
+    <link th:href="@{/modules/timetable/static_limsproduct/css/global_static.css}" rel="stylesheet" type="text/css">
+    <style>
+        .fixed-table-container thead th .sortable {
+            background-image: url('../../../plugins/ueditor/themes/default/images/sortable.png');
+            cursor: pointer;
+            background-position: right;
+            background-size: 16px 13px !important;
+            background-repeat: no-repeat;
+            padding-right: 30px
+        }
+
+        .fixed-table-container thead th .asc {
+            background-image: url('../../../plugins/dhtmlx/dhtmlx/imgs/sort_asc.gif');
+            cursor: pointer;
+            background-position: right;
+            background-size: 10px 9px !important;
+            background-repeat: no-repeat;
+            padding-right: 10px
+        }
+
+        .fixed-table-container thead th .desc {
+            background-image: url('../../../plugins/dhtmlx/dhtmlx/imgs/sort_desc.gif');
+            cursor: pointer;
+            background-position: right;
+            background-size: 10px 9px !important;
+            background-repeat: no-repeat;
+            padding-right: 10px
+        }
+    </style>
+    <script th:inline="javascript">
+        // 定义全局变量-排课方式入口配置
+        var username = [[${session.user.username}]];
+        var role = [[${session.selected_role}]];
+        var academyNumber = [[${session.selected_academy}]];
+        var zuulServerUrl = [[${zuulServerUrl}]];
+        var oauth2 = [[${session.oauth2}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        //取消关闭弹窗
+        function closeLayer(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);//关闭弹窗
+        }
+    </script>
+    <!--<title>Edit <fmt:message key="project.title"/></title>
+    <link rel="stylesheet" type="text/css" href="/jquery/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/jquery/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/jquery/css/demo.css">
+    <script type="text/javascript" src="/jquery/js/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" src="/jquery/js/jquery.easyui.min.js}"></script>
+    <script type="text/javascript" src="/jquery/locale/easyui-lang-zh_CN.js}"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <link th:href="@{/modules/timetable/static_limsproduct/css/global_static.css}" rel="stylesheet" type="text/css">-->
+</head>
+
+<body layout:fragment="timetable">
+<!-- 课程详细信息 -->
+<div class="iStyle_RightInner">
+    <div id="TabbedPanels1" class="TabbedPanels">
+        <div class="site-box">
+            <div class="site-content">
+                <div>
+                    <table id="table_list" style="text-align: left;"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="right-content">
+    <div id="TabbedPanels1" class="TabbedPanels">
+        <div class="TabbedPanelsContentGroup">
+            <div class="TabbedPanelsContent">
+                <div class="content-box">
+                    <font style="color: red">注：从左往右按级别审核，只有前一级审核通过，后面才可以审核！每一级审核完成后不可更改结果！！</font>
+                    <div class="tool-box">
+                        <form name="form">
+                            <input type="button" onclick="closeLayer()" value="返回">
+                            <input type="hidden" id="courseNo" th:value="${courseNo}"/>
+                            <input type="hidden" id="termId" th:value="${termId}"/>
+                            <input type="hidden" id="type" th:value="${businessType}"/>
+                            <input type="hidden" id="timetableStyle" th:value="${timetableStyle}"/>
+                            <input type="hidden" id="error" th:value="${error}"/>
+                        </form>
+                    </div>
+                    <form modelAttribute="project">
+                        <div id="tt" class="easyui-tabs" style="height:910px;">
+                            <th:block th:each="auditConfig,i:${auditConfigs}">
+                                <div th:title="${auditConfig[0]}">
+                                    <iframe frameborder="0" th:id="|myResponseList${i.count}|"
+                                            th:src="@{|/lims/timetable/course/auditTimetableList?businessAppUid=${businessAppUid}&state=${auditConfig[1]}&authName=${auditConfig[2]}&curStage=${auditConfig[4]}&curAuthName=${auditConfig[5]}&businessType=${businessType}&businessUid=${businessUid}|}"
+                                            style="width:100%;height:100%;" scrolling="no"
+                                            onload="this.height=this.contentWindow.document.documentElement.scrollHeight"></iframe>
+                                </div>
+                            </th:block>
+                        </div>
+                    </form>
+                    <div class="clear">&nbsp;</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

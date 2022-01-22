@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>人才信息组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/xm-select.js}"></script>
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${usercenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var oauth2 = [[${session.oauth2}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+        var httpBaseUrl = /*[[@{/}]]*/'';
+        var datashareHost = [[${datashareHost}]];
+        resourceContainer.initResourceContainer({
+            oauth2Host: oauth2,
+            resourceContainerHost: resourceContainerHost + "/gvsunResource",
+            directoryEngineHost: resourceContainerHost + "/gvsunDirectory",
+            siteName: "用户中心",
+            authorizationURL: resourceContainerHost + "/shareApi/getAuthorization",
+            username: currentUsername,
+            resourceContainerHostForUpload: resourceContainerHostForUpload + '/gvsunResource',
+            unfixed: true
+        });
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+    <style>
+        .fill_box {
+            display: none;
+        }
+
+        .buttonAdd{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<i class="fa fa-spinner fa-3x fa-spin loading"></i>
+<!--新增人才信息-->
+<div class="fill_box" id="talentInfoAdd">
+    <form class="layui-form" action="" lay-filter="talentInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">人才称号</label>
+                <div class="layui-input-block">
+                    <select class="talent" name="talent" lay-filter="required"
+                            lay-search>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">称号获批时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="talentTime" id="talentTime_add"
+                           lay-verify="required" autocomplete="off" class="layui-input talentTime">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="talentInfo">立即提交</button>
+                    <button type="reset" class="clearForm" style="display: none"></button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="layui-tab-talentitem">
+    <div class="buttonAdd"><button class="layui-btn header_edit" style="float: right">新增</button></div>
+    <table class="layui-hide" id="talentInfo" lay-filter="talentInfo"></table>
+</div>
+<!--编辑人才信息-->
+<!--编辑表单-->
+<div id="edit_talentInfo" style="display: none">
+    <form class="layui-form" action="" lay-filter="talentInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">人才称号</label>
+                <div class="layui-input-block">
+                    <select class="talent" id="talent" name="talent" lay-filter="required"
+                            lay-search>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">称号获批时间</label>
+                <div class="layui-input-block">
+                    <input type="text" id="talentTime" name="talentTime" lay-verify="required"
+                           autocomplete="off"
+                           class="layui-input talentTime">
+                </div>
+            </div>
+            <div class="layui-col-lg4" style="display: none">
+                <label class="layui-form-label">ID</label>
+                <div class="layui-input-block" id="talentInfo_uid">
+                    <input type="text" name="id" id="id" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="talentInfo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    layui.config({
+            base: '../../../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'personalDetailTab']);
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var beShowUsername=GetQueryString("username");
+
+</script>
+<script type="text/html" id="edit1">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+</body>
+</html>

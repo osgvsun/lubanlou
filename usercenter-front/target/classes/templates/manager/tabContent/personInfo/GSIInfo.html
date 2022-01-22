@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>事业单位基本信息页面</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <script th:src="@{/modules/common.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${usercenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var oauth2 = [[${session.oauth2}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+
+        resourceContainer.initResourceContainer({
+            oauth2Host: oauth2,
+            resourceContainerHost: resourceContainerHost + "/gvsunResource",
+            directoryEngineHost: resourceContainerHost + "/gvsunDirectory",
+            siten_address: "用户中心",
+            siteName: "用户中心",
+            authorizationURL: resourceContainerHost + "/shareApi/getAuthorization",
+            username: currentUsername,
+            resourceContainerHostForUpload: resourceContainerHostForUpload,
+            unfixed: true
+        });
+    </script>
+    <style>
+        .fill_box {
+            display: none;
+        }
+
+        .basic {
+            float: right;
+            height: 24px;
+            line-height: 24px;
+            border-radius: 24px;
+        }
+        .buttonAdd{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<i class="fa fa-spinner fa-3x fa-spin loading"></i>
+<!--编辑基本信息-->
+<div class="layui-tab-basicitem">
+    <div class="fill_box"  id="basicInfoEdit">
+        <form class="layui-form" action="" lay-filter="gsiInfo" id="editMenu">
+            <div class="layui-row layui-col-space10 layui-form-item">
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">事业单位名称
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input id="gsiName" type="text" name="gsiName" autocomplete="off" class="layui-input"
+                               lay-verify="required"   disabled="disabled" readonly="readonly"  />
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">所属区域
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="gsiAddress" autocomplete="off" class="layui-input"
+                               id="gsiAddress"  lay-verify="required"  />
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">负责人姓名
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="chargeName" autocomplete="off" class="layui-input"
+                               id="chargeName"   lay-verify="required" />
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">身份证号码
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="idNumber" autocomplete="off" class="layui-input"
+                               id="idNumber"   onBlur='checktheform()'  lay-verify="idCard"   />
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">负责人手机号
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="number" name="phone" autocomplete="off" class="layui-input"
+                               id="phone"   lay-verify="phone" />
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">电子邮箱
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" autocomplete="off" class="layui-input"
+                               id="email"     lay-verify="required"   />
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">地址
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="address" autocomplete="off" class="layui-input"
+                               id="address"    lay-verify="required"   />
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <label class="layui-form-label">经办人手机号
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="opPhone" autocomplete="off" class="layui-input"
+                               id="opPhone"   lay-verify="phone"   />
+                    </div>
+                </div>
+
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">负责人证件照
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="file" id="idPhotoFile">
+                        <input type="text" id="idPhoto" name="idPhoto" style="display: none" value="" lay-verify="required">
+                        <a class="layui-btn layui-btn-primary" id="idPhotoBtn">上传负责人证件照</a>
+                    </div>
+                </div>
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">单位负责人证明材料
+                        <span style="color:red">*</span>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="file" id="gsiDataFile">
+                        <input type="text" id="gsiData" name="gsiData" style="display: none" value="" lay-verify="required">
+                        <a class="layui-btn layui-btn-primary" id="gsiDataBtn">上传单位负责人证明材料</a>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-input-block">
+                <button class="layui-btn buttonEdit" lay-submit lay-filter="gsiInfo">立即提交</button>
+                <button type="reset" class="clearForm" style="display: none"></button>
+                <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+            </div>
+        </form>
+        <br>
+        <br>
+        <br>
+    </div>
+    <form class="layui-form detail_item" action="" lay-filter="showBasicInfo">
+        <div class="layui-row">
+            <div class="layui-col-lg12">
+                <div class="layui-card-header" style="background: #fff">基本信息
+                    <button class="layui-btn basic" lay-submit lay-filter="showBasicInfo">编辑</button>
+                    <a class="layui-btn basic" onclick="upload()" style="float: right">导出</a>
+                </div>
+
+                <label class="layui-form-label user_head">
+                    <img src="" id="photo_img"/>
+                </label>
+                <div class="user-input-block" id="basicInfoShow">
+                    <div class="layui-col-lg12">
+                        <label class="layui-form-label">事业单位名称</label>
+                        <div class="layui-input-block">
+                            <input id="gsiNameshow" type="text" name="gsiName" autocomplete="off" class="layui-input"
+                                   disabled="disabled" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg12">
+                        <label class="layui-form-label">所属区域</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="gsiAddress" autocomplete="off" class="layui-input"
+                                   id="gsiAddressshow"          disabled="disabled" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg12">
+                        <label class="layui-form-label">负责人姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="chargeName" autocomplete="off" class="layui-input"
+                              id="chargeNameshow"     disabled="disabled" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg12">
+                        <label class="layui-form-label">身份证号码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="idNumber" autocomplete="off" class="layui-input"
+                             id="idNumbershow"      disabled="disabled" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg12">
+                        <label class="layui-form-label">联系电话</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="phone" autocomplete="off" class="layui-input"
+                              id="phoneshow"     disabled="disabled" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg12">
+                        <label class="layui-form-label">电子邮箱</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="email" autocomplete="off" class="layui-input"
+                            id="emailshow"       disabled="disabled" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg12">
+                        <label class="layui-form-label">地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="address" autocomplete="off" class="layui-input"
+                            id="addressshow"       disabled="disabled" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg12">
+                        <label class="layui-form-label">经办人手机号
+                            <span style="color:red">*</span>
+                        </label>
+                        <div class="layui-input-block">
+                            <input type="text" name="opPhone" autocomplete="off" class="layui-input"
+                                   id="opPhoneshow"  disabled="disabled" readonly="readonly"   />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script>
+    layui.config({
+            base: '../../../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'GSIDetailTab']);
+
+    function GetQueryString(name)
+    {
+        // var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        // var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        // if(r!=null)return  unescape(r[2]); return null;
+        var url = window.location.href
+        if(url.indexOf(name+'=')!==-1){
+            var par = url.split(name+'=')[1]
+            if(par.indexOf('&')!==-1)
+                return decodeURIComponent(par.split('&')[0])
+            else return decodeURIComponent(par)
+        }
+        else return undefined
+    }
+    var beShowgsiName = GetQueryString("gsiName");
+    var beShowuserId = GetQueryString("userId");
+    console.log(beShowgsiName)
+    $("#researchInterests").keyup(function(){
+        var len = $(this).val().length;
+        if(len>30){
+            alert("最多只能输入30个字符");
+        }
+    })
+
+</script>
+<script type="text/html" id="edit1">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    function checktheform() {
+        if(isCardNo(card) === false)
+        {
+            alert('您输入的身份证号码不正确，请重新输入');
+            $('.idNo').focus;
+            return false;
+        }
+    }
+    function isCardNo(card) {
+//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+        var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;
+        if(reg.test(card) === false)
+        {
+            return false;
+        }
+        return true;
+    };
+</script>
+</body>
+</html>

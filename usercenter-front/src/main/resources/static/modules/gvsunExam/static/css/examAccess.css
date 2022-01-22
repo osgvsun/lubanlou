@@ -1,0 +1,101 @@
+#admissionTicket{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.admission_ticket_container_in{
+    width: 1200px;
+    border: 1px solid #000;
+    margin: 3%;
+}
+#title{
+    text-align: center;
+    margin: 40px 0;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: '宋体';
+}
+#exam_name_first{
+    width: 100%;
+}
+#exam_name_first>h4, #exam_name_second>h4, #exam_name_third>h4, #exam_name_fourth>h4, #exam_name_fifth>h4, #exam_name_right>h4{
+    display: inline-block;
+    width: 22%;
+    height: 8px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    padding: 14px 10px;
+    margin: 0;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+
+}
+#exam_name_first>h4:last-child, #exam_name_second>h4:last-child, #exam_name_fourth>h4:last-child, #exam_name_fifth>h4:last-child{
+    border-right: none;
+    width: 26.5%;
+    padding-right: 16px;
+    padding-bottom: 9px;
+}
+#exam_name_third>.card_number{
+    width: 73.5%;
+    border-right: none;
+    padding-right: 22px;
+}
+#exam_name_left{
+    display: inline-block;
+    width: 48%;
+    float: left;
+}
+#exam_name_left>h4{
+    display: inline-block;
+    width: 45.8%;
+    height: 8px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    padding: 15px 10px;
+    margin: 0;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+}
+.exam_name{
+    padding-bottom: 13px !important;
+}
+#exam_name_right>h4{
+    display: inline-block;
+    width: 41%;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    padding: 11px;
+    margin: 0;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+}
+#exam_name_right> .exam_name_left_cont{
+    line-height: 60px;
+    height: 28px;
+    padding-bottom: 45px;
+}
+#exam_name_right> .exam_name_right_cont{
+    line-height: 60px;
+    border-right: none;
+    width: 49.2%;
+    height: 28px;
+    padding-bottom: 45px;
+    padding-right: 27px;
+}
+#exam_name_right>.exam_name_title_cont{
+    border-right: none;
+    width: 49.2%;
+    padding-right: 27px;
+}
+#exam_name_right{
+    display: inline-block;
+    width: 52%;
+    float: left;
+}

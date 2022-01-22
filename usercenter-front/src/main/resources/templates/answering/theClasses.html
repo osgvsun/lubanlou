@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/expand.css}" media="all">
+    <style>
+        .model_style {
+            background-color: #fbfbfb;
+            border: 1px solid #eaeefb;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content_box">
+        <form class="layui-form lesson_card" action="" lay-filter="creditcardrecordsattendcebox" id="creditcardrecordsattendcebox">
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space20">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">已排坐班时间段</div>
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-md12">
+                                        <div class="layui-col-md12">
+                                        <!--顶部初始时间安排-->
+                                            <table class="layui-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>坐班时间</th>
+                                                        <th>房间号</th>
+                                                        <th>导师</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="time_table">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <span class="edit_time_title"></span>
+                                <input type="button" class="layui-btn hide header_edit exportData" lay-filter="exportData" id="exportData" lay-tips="新建计划保存">保存</input>
+                            </div>
+
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space10 model_style">
+                                    <div class="layui-col-md12">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">授课教师: </label>
+                                            <div class="layui-input-inline" id="teacher">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">星期: </label>
+                                            <div class="layui-input-inline" style="width: 400px">
+                                                <select name="interest" lay-filter="interest" id="interest">
+                                                    <option value="">请选择星期</option>
+                                                    <option value="1">星期一</option>
+                                                    <option value="2">星期二</option>
+                                                    <option value="3">星期三</option>
+                                                    <option value="4">星期四</option>
+                                                    <option value="5">星期五</option>
+                                                    <option value="6">星期六</option>
+                                                    <option value="7">星期日</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">节次: </label>
+                                            <div class="layui-input-inline" id="classList">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">实验室: </label>
+                                            <div class="layui-input-inline" id="lab">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">周次: </label>
+                                            <div class="layui-input-inline" id="weedayList">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:replace="/answering/globalscript"></div>
+
+    <script th:src="@{/modules/answering/static/js/common.js}"></script>
+    <script th:src="@{/modules/answering/theClasses.js}"></script>
+    <script th:inline="javascript">
+        const timetableStyle = [[${timetableStyle}]];
+        var courseNo = {};
+        function renderChildForm(obj) {
+            console.log(obj)
+            courseNo = obj
+            let tr = `<tr>
+                       <td>${obj.timetable}</td>
+                       <td>${obj.labInfo}</td>
+                       <td>${obj.teachers}</td>
+                      </tr>`;
+            $('#time_table').append(tr);
+
+            $('.edit_time_title').text('编辑选择' + obj.sameNumberId);
+            getCourseObj(obj)
+        }
+    </script>
+</body>
+</html>

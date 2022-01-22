@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>代表作</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${usercenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+    </script>
+
+    <script th:src="@{/modules/common.js}"></script>
+    <style>
+        .fill_box {
+            display: none;
+        }
+
+        #edit_masterworkinfo {
+            display: none;
+        }
+
+        #edit_authorizedpatentinfo {
+            display: none;
+        }
+        .layui-col-md121{
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <!--代表作-->
+        <div class="layui-col-md121" id="user_master_work_info">
+            <div class="layui-card">
+                <div class="layui-card-header">代表作
+                    <button class="layui-btn header_edit">新增</button>
+                </div>
+                <div class="layui-card-body">
+                    <!--新增表单-->
+                    <div class="fill_box" id="masterInfoAdd">
+                        <form class="layui-form" action="">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">论文题目</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="thesisTitle" lay-verify="required" autocomplete="off"
+                                               class="layui-input thesisTitle">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">论文作者</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="firstAuthor" placeholder="作者之间逗号隔开" lay-verify="required" autocomplete="off"
+                                               class="layui-input firstAuthor">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">第一作者身份</label>
+                                    <div class="layui-input-block">
+                                        <select name="withFirstAuthorRelationship" class="withFirstAuthorRelationship" lay-filter="required" lay-search>
+                                            <option value=""></option>
+                                            <option value="本人指导的本科生">本人指导的本科生</option>
+                                            <option value="本人指导的硕士">本人指导的硕士</option>
+                                            <option value="本人指导的博士">本人指导的博士</option>
+                                            <option value="本人指导的博后">本人指导的博后</option>
+                                            <option value="作者本人">作者本人</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">期刊名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="periodical" lay-verify="required" autocomplete="off"
+                                               class="layui-input periodical">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">期刊卷次</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="periodicalVolume" lay-verify="required"
+                                               autocomplete="off" class="layui-input periodicalVolume">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">期刊页码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="periodicalPage" lay-verify="required"
+                                               autocomplete="off" class="layui-input periodicalPage">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">发表时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="publicationTime" id="publicationTime_add"
+                                               lay-verify="required" autocomplete="off" class="layui-input publicationTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">本人角色</label>
+                                    <div class="layui-input-block">
+                                        <select name="characters" class="characters" lay-filter="required" lay-search>
+                                            <option value=""></option>
+                             <!--               <option value="一作">一作</option>
+                                            <option value="共同一作">共同一作</option>
+                                            <option value="通讯">通讯</option>
+                                            <option value="通讯并一作">通讯并一作</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg8 layui-col-md121">
+                                    <label class="layui-form-label">中科院JCR分区</label>
+                                    <div class="layui-input-block">
+                                        <select name="jcr"  class="jcr" lay-filter="required" lay-search>
+                                            <option value=""></option>
+                                            <option value="一区">一区</option>
+                                            <option value="二区">二区</option>
+                                            <option value="三区">三区</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">当年影响因子</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="impactFactor" lay-verify="required"
+                                               autocomplete="off" class="layui-input impactFactor">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">论文链接</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="thesisLink" lay-verify="required" autocomplete="off"
+                                               class="layui-input thesisLink">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="masterWorkInfo">立即提交</button>
+                                        <button type="reset" class="clearForm" style="display: none"></button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--编辑表单-->
+                    <div id="edit_masterWorkInfo" style="display: none">
+                        <form class="layui-form" action="" lay-filter="masterWorkInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">论文题目</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="thesisTitle" id="thesisTitle" lay-verify="required"
+                                               autocomplete="off" class="layui-input thesisTitle">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">论文作者</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="firstAuthor" id="firstAuthor" lay-verify="required"
+                                               autocomplete="off" class="layui-input firstAuthor" placeholder="作者之间逗号隔开">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">第一作者身份</label>
+                                    <div class="layui-input-block">
+                                        <select name="withFirstAuthorRelationship" class="withFirstAuthorRelationship" id="withFirstAuthorRelationship" lay-filter="required"
+                                                lay-search>
+                                            <!--<option value=""></option>-->
+                                            <option value="本人指导的本科生">本人指导的本科生</option>
+                                            <option value="本人指导的硕士">本人指导的硕士</option>
+                                            <option value="本人指导的博士">本人指导的博士</option>
+                                            <option value="本人指导的博后">本人指导的博后</option>
+                                            <option value="作者本人">作者本人</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">期刊名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="periodical" id="periodical" lay-verify="required"
+                                               autocomplete="off" class="layui-input periodical">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">期刊卷次</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="periodicalVolume" id="periodicalVolume"
+                                               lay-verify="required" autocomplete="off" class="layui-input periodicalVolume">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">期刊页码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="periodicalPage" id="periodicalPage"
+                                               lay-verify="required" autocomplete="off" class="layui-input periodicalPage">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">发表时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="publicationTime" id="publicationTime"
+                                               lay-verify="required" autocomplete="off" class="layui-input publicationTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">本人角色</label>
+                                    <div class="layui-input-block">
+                                        <select name="characters"  class="characters" id="characters" lay-filter="required" lay-search>
+                                            <!--<option value=""></option>-->
+                                            <!--<option value="一作">一作</option>
+                                            <option value="共同一作">共同一作</option>
+                                            <option value="通讯">通讯</option>
+                                            <option value="通讯并一作">通讯并一作</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg8 layui-col-md121">
+                                    <label class="layui-form-label">中科院JCR分区</label>
+                                    <div class="layui-input-block">
+                                        <select name="jcr"  class="jcr" id="jcr" lay-filter="required" lay-search>
+                                            <option value="一区">一区</option>
+                                            <option value="二区">二区</option>
+                                            <option value="三区">三区</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">当年影响因子</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="impactFactor" id="impactFactor"
+                                               lay-verify="required" autocomplete="off" class="layui-input impactFactor">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">论文链接</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="thesisLink" id="thesisLink" lay-verify="required"
+                                               autocomplete="off" class="layui-input thesisLink">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4" style="display: none">
+                                    <label class="layui-form-label">ID</label>
+                                    <div class="layui-input-block" id="masterWorkInfo_uid">
+                                        <input type="text" name="id" id="id"  autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="masterWorkInfo">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="layui-hide" id="masterWorkInfo" lay-filter="masterWorkInfo"></table>
+                </div>
+            </div>
+        </div>
+        <!--授权专利-->
+        <div class="layui-col-md121" id="user_authorized_patent_info">
+            <div class="layui-card">
+                <div class="layui-card-header">授权专利
+                    <button class="layui-btn header_edit">新增</button>
+                </div>
+                <div class="layui-card-body">
+                    <!--新增表单-->
+                    <div class="fill_box" id="authorizedPatentInfoAdd">
+                        <form class="layui-form" action="" lay-filter="authorizedPatentInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">专利名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="patentName" lay-verify="required" autocomplete="off"
+                                               class="layui-input patentName">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">专利号</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="patentNum" lay-verify="required" autocomplete="off"
+                                               class="layui-input patentNum">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">获批年份</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="patentTime" id="patentTime_add" lay-verify="required"
+                                               autocomplete="off" class="layui-input patentTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">国家</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="nation" lay-verify="required"
+                                               autocomplete="off" class="layui-input nation">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">专利保护期</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="patentTerm" lay-verify="required"
+                                               autocomplete="off" class="layui-input patentTerm">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">本人排名</label>
+                                    <div class="layui-input-block">
+                                        <select name="personRank" lay-filter="required" class="personRank" lay-search>
+                                            <option value=""></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">转化情况</label>
+                                    <div class="layui-input-block">
+												<span class="tstrue transformSituation">
+												    <input type="radio" name="transformSituation" value="1" title="是"
+                                                           checked="">
+												</span>
+                                        <span class="tsfalse transformSituation">
+												    <input type="radio" name="transformSituation" value="0" title="否">
+												</span>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 transferamount layui-col-md121">
+                                    <label class="layui-form-label">转让金额(万)</label>
+                                    <div class="layui-input-block">
+                                        <input type="number" name="transferAmount" lay-verify="required|number"
+                                               autocomplete="off" class="layui-input transferAmount">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="authorizedPatentInfo">立即提交
+                                        </button>
+                                        <button type="reset" class="clearForm" style="display: none"></button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--编辑表单-->
+                    <div id="edit_authorizedPatentInfo" style="display: none">
+                        <form class="layui-form" action="" lay-filter="authorizedPatentInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">专利名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="patentName" id="patentName" lay-verify="required"
+                                               autocomplete="off" class="layui-input patentName">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">专利号</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="patentNum" id="patentNum" lay-verify="required"
+                                               autocomplete="off" class="layui-input patentNum">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">专利保护期</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="patentTerm" id="patentTerm" lay-verify="required"
+                                               autocomplete="off" class="layui-input patentTerm">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">获批年份</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="patentTime" id="patentTime" lay-verify="required"
+                                               autocomplete="off" class="layui-input patentTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">国家</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="nation" id="nation" lay-verify="required"
+                                               autocomplete="off" class="layui-input nation">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">本人排名</label>
+                                    <div class="layui-input-block">
+                                        <select name="personRank" id="personRank"class="personRank" lay-filter="required" lay-search>
+                                            <!--<option value=""></option>-->
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">转化情况</label>
+                                    <div class="layui-input-block">
+												<span class="tstrue transformSituation">
+												    <input type="radio" name="transformSituation"
+                                                           id="transformSituation" value="1" title="是" checked="">
+												</span>
+                                        <span class="tsfalse transformSituation">
+												    <input type="radio" name="transformSituation"
+                                                           id="transformSituation" value="0" title="否">
+												</span>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 " style="display: none">
+                                    <label class="layui-form-label">ID</label>
+                                    <div class="layui-input-block" id="authorizedPatentInfo_uid">
+                                        <input type="text" name="id" id="id"  autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 transferamount layui-col-md121">
+                                    <label class="layui-form-label">转让金额(万)</label>
+                                    <div class="layui-input-block">
+                                        <input type="number" name="transferAmount" id="transferAmount"
+                                               autocomplete="off" class="layui-input transferAmount">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="authorizedPatentInfo">立即提交
+                                        </button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <table class="layui-hide" id="authorizedPatentInfo" lay-filter="authorizedPatentInfo"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="edit1">
+        <a data-method="offset1" data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="edit2">
+        <a data-method="offset2" data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'masterWork']);
+</script>
+</body>
+
+</html>

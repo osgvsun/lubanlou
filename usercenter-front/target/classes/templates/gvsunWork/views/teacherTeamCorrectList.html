@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+		<link rel="stylesheet" type="text/css" th:href="@{${resourceContainerHost} +  '/shareApi/resourceContainer.css'}"/>
+		<script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="correctlistbox" id="correctlistbox">
+				<div class="layui-fluid">
+					<div classs="layui-row layui-col-space20">
+						<div class="layui-col-md12">
+							<div class="layui-card">
+								<div class="layui-card-header">小组作业
+									<label class="layui-icon batchfiledownload header_btn" data-method="batchfiledownload" lay-tips="批量下载附件">批量下载附件</label>
+									<font class="font_grey">(小组评分/评语适用于组内所有成员，单独修改请在操作栏选择成员评分/评语)</font>
+									<!--搜索开始-->
+									<div class="fr search_line">
+										<div class="layui-inline">
+											<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+										</div>
+										<div class="layui-inline">
+											<input class="layui-input" name="searchdate" id="searchdate" autocomplete="off" placeholder="请输入提交时间" />
+										</div>
+										<input type="button" class="layui-btn" data-type="reload" value="搜索" />
+									</div>
+									<!--搜索结束-->
+								</div>
+								<div class="layui-card-body">
+									<div class="layui-col-md12">
+										<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+											<ul class="layui-tab-title">
+												<li class="layui-this" onclick="showTable('correctlist', 2, 'toolbar')">已提交</li>
+												<li onclick="showTable('correctlist', 3, 'toolbar')">未提交</li>
+												<li onclick="showTable('correctlist', 4, 'toolbar')">迟交(已逾期)</li>
+												<li onclick="showTable('correctlist', 5, 'toolbar')">需重新提交</li>
+											</ul>
+											<div class="layui-tab-content">
+												<div class="layui-tab-item layui-show">
+													<div class="layui-col-md12">
+														<!--表单开始-->
+														<table class="layui-hide" id="correctlist" lay-filter="correctlist"></table>
+														<script type="text/html" id="toolbar">
+															<a class="layui-btn layui-btn-xs" lay-event="comment">写小组评语</a>
+															<a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="member">成员评分/评语</a>
+															<a class="layui-btn layui-btn-green layui-btn-xs" lay-event="submitscore">提交成绩</a>
+															<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="backtoedit">返回修改</a>
+														</script>
+
+														<div id="saveFile" style="display: none">
+
+														</div>
+														<!--表单结束-->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/gvsunWork/globalscript"></div>
+		<script th:src="@{/modules/gvsunWork/static/js/global.js}"></script>
+<!--		<script type="text/javascript" th:src="@{/layuiadmin/static/js/titleHash.js}"></script>-->
+		<script th:inline="javascript">
+			let siteId = [[${session.cid}]];
+			let assignmentId = [[${assignmentId}]];
+			// let username = [[${session.user.username}]]
+			let currentUsername = [[${session.user.username}]];
+			let siteEnName = [[${siteEnName}]];
+			let siteSecret = [[${siteSecret}]];
+			resourceContainer.initResourceContainer({
+				oauth2Host: [[${oauth2Host}]],
+				siteName: "教学平台",
+				username: currentUsername
+			});
+		</script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/timeTransformation.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/teacherTeamCorrectList.js}"></script>
+	</body>
+
+</html>

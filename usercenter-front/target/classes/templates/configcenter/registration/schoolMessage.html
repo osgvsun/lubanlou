@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+       xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/modules/configcenter/registration/css/expand.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+    <script th:src="@{/js/initOAuth2.js}"></script>
+    <script th:src="@{/js/jquery.cookie.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+<!--    <script type="text/javascript" th:src="@{${session.oauth2} + '/oauth/OAuth2.js'}"></script>-->
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var currHost = [[${session.currHost}]];
+        var oauth2 = [[${session.oauth2}]];
+        var dataSource = [[${session.dataSource}]];
+        var configType = [[${session.configType}]];
+        // var configType = [[${configType}]];
+    </script>
+<!--    <script th:src="@{/modules/common.js}"></script>-->
+<!--    <script th:src="@{/modules/configcenter/static/common.js}"></script>-->
+<!--    <script th:src="@{/modules/configcenter/static/global.js}"></script>-->
+    <link rel="stylesheet" th:href="@{/modules/configcenter/process/css/commonList.css}">
+
+</head>
+<body>
+    <div class="main_content_box">
+        <!--主体开始-->
+        <div class="full_box">
+            <form class="layui-form lesson_card" action="" lay-filter="schoolmessagebox" id="schoolmessagebox">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <span>学校通知</span>
+                        <label style="margin-left: 15px;" class="layui-icon layui-icon-add-1 newschoolmessage header_btn layui-hide" data-method="newschoolmessage" lay-tips="新增学校通知"></label>
+                        <font class="font_red">(提示需要做的事情，比如在系主任权限下提示：请上传学业导师名单)</font>
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="layui-row layui-col-space10">
+                            <!--搜索开始-->
+                            <div class="layui-col-md12 search_line">
+                                <input id="clientId" type="hidden"/>
+                                <div class="layui-inline">
+                                    <input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+                                </div>
+                                <input type="button" class="layui-btn" data-type="reload" value="搜索" />
+                                <input type="reset" class="layui-btn layui-btn-primary" value="取消">
+                            </div>
+                            <!--搜索结束-->
+                            <div class="layui-col-md12">
+                                <ul class="layui-tab-title time_tab">
+                                    <li class="layui-this">
+                                        <a href="javascript:void(0)" onclick="commonListRouteByTimeFlag(1,this)">进行中</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="commonListRouteByTimeFlag(2,this)">未开始</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="commonListRouteByTimeFlag(0,this)">已结束</a>
+                                    </li>
+                                </ul>
+                                <!--表单开始-->
+                                <table class="layui-hide" id="schoolmessage" lay-filter="schoolmessage"></table>
+                                <script type="text/html" id="toolbar">
+                                    <div class="layui-btn-group">
+                                        <a class="layui-btn layui-btn-xs" lay-event="detail">总览</a>
+                                        {{# if(d.newFlag == 1){ }}
+                                            <a class="layui-btn layui-btn-green layui-btn-xs" lay-event="nextProcess">填写</a>
+                                        {{# } }}
+                                        {{# if(d.deleteFlag == 1){ }}
+                                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                        {{# } }}
+                                    </div>
+                                </script>
+                                <!--表单结束-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--主体结束-->
+    </div>
+    <!--右侧栏开始-->
+    <div class="quick_line blueside_quick_line">
+        <!--<a href="#"><br/></a>-->
+        <div class="top layui-icon layui-icon-top"></div>
+    </div>
+    <!--右侧栏结束-->
+<script th:src="@{/modules/configcenter/static/global.js}"></script>
+<script th:src="@{/modules/configcenter/registration/schoolMessage.js}"></script>
+</body>
+</html>

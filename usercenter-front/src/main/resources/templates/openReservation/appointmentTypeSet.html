@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+
+</head>
+
+<body>
+<div class="main_content_box">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="appointmenttypesetbox" id="appointmenttypesetbox">
+            <div class="layui-card">
+                <div class="layui-card-header">院级空间预约类型设置</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space10">
+                        <div class="layui-col-md12">
+                            <blockquote class="layui-elem-quote layui-quote-nm line_tag_box">
+                                <div class="field_btn_box">
+                                    开放空间预约类型:
+                                    <a class="field_btn_select">实验室预约</a>
+                                    <a>工作室预约</a>
+                                    <a>会议室预约</a>
+                                </div>
+                                <div class="inline_inside ml5">
+                                    <!--单次预约类型开始-->
+                                    <div class="layui-inline add_nav_box hide">
+                                        <div class="mix_short_input add_nav_single">
+                                            <input class="layui-input" name="" placeholder="请输入分项名称"/>
+                                            <label class="layui-icon layui-icon-close delete_nav "
+                                                   onClick="deletenav(this);" title="删除此分项"></label>
+                                        </div>
+                                    </div>
+                                    <!--单次预约类型结束-->
+                                    <!--新增预约类型区域开始-->
+                                    <div class="layui-inline new_nav_box">
+                                    </div>
+                                    <!--新增预约类型区域结束-->
+                                </div>
+                                <!--预约类型按钮开始-->
+                                <label class="layui-icon layui-icon-add-1 layui-btn-green short_btn addnav"
+                                       data-method="addnav" lay-tips="新增分项"></label>
+                                <label class="layui-icon layui-icon-edit layui-btn-green short_btn editnav"
+                                       lay-tips="编辑分项"></label>
+                                <label class="layui-btn-warm short_btn savenav hide" lay-tips="保存分项设置">保存</label>
+                                <!--预约类型按钮结束-->
+                            </blockquote>
+                        </div>
+                        <!--搜索开始-->
+                        <div class="layui-col-md12 search_line">
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input class="layui-input" name="searchid" id="searchbox" autocomplete="on"
+                                           placeholder="请输入搜索内容"/>
+                                </div>
+                            </div>
+                            <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                            <input type="button" class="layui-btn layui-btn-primary" data-type="reload" value="取消"/>
+                            <input type="button" class="layui-btn layui-btn-green newfield" data-method="newfield"
+                                   value="新增字段"/>
+                        </div>
+                        <!--搜索结束-->
+                        <div class="layui-col-md12 head_tab">
+                            <!--表单开始-->
+                            <table class="layui-hide" id="appointmenttypeset" lay-filter="appointmenttypeset"></table>
+                            <!--行内工具栏开始-->
+                            <script type="text/html" id="toolbar">
+                                <a class="layui-btn layui-btn-green layui-btn-xs" lay-event="edit">编辑</a>
+                                <a class="layui-btn layui-btn-red layui-btn-xs" lay-event="del">删除</a>
+                            </script>
+                            <!--行内工具栏结束-->
+                            <!--表单结束-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <!--<a href="#"><br/></a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/myProject.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'openReservation/appointmentTypeSet']);
+</script>
+</body>
+
+</html>​​​

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+		<link rel="stylesheet" type="text/css" th:href="@{${resourceContainerHost} +  '/shareApi/resourceContainer.css'}"/>
+		<script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+		<style>
+			.layui-form-label {
+				width: 68px;
+			}
+			
+			.layui-input-block {
+				margin-left: 68px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="studentteamhomeworkdetailbox" id="studentteamhomeworkdetailbox">
+				<div class="layui-fluid">
+					<!--小组作业教师批改信息开始-->
+					<div class="layui-card" id="correct_info">
+						<div class="layui-card-header">小组作业教师批改信息</div>
+						<div class="layui-card-body">
+							<div class="detail_item">
+								<div class="layui-row">
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">作业状态</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="state" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">批改时间</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="correcttime" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">成绩水平</label>
+										<div class="layui-input-block">
+											<div class="level_line" id="level">
+												<div class="level_line_block">较差</div>
+												<div class="level_line_block">正常</div>
+												<div class="level_line_block">优秀</div>
+												<div class="level_line_block">极好</div>
+												<!--level_select为成绩水平，此处显示的数值与style的left百分比数值相同-->
+<!--												<div class="level_select" style="left:21%;">21</div>-->
+											</div>
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">教师评语</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="comment" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">批阅结果</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="achievement" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--小组作业教师批改信息结束-->
+					<!--小组作业提交信息开始-->
+					<div class="layui-card" id="team_info">
+						<div class="layui-card-header">小组作业提交信息</div>
+						<div class="layui-card-body">
+							<div class="detail_item">
+								<div class="layui-row">
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">作业名称</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="name" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">提交时间</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="submittime" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">提交内容</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="submitinfo" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--小组作业提交信息结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line">
+			<a href="#correct_info">小组<br/>批改</a>
+			<a href="#team_info">小组<br/>信息</a>
+		</div>
+		<!--右侧栏结束-->
+		<div th:replace="/gvsunWork/globalscript"></div>
+		<script th:src="@{/modules/gvsunWork/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			let currentUsername = [[${session.user.username}]];
+			let siteEnName = [[${siteEnName}]];
+			let siteSecret = [[${siteSecret}]];
+			resourceContainer.initResourceContainer({
+				oauth2Host: [[${oauth2Host}]],
+				siteName: "教学平台",
+				username: currentUsername
+			});
+			let parentData;  //函数用于接收父页面参数
+			function child(d){
+				parentData = d;
+			};
+		</script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/timeTransformation.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/studentTeamHomeworkDetail.js}"></script>
+	</body>
+</html>​​​

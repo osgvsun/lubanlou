@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+       xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/newExpand.css}">
+    <link rel="stylesheet" th:href="@{/modules/configcenter/static/css/expandCommon.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/configcenter/static/css/expandHeader.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+    <script th:src="@{/js/initOAuth2.js}"></script>
+    <script th:src="@{/js/jquery.cookie.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+<!--    <script type="text/javascript" th:src="@{${session.oauth2} + '/oauth/OAuth2.js'}"></script>-->
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var currHost = [[${session.currHost}]];
+        var oauth2 = [[${session.oauth2}]];
+        var dataSource = [[${session.dataSource}]];
+        var configType = [[${configType}]];
+        var nextConfig = [[${nextConfig}]];
+        var serverHostArray = document.location.href.split('/');
+        var serverHost = serverHostArray[0] + "//" + serverHostArray[2] + "/" + serverHostArray[3] + "/";
+        // if(apiGateWayHost.indexOf('/api')!=-1){
+        //     var currHost=apiGateWayHost.replace('/api','');
+        // }else{
+        //     var currHost=apiGateWayHost;
+        // }
+        function logout() {
+            localStorage.clear();
+            $.cookie('currauth', '');
+            $.cookie('currentauthName', '');
+            location.href = serverHost + 'logout';
+        }
+    </script>
+<!--    <script th:src="@{/modules/common.js}"></script>-->
+<!--    <script th:src="@{/modules/configcenter/static/common.js}"></script>-->
+<!--    <script th:src="@{/modules/configcenter/static/global.js}"></script>-->
+    <link rel="stylesheet" th:href="@{/modules/configcenter/process/css/commonList.css}">
+
+</head>
+<body>
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space20 layui-form-item">
+            <form class="layui-form" action="" lay-filter="adminmanage" id="adminmanage">
+                <div class="layui-col-md12 common_header layui-hide">
+                    <blockquote class="layui-elem-quote layui-quote-nm tag_box">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend class="multi_legend">
+                                <a href="javascript:void(0)" class="legend_select">列表</a>
+                            </legend>
+                            <div class="breadcrumb_top breadcrumb_division">
+<!--                                <a href="javascript:void(0)" class="breadcrumb_select addTimetable layui-hide" data-type="addTimetable">新建</a>-->
+<!--                                <a href="javascript:void(0)" class="breadcrumb_select">申购审核</a>-->
+<!--                                <a th:href="${currHost}+'/gvsunExam/views/mainindex'" target="_blank" class="breadcrumb_select accessSetting layui-hide">准入设置</a>-->
+<!--                            <a th:href="${currHost}+'/gvsunExam/views/mainindex'" target="_blank" class="breadcrumb_select feedingCharge layui-hide">收费</a>-->
+<!--                            <a th:href="${currHost}+'/teacherInformationCenter/system_index'" target="_blank" class="breadcrumb_select feedingAudit layui-hide">用户审核</a>-->
+                            <a href="javascript:void(0)" class="breadcrumb_select tableReport layui-hide" data-type="tableReport">查看报表</a>
+                            <!--                                <a href="javascript:void(0)" class="breadcrumb_select deleteTimetable layui-hide" data-type="deleteTimetable">批量删除</a>-->
+                            <a href="javascript:void(0)" class="breadcrumb_select changeAuth layui-hide" data-type="changeAuth">切换权限</a>
+                            <a href="javascript:void(0)" class="breadcrumb_select" onclick="logout()">退出登录</a>
+                        </div>
+                        </fieldset>
+                        </blockquote>
+                    </div>
+                    <!--版头开始-->
+                    <div class="temporary_header layui-hide">
+                        <div class="levelup_head">
+                            <a href="adminmanage.html" class="levelup_tit" title="回到主页">
+                                <img th:src="@{/modules/configcenter/static/images/shzhongyiyao.png}" />
+                            </a>
+                            <div class="levelup_btn">
+                                <a href="javascript:void(0)" class="breadcrumb_select addTimetable layui-hide" data-type="addTimetable" >申购</a>
+                                <!--                            <a href="#" target="_blank">申购审核</a>-->
+<!--                                <a th:href="${currHost}+'/gvsunExam/views/mainindex'" target="_blank" >准入设置</a>-->
+<!--                                <a th:href="${currHost}+'/gvsunExam/views/mainindex'" target="_blank">收费</a>-->
+<!--                                <a th:href="${currHost}+'/teacherInformationCenter/system_index'" target="_blank">用户审核</a>-->
+                                <a href="javascript:void(0)" class="breadcrumb_select changeAuth layui-hide" data-type="changeAuth">切换权限</a>
+                            <a href="javascript:void(0)" onclick="logout()">退出登录</a>
+                        </div>
+                    </div>
+                        <div class="levelup_nav_box">
+                            <!--单个标题开始-->
+                            <div class="levelup_nav">
+                                <a href="javascript:void(0)" class="levelup_nav_tit">动物管理</a>
+<!--                                <a href="" class="levelup_nav_tit">一级标题</a>-->
+<!--                                <div class="levelup_list">-->
+<!--                                    <a class="levelup_line">二级标题1</a>-->
+<!--                                    <a class="levelup_line">二级标题11</a>-->
+<!--                                    <a class="levelup_line">二级标题111</a>-->
+<!--                                    <a class="levelup_line">二级标题1111</a>-->
+<!--                                    <a class="levelup_line">二级标题11111</a>-->
+<!--                                </div>-->
+                            </div>
+                        <!--单个标题结束-->
+                        <div class="levelup_nav">
+                            <a class="levelup_nav_tit" th:href="${currHost}+'/gvsunExam/views/mainindex'" target="_blank" >准入设置</a>
+                        </div>
+                        <div class="levelup_nav">
+                            <a class="levelup_nav_tit" th:href="${currHost}+'/gvsunExam/views/mainindex'" target="_blank">收费</a>
+                        </div>
+                        <div class="levelup_nav">
+                            <a class="levelup_nav_tit" th:href="${currHost}+'/teacherInformationCenter/system_index'" target="_blank">用户审核</a>
+                        </div>
+                    </div>
+                    <div class="levelup_hint">
+                        <font>您当前所在位置：</font>
+                        <a href="#">主页</a>
+                        <a href="#">动物管理</a>
+<!--                        <a href="#">二级标题</a>-->
+                    </div>
+                </div>
+                <!--版头结束-->
+                <div class="layui-col-md12">
+                    <div class="layui-tab layui-tab-brief customtab_one" lay-filter="">
+<!--                        <ul class="layui-tab-title time_tab">-->
+<!--                            <li class="layui-this">-->
+<!--                                <a href="javascript:void(0)" onclick="commonListRouteByTimeFlag(1,this)">进行中</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a href="javascript:void(0)" onclick="commonListRouteByTimeFlag(2,this)">未开始</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a href="javascript:void(0)" onclick="commonListRouteByTimeFlag(0,this)">已结束</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+                        <div class="layui-tab layui-tab-card" lay-filter="step_change" style="display: none">
+                            <ul class="layui-tab-title all_step">
+<!--                                <li class="layui-this">所有阶段</li>-->
+                            </ul>
+
+                        </div>
+                        <div class="layui-tab-content" id="common_table">
+                            <div class="layui-tab-item layui-show">
+                                <!--表单开始-->
+                                <div class="layui-col-md12">
+                                    <!--搜索盒子开始-->
+                                    <div>
+                                        <form class="layui-form">
+                                            <input id="clientId" type="hidden"/>
+                                            <div class="layui-form-item tabsearch">
+                                                <div class="layui-inline layui-hide timetable_tool">
+                                                    <label class="layui-form-label" style="width: auto;">选择模板:</label>
+                                                    <div class="layui-input-inline">
+                                                        <select id="template" lay-filter="allTemplates"  lay-search="" name="template">
+                                                            <option value="">请选择模板</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <!--<div class="layui-inline layui-hide timetable_tool">-->
+                                                <!--<button type="button" class="layui-btn" data-type="add">立即提交</button>-->
+                                                <!--<button type="reset" class="layui-btn layui-btn-primary edit_hide" data-type="cancel">取消</button>-->
+
+                                                <!--</div>-->
+                                                <!--<div class="layui-col-md12 tabsearch">-->
+                                                <div class="layui-inline">
+                                                    <input autocomplete="off" class="layui-input" id="search_box" name="id" placeholder="请输入搜索关键字" />
+                                                </div>
+                                                <!--<input type="button" class="layui-btn" data-type="reload" value="搜索" />-->
+                                                <button class="layui-btn" data-type="reload" type="button">
+                                                    <i class="layui-icon layui-icon-search"></i>搜索
+                                                </button>
+                                                <a class="layui-btn breadcrumb_select deleteTimetable layui-hide" data-type="deleteTimetable" href="javascript:void(0)">批量删除</a>
+                                                <!--</div>-->
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <!-- 搜索盒子结束-->
+                                    <table class="layui-table" id="menu" lay-filter="menuList"></table>
+                                    <table class="layui-table layui-hide" id="exprortTable" lay-filter="exprortTableList" style="display: none"></table>
+                                </div>
+                                <!--表单结束-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script type="text/html" id="edit">
+    <div class="layui-btn-group">
+        <a class="layui-btn table_edit" lay-event="detail">总览</a>
+        <a class="layui-btn table_edit" lay-event="nextList">查看</a>
+        {{# if(d.newFlag == 1){ }}
+        <a class="layui-btn table_edit" lay-event="new">填写</a>
+        {{# } }}
+<!--        {{# if(d.step>0&&d.nextFlag == 1&&d.timeFlag != 2&&d.timeFlag != 0){ }}-->
+<!--        <a class="layui-btn table_edit" lay-event="nextstep">下一阶段</a>-->
+<!--        {{# } }}-->
+        <!--<a data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>-->
+<!--        {{# if(d.deleteFlag == 1){ }}-->
+<!--        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+<!--        {{# } }}-->
+    </div>
+</script>
+<script th:src="@{/modules/configcenter/process/linkList.js}"></script>
+<!--<script>-->
+<!--    layui.config({-->
+<!--        base:'../'-->
+<!--    }).extend({-->
+<!--        index:'lib/index'-->
+<!--    }).use(['index','configcenter/process/commonList'])-->
+<!--</script>-->
+
+</html>

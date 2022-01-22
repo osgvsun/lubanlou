@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/layui/css/layui.css}" >
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/style/admin.css}" >
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/css/expand.css}" >
+    <link media="all" rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+</head>
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="switchpermissionsbox" id="switchpermissionsbox">
+        <div class="layui-row layui-col-space10" id="authSelect">
+
+        </div>
+        <!--操作按钮开始-->
+        <div class="layui-col-lg12 bottom_btnbox layui-hide">
+            <input type="button" lay-filter="switchpermissionsbtn" id="switchpermissionsbtn" class="layui-btn"
+                   lay-submit value="立即提交"/>
+            <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+        </div>
+        <!--操作按钮结束-->
+    </form>
+</div>
+<!--主体结束-->
+<script th:src="@{/modules/teachResource/static/layui/layui.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/vue.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/global.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/xm-select.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:inline="javascript">
+    const siteId = [[${session.cid}]];
+    const username = [[${session.user.username}]];
+    const httpBaseUrl = /*[[${gvsunExam}]]*/'';
+</script>
+<script th:src="@{/modules/teachResource/switchPermissions.js}"></script>
+</body>
+</html>

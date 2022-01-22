@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="homeworklistbox" id="homeworklistbox">
+				<div class="layui-fluid">
+					<div classs="layui-row layui-col-space20">
+						<div class="layui-col-md12">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<span th:if="${type=='knowledge' || type == 'null' || type == '' || type == null}">知识</span>
+									<span th:if="${type=='skill'}">实验作业</span>
+									<span th:if="${type=='200' && title == 'report'}">实验报告</span>
+									<span th:if="${type=='200' && title == 'data'}">实验数据</span>
+									<span th:if="${type=='experience'}">体验作业</span>
+									<label class="layui-icon layui-icon-add-1 newhomework header_btn" data-method="newhomework" lay-tips="新增作业"></label>
+									<!--切换课程-->
+									<div class="fr searchbox">
+										<div class="layui-inline" id="site">
+										</div>
+										<input type="button" class="layui-btn" data-type="reload" value="切换课程"/>
+									</div>
+									<!---->
+									<!--搜索开始-->
+									<div class="fr search_line">
+<!--										<div class="layui-inline">-->
+<!--											<select name="site" lay-search>-->
+<!--												<option value="">请选择作业状态</option>-->
+<!--												<option value="1">进行中</option>-->
+<!--												<option value="2">未开始</option>-->
+<!--												<option value="3">已结束</option>-->
+<!--											</select>-->
+<!--										</div>-->
+										<div class="layui-inline">
+											<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+										</div>
+										<input type="button" class="layui-btn" data-type="reload" value="搜索" />
+									</div>
+									<!--搜索结束-->
+								</div>
+								<div class="layui-card-body">
+									<div class="layui-col-md12">
+										<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+											<ul class="layui-tab-title">
+												<li>
+													<a th:href="@{/gvsunwork/teacherNormalHomeworkList(type=${type},title=${title})}" name="teacherNormalHomeworkList" target="i">普通作业</a>
+												</li>
+												<li class="layui-this">
+													<a th:href="@{/gvsunwork/teacherTeamHomeworkList(type=${type},title=${title})}" name="teacherTeamHomeworkList" target="i">小组作业</a>
+												</li>
+											</ul>
+											<div class="layui-tab-content">
+												<div class="layui-tab-item layui-show">
+													<div class="layui-col-md12">
+														<!--表单开始-->
+														<table class="layui-hide" id="homeworklist" lay-filter="homeworklist"></table>
+														<script type="text/html" id="state">
+															<font class="font_green">进行中</font>
+															<font class="font_grey">未开始</font>
+															<font class="font_orange">已结束</font>
+														</script>
+														<script type="text/html" id="toolbar">
+															<a class="layui-btn layui-btn-xs" lay-event="correct">批改</a>
+															<a class="layui-btn layui-btn-green layui-btn-xs" lay-event="edit">编辑</a>
+															<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+															<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+														</script>
+														<!--表单结束-->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/gvsunWork/globalscript"></div>
+		<script th:src="@{/modules/gvsunWork/static/js/global.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/titleHash.js}"></script>
+		<script th:inline="javascript">
+			let type = [[${type}]];
+			let title = [[${title}]];
+			let siteId = [[${session.cid}]];
+		</script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/timeTransformation.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/teacherTeamHomeworkList.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+		<!--多选-->
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/plugins/formselect/formSelects-v4.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 159px;
+			}
+			
+			.layui-input-block {
+				margin-left: 159px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="editopentimebox" id="editopentimebox">
+				<div class="layui-row layui-col-space10">
+					<div class="layui-col-lg12">
+						<label class="layui-form-label">已设置开放日期范围</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="opendaterange" id="opendaterange" autocomplete="on" lay-verify="required" placeholder="请选择已设置开放日期范围" />
+						</div>
+					</div>
+					<div class="layui-col-lg12">
+						<label class="layui-form-label">开放星期</label>
+						<div class="layui-input-block">
+							<select name="week" xm-select="week" xm-select-skin="normal" xm-select-search="" lay-filter="" lay-verify="required" lay-search="">
+								<option value="">请选择开放星期</option>
+								<option value="1">周一</option>
+								<option value="2">周二</option>
+								<option value="3">周三</option>
+								<option value="4">周四</option>
+								<option value="5">周五</option>
+								<option value="6">周六</option>
+								<option value="7">周日</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-col-lg12">
+						<label class="layui-form-label">开放时间范围</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="opentimerange" id="opentimerange" autocomplete="on" lay-verify="required" placeholder="请选择开放时间范围" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">等级</label>
+						<div class="layui-input-block">
+							<select name="grade" lay-search lay-verify="required">
+								<option value="">请选择等级</option>
+								<option value="1">全部</option>
+								<option value="2">B级及以上</option>
+								<option value="3">A级</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">最小提前预约时间(小时)</label>
+						<div class="layui-input-block">
+							<input type="number" class="layui-input" name="mintime" autocomplete="on" lay-verify="required" placeholder="请输入最小提前预约时间" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">最大提前预约时间(小时)</label>
+						<div class="layui-input-block">
+							<input type="number" class="layui-input" name="maxtime" autocomplete="on" lay-verify="required" placeholder="请输入最大提前预约时间" />
+						</div>
+					</div>
+				</div>
+				<!--操作按钮开始-->
+				<div class="layui-col-lg12 bottom_btnbox layui-hide">
+					<input type="button" lay-filter="editopentimebtn" id="editopentimebtn" class="layui-btn" lay-submit value="立即提交" />
+					<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+				</div>
+				<!--操作按钮结束-->
+			</form>
+		</div>
+		<!--主体结束-->
+		<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+		<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/plugins/formselect/formSelects-v4.min.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			// const configMachineUid = [[${configMachineUid}]];
+			// const username = [[${session.user.username}]];
+			const httpDeviceUrl = /*[[${deviceHost}]]*/'';
+			// const  httpDeviceUrl = 'http://localhost:8844/'
+			let editData = {};
+			function child(data) {
+				editData = data;
+			}
+		</script>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/editOpenTime.js}"></script>
+	</body>
+
+</html>​​​

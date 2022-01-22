@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <style>
+        /*.layui-table{*/
+        /*    width: 100%;*/
+        /*    background: #fff;*/
+        /*    color: #666;*/
+        /*}*/
+        /*th,td{*/
+        /*    border: 1px solid #666;*/
+        /*    position: relative;*/
+        /*    padding: 9px 15px;*/
+        /*    min-height: 20px;*/
+        /*    line-height: 20px;*/
+        /*    font-size: 14px;*/
+        /*}*/
+        #table thead, #table tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: #a8bfde;
+        }
+        #table {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #a8bfde;
+        }
+
+        /* Padding and font style */
+        #table td, #table th {
+            padding: 5px 10px;
+            font-size: 12px;
+            font-family: Verdana;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Alternating background colors */
+        #table tr:nth-child(even) {
+            /*background: #666*/
+        }
+        #table tr:nth-child(odd) {
+            background: #FFF
+        }
+        .layui-elem-field{
+            border-color: #eee;
+            margin: 10px 0 20px;
+            border-width: 1px 0 0;
+            padding: 0;
+            border-style: solid;
+        }
+        .layui-elem-field legend{
+            margin-left: 20px;
+            padding: 0 10px;
+            font-size: 20px;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <th:block th:if="${state == '1'}">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>管理员导入模版</legend>
+        </fieldset>
+        <table class="layui-table" id="table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>工号</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>11111111</td>
+            </tr>
+            <tr>
+                <td>11111112</td>
+            </tr>
+            <tr>
+                <td>11111113</td>
+            </tr>
+            <tr>
+                <td>11111114</td>
+            </tr>
+            </tbody>
+        </table>
+    </th:block>
+    <th:block th:if="${state == '0'}">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>仪器设备导入模版</legend>
+        </fieldset>
+        <table class="layui-table" id="table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>设备编号</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>00000017</td>
+            </tr>
+            <tr>
+                <td>00000018</td>
+            </tr>
+            <tr>
+                <td>00000019</td>
+            </tr>
+            <tr>
+                <td>00000020</td>
+            </tr>
+            </tbody>
+        </table>
+    </th:block>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"name": "test1",
+			"type": "test2",
+			"use": "√",
+			"required": "×"
+		}, {
+			"name": "test1",
+			"type": "test2",
+			"use": "√",
+			"required": "×"
+		}, {
+			"name": "test1",
+			"type": "test2",
+			"use": "√",
+			"required": "×"
+		}, {
+			"name": "test1",
+			"type": "test2",
+			"use": "√",
+			"required": "×"
+		}, {
+			"name": "test1",
+			"type": "test2",
+			"use": "√",
+			"required": "×"
+		}
+	]
+}

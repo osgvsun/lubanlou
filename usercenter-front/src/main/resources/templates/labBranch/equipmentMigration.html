@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+</head>
+<body>
+    <div class="main_content_box">
+        <div class="full_box">
+            <!--主体开始-->
+            <div class="content_box">
+                <form class="layui-form lesson_card" action="" lay-filter="equipmentmigrationbox" id="equipmentmigrationbox">
+                    <div class="layui-row layui-col-space20">
+                        <!--搜索开始-->
+                        <div class="layui-col-md12 tabsearch search_line">
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input class="layui-input" name="searchid" id="searchbox" autocomplete="on"
+                                           placeholder="请输入实验分室名称搜索内容"/>
+                                </div>
+                            </div>
+                            <input type="button" class="layui-btn sureSearch" data-type="reload" value="搜索"/>
+                        </div>
+                        <!--搜索结束-->
+                        <div class="layui-col-md12 head_tab">
+                            <!--表单开始-->
+                            <table class="layui-hide" id="equipmentmigration" lay-filter="equipmentmigration"></table>
+                        </div>
+                    </div>
+                    <!--操作按钮开始-->
+                    <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                        <input type="button" lay-filter="equipmentmigrationbtn" id="equipmentmigrationbtn" class="layui-btn"
+                               value="立即提交"/>
+                        <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+                    </div>
+                    <!--操作按钮结束-->
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:inline="javascript">
+        const ids = [[${ids}]];
+        const timetableHost = [[${timetableHost}]];
+    </script>
+    <script th:src="@{/modules/labBranch/equipmentMigration.js}"></script>
+</body>
+</html>

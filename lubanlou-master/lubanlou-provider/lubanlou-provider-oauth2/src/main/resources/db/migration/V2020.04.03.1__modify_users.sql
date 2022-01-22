@@ -1,0 +1,1 @@
+alter table users modify `is_enterprise` boolean not null default false comment '是否是企事业用户';

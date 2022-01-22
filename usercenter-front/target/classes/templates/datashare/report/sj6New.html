@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>SJ6</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.css}">
+    <script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.js}"></script>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName= localStorage['roleCname'];
+    </script>
+</head>
+<body>
+<div class="toolbar">
+    <b>总数：<span id="total"></span></b>
+</div>
+<table id="table"
+       data-search="true"
+       data-toolbar=".toolbar"
+>
+    <thead>
+    <tr>
+        <th data-field="laboratoryNumber">实验室编号</th>
+        <th data-field="laboratoryName">实验室名称</th>
+        <th data-field="laboratoryType">实验室类别</th>
+        <th data-field="buildYear">建立年份</th>
+        <th data-field="laboratoryArea">实验室面积</th>
+        <th data-field="laboratoryClass">实验室类型</th>
+        <th data-field="belongingSubject">所属学科</th>
+        <th data-field="awardsNational">教师获奖与成果（国家级）</th>
+        <th data-field="awardsProvincial">教师获奖与成果（省部级）</th>
+        <th data-field="awardsPatent">教师获奖与成果（发明专利）</th>
+        <th data-field="studentAwards">学生获奖情况</th>
+        <th data-field="teachingThreeMajorSearches">教学方面论文和教材情况（三大检索收录）</th>
+        <th data-field="researchThreeMajorSearches">科研方面论文和教材情况（三大检索收录）</th>
+        <th data-field="teachingCorePublication">教学方面论文和教材情况（核心刊物）</th>
+        <th data-field="researchCorePublication">科研方面论文和教材情况（核心刊物）</th>
+        <th data-field="papersTeachingMaterials">论文和教材情况（实验教材）</th>
+        <th data-field="researchProjectsProvincial">科研及社会服务情况中科研项目数（省部级以上）</th>
+        <th data-field="researchProjectsOther">科研及社会服务情况中科研项目数（其它）</th>
+        <th data-field="socialServiceItems">科研及社会服务情况中社会服务项目数</th>
+        <th data-field="socialServiceItemsProvincial">科研及社会服务情况中教研项目数（省部级以上）</th>
+        <th data-field="socialServiceItemsOther">科研及社会服务情况中教研项目数（其它）</th>
+        <th data-field="graduationProjectSpecialist">毕业设计和论文人数（专科生人数）</th>
+        <th data-field="graduationProjectUndergraduate">毕业设计和论文人数（本科生人数）</th>
+        <th data-field="graduationProjectPostgraduate">毕业设计和论文人数（研究生人数）</th>
+        <th data-field="openExperimentItemsOnCampus">开放实验个数（校内）</th>
+        <th data-field="openExperimentItemsOffCampus">开放实验个数（校外）</th>
+        <th data-field="openExperimentPeopleOnCampus">开放实验人数（校内）</th>
+        <th data-field="openExperimentPeopleOffCampus">开放实验人数（校外）</th>
+        <th data-field="openExperimentManHoursOnCampus">开放实验人时数（校内）</th>
+        <th data-field="openExperimentManHoursOffCampus">开放实验人时数（校外）</th>
+        <th data-field="partTimeStaff">兼任人员数</th>
+        <th data-field="maintenanceExpenses">实验教学运行经费小计</th>
+        <th data-field="consumptionFee">其中教学实验年材料消耗费</th>
+    </tr>
+    </thead>
+</table>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        let $table = $('#table')
+        let yearCode = [[${yearCode}]];
+        let system = [[${system}]];
+        $.ajax({
+            url: datashareHost + "getSJ6New",
+            method: "get",
+            data: {
+                limsAuth: $.cookie('currentAuthBydatashare'),
+                yearCode: yearCode,
+                system: system
+            },
+            dataType: "json",
+            success: function (data) {
+                $('#total').text(data.length);
+                $table.bootstrapTable({data: data});
+            }
+        });
+    })
+</script>
+</body>
+</html>

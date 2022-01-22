@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <!--    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/bootstrap/js/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+    <!--树形组件-->
+    <link rel="stylesheet" th:href="@{/plugins/eletree/eleTree.css}" media="all">
+    <!--masonry模块管理-->
+    <link rel="stylesheet" th:href="@{/plugins/masonry/masonry-docs.css}" media="all">
+    <script type="text/javascript" th:src="@{/plugins/masonry/masonry.pkgd.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+</head>
+
+<body>
+<div class="main_content_box">
+    <form class="layui-form" action="" lay-filter="stationmainbox" id="stationmainbox">
+        <!--左中工具栏开始-->
+        <div class="main_tit_sub" id="left">
+            <!--引用框架搭桥开始-->
+            <iframe class="soniframe" id="soniframe" src="" name="i"></iframe>
+            <!--引用框架搭桥结束-->
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md12">
+                    <!--树形目录搜索开始-->
+                    <input type="text" placeholder="请输入关键字进行搜索" autocomplete="off" class="layui-input eleTree-search1">
+                    <!--树形目录搜索结束-->
+                </div>
+                <div class="layui-col-md12">
+                    <!--树形目录开始-->
+                    <div class="eleTree ele1 spec_tree_one" lay-filter="data1"></div>
+                    <!--树形目录结束-->
+                </div>
+                <!--树形目录调试按钮，已隐藏，不调试可删除，开始-->
+                <div class="layui-col-md12">
+                    <div class="eleTree layui-form ele_control_box">
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="renderAfterExpand" lay-skin="primary" checked>是否在第一次展开某个树节点后才渲染其子节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="highlightCurrent" lay-skin="primary">是否高亮当前选中节点，默认值是 false
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="defaultExpandAll" lay-skin="primary" checked>是否默认展开所有节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="expandOnClickNode" lay-skin="primary" checked="">是否在点击节点的时候展开或者收缩节点，
+                            默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="checkOnClickNode" lay-skin="primary">是否在点击节点的时候选中节点，默认值为
+                            false，即只有在点击复选框时才会选中节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="defaultExpandedKeys" lay-skin="primary">默认展开的节点的 key 的数组
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="autoExpandParent" lay-skin="primary" checked>展开子节点的时候是否自动展开父节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="showCheckbox" lay-skin="primary" checked>节点是否可被选择
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="checkStrictly" lay-skin="primary">在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为
+                            false
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="defaultCheckedKeys" lay-skin="primary">默认勾选的节点的 key 的数组
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="accordion" lay-skin="primary">是否每次只打开一个同级树节点展开（手风琴效果）
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="indent" lay-skin="primary">相邻级节点间的水平缩进，单位为像素
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="lazy" lay-skin="primary">是否懒加载子节点，需与 load 方法结合使用
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="load" lay-skin="primary">加载子树数据的方法，仅当 lazy 属性为true 时生效
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="draggable" lay-skin="primary" checked="">是否开启拖拽节点功能
+                        </div>
+                        <div class="inp">
+                            <h3>contextmenuList</h3>
+                            <input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="copy"
+                                   lay-skin="primary" checked>
+                            <input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="add"
+                                   lay-skin="primary" checked>
+                            <input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="edit"
+                                   lay-skin="primary" checked>
+                            <input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="remove"
+                                   lay-skin="primary" checked>
+                        </div>
+                        <div class="inp">
+                            <h3>indent</h3>
+                            <div class="slideTest"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--树形目录调试按钮，已隐藏，不调试可删除，结束-->
+            </div>
+        </div>
+        <!--左中工具栏结束-->
+        <!--主体开始-->
+        <div class="content_box">
+            <div class="full_box">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <a th:href="@{/modules/openReservation/static/images/room1.jpg}" class="header_link_btn" target="_blank">本层楼层图查看</a>
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space20">
+                                <!--模板搜索开始-->
+                                <div class="layui-col-md12 search_line short155_input layui-col-space10">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">搜索项</label>
+                                        <div class="layui-inline">
+                                            <input class="layui-input" name="searchid" id="searchbox" autocomplete="on"
+                                                   placeholder="实验室/编号">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">预约性质</label>
+                                        <div class="layui-inline">
+                                            <select name="nature" lay-search>
+                                                <option value="">请选择</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">预约时间段</label>
+                                        <div class="layui-inline">
+                                            <input class="layui-input" name="searchdate" id="searchdate"
+                                                   autocomplete="on" placeholder="请选择">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">软件名称</label>
+                                        <div class="layui-inline">
+                                            <input class="layui-input" name="searchequipment" id="searchequipment"
+                                                   autocomplete="on" placeholder="请输入">
+                                        </div>
+                                    </div>
+                                    <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                                    <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+                                </div>
+                                <!--模板搜索结束-->
+                                <div class="layui-col-md12">
+                                    <div class="duo">
+                                        <div class="grid"></div>
+                                        <!--按数字排序吸附-->
+                                    </div>
+                                    <!--操作按钮开始-->
+                                    <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                                        <input type="button" lay-filter="selectmodularbtn" id="selectmodularbtn"
+                                               class="layui-btn" lay-submit value="立即提交"/>
+                                        <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+                                    </div>
+                                    <!--操作按钮结束-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--主体结束-->
+        <!--右侧栏开始-->
+        <div class="quick_line blueside_quick_line">
+            <!--<a href="#"><br/></a>-->
+            <div class="top layui-icon layui-icon-top"></div>
+        </div>
+        <!--右侧栏结束-->
+    </form>
+</div>
+<script type="text/javascript" th:src="@{/teachPublic/layui/layui.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/myProject.js}"></script>
+<script type="text/javascript" th:src="@{/js/pinyinMatch.js}"></script>
+<script th:src="@{/js/cookie.js}"></script>
+<script th:src="@{/modules/labBranch/static/js/labTreeCommonFn.js}"></script>
+<script th:inline="javascript">
+    const labRoomHost = [[${labRoomHost}]];
+    const httpBaseUrl = /*[[@{/}]]*/'';
+    const username = [[${session.user.username}]];
+</script>
+<script th:src="@{/modules/openReservation/stationMain.js}"></script>
+</body>
+</html>

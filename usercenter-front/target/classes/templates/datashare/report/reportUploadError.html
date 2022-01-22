@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>SJ4</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.css}">
+    <script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.js}"></script>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName= localStorage['roleCname'];
+    </script>
+</head>
+<body>
+<div class="toolbar">
+    <b>总数：<span id="total"></span></b>
+</div>
+<table id="table"
+       data-search="false"
+       data-toolbar=".toolbar"
+>
+    <thead>
+    <tr>
+        <th data-field="primaryKey">主关键字</th>
+        <th data-field="log">出错日志</th>
+    </tr>
+    </thead>
+</table>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        let $table = $('#table')
+        let yearCode = [[${yearCode}]];
+        let system = [[${system}]];
+        let errorLog = parent.errorLog;
+        var json = JSON.parse(errorLog);
+        $('#total').text(json.length);
+        $table.bootstrapTable({data: json});
+        console.log(errorLog);
+    })
+</script>
+</body>
+</html>

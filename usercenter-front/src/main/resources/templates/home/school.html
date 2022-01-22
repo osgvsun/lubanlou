@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>校级平台</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		<!--地图引用开始-->
+		<link href="../../layuiadmin/static/plugins/school/css/easyui.css" rel="stylesheet" type="text/css">
+		<link href="../../layuiadmin/static/plugins/school/css/room.css" rel="stylesheet" type="text/css" />
+		<script language="javascript" type="text/javascript" src="../../layuiadmin/static/plugins/school/js/jquery.min.js"></script>
+		<script language="javascript" type="text/javascript" src="../../layuiadmin/static/plugins/school/js/jquery.easyui.min.js"></script>
+		<script language="javascript" type="text/javascript" src="../../layuiadmin/static/plugins/school/js/echarts.js"></script>
+		<script language="javascript" type="text/javascript" src="../../layuiadmin/static/plugins/school/js/echarts-wordcloud.js"></script>
+		<script language="javascript" type="text/javascript" src="../../layuiadmin/static/plugins/school/js/bmap.min.js"></script>
+		<script language="javascript" type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=482C5Mjpf8l0D8lDa8louwDGR0L1gIou"></script>
+		<script language="javascript" type="text/javascript" src="../../layuiadmin/static/plugins/school/js/geoCoord.js"></script>
+		<script language="javascript" type="text/javascript" src="../../layuiadmin/static/plugins/school/js/room.js"></script>
+		<!--地图引用结束-->
+		<!--统一样式引用-->
+		<link rel="stylesheet" href="../../layuiadmin/static/css/expand.css" media="all">
+	</head>
+
+	<body>
+		<!--<img class="security_map" src="../../layuiadmin/static/images/map_school.png" />-->
+		<div id="main">
+			<!-- 刷新 -->
+			<!--<div id="refresh">
+            <span id="refreshTime">最后刷新时间：2018-05-06 23:13.24</span>
+        </div>-->
+			<!-- 刷新结束 -->
+			<div class="main_box_top">
+				<div class="main_box">
+					<div class="y_gauge">
+						<!-- 进度条区域开始-->
+						<div id="y_gauge1"></div>
+						<div id="y_gauge2"></div>
+						<div id="y_gauge3"></div>
+						<div id="y_gauge4"></div>
+						<!-- 进度条区域结束-->
+					</div>
+
+					<!-- 螺旋图开始 -->
+					<div id="orderStatus"></div>
+					<div class="contentButton" style="top:822px;left:453px">
+						<a class="a1" href="javascript:void(0);" onclick="javascript:openDialog('modalDlg');">&nbsp;</a>
+					</div>
+					<!-- 螺旋图结束 -->
+				</div>
+
+				<div class="main_box">
+					<!-- 地图开始 -->
+					<div id="map" style="display:none;"></div>
+					<!-- 地图结束 -->
+				</div>
+
+				<div class="main_box">
+					<!-- 产品饼图开始 -->
+					<div id="productPie"></div>
+					<!-- 产品饼图结束 -->
+				</div>
+
+				<div class="main_box">
+					<!-- 业务进展图开始 -->
+					<div id="businessProgress"></div>
+					<div class="contentButton" style="top:822px;left:3679px">
+						<a class="a1" href="javascript:void(0);" onclick="javascript:openDialog('modalDlg');">&nbsp;</a>
+					</div>
+					<!-- 业务进展图结束 -->
+				</div>
+			</div>
+			<div class="main_box_bottom">
+				<div class="main_box">
+					<!-- 安全项目进展展示开始-->
+					<div id="plan"></div>
+					<div class="contentButton" style="top:1402px;left:453px">
+						<a href="javascript:void(0);" onclick="javascript:openDialog('modalDlg');">&nbsp;</a>
+					</div>
+					<!-- 安全项目进展展示结束-->
+				</div>
+
+				<div class="main_box">
+					<!-- 安全指标分析展示开始-->
+					<div id="quality"></div>
+					<div class="contentButton" style="top:1402px;left:1532px">
+						<a href="javascript:void(0);" onclick="javascript:openDialog('modalDlg');">&nbsp;</a>
+					</div>
+					<!-- 安全指标分析展示结束-->
+				</div>
+
+				<div class="main_box">
+					<!-- 整改完成情况展示开始-->
+					<div id="produce">
+						<table width="100%" cellpadding="6" cellspacing="0">
+							<tr class="row1">
+								<td rowspan="2"><span id="currentDate">2018/04/25</span></td>
+								<td colspan="2">制度落实</td>
+								<td colspan="2">操作违规</td>
+								<td colspan="2">隐患整改</td>
+							</tr>
+							<tr class="row1">
+								<td>职责</td>
+								<td>人员</td>
+								<td>检查</td>
+								<td>汇报</td>
+								<td>设施</td>
+								<td>环境</td>
+							</tr>
+							<tr class="row2">
+								<td>已处理</td>
+								<td>48</td>
+								<td>48</td>
+								<td>48</td>
+								<td>48</td>
+								<td>48</td>
+								<td>48</td>
+							</tr>
+							<tr class="row1">
+								<td>处理中</td>
+								<td>34</td>
+								<td>34</td>
+								<td>34</td>
+								<td>34</td>
+								<td>34</td>
+								<td>34</td>
+							</tr>
+							<tr class="row2">
+								<td>未处理</td>
+								<td>30</td>
+								<td>28</td>
+								<td>28</td>
+								<td>26</td>
+								<td>25</td>
+								<td>8</td>
+							</tr>
+							<tr class="row2">
+								<td>合计</td>
+								<td>30</td>
+								<td>28</td>
+								<td>28</td>
+								<td>26</td>
+								<td>25</td>
+								<td>8</td>
+							</tr>
+							<tr class="row1">
+								<td>总计</td>
+								<td colspan="2">22</td>
+								<td colspan="2">65</td>
+								<td colspan="2">44</td>
+							</tr>
+						</table>
+					</div>
+					<div class="contentButton" style="top:1402px;left:2598px">
+						<a href="javascript:void(0);" onclick="javascript:openDialog('modalDlg');">&nbsp;</a>
+					</div>
+					<!-- 整改完成情况展示结束-->
+				</div>
+
+				<div class="main_box">
+					<!-- 实验室词云展示开始-->
+					<div id="wordCloud"></div>
+					<div class="contentButton" style="top:1402px;left:3679px">
+						<a href="javascript:void(0);" onclick="javascript:openDialog('modalDlg');">&nbsp;</a>
+					</div>
+					<!-- 实验室词云结束-->
+				</div>
+			</div>
+
+			<!-- 仪表盘区域开始-->
+			<!-- <div id="gauge1"></div>
+            <div class="gaugeTitle" style="left:2200px;top:480px;"><sapn id="vg1">32</sapn>&nbsp;m<sup>3</sup>/d</div>
+            <div id="gauge2"></div>
+            <div class="gaugeTitle" style="left:2550px;top:480px;"><sapn id="vg2">32</sapn>&nbsp;KVA</div>
+            <div id="gauge3"></div>
+            <div class="gaugeTitle" style="left:2910px;top:480px;"><sapn id="vg3">32</sapn>&nbsp;Nm<sup>3</sup>/h</div>
+            <div id="gauge4"></div>
+            <div class="gaugeTitle" style="left:2380px;top:750px;"><sapn id="vg4">32</sapn>&nbsp;m<sup>3</sup>/m</div>
+            <div id="gauge5"></div>
+            <div class="gaugeTitle" style="left:2730px;top:750px;"><sapn id="vg5">32</sapn>&nbsp;t/h</div> -->
+			<!-- 仪表盘区域结束-->
+
+			<!--弹出窗口-->
+			<!--<div id="popWindow">
+                <div style="padding:20px;font-size:32px; background-color:#051E3C;color:#B7E1FF; border-bottom:1px solid #09F">弹出窗口标题</div>
+            </div>-->
+			<!--弹出窗口结束---->
+		</div>
+
+		<!--编辑系统用户的弹出窗口-->
+		<div id="modalDlg" class="easyui-dialog" title="弹出窗口" data-options="modal:true,closed:true,buttons:
+        [{
+                    text:'确定',
+                    iconCls:'icon-ok',
+                    handler:function(){
+                        $('#modalDlg').dialog('close');
+                    }
+                },{
+                    text:'取消',
+                    handler:function(){
+                        $('#modalDlg').dialog('close');
+                    }
+                }]" style="padding:10px">
+			<table width="100%" cellpadding="5">
+				<tr>
+					<td width="80" align="center">用户名称:</td>
+					<td><input type="text" name="updateUsername" id="updateUsername" value=""></td>
+				</tr>
+				<tr>
+					<td align="center">登录密码:</td>
+					<td><input type="text" name="updateUserpass" id="updateUserpass" value=""></td>
+				</tr>
+				<tr>
+					<td align="center">&nbsp;</td>
+					<td height="30">如无需修改密码，请留空</td>
+				</tr>
+				<tr>
+					<td align="center">用户类型:</td>
+					<td>
+						<select name="updateUserType" id="updateUserType">
+							<option value="">--请选择--</option>
+							<option value="administrator">管理员</option>
+							<option value="user">系统用户</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">用户状态:</td>
+					<td>
+						<input type="radio" name="updateUserStatus" id="updateUserStatus1" value="0"><label for="updateUserStatus1">启用</label>&nbsp;&nbsp;
+						<input type="radio" name="updateUserStatus" id="updateUserStatus2" value="1"><label for="updateUserStatus2">禁用</label>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">用户说明:</td>
+					<td>
+						<input type="text" name="updateUserDescription" id="updateUserDescription" value="">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!--编辑系统用户的弹出窗口结束-->
+<div class="cover_box">
+			<img class="school_map" src="../../layuiadmin/static/images/school.png" />
+			<a class="link_pos sp1" href="college.html">
+				<img src="../../layuiadmin/static/images/position_icon.png" />
+				<label>进入学院1</label>
+			</a>
+			<a class="link_pos sp2" href="college.html">
+				<img src="../../layuiadmin/static/images/position_icon.png" />
+				<label>进入学院2</label>
+			</a>
+			<a class="link_pos sp3" href="college.html">
+				<img src="../../layuiadmin/static/images/position_icon.png" />
+				<label>进入学院3</label>
+			</a>
+		</div>
+		
+		<!--演示地图结束-->
+		<script src="../../layuiadmin/layui/layui.js?t=1"></script>
+		<script>
+			layui.config({
+				base: '../../layuiadmin/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index', 'school']);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,16 @@
+.layui-btn{
+	padding:0 30px !important;
+	margin-left:12px;
+	height:34px !important;
+	line-height:34px !important;
+	background-color: #0087ff !important;
+	color:#fff;
+	cursor: pointer;
+	border-radius: 3px;
+}
+button.layui-btn-primary{
+	background: #f7f7f7 !important;
+	line-height:32px !important;
+	color:#666 !important;
+	border:1px solid #C9C9C9;
+}

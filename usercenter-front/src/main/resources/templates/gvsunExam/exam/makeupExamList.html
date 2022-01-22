@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="makeupexamlistbox" id="makeupexamlistbox">
+				<div class="layui-fluid">
+					<div classs="layui-row layui-col-space20">
+						<div class="layui-col-md12">
+							<div class="layui-card">
+								<div class="layui-card-header">补考名单
+									<a href="#" class="fa fa-download header_btn" lay-tips="导出补考名单" id="exportedMakeUp"></a>
+									<!--<label class="layui-icon layui-icon-add-1 newmakeupexamlist header_btn" data-method="newmakeupexamlist" lay-tips="新增补考名单"></label>-->
+									<!--搜索开始-->
+									<div class="fr search_line">
+										<div class="layui-inline">
+											<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+										</div>
+										<input type="button" class="layui-btn" data-type="reload" value="搜索" />
+									</div>
+									<!--搜索结束-->
+								</div>
+								<div class="layui-card-body">
+									<div class="layui-row layui-col-space20">
+										<div class="layui-col-md12">
+											<!--表单开始-->
+											<table class="layui-hide" id="makeupexamlist" lay-filter="makeupexamlist"></table>
+											<!--表单结束-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/gvsunExam/globalscript"></div>
+		<script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const assignmentId = [[${assignmentId}]];
+			const siteId = [[${session.cid}]];
+		</script>
+		<script type="text/javascript" th:src="@{/modules/gvsunExam/exam/makeupExamList.js}"></script>
+	</body>
+</html>

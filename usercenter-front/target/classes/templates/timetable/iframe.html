@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" th:href="@{/modules/timetable/static/css/style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/icon.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/gray/easyui.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/modules/timetable/static/css/global_static.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+</head>
+<body style="overflow-y:auto;">
+<div class="dmrrr">
+    <div layout:fragment="timetable"></div>
+</div>
+</body>
+<!-- 弹出框插件的引用 -->
+<script type="text/javascript" th:src="@{/plugins/layer-v2.2/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/modules/timetable/static/js/browseXss.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.easyui.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js}"></script>
+</html>

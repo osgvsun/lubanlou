@@ -1,0 +1,150 @@
+/* CSS Document */
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,table,td,img,div,dl,dt,dd,input{margin:0;padding:0; box-sizing: border-box}
+body{font-size:12px;}
+img{border:none;}
+li{list-style:none;}
+input,select,textarea{outline:none;}
+textarea{resize:none;}
+a{text-decoration:none;}
+/*清浮动*/
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom:1;}
+
+/* 取消a标签点击后的虚线框 */
+a {outline: none;}
+a:active {star:expression(this.onFocus=this.blur());}
+input[type="text"]{
+    outline: none;
+}
+/*付款方式*/
+.payWrap{
+    width:950px;
+    min-height: 560px;
+    background: #FFFFFF;
+    margin: 0 auto;
+}
+.payHeader{
+    height: 56px;
+    line-height: 56px;
+    border-bottom: 1px solid #CCCCCC;
+    padding: 0 40px;
+}
+
+.payWrap .fontsize{
+    color:#d81e06 ;
+    font-size: 18px;
+    margin:0 5px;
+}
+.payContent{
+    padding:10px 20px;
+}
+.unionpayList{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin: 5px 0;
+    position: relative;
+    border: 2px solid #FFFFFF;
+}
+.unionpayList:hover{
+    cursor: pointer;
+    background: #f1f4fa;
+}
+.unionPrice{
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+.unionpay1{
+    padding: 0 20px 0 62px;
+    background: url("images/unionpay1.png") 20px center no-repeat;
+}
+.unionpay2{
+    padding: 0 20px 0 62px;
+    background: url("images/unionpay2.png") 20px center no-repeat;
+}
+.activeBtn{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: 2px solid #409eff;
+}
+.payBorder{
+    width: 100%;
+    border-top: 1px solid #f2f2f2;
+    margin-top: 30px;
+}
+.payBut{
+    display: block;
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: #409eff!important;
+    color: #FFFFFF!important;
+    float: left!important;
+    margin: 20px 0;
+}
+.wait{
+    display:block;
+    width:300px;
+    height: 32px;
+    margin: 30px 0 0 160px;
+    text-decoration: underline!important;
+}
+.img-pay {
+    height: 30px;
+    position: absolute;
+    top: 3px;
+    left: 135px;
+}
+.layui-layer-content{
+    background-color: #f4f6f9;
+}
+.row {
+    min-height: 457px;
+}
+.card {
+    height: 400px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.03);
+    background-color: #fff;
+    border-radius: 3px;
+    border: none;
+    position: absolute;
+    top: 6%;
+    left: 10%;
+    margin-bottom: 30px;
+    display: flex;
+}
+.card .card-header{
+    width: auto;
+    margin-top: 1.2rem;
+    border-bottom: 1px solid #f9f9f9;
+    line-height: 30px;
+    padding: 9px 25px;
+    height: 35px;
+    position: absolute;
+    left: 26%;
+}
+
+
+.card .card-header h4{
+    font-size: 16px;
+    line-height: 28px;
+    color: #036;
+    padding-right: 10px;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+#qrcode{
+    position: absolute;
+    top: 21%;
+    left: 18%;
+
+}
+@media screen and (max-width: 768px) {
+    .payWrap{
+        width:100%;
+    }
+}

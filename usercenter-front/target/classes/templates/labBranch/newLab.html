@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+    <style>
+        .main_content {
+            padding: 20px 20px 0;
+        }
+
+        .layui-form-label {
+            box-sizing: border-box;
+            width: 115px;
+            padding: 9px 0;
+        }
+
+        .layui-input-block {
+            margin-left: 125px;
+        }
+
+        .xm-select-parent .xm-select .xm-select-label {
+            width: auto;
+            white-space: nowrap;
+            overflow: visible;
+        }
+
+        @media screen and (max-height: 590px) {
+            .xm-select-parent .xm-form-selected dl,
+            .layui-form-selected dl {
+                max-height: 368px;
+            }
+        }
+
+        @media screen and (max-height: 500px) {
+            .xm-select-parent .xm-form-selected dl,
+            .layui-form-selected dl {
+                max-height: 155px;
+            }
+        }
+    </style>
+    <script th:inline="javascript">
+        var labRoomHost = [[${labRoomHost}]];
+    </script>
+</head>
+
+<body>
+
+<div class="main_content_box">
+    <div class="full_box">
+        <!--主体开始-->
+        <div class="content_box">
+            <form class="layui-form lesson_card" action="" lay-filter="newlabbox" id="newlabbox">
+                <div class="layui-card">
+                    <div class="layui-card-header">基础信息（必填）</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">房间号</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="number" placeholder="请输入编号" autocomplete="off"
+                                               class="layui-input" lay-verify="required"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="name" placeholder="请输入名称" autocomplete="off"
+                                               class="layui-input" lay-verify="required"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">所属实验中心</label>
+                                    <div class="layui-input-block">
+                                        <select name="core" lay-search lay-verify="required" lay-filter="core">
+                                            <option value="">请选择所属实验中心</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">所属实验室</label>
+                                    <div class="layui-input-block">
+                                        <select name="lab" lay-search lay-verify="required">
+                                            <option value="">请先选择所属实验中心</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">所属校区</label>
+                                    <div class="layui-input-block">
+                                        <select name="campus" lay-search lay-verify="required" lay-filter="campus">
+                                            <option value="">请选择所属校区</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">所属楼宇</label>
+                                    <div class="layui-input-block">
+                                        <select name="building" lay-search lay-verify="required" lay-filter="building">
+                                            <option value="">请先选择所属校区</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">所在楼层</label>
+                                    <div class="layui-input-block">
+                                        <select name="floor" lay-search lay-verify="required">
+                                            <option value="">请先选择所属楼宇</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">所属房间 <a href="javascript: void(0)" class="addSystemRoom">添加</a></label>
+                                    <div class="layui-input-block">
+<!--                                        <input type="text" name="systemRoom" placeholder="请添加所属房间" autocomplete="off"-->
+<!--                                               class="layui-input" lay-verify="required" readonly/>-->
+                                        <select name="systemRoom" lay-search lay-verify="required">
+                                            <option value="">请选择所属房间</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">使用面积(M²)</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="area" placeholder="请输入使用面积" autocomplete="off"
+                                               class="layui-input" lay-verify="required|number"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">容量</label>
+                                    <div class="layui-input-block">
+                                        <input type="number" name="capacity" placeholder="请输入大于0的整数容量"
+                                               autocomplete="off" class="layui-input" lay-verify="required|number"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">实验室类型</label>
+                                    <div class="layui-input-block">
+                                        <select name="cdictionaryByLabRoom" lay-search lay-verify="required">
+                                            <option value="">请输入实验室类型</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">是否可排课</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="isOpen" value="1" title="是" checked="">
+                                        <input type="radio" name="isOpen" value="0" title="否">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">性质</label>
+                                    <div class="layui-input-block">
+                                        <select name="labRoomNature" lay-search lay-verify="required">
+                                            <option value="">请选择</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">附加信息（非必填）</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">英文名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="englishname" placeholder="请输入英文名称" autocomplete="off"
+                                               class="layui-input"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">所属基地</label>
+                                    <div class="layui-input-block">
+                                        <select name="base" lay-search>
+                                            <option value="">请选择所属基地</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--<div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">实验室地点</label>
+                                    <div class="layui-input-block">
+                                        <select name="address" lay-search>
+                                            <option value="">请先选择所属楼宇</option>
+                                        </select>
+                                    </div>
+                                </div>-->
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">实验室类别</label>
+                                    <div class="layui-input-block">
+                                        <select name="category" lay-search>
+                                            <option value="">请选择实验室类别</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">建立时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="date" id="date" placeholder="请选择建立时间"
+                                               autocomplete="off" class="layui-input"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">实验室分类</label>
+                                    <div class="layui-input-block">
+                                        <select name="sort" lay-search>
+                                            <option value="">请选择实验室分类</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">所属学科</label>
+                                    <div class="layui-input-block">
+                                        <select name="lesson" lay-search>
+                                            <option value="">请选择所属学科</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">有无多媒体</label>
+                                    <div class="layui-input-block">
+                                        <select name="media" lay-search>
+                                            <option value="">请选择有无多媒体</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">是否校企共建</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="construction" value="1" title="是" checked="">
+                                        <input type="radio" name="construction" value="0" title="否">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">是否生产性实验室</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="productivelab" value="1" title="是" checked="">
+                                        <input type="radio" name="productivelab" value="0" title="否">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 float_dd">
+                                    <label class="layui-form-label">是否虚拟仿真实验室</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="simulationlab" value="1" title="是" checked="">
+                                        <input type="radio" name="simulationlab" value="0" title="否">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">实验室地点</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="detailAddress" placeholder="请输入详细地址信息，如道路、门牌号、小区、楼栋号、单元等信息" autocomplete="off"
+                                               class="layui-input"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">实验室描述</label>
+                                    <div class="layui-input-block">
+                                        <textarea class="layui-textarea" name="describe"
+                                                  placeholder="请输入实验室描述"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">规章制度</label>
+                                    <div class="layui-input-block">
+                                        <textarea class="layui-textarea" name="rule" placeholder="请输入规章制度"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">注意事项</label>
+                                    <div class="layui-input-block">
+                                        <textarea class="layui-textarea" name="attention"
+                                                  placeholder="请输入注意事项"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">获奖信息</label>
+                                    <div class="layui-input-block">
+                                        <textarea class="layui-textarea" name="award" placeholder="请输入获奖信息"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--操作按钮开始-->
+                <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                    <input type="button" lay-filter="newlabbtn" id="newlabbtn" class="layui-btn" lay-submit
+                           value="立即提交"/>
+                    <button type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+                </div>
+                <!--操作按钮结束-->
+            </form>
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script th:src="@{/modules/labBranch/static/js/global.js}"></script>
+<script th:src="@{/modules/labBranch/static/js/commonSelectInit.js}"></script>
+<script th:src="@{/modules/labBranch/static/js/labDataInit.js}"></script>
+<script th:src="@{/modules/labBranch/newLab.js}"></script>
+</body>
+</html>

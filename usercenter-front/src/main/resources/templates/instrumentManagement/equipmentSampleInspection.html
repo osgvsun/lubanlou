@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 140px;
+			}
+			
+			.layui-input-block {
+				margin-left: 140px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="equipmentsampleinspectionbox" id="equipmentsampleinspectionbox">
+				<div class="main_content">
+					<div class="layui-fluid">
+						<blockquote class="layui-elem-quote layui-quote-nm tag_box">
+							<fieldset class="layui-elem-field layui-field-title">
+								<legend class="deviceName">设备名称（这里是设备编号）</legend>
+								<span class="layui-breadcrumb breadcrumb_top" lay-separator="|">
+				                <a href="equipmentList" class="breadcrumb_btn">返回设备列表</a>
+							</span>
+							</fieldset>
+							<div class="li_cell_box">
+								<div class="li_cell"><i class="layui-icon layui-icon-auz"></i>设备型号：</div>
+								<div class="li_cell"><i class="layui-icon layui-icon-console"></i>所属学院：</div>
+								<div class="li_cell"><i class="layui-icon layui-icon-location"></i>所在实验室：</div>
+								<div class="li_cell"><i class="layui-icon layui-icon-user"></i>生产厂家：</div>
+								<div class="li_cell"><i class="layui-icon layui-icon-rmb"></i>价格：</div>
+							</div>
+							<div class="field_btn_box">
+								<a th:href="@{/instrumentmanagement/equipmentBasicInfo(uid=${uid})}">基本信息</a>
+								<a th:href="@{/instrumentmanagement/equipmentReserve(uid=${uid})}">预约设置</a>
+								<a th:href="@{/instrumentmanagement/equipmentTimeBooking(uid=${uid})}">机时预约</a>
+								<a href="#" class="field_btn_select">送样检测</a>
+								<a th:href="@{/instrumentmanagement/noticeManage(uid=${uid})}">仪器公告</a>
+								<a th:href="@{/instrumentmanagement/powerControllerSet(uid=${uid})}">电源控制器</a>
+							</div>
+						</blockquote>
+						<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+							<ul class="layui-tab-title">
+								<li class="layui-this">
+									<a href="javascript: void(0)">基础设置</a>
+								</li>
+								<li>
+									<a th:href="@{/instrumentmanagement/equipmentInspectProject(uid=${uid})}">检测项目</a>
+								</li>
+								<li>
+									<a th:href="@{/instrumentmanagement/equipmentSampleCharge(uid=${uid})}">附加收费</a>
+								</li>
+							</ul>
+							<div class="layui-tab-content">
+								<div class="layui-tab-item layui-show">
+									<!--模板选择开始-->
+									<div id="template_box" class="layui-card">
+										<div class="layui-card-header">送样检测模板选择</div>
+										<div class="layui-card-body">
+											<div class="layui-inline">
+												<select name="template" lay-search="" lay-filter="template">
+
+												</select>
+											</div>
+										</div>
+									</div>
+									<!--模板选择结束-->
+									<!--送样预约开始-->
+									<div id="info_box" class="layui-card">
+										<div class="layui-card-header">送样预约</div>
+										<div class="layui-card-body">
+											<div class="fill_box">
+												<div class="layui-row layui-col-space10 short65_input">
+													<div class="layui-col-lg4">
+														<label class="layui-form-label">最大接受送样数：</label>
+														<div class="layui-input-block">
+															<div class="layui-inline">
+																<input class="layui-input" type="number" name="maxReceive" autocomplete="on" lay-verify="required" placeholder="请输入" />
+															</div>
+															个
+														</div>
+													</div>
+													<div class="layui-col-lg4">
+														<label class="layui-form-label">最少提前预约时间：</label>
+														<div class="layui-input-block">
+															<div class="layui-inline">
+																<input class="layui-input" type="number" name="minAheadDay" autocomplete="on" lay-verify="required" placeholder="请输入" />
+															</div>
+															天
+														</div>
+													</div>
+													<div class="layui-col-lg4">
+														<label class="layui-form-label">最多提前预约时间：</label>
+														<div class="layui-input-block">
+															<div class="layui-inline">
+																<input class="layui-input" type="number" name="maxAheadDay" autocomplete="on" lay-verify="required" placeholder="请输入" />
+															</div>
+															天
+														</div>
+													</div>
+													<div class="layui-col-lg12">
+														<label class="layui-form-label">需要审核：</label>
+														<div class="layui-input-block">
+															<input type="radio" name="needAudit" value="1" title="是" lay-filter="examine">
+															<input type="radio" name="needAudit" value="2" title="否" lay-filter="examine" checked="">
+														</div>
+													</div>
+													<div class="layui-col-lg12 examine_box hide">
+														<label class="layui-form-label">设备审核流程：</label>
+														<div class="layui-input-block short130_input">
+															一级审核:
+															<div class="layui-inline">
+																<select name="firstexamine" lay-search="">
+																	<option value="-1">请选择一级审核</option>
+																	<option value="off">无</option>
+																	<option value="on">课题组负责人</option>
+																</select>
+															</div>
+															<label class="space20_r"></label> 二级审核:
+															<div class="layui-inline">
+																<select name="secondexamine" lay-search="">
+																	<option value="-2">请选择二级审核</option>
+																	<option value="off">无</option>
+																	<option value="on">设备管理员</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="layui-col-lg12">
+														<label class="layui-form-label">样品获取形式：</label>
+														<div class="layui-input-block">
+															<input type="radio" name="sendSpecimenForm" value="0" title="校内送样" lay-filter="obtainform">
+															<input type="radio" name="sendSpecimenForm" value="1" title="校外送样" lay-filter="obtainform" checked="">
+															<input type="radio" name="sendSpecimenForm" value="2" title="校内/校外送样皆可，送样者可自行选择" lay-filter="obtainform">
+														</div>
+													</div>
+													<div class="layui-col-lg12">
+														<label class="layui-form-label">如何获取报告：</label>
+														<div class="layui-input-block">
+															<input type="radio" name="receiveReportForm" value="0" title="自取" lay-filter="report">
+															<input type="radio" name="receiveReportForm" value="2" title="系统中下载报告" lay-filter="report" checked="">
+														</div>
+													</div>
+													<div class="layui-col-lg12">
+														<label class="layui-form-label">可以取消预约：</label>
+														<div class="layui-input-block">
+															<input type="radio" name="isCancel" value="1" title="是" lay-filter="cancelbooking">
+															<input type="radio" name="isCancel" value="0" title="否" lay-filter="cancelbooking" checked="">
+														</div>
+													</div>
+													<div class="layui-col-lg12 cancelbooking_box hide">
+														<label class="layui-form-label">取消预约设置：</label>
+														<div class="layui-input-block">
+															在预约送样时间前
+															<div class="layui-inline">
+																<input class="layui-input" type="number" name="aheadCancel" autocomplete="on" lay-verify="required" placeholder="请输入" />
+															</div>
+															小时，可取消
+															<div class="layui-inline">
+																<input class="layui-input" type="number" name="timesCancel" autocomplete="on" lay-verify="required" placeholder="请输入最低信誉积分" />
+															</div>
+															次/
+															<div class="layui-inline">
+																<select name="pricePerTime" lay-search="">
+																	<option value="">请选择</option>
+																	<option value="WEEK" selected="">周</option>
+																	<option value="MONTH">月</option>
+																	<option value="YEAR">年</option>
+																</select>
+															</div>
+															。如超出，每次扣除信誉积分
+															<div class="layui-inline">
+																<input class="layui-input" type="number" name="deductCreditScore" autocomplete="on" lay-verify="required" placeholder="请输入" />
+															</div>
+															分。
+															<font class="font_grey">一旦开始审核则不允许取消</font>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--送样预约结束-->
+									<!--样品送检属性准入开始-->
+									<div id="sampleattribute_box" class="layui-card">
+										<div class="layui-card-header">样品送检属性准入
+											<label class="layui-icon layui-icon-add-1 newsampleattribute header_btn" data-method="newsampleattribute" lay-tips="新增样品送检属性准入"></label>
+										</div>
+										<div class="layui-card-body">
+											<div class="layui-row layui-col-space10">
+												<!--搜索开始-->
+												<div class="layui-col-md12 search_line">
+													<div class="layui-inline">
+														<input class="layui-input" name="sampleattributesearchid" id="sampleattributesearchbox" autocomplete="on" placeholder="请输入搜索内容" />
+													</div>
+													<input type="button" class="layui-btn sampleattributesearch" data-type="reload" value="搜索" />
+													<input type="reset" class="layui-btn layui-btn-primary" value="取消">
+												</div>
+												<!--搜索结束-->
+												<div class="layui-col-md12">
+													<!--表单开始-->
+													<table class="layui-hide" id="sampleattribute" lay-filter="sampleattribute"></table>
+													<script type="text/html" id="sampleattributetoolbar">
+														<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+													</script>
+													<!--表单结束-->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--样品送检属性准入结束-->
+									<!--可接样时间设置开始-->
+									<div id="receivesample_box" class="layui-card">
+										<div class="layui-card-header">可接样时间设置
+											<label class="layui-icon layui-icon-add-1 newreceivesample header_btn" data-method="newreceivesample" lay-tips="新增可接样时间设置"></label>
+										</div>
+										<div class="layui-card-body">
+											<div class="layui-row layui-col-space10">
+												<!--搜索开始-->
+												<div class="layui-col-md12 search_line">
+													<div class="layui-inline">
+														<input class="layui-input" name="receivesamplesearchid" id="receivesamplesearchbox" autocomplete="on" placeholder="请输入搜索内容" />
+													</div>
+													<input type="button" class="layui-btn receivesamplesearch" data-type="reload" value="搜索" />
+													<input type="reset" class="layui-btn layui-btn-primary" value="取消">
+												</div>
+												<!--搜索结束-->
+												<div class="layui-col-md12">
+													<!--表单开始-->
+													<table class="layui-hide" id="receivesample" lay-filter="receivesample"></table>
+													<script type="text/html" id="receivesampletoolbar">
+														<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+													</script>
+													<!--表单结束-->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--可接样时间设置结束-->
+									<!--不可预约时间设置开始-->
+									<div id="noreceivesample_box" class="layui-card">
+										<div class="layui-card-header">不可预约时间设置
+											<label class="layui-icon layui-icon-add-1 newnoreceivesample header_btn" data-method="newnoreceivesample" lay-tips="新增不可预约时间设置"></label>
+											<font class="font_grey">（含节假日）</font>
+										</div>
+										<div class="layui-card-body">
+											<div class="layui-row layui-col-space10">
+												<!--搜索开始-->
+												<div class="layui-col-md12 search_line">
+													<div class="layui-inline">
+														<input class="layui-input" name="noreceivesamplesearchid" id="noreceivesamplesearchbox" autocomplete="on" placeholder="请输入搜索内容" />
+													</div>
+													<input type="button" class="layui-btn noreceivesamplesearch" data-type="reload" value="搜索" />
+													<input type="reset" class="layui-btn layui-btn-primary" value="取消">
+												</div>
+												<!--搜索结束-->
+												<div class="layui-col-md12">
+													<!--表单开始-->
+													<table class="layui-hide" id="noreceivesample" lay-filter="noreceivesample"></table>
+													<script type="text/html" id="noreceivesampletoolbar">
+														<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+													</script>
+													<!--表单结束-->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--不可预约时间设置结束-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="step_bottom">
+					<input type="button" lay-filter="equipmentsampleinspectionbtn" id="equipmentsampleinspectionbtn" class="layui-btn" lay-submit="" value="保存">
+					<input type="button" lay-filter="saveassampletemplate" class="layui-btn layui-btn-warm saveassampletemplate" data-method="saveassampletemplate" value="另存为模板">
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<a href="#template_box">模板<br/>选择</a>
+			<a href="#info_box">送样<br/>预约</a>
+			<a href="#sampleattribute_box">样品<br/>属性</a>
+			<a href="#receivesample_box">
+				<font class="small_font">可接样</font><br/>时间</a>
+			<a href="#noreceivesample_box">不可<br/>预约</a>
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<div th:replace="/instrumentManagement/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/common.js}"></script>
+		<script th:inline="javascript">
+			const uid = [[${uid}]];
+		</script>
+		<script th:src="@{/modules/instrumentManagement/equipmentSampleInspection.js}"></script>
+	</body>
+</html>​​​

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>SJ7</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.css}">
+    <script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/plugins/bootstrap/bootstrap-table.min.js}"></script>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName= localStorage['roleCname'];
+    </script>
+</head>
+<body>
+<div class="toolbar">
+    <b>总数：<span id="total"></span></b>
+</div>
+<table id="table"
+       data-search="true"
+       data-toolbar=".toolbar"
+>
+    <thead>
+    <tr>
+        <th data-field="schoolCode">学校代码</th>
+        <th data-field="academyNumber">学院编号</th>
+        <th data-field="laboratoriesCount">实验室个数</th>
+        <th data-field="laboratoriesTotalArea">实验室房屋使用面积</th>
+        <th data-field="totalFee">经费投入总计</th>
+        <th data-field="deviceFee">经费投入中仪器设备购置经费小计</th>
+        <th data-field="teachDeviceFee">经费投入中仪器设备购置经费(其中教学仪器购置经费)</th>
+        <th data-field="deviceMaintainFee">经费投入中仪器设备维护经费小计</th>
+        <th data-field="teachDeviceMaintainFee">经费投入中仪器设备维护经费(其中教学仪器维护经费)</th>
+        <th data-field="experimentalTeachingFee">经费投入中实验教学运行经费小计</th>
+        <th data-field="materialConsumptionFee">经费投入中实验教学运行经费(其中年材料消耗经费)</th>
+        <th data-field="laboratoryConstructionFee">经费投入中实验室建设经费</th>
+        <th data-field="teachingResearchAndReformFee">经费投入中实验教学研究与改革经费</th>
+        <th data-field="otherFee">经费投入中其它</th>
+    </tr>
+    </thead>
+</table>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        let $table = $('#table')
+        let yearCode = [[${yearCode}]];
+        $.ajax({
+            url: datashareHost + "getSJ7New",
+            method: "get",
+            data: {
+                yearCode: yearCode
+            },
+            dataType: "json",
+            success: function (data) {
+                $('#total').text(data.length);
+                $table.bootstrapTable({data: data});
+            }
+        });
+    })
+</script>
+</body>
+</html>

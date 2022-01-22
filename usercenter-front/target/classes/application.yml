@@ -1,0 +1,128 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /teacherInformationCenter
+
+spring:
+  flyway:
+    baseline-on-migrate: true
+    enabled: false
+    encoding: UTF-8
+    validate-on-migrate: false
+  redis:
+    host: ${redis_host:localhost}
+    port: ${redis_port:6379}
+    password: ${redis_password:123456}
+  main:
+    allow-bean-definition-overriding: true
+  #  datasource:
+  #    url: jdbc:mysql://${db_host:localhost}/${db_name:teacher_info_center}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+  #    username: ${db_user:root}
+  #    password: ${db_pwd:gengshang}
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: false
+    open-in-view: false
+  thymeleaf:
+    prefix: classpath:/templates
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
+    servlet:
+      content-type: text/html
+    cache: false
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 60MB
+
+authorization:
+  siteEnName: GvsunUserCenter
+  siteSecret:
+
+#管理员下放权限给教师（教师自己给自己配置栏目）
+delegation: false
+
+apiGateWayHost: ${apiGateWay_host:http://localhost:8760}
+iotHost: ${iot_host:http://localhost:9523}
+apiGateWayHostTest: ${apiGateWay_host:http://localhost/api}
+
+#资源容器的地址，注意不是网关上的地址，上传大文件不走网关
+resourceContainerHostForUpload: ${resource_host:http://localhost:8162}
+logo: logotext_gvsun.png
+dataSource: true
+
+
+oauth2Host: ${oauth2_Host:http://localhost:8765/uaa}
+#此处需要配置教学地址
+teachHost: ${teach_Host:http://localhost/api}
+#此处需要配置获取iot相关数据的地址
+iotWebSocketHost: ${iot_websocket_host:http://localhost:9191/api/websocket}
+#此处需要配置datashare地址
+datashareHost: ${datashare_host:http://localhost:9096/datashare}
+#此处需要配置device地址
+deviceHost: ${device_host:http://localhost:8844/device/}
+#此处需要配置作业微服务地址
+gvsunWork: ${gvsun_work:http://localhost:8001/gvsunWork/}
+#此处需要配置考试微服务地址
+gvsunExam: ${gvsun_exam:http://localhost:8000/gvsunExam}
+#此处需要配置准入微服务access地址
+accessHost: ${access_host:http://localhost:9093/access}
+#此处需要配置limsproduct地址
+limsproductHost: ${limsproduct_host:http://localhost:8763/limsproduct}
+#此处需要配置appointment地址
+appointmentHost: ${apiGateWayHost}/appointment
+#此处需要配置timetablelabRoom空间管理地址
+labroomHost: ${apiGateWayHost}/timetable
+#此处需要配置usercenter用户中心地址 ${apiGateWayHost}/usercenter ${http://localhost:8762}
+usercenterHost: ${apiGateWayHost}/usercenter
+#此处需要配置timetablelabRoom空间管理地址
+auditserverHost: ${apiGateWayHost}/auditserver
+security:
+  oauth2:
+    host: ${oauth2Host}
+    client:
+      clientId: GvsunUserCenter
+      clientSecret: MisjTDa^ZintCniukj^eP5WQF!PYLjnrOmj%0tbMX#rxp646#eRYHYpaCK7H@2v3!5I6tzKxmExH!k&N^%$#BkH&RiOJwojun15FBg%Go@pAeS&5hxTz4RNB$gyI9R@#
+      accessTokenUri: ${oauth2Host}/oauth/token
+      userAuthorizationUri: ${oauth2Host}/oauth/authorize
+      logoutOAuth2Uri: ${oauth2Host}/oauth/logout
+      logoutCallback: ${logout_callback:http://localhost/teacherInformationCenter}
+    resource:
+      userInfoUri: ${oauth2Host}/user/me
+
+datasource:
+  projectName: usercenter-front
+  enableExecuteFlywayOnMultiDatasource: false
+
+usession:
+  project-name: ${datasource.projectName}
+  redis:
+    host: ${spring.redis.host}
+    port: ${spring.redis.port}
+    password: ${spring.redis.password}
+
+#统一身份认证-开始
+uia:
+  url: ${uia_host:http://localhost/uia}
+  #  url: ${uia_host:http://localhost:8550/uia}
+  #是否使用统一身份认证 true or false
+  isUia: ${isUia:true}
+  #统一身份认证登录路
+  loginUrl: ${uia.url}/signon
+  #统一身份认证退出路径
+  logoutUrl: ${uia.url}/signout
+  #密匙
+  secretKey: gvsun
+app:
+  #  本地
+  url: ${appurl:http://localhost:8080/teacherInformationCenter}
+
+  #统一身份认证登录后回调地址
+  redirectUrl: ${app.url}/webapp/login
+  #统一身份认证退出后返回地址
+  #  本地
+  outUrl: ${appouturl:http://localhost/teacherInformationCenter/login}
+  #时效（以秒为单位）
+  timeDiff: ${timeDiff:600}
+#统一身份认证-结束

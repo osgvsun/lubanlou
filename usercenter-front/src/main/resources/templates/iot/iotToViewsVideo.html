@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #flvvideo {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<video name="videoElement" id="flvvideo" class="live_box" controls></video>
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/plugins/ckplayer/flv.js}"></script>
+<script th:inline="javascript">
+    const url = [[${url}]];
+    console.log(encodeURI(url))
+</script>
+
+<script th:src="@{/modules/iot/iotToViewsVideo.js}"></script>
+</body>
+</body>
+</html>

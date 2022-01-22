@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>代表作信息组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${usercenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+
+    <style>
+        .fill_box {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!--新增表单-->
+<div class="fill_box" id="masterInfoAdd">
+    <form class="layui-form" action="">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">论文题目</label>
+                <div class="layui-input-block">
+                    <input type="text" name="thesisTitle" lay-verify="required" autocomplete="off"
+                           class="layui-input thesisTitle">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">论文作者</label>
+                <div class="layui-input-block">
+                    <input type="text" name="firstAuthor" lay-verify="required" autocomplete="off"
+                           class="layui-input firstAuthor" placeholder="作者之间逗号隔开">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">第一作者身份</label>
+                <div class="layui-input-block">
+                    <select name="withFirstAuthorRelationship" class="withFirstAuthorRelationship" lay-filter="required" lay-search>
+                        <option value=""></option>
+                        <option value="本人指导的本科生">本人指导的本科生</option>
+                        <option value="本人指导的硕士">本人指导的硕士</option>
+                        <option value="本人指导的博士">本人指导的博士</option>
+                        <option value="本人指导的博后">本人指导的博后</option>
+                        <option value="作者本人">作者本人</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">期刊</label>
+                <div class="layui-input-block">
+                    <input type="text" name="periodical" lay-verify="required" autocomplete="off"
+                           class="layui-input periodical">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">期刊卷次</label>
+                <div class="layui-input-block">
+                    <input type="text" name="periodicalVolume" lay-verify="required"
+                           autocomplete="off" class="layui-input periodicalVolume">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">期刊页码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="periodicalPage" lay-verify="required"
+                           autocomplete="off" class="layui-input periodicalPage">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">发表时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="publicationTime" id="publicationTime_add"
+                           lay-verify="required" autocomplete="off" class="layui-input publicationTime">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">本人角色</label>
+                <div class="layui-input-block">
+                    <select name="characters" class="characters" lay-filter="required" lay-search>
+                        <option value=""></option>
+                        <!--               <option value="一作">一作</option>
+                                       <option value="共同一作">共同一作</option>
+                                       <option value="通讯">通讯</option>
+                                       <option value="通讯并一作">通讯并一作</option>-->
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg8 layui-col-md121">
+                <label class="layui-form-label">中科院JCR分区</label>
+                <div class="layui-input-block">
+                    <select name="jcr" class="jcr" lay-filter="required" lay-search>
+                        <option value=""></option>
+                       <option value="一区">一区</option>
+                       <option value="二区">二区</option>
+                       <option value="三区">三区</option>
+                       <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">当年影响因子</label>
+                <div class="layui-input-block">
+                    <input type="text" name="impactFactor" lay-verify="required"
+                           autocomplete="off" class="layui-input impactFactor">
+                </div>
+            </div>
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">论文链接</label>
+                <div class="layui-input-block">
+                    <input type="text" name="thesisLink" lay-verify="required" autocomplete="off"
+                           class="layui-input thesisLink">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="masterWorkInfo">立即提交</button>
+                    <button type="reset" class="clearForm" style="display: none"></button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="masterworkinfo">
+    <div class="masterWorkInput" style="margin-bottom: 10px;">
+        论文题目：
+        <div class="layui-inline">
+            <input class="layui-input" name="thesisTitle" id="thesisTitleInput" autocomplete="off">
+        </div>
+        期刊名：
+        <div class="layui-inline">
+            <input class="layui-input" name="periodical" id="periodicalInput" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload_masterWork">搜索</button>
+        <button class="layui-btn header_edit" style="float: right">新增</button>
+    </div>
+
+    <table class="layui-hide" id="masterWorkInfo" lay-filter="masterWorkInfo"></table>
+</div>
+<!--代表作编辑-->
+<div id="edit_masterWorkInfo" style="display: none">
+    <form class="layui-form" action="" lay-filter="masterWorkInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">论文题目</label>
+                <div class="layui-input-block">
+                    <input type="text" name="thesisTitle" id="thesisTitle" lay-verify="required"
+                           autocomplete="off" class="layui-input thesisTitle">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">论文作者</label>
+                <div class="layui-input-block">
+                    <input type="text" name="firstAuthor" id="firstAuthor" lay-verify="required"
+                           autocomplete="off" class="layui-input firstAuthor" placeholder="作者之间逗号隔开">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">第一作者身份</label>
+                <div class="layui-input-block">
+                    <select name="withFirstAuthorRelationship" class="withFirstAuthorRelationship" id="withFirstAuthorRelationship" lay-filter="required"
+                            lay-search>
+                        <!--<option value=""></option>-->
+                        <option value="本人指导的本科生">本人指导的本科生</option>
+                        <option value="本人指导的硕士">本人指导的硕士</option>
+                        <option value="本人指导的博士">本人指导的博士</option>
+                        <option value="本人指导的博后">本人指导的博后</option>
+                        <option value="作者本人">作者本人</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">期刊名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="periodical" id="periodical" lay-verify="required"
+                           autocomplete="off" class="layui-input periodical">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">期刊卷次</label>
+                <div class="layui-input-block">
+                    <input type="text" name="periodicalVolume" id="periodicalVolume"
+                           lay-verify="required" autocomplete="off" class="layui-input periodicalVolume">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">期刊页码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="periodicalPage" id="periodicalPage"
+                           lay-verify="required" autocomplete="off" class="layui-input periodicalPage">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">发表时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="publicationTime" id="publicationTime"
+                           lay-verify="required" autocomplete="off" class="layui-input publicationTime">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">本人角色</label>
+                <div class="layui-input-block">
+                    <select name="characters"  class="characters" id="characters" lay-filter="required" lay-search>
+                        <!--<option value=""></option>-->
+                        <!--<option value="一作">一作</option>
+                        <option value="共同一作">共同一作</option>
+                        <option value="通讯">通讯</option>
+                        <option value="通讯并一作">通讯并一作</option>-->
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg8 layui-col-md121">
+                <label class="layui-form-label">中科院JCR分区</label>
+                <div class="layui-input-block">
+                    <select name="jcr"  class="jcr" id="jcr" lay-filter="required" lay-search>
+                        <option value="一区">一区</option>
+                        <option value="二区">二区</option>
+                        <option value="三区">三区</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">当年影响因子</label>
+                <div class="layui-input-block">
+                    <input type="text" name="impactFactor" id="impactFactor"
+                           lay-verify="required" autocomplete="off" class="layui-input impactFactor">
+                </div>
+            </div>
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">论文链接</label>
+                <div class="layui-input-block">
+                    <input type="text" name="thesisLink" id="thesisLink" lay-verify="required"
+                           autocomplete="off" class="layui-input thesisLink">
+                </div>
+            </div>
+            <div class="layui-col-lg4" style="display: none">
+                <label class="layui-form-label">ID</label>
+                <div class="layui-input-block" id="masterWorkInfo_uid">
+                    <input type="text" name="id" id="id"  autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="masterWorkInfo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    layui.config({
+            base: '../../../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'masterDetailTab']);
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var beShowUsername=GetQueryString("username");
+
+</script>
+<script type="text/html" id="edit1">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+</body>
+</html>

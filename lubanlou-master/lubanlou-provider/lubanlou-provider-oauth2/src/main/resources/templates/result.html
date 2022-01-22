@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="${web_title}"></title>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content=""/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=0.5, maximum-scale=1"/>
+    <link rel=icon th:href="@{/favicon.ico}">
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/plugin/js.cookie.min.js}"></script>
+    <script th:inline="javascript">
+        window.resourceContainerHost = [[${resourceContainerHost}]];
+    </script>
+</head>
+<body>
+<header>
+    <div class="logo" onclick="javascript:window.open(location.origin)"></div>
+</header>
+<div class="banner">
+    <div class="w">
+        <div class="alert_div" style="">
+            <p th:utext="${msg}" style="text-decoration:underline"></p>
+            <p>页面将在<span id="countDown" style="color:var(--color-error)"></span>秒后自动跳转，如果没有跳转，请<a
+                    th:href="${apiSuccessfulJump + original_uri}">点击这里<i class="fa fa-hand-o-left"></i></a></p>
+        </div>
+    </div>
+</div>
+<footer>
+    <p>Copyright © 2020 庚商教育智能科技 沪ICP备14016833号</p>
+    <p>
+        <img th:src="@{/images/login/bei.png}" alt="">
+        <span>沪公网安备 31011702007343号</span>
+    </p>
+</footer>
+<script>
+    $(function () {
+        let countDown = 10;
+        let countFn = function autoCountDown() {
+            if (countDown === 0) {
+                clearInterval(timer)
+                $("#countDown+a").get(0).click();
+            }
+            $("#countDown").text(countDown--);
+            return countFn;
+        }
+        // 定时前先执行一次
+        let timer = setInterval(countFn(), 1000)
+    })
+</script>
+<script type="text/javascript" th:src="@{/js/cmsSetting.js}"></script>
+</body>
+</html>

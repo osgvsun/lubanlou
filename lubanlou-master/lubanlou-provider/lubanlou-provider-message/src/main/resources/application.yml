@@ -1,0 +1,54 @@
+# @Date:   2019-07-04T09:51:37+08:00
+# @Email:  1483993157@qq.com
+# @Last modified time: 2019-07-04T13:07:10+08:00
+
+server:
+  port: 9099
+
+info:
+  app:
+     name: message
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 100 #过期时间
+    lease-renewal-interval-in-seconds: 20 #续约时间
+    #lease-expiration-duration-in-seconds: 20 #服务端从上次收到心跳，在20s内未收到下次心跳，表示服务挂掉
+    prefer-ip-address: true #以IP地址注册到服务中心，相互注册使用IP地址
+  client:
+    healthcheck:
+      enabled: false
+    serviceUrl:
+      defaultZone: ${eureka_host:http://localhost:8761/eureka/}
+    #fetch-registry: false
+    #register-with-eureka: false
+
+
+
+spring:
+  application:
+     name: message
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    validate-on-migrate: false
+  redis:
+    host: ${redis_host:localhost}
+    port: ${redis_port:6379}
+    password: ${redis_password:123456}
+  kafka:
+    bootstrap-servers: ${kafka_host:localhost:9092}
+    consumer:
+      group_id: ${kafka_group_id:localhost_message}
+      auto-startup: true
+
+debug: true
+
+apiGateWayHost: ${apiGateWay_host:http://localhost:8760}
+datasource:
+  projectName: message
+  enableExecuteFlywayOnMultiDatasource: true
+topicName: ${topic_name:SMS_186967419,SMS_186967418,SMS_190793933,SMS_186947491,SMS_196615873,SMS_196619478,SMS_202548184}
+management:
+  health:
+    mail:
+      enabled: false

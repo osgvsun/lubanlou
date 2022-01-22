@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>实验分室列表</title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <link th:href="@{/images/favicon.ico}" type="image/x-icon" rel="icon">
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/teachPublic/layui/layui.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/bootstrap/js/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}"></script>
+    <script th:src="@{/js/initOAuth2.js}"></script>
+    <!--树形组件-->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/plugins/eletree/eleTree.css}" media="all">
+    <!--masonry模块管理-->
+    <link rel="stylesheet" th:href="@{/plugins/masonry/masonry-docs.css}" media="all">
+    <script type="text/javascript" th:src="@{/plugins/masonry/masonry.pkgd.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/plugins/cascader/cascader.css}">
+    <script th:src="@{/modules/labBranch/static/plugins/cascader/cascader.js}"></script>
+    <script th:inline="javascript">
+        var labRoomHost = [[${labRoomHost}]];
+        var siteEnName = [[${siteEnName}]];
+        var oauth2 = [[${oauth2}]];
+        var apiGateWayHost = [[${apiGateWayHost}]];
+        var httpBaseUrl = /*[[@{/}]]*/'';
+        var oauth2 = [[${session.oauth2}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+    </script>
+    <script type="text/javascript" th:src="@{/js/pinyinMatch.js}"></script>
+    <script th:src="@{/js/cookie.js}"></script>
+</head>
+<body>
+<div class="main_content_box">
+    <div class="full_box">
+        <!--左中工具栏开始-->
+        <div class="main_tit_sub" id="left" style="display: none">
+            <!--引用框架搭桥开始-->
+            <iframe class="soniframe" id="soniframe" src="" name="i"></iframe>
+            <!--引用框架搭桥结束-->
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md12">
+                    <!--树形目录搜索开始-->
+                    <input type="text" placeholder="请输入关键字进行搜索" autocomplete="off" class="layui-input eleTree-search1">
+                    <!--树形目录搜索结束-->
+                </div>
+                <div class="layui-col-md12">
+                    <!--树形目录开始-->
+                    <div class="eleTree ele1 spec_tree_one" lay-filter="data1"></div>
+                    <!--树形目录结束-->
+                </div>
+                <!--树形目录调试按钮，已隐藏，不调试可删除，开始-->
+                <div class="layui-col-md12">
+                    <div class="eleTree layui-form ele_control_box">
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="renderAfterExpand" lay-skin="primary" checked>是否在第一次展开某个树节点后才渲染其子节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="highlightCurrent" lay-skin="primary">是否高亮当前选中节点，默认值是 false
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="defaultExpandAll" lay-skin="primary" checked>是否默认展开所有节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="expandOnClickNode" lay-skin="primary" checked="">是否在点击节点的时候展开或者收缩节点，
+                            默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="checkOnClickNode" lay-skin="primary">是否在点击节点的时候选中节点，默认值为
+                            false，即只有在点击复选框时才会选中节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="defaultExpandedKeys" lay-skin="primary">默认展开的节点的 key 的数组
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="autoExpandParent" lay-skin="primary" checked>展开子节点的时候是否自动展开父节点
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="showCheckbox" lay-skin="primary" checked>节点是否可被选择
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="checkStrictly" lay-skin="primary">在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为
+                            false
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="defaultCheckedKeys" lay-skin="primary">默认勾选的节点的 key 的数组
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="accordion" lay-skin="primary">是否每次只打开一个同级树节点展开（手风琴效果）
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="indent" lay-skin="primary">相邻级节点间的水平缩进，单位为像素
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="lazy" lay-skin="primary">是否懒加载子节点，需与 load 方法结合使用
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="load" lay-skin="primary">加载子树数据的方法，仅当 lazy 属性为true 时生效
+                        </div>
+                        <div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test"
+                                                title="draggable" lay-skin="primary" checked="">是否开启拖拽节点功能
+                        </div>
+                        <div class="inp">
+                            <h3>contextmenuList</h3>
+                            <input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="copy"
+                                   lay-skin="primary" checked>
+                            <input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="add"
+                                   lay-skin="primary" checked>
+                            <input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="edit"
+                                   lay-skin="primary" checked>
+                            <input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="remove"
+                                   lay-skin="primary" checked>
+                        </div>
+                        <div class="inp">
+                            <h3>indent</h3>
+                            <div class="slideTest"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--树形目录调试按钮，已隐藏，不调试可删除，结束-->
+            </div>
+        </div>
+        <!--左中工具栏结束-->
+        <!--主体开始-->
+        <div class="content_box">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header header_title">
+                        <span>
+                            <!--清华大学南校区笃行楼1层-->
+                        </span>
+                        <!--右侧工具栏开始-->
+                        <!--切换权限-->
+                        <button class="layui-btn header_edit changeAuth" data-method="changeAuth" lay-tips="切换权限">切换权限</button>
+                        <!--切换权限结束-->
+<!--                        &lt;!&ndash;权限配置&ndash;&gt;-->
+<!--                        <button class="layui-btn header_edit changeAuth" data-method="changeAuth" lay-tips="切换权限">切换权限</button>-->
+<!--                        &lt;!&ndash;权限配置结束&ndash;&gt;-->
+                        <label class="layui-btn header_edit newlab hide" data-method="newlab" lay-tips="新建实验室">新建实验室</label>
+                        <label class="layui-btn header_edit setmanager hide" data-method="setmanager" lay-tips="批量设置管理员">批量设置管理员</label>
+                        <!--右侧工具栏结束-->
+                        <!--批量管理栏开始-->
+                        <button class="layui-btn header_edit batchdelete hide">批量管理</button>
+                        <span class="batchdelete_box">
+								    <button class="layui-btn header_edit hollow_btn selectcancel">完成</button>
+									<button class="layui-btn header_edit hollow_btn selectdelete">删除所选</button>
+									<button class="layui-btn header_edit hollow_btn cancelall">取消全选</button>
+									<button class="layui-btn header_edit hollow_btn selectall">全选</button>
+								</span>
+                        <!--批量管理栏结束-->
+                    </div>
+                    <!--实验室分全部实验室、我的实验室-->
+                    <div class="layui-card-body">
+                        <span class="">
+
+                        </span>
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="layui-col-lg4 search_top">
+                            <input type="text" class="layui-input" name="searchid" id="searchbox" autocomplete="on"
+                                   placeholder="请输入搜索内容">
+                        </div>
+                        <input id="demo1" style="width: 300px"/>
+                        <input class="layui-btn header_edit cancelSearch" type="button" value="取消查询" />
+                        <button type="button" class="layui-btn header_edit hollow_btn all_labroom">全部实验室</button>
+                        <button type="button" class="layui-btn header_edit hollow_btn my_labroom">我的实验室</button>
+                        <form class="layui-form" action="" lay-filter="labmainbox" id="labmainbox">
+                            <div class="layui-row layui-col-space20">
+                                <!--模板搜索开始-->
+                                <div class="layui-col-md12 tabsearch search_line">
+
+                                    <!--<input type="button" class="layui-btn" data-type="reload" value="搜索"-->
+                                    <!--onclick="labRoomSearch()"/>-->
+                                </div>
+                                <!--模板搜索结束-->
+                                <div class="layui-col-md12">
+                                    <div class="duo">
+                                        <!--按数字排序吸附-->
+                                        <!--<div class="grid" data-masonry='{"percentPosition": true,"horizontalOrder":true }'>-->
+                                        <!--按位置排序吸附-->
+                                        <div class="grid" data-masonry='{"percentPosition": true}'>
+                                            <!--实验分室开始-->
+                                            <!--html-->
+                                            <!--实验分室结束-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--搜索时的分页工具-->
+                                <div id="page" style="text-align: right"></div>
+                                <!--全部实验室显示时分页基础-->
+<!--                                <div id="all_page" style="text-align: right"></div>-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script th:src="@{/modules/labBranch/static/js/global.js}"></script>
+<script th:src="@{/modules/labBranch/static/js/labTreeCommonFn.js}"></script>
+<script th:src="@{/modules/labBranch/labMain.js}"></script>
+</body>
+</html>

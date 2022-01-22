@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title></title>
+	<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="Generator" content="GVSUN" />
+	<meta name="Author" content="chenyawen" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/projectManagement/css/expand.css}" media="all">
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<!--资源容器-->
+	<link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/default/easyui.css}">
+	<link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/icon.css}">
+	<script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.easyui.min.js}"></script>
+	<link rel="stylesheet" th:href="@{${resourceContainerHostForUpload} + '/shareApi/resourceContainer.css'}" media="all">
+	<script type="text/javascript" th:src="@{${resourceContainerHostForUpload} + '/shareApi/resourceContainer.js'}"></script>
+	<script th:inline="javascript">
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var oauth2 = [[${session.oauth2}]];
+		var resourceContainerHost = [[${resourceContainerHost}]];
+		var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+		const timetableHost = apiGateWayHost+"/timetable/";
+	</script>
+	<script th:src="@{/js/initOAuth2.js}"></script>
+	</head>
+
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="uploadenclosurebox" id="uploadenclosurebox">
+				<div class="layui-fluid">
+					<!--上传开始-->
+					<div class="layui-row layui-form-item">
+						<div class="fill_box">
+							<div class="layui-row layui-col-space10 layui-form-item">
+								<div class="layui-col-lg12">
+									<div class="mix_uploadbox">
+										<div class="layui-upload">
+											<div class="layui-upload-drag" id="projectbook">
+												<i class="layui-icon"></i>
+												<p>点击选择文件，或将文件拖拽到此处</p>
+											</div>
+											<div class="layui-upload-list">
+												<table class="layui-table">
+													<thead>
+														<tr>
+															<th>文件名</th>
+															<th>大小</th>
+															<th>状态</th>
+															<th>操作</th>
+														</tr>
+													</thead>
+													<tbody id="pblist"></tbody>
+												</table>
+												<div class="upload_btn">
+													<input type="button" class="layui-btn" id="uploadfilesbtn" value="开始上传文件" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--上传结束-->
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="uploadenclosurebtn" id="uploadenclosurebtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/projectManagement/uploadEnclosure.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../layuiadmin/' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'uploadEnclosure']);-->
+<!--		</script>-->
+	</body>
+
+</html>

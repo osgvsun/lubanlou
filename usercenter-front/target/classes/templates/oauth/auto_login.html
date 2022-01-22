@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8"/>
+    <title>loading……</title>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+
+</head>
+<body>
+<!--请等候……-->
+<form id="login_box" th:action="@{/login}" method="post" style="display:none;">
+    <input type="text" name="username" th:value="${username}"/>
+    <input type="password" name="password" th:value="${password}"/>
+    <input type="submit" value="submit"/>
+</form>
+<script>
+     document.getElementById("login_box").submit();
+</script>
+</body>
+</html>

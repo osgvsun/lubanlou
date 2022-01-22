@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/expand.css}" media="all">
+
+    <script th:inline="javascript">
+        var attendanceHost = [[${attendanceHost}]];
+        // var attendanceHost = "http://localhost:8844"
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var currentUsername = [[${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}]];
+        var id = [[${id}]];
+        var courseNo = [[${courseNo}]];
+        var classDate = [[${classDate}]];
+        var startTime = [[${startTime}]];
+        var endTime = [[${endTime}]];
+        var hardwareIps = [[${hardwareIps}]];
+    </script>
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="courseattendancedetailbox"
+          id="courseattendancedetailbox">
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">考勤
+                            <div class="head_hint">
+                                <span>（</span>
+                            <span><label>节次时间：</label><th:block th:text="${classDate+' '+startTime+' ~ '+endTime}"></th:block></span>
+                                <span>）</span>
+                            </div>
+                            <!--获取开始-->
+                            <div class="fr search_line">
+                                <div class="layui-inline">
+                                    <input type="checkbox" name="calculateThis" lay-skin="primary" title="计算迟到早退">
+                                </div>
+                                <div class="layui-inline">
+                                    <input class="layui-input short_inputtext" type="number" name="late"/>分迟到
+                                </div>
+                                <div class="layui-inline">
+                                    <input class="layui-input short_inputtext" type="number" name="leaveEarly"/>分早退
+                                </div>
+                                <div class="layui-inline">
+                                    <input class="layui-input short_inputtext" type="number" name="meters"/>米无效
+                                </div>
+                                <input type="button"  onclick="checkTime()" class="layui-btn layui-btn-warm" value="获取考勤机数据"/>
+                            </div>
+                            <!--获取结束-->
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-md12">
+                                    <!--搜索开始-->
+                                    <div class="search_line">
+<!--                                        <div class="layui-inline">-->
+<!--                                            <input class="layui-input" name="startattendance" id="startattendance"-->
+<!--                                                   autocomplete="off" placeholder="请选择考勤开始时间"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="layui-inline">-->
+<!--                                            <input class="layui-input" name="endattendance" id="endattendance"-->
+<!--                                                   autocomplete="off" placeholder="请选择考勤结束时间"/>-->
+<!--                                        </div>-->
+                                        <div class="layui-inline">
+                                            <input class="layui-input" name="searchbox" id="searchbox" autocomplete="on"
+                                                   placeholder="请输入姓名/学号"/>
+                                        </div>
+                                        <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                                        <input type="reset" class="layui-btn layui-btn-primary" data-type="reset"
+                                               value="取消"/>
+                                    </div>
+                                    <!--搜索结束-->
+                                </div>
+                                <div class="layui-col-md12">
+                                    <!--表单开始-->
+                                    <table class="layui-hide" id="courseattendancedetail"
+                                           lay-filter="courseattendancedetail"></table>
+                                    <script type="text/html" id="toolbar">
+                                        <div class="twoword_radio_box">
+                                            <input type="radio" name="{{d.username}}" data="{{d.id}}" value="1" title="出勤" lay-filter="stateRadio">
+                                            <input type="radio" name="{{d.username}}" data="{{d.id}}" value="2" title="迟到" lay-filter="stateRadio">
+                                            <input type="radio" name="{{d.username}}" data="{{d.id}}" value="3" title="早退" lay-filter="stateRadio">
+                                            <input type="radio" name="{{d.username}}" data="{{d.id}}" value="4" title="旷课" lay-filter="stateRadio">
+                                            <input type="radio" name="{{d.username}}" data="{{d.id}}" value="5" title="请假" lay-filter="stateRadio">
+<!--                                            <input type="radio" name="state{{d.id}}" value="0" title="未考勤">-->
+                                        </div>
+                                        function checkTime() {
+                                        var startTime = $("input[name='startTime']").val();
+                                        var endTime = $("input[name='endTime']").val();
+                                        var startTimeMs = new Date(startTime).setHours(0,0,0,0);
+                                        var endTimeMs = new Date(endTime).setHours(0,0,0,0);
+                                        if(startTimeMs !=endTimeMs){
+                                        layer.msg("<font style='color: white' >请选择同一天</font>");
+                                        return false;
+                                        }
+
+                                        if (startTime.indexOf('-') == -1 || endTime.indexOf('-') == -1) {
+                                        layer.msg("<font style='color: white' >请填写时间</font>");
+                                        return false;
+                                        }
+                                        if ($("input[name='calculateThis']").is(':checked')) {
+                                        var late = $("input[name='late']").val();
+                                        var leaveEarly = $("input[name='leaveEarly']").val();
+                                        var numberReg = /^\d+$/;
+                                        if (!numberReg.test(late) || !numberReg.test(leaveEarly)) {
+                                        layer.msg("<font style='color: white' >请填写正确的迟到早退时间</font>");
+                                        return false;
+                                        }
+                                        }
+                                        $.ajax({
+                                        url: '../teach/attendanceSynchronizationOnPage',
+                                        type: 'post',
+                                        data: $('#formSelectTime').serialize(),
+                                        success: function (e) {
+                                        layer.msg("<font style='color: white' >同步成功</font>");
+                                        var startTime = $("input[name='startTime']").val();
+                                        var endTime = $("input[name='endTime']").val();
+                                        var folderId = $("#folderId").val();
+                                        window.location.href="../manage/newAttendance?folderId="+folderId+"&startTime="+startTime+"&endTime="+endTime;
+                                        //window.location.reload();
+                                        },
+                                        error: function (e) {
+                                        layer.msg("<font style='color: white' >同步失败</font>");
+                                        console.log(e);
+                                        }
+                                        });
+                                        }
+                                    </script>
+                                    <!--表单结束-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="courseattendancedetailbtn" id="courseattendancedetailbtn"
+                       class="layui-btn" lay-submit value="立即提交"/>
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+            </div>
+            <!--操作按钮结束-->
+        </div>
+    </form>
+</div>
+<!--主体结束-->
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/global.js}"></script>
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/titleHash.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'iotAttendance/courseAttendanceDetail']);
+</script>
+</body>
+
+</html>

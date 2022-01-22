@@ -1,0 +1,102 @@
+body {
+    line-height: 1.4;
+    color: #333;
+    font-family: Helvetica,"Hiragino Sans GB","WenQuanYi Micro Hei","Microsoft YaHei",sans-serif,"Noto Sans CJK SC";
+    font-size: 12px;
+
+
+}
+
+input, textarea, select {
+    font-size: 12px;
+    font-size: 100%;
+    outline: none;
+    font-family: arial,microsoft yahei;
+    font-family: inherit; }
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, form {
+    margin: 0; }
+
+h4, h5, h6 {
+    font-size: 1em; }
+
+ul, ol {
+    padding-left: 0;
+    list-style-type: none; }
+
+a img {
+    border: 0; }
+
+img {
+    border: 0; }
+
+a {
+    text-decoration: none;
+    color:#333; }
+
+table{
+    border-collapse: collapse;
+}
+textarea {
+    min-height: 50px;
+    resize: none;
+}
+/*input[type="checkbox"] {
+  -webkit-appearance: none;
+  background: #fff url(i/blue.png);
+  height: 22px;
+  vertical-align: middle;
+  width: 22px;
+}*/
+input[type="checkbox"], input[type="radio"] {
+    visibility: hidden;
+    visibility: visible\9;
+    min-width: 14px;
+    width:auto;
+    height: 14px;
+
+    margin: 0;
+    padding: 0; }
+
+h1{
+    font-family: microsoft yahei;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+input[type="checkbox"] + label {
+    padding-left: 15px;
+    min-width: 14px;
+    width:auto;
+    height: 14px;
+    background-image: url(../images/uncheck.png);
+    background-image: none\9;
+    background-repeat: no-repeat;
+    line-height: 14px;
+    font-family: microsoft yahei;
+    font-weight: normal;
+    letter-spacing: 1px;}
+input[type="radio"] + label{
+    padding-left: 17px;
+    min-width: 14px;
+    width:auto;
+    height:20px;
+    background-image: url(../images/unradio.png);
+    background-image: none\9;
+    background-repeat: no-repeat;
+    line-height:15px;
+}
+input[type="checkbox"]:checked + label {
+    color: #000;
+    background-image: url(../images/check.png);
+    background-repeat: no-repeat; }
+
+input[type="radio"]:checked + label {
+    color: #000;
+    background-image: url(../images/radio.png);
+    background-repeat: no-repeat; }
+/*# sourceMappingURL=reset.css.map */
+
+#bi{
+    width: 250px;
+}

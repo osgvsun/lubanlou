@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>知识资源</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          name="viewport">
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/layui/css/layui.css}" >
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/style/admin.css}" >
+    <link media="all" rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/css/expand.css}" >
+
+    <style>
+        .layui-table-cell {
+            height: auto;
+        }
+
+        html,
+        .layui-col-md12,
+        .layui-card,
+        .layui-table,
+        .layui-table tbody tr:hover,
+        .layui-table-click,
+        .layui-table-hover {
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-fluid">
+    <form action="" class="layui-form lesson_card" id="sectionlistbox" lay-filter="sectionlistbox">
+        <div class="layui-row layui-col-space15">
+            <!--选项卡开始-->
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header">小节名称
+                                    <label class="layui-icon layui-icon-add-1 newsection header_btn" v-on:click="newsection"></label>
+                                    <!--搜索开始-->
+                                    <div class="fr search_line">
+                                        <a class="layui-btn" href="javascript:" onclick="self.location=document.referrer;">返回章</a>
+                                    </div>
+                                    <!--搜索结束-->
+                                </div>
+                                <div class="layui-card-body">
+                                    <div class="layui-collapse" lay-filter="test" id="knowledge">
+                                        <div class="layui-colla-item" v-for=" item in knowledgeList " :key="item.id">
+                                            <div class="layui-colla-title layui-colla-special">
+                                                <font>{{item.name}}</font>
+                                                <div class="little_btn">
+                                                    <i class="fa fa-edit" v-on:click="editsection(item.id)" lay-tips="编辑"></i>
+                                                    <i class="fa fa-trash-o"  v-on:click="delsection(item.id)" lay-tips="删除"></i>
+                                                    <i class="fa fa-angle-double-up" v-on:click="upsection(item.id)" lay-tips="上移"></i>
+                                                    <i class="fa fa-angle-double-down" v-on:click="downsection(item.id)" lay-tips="下移"></i>
+                                                </div>
+                                                <div class="colla_info">
+                                                    {{item.description}}
+                                                </div>
+                                                <div class="colla_operation">
+                                                    <div class="layui-btn layui-btn-primary layui-btn-sm toVideo"
+                                                         v-on:click="toVideo(item.id)">视频
+                                                    </div>
+                                                    <div class="layui-btn layui-btn-primary layui-btn-sm toPicture"
+                                                         v-on:click="toPicture(item.id)">图片
+                                                    </div>
+                                                    <div class="layui-btn layui-btn-primary layui-btn-sm toFile"
+                                                         v-on:click="toFile(item.id)">文件
+                                                    </div>
+                                                    <div class="layui-btn layui-btn-primary layui-btn-sm toLink"
+                                                         v-on:click="toLink(item.id)">链接
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--选项卡结束-->
+<!--右侧栏开始-->
+<div class="quick_line">
+    <!--<a href="#id">备用<br/>用</a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script th:src="@{/modules/teachResource/static/layui/layui.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/vue.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/global.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/xm-select.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+
+<script th:inline="javascript">
+    const apiGateWayHost = [[${apiGateWayHost}]];
+    const httpBaseUrl = /*[[${gvsunExam}]]*/'';
+    const pathType = "knowledge";
+    const siteId = "1218";
+    const username = "20180218";
+</script>
+<script th:src="@{/modules/teachResource/knowledge/sections.js}"></script>
+<script th:src="@{/modules/teachResource/common.js}"></script>
+<script>
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>可视化</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/modules/labSafe/css/expand.css}" media="all">
+</head>
+
+<body>
+<iframe id="videobox" class="videobox"></iframe>
+<script>
+    var parent = document.getElementById("videobox");
+</script>
+<script type="text/javascript">
+    function flashChecker() {
+        var hasFlash = 0;　　　　 //是否安装了flash
+        var flashVersion = 0;　　 //flash版本
+
+        if (document.all) {
+            var swf = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+            if (swf) {
+                hasFlash = 1;
+                VSwf = swf.GetVariable("$version");
+                flashVersion = parseInt(VSwf.split(" ")[1].split(",")[0]);
+            }
+        } else {
+            if (navigator.plugins && navigator.plugins.length > 0) {
+                var swf = navigator.plugins["Shockwave Flash"];
+                if (swf) {
+                    hasFlash = 1;
+                    var words = swf.description.split(" ");
+                    for (var i = 0; i < words.length; ++i) {
+                        if (isNaN(parseInt(words[i]))) continue;
+                        flashVersion = parseInt(words[i]);
+                    }
+                }
+            }
+        }
+        return {
+            f: hasFlash,
+            v: flashVersion
+        };
+    }
+
+    var fls = flashChecker();
+    var s = "";
+    if (!fls.f) {
+        parent.src = "./flvvideo";
+    } else {
+        parent.src = "./flashvideo";
+    }
+</script>
+</body>
+
+</html>

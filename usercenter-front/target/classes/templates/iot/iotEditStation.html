@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iot/static/css/expand.css}" media="all">
+    <script th:inline="javascript">
+        var iotHost = [[${iotHost}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var currentUsername = [[${session.user.username}]];
+    </script>
+    <style>
+        .layui-form-label {
+            width: 85px;
+        }
+
+        .layui-input-block {
+            margin-left: 85px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-fluid">
+    <form class="layui-form" action="" lay-filter="editstation" id="editstation">
+        <input type="hidden" th:value="${sn}" name="sn">
+        <!--基础信息开始-->
+        <div class="layui-col-md12 editbox">
+            <div class="layui-card">
+                <div class="layui-card-header">基础信息</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-form-item">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space20 layui-form-item">
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">实验室：</label>
+                                    <div class="layui-input-block float_dd">
+                                        <select name="room_name" lay-filter="required" lay-search>
+                                            <option value="">请选择实验室</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">设备名称：</label>
+                                    <div class="layui-input-block">
+                                        <input class="layui-input" name="hardwareName" autocomplete="on" placeholder="请填写设备名称" />
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">制造商：</label>
+                                    <div class="layui-input-block float_dd">
+                                        <select name="manufacturer" lay-filter="required" lay-search>
+                                            <!--													<option value="">请选择</option>-->
+                                            <option value="gvusn">gvusn</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">版本号：</label>
+                                    <div class="layui-input-block float_dd">
+                                        <select name="hardwareVersion" lay-filter="required" lay-search>
+                                            <!--													<option value="">请选择</option>-->
+                                            <option value="v1.0">v1.0</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">设备号(门号)：</label>
+                                    <div class="layui-input-block float_dd">
+                                        <select name="deviceIndex" lay-filter="required" lay-search>
+                                            <!--													<option value="">请选择</option>-->
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">网络信息</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-form-item">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space20 layui-form-item">
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">服务器IP：</label>
+                                    <div class="layui-input-block">
+                                        <input class="layui-input" name="serverIp" autocomplete="on" placeholder="请输入服务器IP" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--基础信息结束-->
+        <!--操作按钮开始-->
+        <div class="layui-col-lg12 layui-hide">
+            <button lay-filter="editstationbtn" id="editstationbtn" class="layui-btn" lay-submit>立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+        </div>
+        <!--操作按钮结束-->
+    </form>
+</div>
+<!--右侧栏开始-->
+<div class="quick_line">
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script th:src="@{/modules/iot/static/layui/layui.js}"></script>
+<script th:src="@{/modules/iot/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/iot/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+
+    ).use(['index', 'iot/iotEditStation']);
+</script>
+</body>
+
+</html>

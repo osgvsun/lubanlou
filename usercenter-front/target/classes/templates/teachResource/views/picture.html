@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/layui/css/layui.css}" >
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/style/admin.css}" >
+    <link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/css/expand.css}" >
+    <link media="all" rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+</head>
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="piclistbox" id="piclistbox">
+        <div class="layui-fluid">
+            <div classs="layui-row layui-col-space20">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">图片列表
+                            <label class="layui-icon layui-icon-add-1 newpic header_btn" data-method="newpic" ></label>
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-col-md12">
+                                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                                    <div class="layui-tab-content" style="height: 252px;">
+                                        <div class="layui-tab-item layui-show">
+                                            <!--表单开始-->
+                                            <table  id="piclist" lay-filter="piclist" class="piclist"></table>
+                                            <script type="text/html" id="toolbar">
+                                                <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+                                                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                                                <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+                                            </script>
+                                            <!--表单结束-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="qRCode" style="display: none">
+    <div class="outline_title">
+        <h1>二维码</h1>
+        <div id="wx_p">
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!--主体结束-->
+<script th:src="@{/modules/teachResource/static/layui/layui.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/vue.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/teachResource/static/js/global.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/xm-select.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:inline="javascript">
+    const currentUsername = [[${session.user.username}]];
+    const siteId = [[${session.cid}]];
+    const username = [[${session.user.username}]];
+    const dateType = 'exam';
+    resourceContainer.initResourceContainer({
+        oauth2Host: [[${oauth2Host}]],
+        siteName: "教学平台",
+        username: currentUsername
+    });
+</script>
+<script th:src="@{/modules/teachResource/knowledge/picture.js}"></script>
+<script th:src="@{/modules/teachResource/common.js}"></script>
+</body>
+</html>

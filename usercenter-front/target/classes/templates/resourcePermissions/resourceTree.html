@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>资源权限</title>
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+    <!--    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">-->
+    <link rel="stylesheet" th:href="@{/plugins/eletree/eleTree.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-item {
+            margin-bottom: 15px;
+        }
+        .visual-label {
+            width: 220px !important;
+        }
+        .visual-input {
+            margin-left: 220px !important;
+        }
+    </style>
+</head>
+<body>
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="creditcardrecordsattendcebox" id="creditcardrecordsattendcebox">
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space20">
+                <div class="">
+                    <div class="layui-col-md12">
+                        <!--树形目录搜索开始-->
+                        <input style="display: inline;width: 75%;" type="text" placeholder="键入关键字搜索" autocomplete="off" class="layui-input eleTree-search1">
+                        <!--树形目录搜索结束-->
+                        <button type="button" class="layui-btn addition-btn btn-method newNode"><i class="layui-icon layui-icon-addition"></i></button>
+                        <!--							<input style="display: inline;width: 20%;padding: 0;" type="button" class="layui-btn" value="新增"/>-->
+                    </div>
+                    <div class="layui-col-md12" style="margin-top: 20px">
+                        <!--树形目录开始-->
+                        <div class="eleTree ele1 spec_tree_one" lay-filter="data1"></div>
+                        <!--树形目录结束-->
+                    </div>
+
+                    <div class="layui-col-md12" style="margin-top: 20px">
+                        <ul id="demoTree" class="dtree" data-id="0" data-value="001"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--顶层节点新增-->
+<div class="model_add" style="display: none; margin: 20px">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label">当前选中：</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input parentNodeId" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新增节点：</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input parentNodeCont" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">资源许可：</label>
+            <div class="layui-input-block" id="license">
+<!--                <input type="text" class="layui-input">-->
+            </div>
+        </div>
+        <!--资源节点增加内容-->
+        <div class="layui-form-item">
+            <label class="layui-form-label visual-label">可视化管理名称：</label>
+            <div class="layui-input-block visual-input">
+                <input type="text" class="layui-input ename" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label visual-label">可视化管理链接：</label>
+            <div class="layui-input-block visual-input">
+                <input type="text" class="layui-input link" placeholder="例如：localhost" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label visual-label">可视化管理标识：</label>
+            <div class="layui-input-block visual-input">
+                <input type="text" class="layui-input identification" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label visual-label">可视化管理排序：</label>
+            <div class="layui-input-block visual-input">
+                <input type="text" class="layui-input order" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label visual-label">可视化管理状态：</label>
+            <div class="layui-input-block visual-input" id="state">
+                <select name="state" lay-verify="required">
+                    <option value="true">开启</option>
+                    <option value="false">隐藏</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin-left: 0; text-align: center">
+                <button type="button" class="layui-btn layui-btn-normal sureAdd">点击确认</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script th:src="@{/js/xm-select.js}"></script>
+<script type="text/javascript" th:src="@{/teachPublic/layui/layui.js}"></script>
+<script th:inline="javascript">
+    const oauth2Host = [[${oauth2Host}]];
+    // const oauth2Host = 'http://localhost:8765/uaa'
+</script>
+<script th:src="@{/modules/resourcePermissions/resourceTree.js}"></script>
+</body>
+</html>

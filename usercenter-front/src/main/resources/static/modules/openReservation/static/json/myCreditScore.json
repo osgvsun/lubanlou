@@ -1,0 +1,43 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"equipment": "test1",
+			"item": "test2",
+			"duration": "test3",
+			"teacher": "test4",
+			"deductscore": "test5",
+			"creditscore": "test6"
+		}, {
+			"equipment": "test1",
+			"item": "test2",
+			"duration": "test3",
+			"teacher": "test4",
+			"deductscore": "test5",
+			"creditscore": "test6"
+		}, {
+			"equipment": "test1",
+			"item": "test2",
+			"duration": "test3",
+			"teacher": "test4",
+			"deductscore": "test5",
+			"creditscore": "test6"
+		}, {
+			"equipment": "test1",
+			"item": "test2",
+			"duration": "test3",
+			"teacher": "test4",
+			"deductscore": "test5",
+			"creditscore": "test6"
+		}, {
+			"equipment": "test1",
+			"item": "test2",
+			"duration": "test3",
+			"teacher": "test4",
+			"deductscore": "test5",
+			"creditscore": "test6"
+		}
+	]
+}

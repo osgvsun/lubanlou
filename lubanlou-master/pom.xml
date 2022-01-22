@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
+        <release.version>0.0.1-SNAPSHOT</release.version>
+        <!-- 标签线 -->
+        <tag.version>beta</tag.version>
+        <mybatisplus.version>3.4.2</mybatisplus.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>net.gvsun.lubanlou</groupId>
+    <artifactId>lubanlou-master</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>lubanlou-master</name>
+    <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>lubanlou-common</module>
+        <module>lubanlou-eureka</module>
+        <module>lubanlou-gateway</module>
+        <module>lubanlou-feign</module>
+        <module>lubanlou-provider</module>
+    </modules>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>http://library.gvsun.net/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>http://library.gvsun.net/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- =========================== 所有依赖的版本管理 ===========================-->
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--通用dto包-->
+            <dependency>
+                <groupId>net.gvsun.lubanlou</groupId>
+                <artifactId>lubanlou-common</artifactId>
+                <version>1.1.3-SNAPSHOT</version>
+            </dependency>
+            <!--feign接口声明-->
+            <dependency>
+                <groupId>net.gvsun.lubanlou</groupId>
+                <artifactId>lubanlou-feign</artifactId>
+                <version>1.4.0-SNAPSHOT</version>
+            </dependency>
+
+            <!--资源容器工具包-->
+            <dependency>
+                <groupId>net.gvsun.utils</groupId>
+                <artifactId>new-resource-service</artifactId>
+                <version>3.0.5-SNAPSHOT</version>
+            </dependency>
+
+            <!--认证工具包-->
+            <dependency>
+                <groupId>net.gvsun.utils</groupId>
+                <artifactId>oauth2-service</artifactId>
+                <version>2.0.7-SNAPSHOT</version>
+            </dependency>
+
+            <!--多数据源依赖jar-->
+            <dependency>
+                <groupId>net.gvsun.utils</groupId>
+                <artifactId>datasource</artifactId>
+                <version>3.0.3-SNAPSHOT</version>
+            </dependency>
+
+            <!--缓存相关包-->
+            <dependency>
+                <groupId>net.gvsun.utils</groupId>
+                <artifactId>EasyCache</artifactId>
+                <version>1.2.3-SNAPSHOT</version>
+            </dependency>
+
+            <!--通用kafka包-->
+            <dependency>
+                <groupId>net.gvsun.utils</groupId>
+                <artifactId>gvsun-kafka</artifactId>
+                <version>1.4.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- mybatisplus  -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+
+            <!-- 阿里excel导出工具包 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>2.2.6</version>
+            </dependency>
+
+            <!-- flyway-->
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>5.2.4</version>
+            </dependency>
+
+            <!-- fastjson  -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.58</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--来源公司库配置 -->
+    <repositories>
+        <repository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>http://library.gvsun.net/nexus/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>local-nexus</id>
+            <url>http://library.gvsun.net/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <!-- Defines plugins that are used in the modules. -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <from>
+                            <image>registry.cn-shanghai.aliyuncs.com/gvsun/jdk:8u141</image>
+                        </from>
+                        <to>
+                            <image>lubanlou-${tag.version}/lubanlou-master:${project.version}</image>
+                        </to>
+                        <!--容器相关的属性-->
+                        <!--允许非https-->
+                        <allowInsecureRegistries>true</allowInsecureRegistries>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

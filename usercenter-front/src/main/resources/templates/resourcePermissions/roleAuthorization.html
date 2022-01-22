@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+    <!--    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">-->
+    <link rel="stylesheet" th:href="@{/plugins/eletree/eleTree.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+</head>
+<body>
+    <div class="content_box">
+        <div class="content_box">
+            <form class="layui-form lesson_card" action="" lay-filter="creditcardrecordsattendcebox" id="creditcardrecordsattendcebox">
+                <div class="layui-fluid">
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header">授权管理</div>
+                                <div class="layui-card-body">
+                                    <div class="layui-row layui-col-space20">
+                                        <div class="layui-col-md12">
+                                            <!--树形目录开始-->
+                                            <div class="eleTree ele1 spec_tree_one" lay-filter="data1"></div>
+                                            <!--树形目录结束-->
+                                            <button type="button" class="layui-btn layui-btn-normal addRole hide" id="addLicense"><i class="layui-icon layui-icon-addition"></i>新增</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/teachPublic/layui/layui.js}"></script>
+    <script th:inline="javascript">
+        const roleId = [[${roleId}]];
+        const oauth2Host = [[${oauth2Host}]];
+        // const oauth2Host = 'http://localhost:8765/uaa'
+    </script>
+    <script th:src="@{/modules/resourcePermissions/roleAuthorization.js}"></script>
+</body>
+</html>

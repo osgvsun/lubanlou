@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<!--		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/configcenter/registration/css/expand.css}" media="all">
+		<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{/js/jquery.cookie.js}"></script>
+		<script th:src="@{/layui/layui.js}"></script>
+		<!-- expand -->
+		<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/expandCommon.css}" media="all">
+		<script th:inline="javascript">
+			var configType = [[${configType}]];
+			var currentUsername = [[${session.user.username}]];
+			var apiGateWayHost = [[${session.apiGateWayHost}]];
+			var currentsiteEnName = [[${session.siteEnName}]];
+			var config1;
+			var config2;
+			var config3;
+			var serverHostArray = document.location.href.split('/');
+			var serverHost = serverHostArray[0] + "//" + serverHostArray[2] + "/" + serverHostArray[3] + "/";
+		</script>
+		<script>
+			function loginOut() {
+				localStorage.clear();
+				$.cookie('currauth', '');
+				$.cookie('currentauthName', '');
+				location.href = serverHost + 'webapp/logout?outUrl=' + document.location.href;
+			}
+		</script>
+	</head>
+
+	<body>
+	<div class="main_content_box">
+		<div class="head_box">
+			<!--头部左侧目录开始-->
+			<div class="head_nav">
+<!--				<a id="schoolMessage" th:href="@{/configcenter/registration/schoolMessage}" th:name="@{/configcenter/registration/schoolMessage}" target="i" lay-tips="查看学校通知">学校通知</a>-->
+<!--				<div class="head_info basic_head_info">-->
+<!--					<div class="head_tit">-->
+<!--						<label>师生互选(学业导师)</label>-->
+<!--						<i class="fa fa-caret-down"></i>-->
+<!--					</div>-->
+<!--					<div class="user_detail">-->
+<!--						<div class="ud_pointer"></div>-->
+<!--						<div class="operation_mid">-->
+<!--							<a id="academicDeanTutorList" th:href="@{/configcenter/registration/academicDeanTutorList}" th:name="@{/configcenter/registration/academicDeanTutorList}" target="i">导师名单</a>-->
+<!--							<a id="academicRelationship" th:href="@{/configcenter/registration/academicRelationship}" th:name="@{/configcenter/registration/academicRelationship}" target="i">师生对应名单</a>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+				<div class="head_info basic_head_info">
+					<div class="head_tit">
+						<label>导师聘任(科创导师)</label>
+						<i class="fa fa-caret-down"></i>
+					</div>
+					<div class="user_detail">
+						<div class="ud_pointer"></div>
+						<div class="operation_mid">
+							<a href="scientificOfficeMessage.html" name="scientificOfficeMessage.html" target="i">导师聘任通知</a>
+							<a href="scientificTutorDetail.html" name="scientificTutorDetail.html" target="i">导师/导师组信息</a>
+						</div>
+					</div>
+				</div>
+				<div class="head_info basic_head_info">
+					<div class="head_tit">
+						<label>师生互选(科创导师)</label>
+						<i class="fa fa-caret-down"></i>
+					</div>
+					<div class="user_detail">
+						<div class="ud_pointer"></div>
+						<div class="operation_mid">
+							<a href="scientificOfficeChooseTutorMessage.html" name="scientificOfficeChooseTutorMessage.html" target="i">教务处通知(学生)</a>
+							<a href="scientificOfficeChooseStudentMessage.html" name="scientificOfficeChooseStudentMessage.html" target="i">教务处通知(导师)</a>
+							<a href="scientificRelationship.html" name="scientificRelationship.html" target="i">师生对应名单(教务处)</a>
+							<a href="scientificStudentList.html" name="scientificStudentList.html" target="i">导师工作管理</a>
+							<a href="scientificTutorList.html" name="scientificTutorList.html" target="i">学生工作管理</a>
+							<a href="scientificOfficeExamineTutor.html" name="scientificOfficeExamineTutor.html" target="i">师生互选变更申请审核(教务处)</a>
+						</div>
+					</div>
+				</div>
+				<div class="head_info basic_head_info">
+					<div class="head_tit">
+						<label>师生互选(学业导师)</label>
+						<i class="fa fa-caret-down"></i>
+					</div>
+					<div class="user_detail">
+						<div class="ud_pointer"></div>
+						<div class="operation_mid">
+							<a class="academic" id="schoolMessage" th:href="@{/configcenter/registration/schoolMessage}" th:name="@{/configcenter/registration/schoolMessage}" target="i">学校通知</a>
+							<a class="academic" id="academicDeanTutorList" th:href="@{/configcenter/registration/academicDeanTutorList}" th:name="@{/configcenter/registration/academicDeanTutorList}" target="i">导师名单</a>
+							<a class="academic" id="academicRelationship" th:href="@{/configcenter/registration/academicRelationship}" th:name="@{/configcenter/registration/academicRelationship}" target="i">师生对应名单</a>
+							<a class="academic" th:href="@{/configcenter/registration/academicStudentList}" th:name="@{/configcenter/registration/academicStudentList}" target="i">导师工作管理</a>
+							<a class="academic" th:href="@{/configcenter/registration/academicTutorList}" th:name="@{/configcenter/registration/academicTutorList}"target="i">学生工作管理</a>
+							<a class="academic" id="academicDeanExamineTutor" th:href="@{/configcenter/registration/academicDeanExamineTutor}" th:name="@{/configcenter/registration/academicDeanExamineTutor}" target="i">师生互选变更申请审核(系主任)</a>
+						</div>
+					</div>
+				</div>
+
+				<!--<a href="labMain.html" name="labMain.html" target="i" lay-tips="查看实验室预约">实验室预约</a>
+                <a href="stationMain.html" name="stationMain.html" target="i" lay-tips="查看工位预约">工位预约</a>
+                <div class="head_info basic_head_info">
+                    <div class="head_tit">
+                        <label>预约管理</label>
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                    <div class="user_detail">
+                        <div class="ud_pointer"></div>
+                        <div class="operation_mid">
+                            <a href="appointmentExamine.html" name="appointmentExamine.html" target="i">预约审核</a>
+                            <a href="myAppointment.html" name="myAppointment.html" target="i">我的预约</a>
+                            <a href="appointmentList.html" name="appointmentList.html" target="i">预约列表</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="openMain.html" name="openMain.html" target="i" lay-tips="查看开放预约">开放设置</a>
+                <div class="head_info basic_head_info">
+                    <div class="head_tit">
+                        <label>模板设置</label>
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                    <div class="user_detail">
+                        <div class="ud_pointer"></div>
+                        <div class="operation_mid">
+                            <a href="collegeTemplateSet.html" name="collegeTemplateSet.html" target="i">院级开放设置模板设置</a>
+                            <a href="personalTemplateSet.html" name="personalTemplateSet.html" target="i">院级个人设置模板设置</a>
+                            <a href="appointmentTypeSet.html" name="appointmentTypeSet.html" target="i">院级空间预约类型设置</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="head_info basic_head_info">
+                    <div class="head_tit">
+                        <label>信誉积分</label>
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                    <div class="user_detail">
+                        <div class="ud_pointer"></div>
+                        <div class="operation_mid">
+                            <a href="creditScoreSet.html" name="creditScoreSet.html" target="i">中心自行设置项(信誉积分设置)</a>
+                            <a href="creditScoreInfo.html" name="creditScoreInfo.html" target="i">信誉积分查看</a>
+                            <a href="creditScoreDeduct.html" name="creditScoreDeduct.html" target="i">信誉积分扣除</a>
+                            <a href="myCreditScore.html" name="myCreditScore.html" target="i">我的信誉积分</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="appointmentOverview.html" name="appointmentOverview.html" target="i" lay-tips="查看预约总览">预约总览</a>-->
+			</div>
+			<!--头部左侧目录结束-->
+			<!--头部右侧工具栏开始-->
+			<div class="head_tool">
+<!--				<a href="#">登录</a>-->
+				<div class="head_info user_info">
+					<div class="head_tit">
+						<img th:src="@{/modules/iotAttendance/static/images/user_head.jpg}"/>
+						<label th:text="${session.user.username}"></label>
+						<i class="fa fa-caret-down"></i>
+					</div>
+					<div class="user_detail">
+						<div class="ud_pointer"></div>
+						<div class="ud_top">
+							<img th:src="@{/modules/iotAttendance/static/images/user_head.jpg}"/>
+							<div class="ud_info">
+								<div th:text="${session.user.username}"></div>
+								<div>身份信息</div>
+							</div>
+						</div>
+						<div class="operation_mid">
+							<a href="#" class="switchpermissions" data-method="switchpermissions">切换权限</a>
+						</div>
+						<a class="ud_logout" target="_parent" href="javascript:void(0)" onclick="loginOut()">退出登录</a>
+					</div>
+				</div>
+			</div>
+			<!--头部右侧工具栏结束-->
+		</div>
+		<div class="main_box">
+			<!--主体开始-->
+			<div class="full_screen">
+				<iframe id="iframe" src="" name="i"></iframe>
+			</div>
+			<!--主体结束-->
+		</div>
+	</div>
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/static/js/mainindex.js}"></script>
+		<script th:src="@{/modules/configcenter/registration/mainindex.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'configcenter/organization/mainindex']);-->
+<!--		</script>-->
+	</body>
+
+</html>

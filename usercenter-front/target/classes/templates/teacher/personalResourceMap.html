@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN" id="index"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>个人资源图谱</title>
+    <script th:src="@{/layui/layui.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <style>
+        .map_a {
+            color: #409EFF;
+            cursor: pointer
+        }
+    </style>
+    <script th:src="@{/modules/common.js}"></script>
+</head>
+<body ontouchstart="">
+<div id="resource-container"></div>
+<div id="tips">加载中...</div>
+<div id="jsmind_container"></div>
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<!--资源容器-->
+<link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/default/easyui.css}">
+<link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/icon.css}">
+<script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.easyui.min.js}"></script>
+<link rel="stylesheet" th:href="@{${resourceContainerHost} + '/shareApi/resourceContainer.css'}" media="all">
+<script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+<!--资源容器-->
+<link th:href="@{/plugins/kmsjsmap/kmsjsmap.css}" rel="stylesheet" type="text/css"/>
+<script th:src="@{/plugins/kmsjsmap/kmsjsmap.js}"></script>
+<script th:inline="javascript">
+    var userCenterHost = [[${userCenterHost}]];
+    var currentUsername = [[${username}]];
+    var apiGateWayHost = [[${apiGateWayHost}]];
+    var encryptUsername = [[${encryptUsername}]];
+    var currentsiteEnName = [[${siteEnName}]];
+    var currentsiteSecret = [[${siteSecret}]];
+    var oauth2 = [[${oauth2}]];
+
+    resourceContainer.initResourceContainer({
+        oauth2Host: oauth2,
+        siteName: "用户中心",
+        username: currentUsername,
+        unfixed: true
+    });
+
+
+</script>
+<script th:inline="javascript">
+    var teachHost = [[${session.teachHost}]];
+
+</script>
+<script>
+    function GetQueryString(name) {
+        var url = window.location.href
+        if (url.indexOf(name + '=') !== -1) {
+            var par = url.split(name + '=')[1]
+            if (par.indexOf('&') !== -1)
+                return decodeURIComponent(par.split('&')[0])
+            else return decodeURIComponent(par)
+        } else return ''
+    }
+
+    function mapInit(data) {
+        kmsjsmap.init({
+            container: "jsmind_container",
+            data: data,
+            editable: false, // 是否可以编辑
+            onRelation: function (item) {
+                // 右键关联节点后的回调函数
+            }
+        }, function () {
+            $('#tips').show()
+            // 浏览器窗口变化时调整
+            $(window).resize(function () {
+                $(".mui-adapt").click();
+            });
+            // 节点收缩/展开时调整div大小
+            $("jmexpander").click(function () {
+                let relativeHeight = $(window).scrollTop() / document.body.clientHeight
+                setTimeout(() => {
+                    // 调整适应
+                    let num = 0;
+                    while (num < 5) {
+                        $(".mui-adapt").click();
+                        num++;
+                    }
+                    // console.log($(this).offset().top,$(window).height()/2);
+                    // $(window).scrollTop($(this).offset().top-$(window).height()/2);
+                    $(window).scrollTop(document.body.clientHeight * relativeHeight);
+                }, 100)
+            });
+            var trueHeight = Math.floor(
+                document.getElementsByClassName("theme-kms1")[0].getBoundingClientRect().height);
+            $("#jsmind_container").height(trueHeight);
+            $(".theme-kms1").height(trueHeight);
+            $(".jsmind-inner").height(trueHeight);
+            $("#jsmind_loading").hide();
+            $("#jsmind_handle").show();
+            // 监听滚动 lui-jsmind-innerToolBar 操作按钮
+            let isTrue = true;
+            $(window).scroll(function () {
+                let jsmindTop = document.getElementById("jsmind_container").offsetTop;
+                // 115是上面fix的当前课程的高度
+                let winTop = $(window).scrollTop() + 115;
+                if (isTrue) {
+                    if (jsmindTop < winTop && winTop - jsmindTop - $("#jsmind_container").height() + $(".lui-jsmind-innerToolBar").height() + 20 < 0) {
+                        let positionTop = winTop - jsmindTop;
+                        $(".lui-jsmind-innerToolBar").css("top", positionTop + "px");
+                        isTrue = false;
+                        setTimeout(function () {
+                            isTrue = true;
+                        }, 0)
+                    } else if (jsmindTop >= winTop) {
+                        $(".lui-jsmind-innerToolBar").css("top", "0px");
+                    }
+                }
+            })
+            $('#tips').hide()
+        })
+    }
+
+    var siteId = GetQueryString('siteId')
+    var siteName = GetQueryString('siteName')
+    console.log(currentUsername)
+
+    function uploadFileByPath(path) {
+        resourceContainer.initUploadFileWindow({
+            beforeUpload: function (data) {
+                return true;
+            },
+            afterUploadSuccess: function (data) {
+                console.log(data);
+            },
+            path: path,
+            uploadFail: function (result) {
+                alert('上传失败' + result);
+            },
+            fileTags: ['文件'],
+            compressionRatio: 1
+        });
+        resourceContainer.showUploadWindow(true);
+    }
+
+    function downloadFile(fileId) {
+        if (fileId.startsWith('http')) {
+            setInterval(window.open(fileId), 300);
+            return;
+        }
+        resourceContainer.getFileById({
+            success: function (data) {
+                location.href = data.url + "&filename=" + data.fileName;
+            }, fail: function (reason) {
+                console.log("失败:" + reason);
+            }, fileId: fileId, username: currentUsername, needToken: false
+        });
+    }
+
+    $(function () {
+        $.ajax({
+            url: userCenterHost + "/usercenter/getPersonalEduForMap",
+            type: "GET",
+            dataType: 'json',
+            data: {
+                username: currentUsername,
+                siteId: siteId
+            },
+            success: function (data) {
+                mapInit(data)
+            },
+            error: function () {
+                console.log("加载失败")
+            }
+        });
+    });
+</script>
+</body>
+</html>

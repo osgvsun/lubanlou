@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iot/static/css/expand.css}" media="all">
+    <script th:inline="javascript">
+        var iotHost = [[${iotHost}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var currentUsername = [[${session.user.username}]];
+    </script>
+    <style>
+        .layui-form-label {
+            width: 113px;
+        }
+
+        .layui-input-block {
+            margin-left: 113px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layui-fluid">
+    <form class="layui-form" action="" lay-filter="editattendance" id="editattendance">
+        <input type="hidden" th:value="${id}" name="id">
+        <!--基础信息开始-->
+        <div class="layui-col-md12 editbox">
+            <div class="layui-card">
+                <div class="layui-card-header">编辑指南</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-form-item">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space20 layui-form-item">
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">指南标题</label>
+                                    <div class="layui-input-block">
+                                        <input class="layui-input" name="title" autocomplete="on" placeholder="请输入标题" />
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">超链接：</label>
+                                    <div class="layui-input-block">
+                                        <input class="layui-input" name="content" autocomplete="on" placeholder="请输入url" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--基础信息结束-->
+        <!--操作按钮开始-->
+        <div class="layui-col-lg12 layui-hide">
+            <button lay-filter="editattendancebtn" id="editattendancebtn" class="layui-btn" lay-submit>立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+        </div>
+        <!--操作按钮结束-->
+    </form>
+</div>
+<!--右侧栏开始-->
+<div class="quick_line">
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script th:src="@{/modules/iot/static/layui/layui.js}"></script>
+<script th:src="@{/modules/iot/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/iot/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+
+    ).use(['index', 'iot/guideEditAtt']);
+</script>
+</body>
+
+</html>

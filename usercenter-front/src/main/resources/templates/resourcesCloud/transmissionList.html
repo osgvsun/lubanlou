@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/resourcesCloud/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: 68px;
+        }
+
+        .layui-input-block {
+            margin-left: 68px;
+        }
+    </style>
+
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box heightauto">
+    <form class="layui-form" action="" lay-filter="transmissionlistbox" id="transmissionlistbox">
+        <div class="layui-fluid">
+            <div class="layui-col-md12">
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                    <ul class="layui-tab-title line-tab-title">
+                        <li class="layui-this">正在下载(5)</li>
+                        <li>正在上传(0)</li>
+                        <li>传输完成(10)</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div class="layui-col-md12">
+                                <!--表单开始-->
+                                <table class="layui-hide new_progress" id="transmissionlisttab"
+                                       lay-filter="transmissionlisttab"></table>
+                                <!--行内工具栏开始-->
+                                <script type="text/html" id="toolbar">
+                                    <a class="layui-btn layui-btn-warm layui-btn-xs">暂停</a>
+                                    <a class="layui-btn layui-btn-green layui-btn-xs">继续</a>
+                                    <a class="layui-btn layui-btn-red layui-btn-xs" lay-event="del">删除</a>
+                                </script>
+                                <!--行内工具栏结束-->
+                                <!--表单结束-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--主体结束-->
+<script th:src="@{/modules/resourcesCloud/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'resourcesCloud/transmissionList']);
+</script>
+</body>
+
+</html>

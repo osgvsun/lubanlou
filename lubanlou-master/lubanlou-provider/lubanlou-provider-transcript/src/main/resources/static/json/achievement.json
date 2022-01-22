@@ -1,0 +1,53 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"pjnum": "002321",
+			"pjname": "aaa",
+			"pjperson": "张三",
+			"pjteacher": "李四",
+			"pjpersonschool": "经管学院",
+			"credit": "1",
+			"implementtime": "1",
+			"departmentfund": "1000"
+		}, {
+			"pjnum": "432479",
+			"pjname": "bbb",
+			"pjperson": "李四",
+			"pjteacher": "张三",
+			"pjpersonschool": "纺织学院",
+			"credit": "2",
+			"implementtime": "2",
+			"departmentfund": "3000"
+		}, {
+			"pjnum": "002321",
+			"pjname": "aaa",
+			"pjperson": "张三",
+			"pjteacher": "李四",
+			"pjpersonschool": "经管学院",
+			"credit": "1",
+			"implementtime": "1",
+			"departmentfund": "1000"
+		}, {
+			"pjnum": "432479",
+			"pjname": "bbb",
+			"pjperson": "李四",
+			"pjteacher": "张三",
+			"pjpersonschool": "纺织学院",
+			"credit": "2",
+			"implementtime": "2",
+			"departmentfund": "3000"
+		}, {
+			"pjnum": "002321",
+			"pjname": "aaa",
+			"pjperson": "张三",
+			"pjteacher": "李四",
+			"pjpersonschool": "经管学院",
+			"credit": "1",
+			"implementtime": "1",
+			"departmentfund": "1000"
+		}
+	]
+}

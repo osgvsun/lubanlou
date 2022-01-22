@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/resourcesCloud/static/css/expand.css}" media="all">
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box heightauto">
+    <form class="layui-form" action="" lay-filter="sharewithvariousbox" id="sharewithvariousbox">
+        <div class="layui-fluid">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title line-tab-title">
+                    <li class="fa fa-user-plus layui-this">按联系人添加</li>
+                    <li class="fa fa-sitemap">按部门添加</li>
+                    <li class="fa fa-shield">按角色(职务)添加</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-row layui-col-space15">
+                            <div class="layui-col-md12">
+                                <!--联系人穿梭数据开始-->
+                                <div id="member"></div>
+                                <!--联系人穿梭数据结束-->
+                            </div>
+                            <div class="layui-col-md12">
+                                <input type="radio" name="memberauthority" value="编辑" title="编辑" checked="">
+                                <input type="radio" name="memberauthority" value="上传下载" title="上传下载">
+                                <input type="radio" name="memberauthority" value="仅上传" title="仅上传">
+                                <input type="radio" name="memberauthority" value="仅下载" title="仅下载">
+                                <input type="radio" name="memberauthority" value="仅预览" title="仅预览">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-row layui-col-space15">
+                            <div class="layui-col-md12">
+                                <!--部门穿梭数据开始-->
+                                <div id="department"></div>
+                                <!--部门穿梭数据结束-->
+                            </div>
+                            <div class="layui-col-md12">
+                                <input type="radio" name="departmentauthority" value="编辑" title="编辑" checked="">
+                                <input type="radio" name="departmentauthority" value="上传下载" title="上传下载">
+                                <input type="radio" name="departmentauthority" value="仅上传" title="仅上传">
+                                <input type="radio" name="departmentauthority" value="仅下载" title="仅下载">
+                                <input type="radio" name="departmentauthority" value="仅预览" title="仅预览">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-row layui-col-space15">
+                            <div class="layui-col-md12">
+                                <!--角色(职务)穿梭数据开始-->
+                                <div id="profession"></div>
+                                <!--角色(职务)穿梭数据结束-->
+                            </div>
+                            <div class="layui-col-md12">
+                                <input type="radio" name="professionauthority" value="编辑" title="编辑" checked="">
+                                <input type="radio" name="professionauthority" value="上传下载" title="上传下载">
+                                <input type="radio" name="professionauthority" value="仅上传" title="仅上传">
+                                <input type="radio" name="professionauthority" value="仅下载" title="仅下载">
+                                <input type="radio" name="professionauthority" value="仅预览" title="仅预览">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="sharewithvariousbtn" id="sharewithvariousbtn" class="layui-btn"
+                       lay-submit value="立即提交"/>
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+            </div>
+            <!--操作按钮结束-->
+        </div>
+    </form>
+</div>
+<!--主体结束-->
+<script th:src="@{/modules/resourcesCloud/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'resourcesCloud/shareWithVarious']);
+</script>
+</body>
+
+</html>

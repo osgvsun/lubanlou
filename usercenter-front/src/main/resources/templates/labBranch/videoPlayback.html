@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #flashvideo {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <video name="videoElement" id="flvvideo" class="live_box" controls></video>
+    <div id="flashvideo" class="live_box"></div>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/plugins/ckplayer/flv.js}"></script>
+    <script th:src="@{/plugins/ckplayer/ckplayer.js}"></script>
+    <script th:inline="javascript">
+        const timetableHost = [[${timetableHost}]];
+        const agentId = [[${agentId}]];
+    </script>
+    <script th:src="@{/modules/labBranch/videoPlayback.js}"></script>
+</body>
+</html>

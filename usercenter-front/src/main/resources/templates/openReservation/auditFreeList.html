@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+
+</head>
+
+<body>
+<div class="main_content_box">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="auditfreelistbox" id="auditfreelistbox">
+            <blockquote class="layui-elem-quote layui-quote-nm tag_box">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>
+                        <span></span>
+                        <div class="li_cell_box">
+                            <div class="li_cell"><i class="layui-icon layui-icon-console"></i></div>
+                            <div class="li_cell"><i class="layui-icon layui-icon-component"></i></div>
+                            <div class="li_cell"><i class="layui-icon layui-icon-user"></i></div>
+                        </div>
+                    </legend>
+                    <span class="layui-breadcrumb breadcrumb_top" lay-separator="|">
+							<a th:href="@{/openReservation/openMain}" th:name="@{/openReservation/openMain}" target="i" class="breadcrumb_btn">返回实验室列表</a>
+							</span>
+                </fieldset>
+                <div class="field_btn_box layui-col-lg9">
+                    <a th:href="@{/openReservation/equipmentReserve(configType=${configType},labRoomId=${labRoomId})}"
+                       th:name="@{/openReservation/equipmentReserve(configType=${configType},labRoomId=${labRoomId})}" target="i">预约设置</a>
+                    <a th:href="@{/openReservation/equipmentAdmittanceMode(configType=${configType},labRoomId=${labRoomId})}"
+                       th:name="@{/openReservation/equipmentAdmittanceMode(configType=${configType},labRoomId=${labRoomId})}" target="i">准入设置</a>
+                    <a th:href="@{/openReservation/equipmentTimeBooking(configType=${configType},labRoomId=${labRoomId})}"
+                       th:name="@{/openReservation/equipmentTimeBooking(configType=${configType},labRoomId=${labRoomId})}" target="i">机时预约</a>
+                    <a th:href="@{/openReservation/authorizationList(configType=${configType},labRoomId=${labRoomId})}"
+                       th:name="@{/openReservation/authorizationList(configType=${configType},labRoomId=${labRoomId})}" target="i" class="field_btn_select">准入名单</a>
+                </div>
+                <div class="clearboth"></div>
+            </blockquote>
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li>
+                        <a th:href="@{/openReservation/authorizationList(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/authorizationList(configType=${configType},labRoomId=${labRoomId})}" target="i">授权名单</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/openReservation/auditFreeList(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/auditFreeList(configType=${configType},labRoomId=${labRoomId})}" target="i" class="layui-this">免审核名单</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/openReservation/examFreeList(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/examFreeList(configType=${configType},labRoomId=${labRoomId})}" target="i">免考试名单</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/openReservation/blackList(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/blackList(configType=${configType},labRoomId=${labRoomId})}" target="i">黑名单</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/openReservation/securityList(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/securityList(configType=${configType},labRoomId=${labRoomId})}" target="i">安全协议书</a>
+                    </li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--免审核名单开始-->
+                        <div class="layui-card">
+                            <div class="layui-card-header">免审核名单
+                                <label class="layui-icon layui-icon-add-1 newauditfreelist header_btn"
+                                       data-method="newauditfreelist" lay-tips="添加人员"></label>
+                            </div>
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space10">
+                                    <!--搜索开始-->
+                                    <div class="layui-col-md12 search_line">
+                                        <div class="layui-input-inline" id="username">
+                                        </div>
+                                        <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                                        <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+                                    </div>
+                                    <!--搜索结束-->
+                                    <div class="layui-col-md12">
+                                        <!--表单开始-->
+                                        <table class="layui-hide" id="auditfreelist" lay-filter="auditfreelist"></table>
+                                        <script type="text/html" id="toolbar">
+                                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                        </script>
+                                        <!--表单结束-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--免审核名单结束-->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <!--<a href="#"><br/></a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script th:src="@{/js/cookie.js}"></script>
+<script th:src="@{/js/xm-select.js}"></script>
+<script th:inline="javascript">
+    const configType = [[${configType}]];
+    const labRoomId = [[${labRoomId}]];
+    const accessHost = [[${accessHost}]];
+    const oauth2Host = [[${oauth2Host}]];
+</script>
+<script th:src="@{/modules/openReservation/static/js/common.js}"></script>
+<script th:src="@{/modules/openReservation/auditFreeList.js}"></script>
+</body>
+</html>​​​

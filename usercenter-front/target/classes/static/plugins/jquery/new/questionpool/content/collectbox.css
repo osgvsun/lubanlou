@@ -1,0 +1,12 @@
+.resolute{
+	position: relative;
+}
+.close_box{
+	position: absolute;
+	top:0;
+	right: 12px;
+
+}
+.m-list>li:hover{
+	border:1px solid #e6e6e6;
+}

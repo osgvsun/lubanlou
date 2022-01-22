@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+<!--	<link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">-->
+	<link rel="stylesheet" th:href="@{/modules/configcenter/registration/css/expand.css}" media="all">
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+	<script th:src="@{/js/initOAuth2.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<!--    <script type="text/javascript" th:src="@{${session.oauth2} + '/oauth/OAuth2.js'}"></script>-->
+	<script th:inline="javascript">
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var currHost = [[${session.currHost}]];
+		var oauth2 = [[${session.oauth2}]];
+		var dataSource = [[${session.dataSource}]];
+		var configType = [[${session.configType}]];
+	</script>
+	<!--    <script th:src="@{/modules/common.js}"></script>-->
+	<!--    <script th:src="@{/modules/configcenter/static/common.js}"></script>-->
+	<!--    <script th:src="@{/modules/configcenter/static/global.js}"></script>-->
+	<link rel="stylesheet" th:href="@{/modules/configcenter/process/css/commonList.css}">
+	<style>
+		.layui-table-view .layui-table {
+			width: 100%;
+		}
+
+		.layui-table-header {
+			margin-right: -1px;
+		}
+
+		.layui-table-cell {
+			height: auto;
+		}
+
+		.layui-table tbody tr:hover,
+		.layui-table-click,
+		.layui-table-hover {
+			background: transparent;
+		}
+	</style>
+</head>
+
+<body>
+		<div class="main_content_box">
+			<!--主体开始-->
+			<div class="full_box">
+				<form class="layui-form lesson_card" action="" lay-filter="academicdeanexaminetutorbox" id="academicdeanexaminetutorbox">
+					<blockquote class="layui-elem-quote layui-quote-nm tag_box">
+						<fieldset class="layui-elem-field layui-field-title">
+							<legend class="templateInfo">
+								<!--								这里显示项目的名称-->
+								<div class="li_cell_box">
+									<div class="li_cell"><i class="layui-icon layui-icon-console"></i>开始时间：2021-11-18 08:00:00</div>
+									<div class="li_cell"><i class="layui-icon layui-icon-component"></i>范围：全校</div>
+								</div>
+							</legend>
+							<div class="breadcrumb_top breadcrumb_division">
+								<!--								<a class="breadcrumb_select">2018级</a>-->
+								<!--								<a>2019级</a>-->
+								<!--								<a>2020级</a>-->
+								<!--								<a>2021级</a>-->
+							</div>
+						</fieldset>
+						<div class="field_btn_box layui-col-lg9 templateOtherInfo">
+							<!--							要求：这里显示要求/这里显示要求/这里显示要求/这里显示要求/这里显示要求-->
+						</div>
+						<div class="layui-col-lg3">
+							<select name="template" lay-search=""  lay-filter="templateSelect">
+								<!--								<option value="">可切换项目</option>-->
+								<!--								<option value="1">项目1</option>-->
+								<!--								<option value="2">项目2</option>-->
+								<!--								<option value="3">项目3</option>-->
+							</select>
+						</div>
+						<div class="clearboth"></div>
+					</blockquote>
+					<div class="layui-card">
+						<div class="layui-card-header">师生互选变更申请审核
+<!--							<input type="checkbox" name="tutor" title="全选导师申请" />-->
+							<label class="layui-icon layui-icon-ok layui-btn-green passacademicdeanexaminetutor header_btn" data-method="passacademicdeanexaminetutor">通过所选申请</label>
+							<label class="layui-icon layui-icon-close false layui-btn-red refuseacademicdeanexaminetutor header_btn" data-method="refuseacademicdeanexaminetutor">拒绝所选申请</label>
+<!--							<font class="font_red">(提示需要做的事情)</font>-->
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+								<ul class="layui-tab-title">
+									<li class="layui-this">
+										<a>导师申请</a>
+									</li>
+									<li>
+										<a>操作记录</a>
+									</li>
+								</ul>
+								<div class="layui-tab-content">
+									<div class="layui-tab-item layui-show layui-row layui-col-space10">
+										<!--搜索开始-->
+										<div class="layui-col-md12 search_line">
+											<div class="layui-inline">
+												<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+											</div>
+											<input type="button" class="layui-btn" data-type="reload" value="搜索" />
+											<input type="reset" class="layui-btn layui-btn-primary" value="取消">
+										</div>
+										<!--搜索结束-->
+										<div class="layui-col-md12">
+											<!--表单开始-->
+											<table class="layui-table border_tab" id="academicdeanexaminetutor" lay-filter="academicdeanexaminetutor"></table>
+<!--												<thead>-->
+<!--													<tr>-->
+<!--														<th rowspan="2" lay-data="{type:'checkbox', width:35}"></th>-->
+<!--														<th rowspan="2" lay-data="{type:'numbers', width:50}">序号</th>-->
+<!--														<th rowspan="2" lay-data="{field:'tutorname',sort:'true'}">申请导师</th>-->
+<!--														<th colspan="3" lay-data="{align:'center'}">原分配学生信息</th>-->
+<!--														<th colspan="3" lay-data="{align:'center'}">申请更换学生信息</th>-->
+<!--														<th rowspan="2" lay-data="{fixed:'right',width: 110,toolbar: '#toolbar'}">操作</th>-->
+<!--													</tr>-->
+<!--													<tr>-->
+<!--														<th lay-data="{field:'originalstudentname',sort:'true'}">姓名</th>-->
+<!--														<th lay-data="{field:'originalstudentgender',sort:'true'}">性别</th>-->
+<!--														<th lay-data="{field:'originalstudentage',sort:'true'}">年龄</th>-->
+<!--														<th lay-data="{field:'newstudentname',sort:'true'}">姓名</th>-->
+<!--														<th lay-data="{field:'newstudentgender',sort:'true'}">性别</th>-->
+<!--														<th lay-data="{field:'newstudentage',sort:'true'}">年龄</th>-->
+<!--													</tr>-->
+<!--												</thead>-->
+<!--											</table>-->
+											<!--表单结束-->
+											<script type="text/html" id="toolbar">
+												<a class="layui-btn layui-btn-green layui-btn-xs" lay-event="pass">通过</a>
+												<a class="layui-btn layui-btn-red layui-btn-xs" lay-event="refuse">拒绝</a>
+											</script>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+			<!--主体结束-->
+		</div>
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<!--<a href="#"><br/></a>-->
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/static/cell-rowspan.js}"></script>
+		<script th:src="@{/modules/configcenter/registration/academicDeanExamineTutor.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../layuiadmin/' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'academicDeanExamineTutor']);-->
+<!--		</script>-->
+	</body>
+
+</html>

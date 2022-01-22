@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>培训经历信息组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+
+    <style>
+        .fill_box {
+            display: none;
+        }
+
+        .buttonAdd{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<!--新增表单-->
+<div class="fill_box" id="trainExperienceInfoAdd">
+    <form class="layui-form" action="" lay-filter="trainExperienceInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg8 layui-col-md121">
+                <label class="layui-form-label">地点</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" lay-verify="required" autocomplete="off"
+                           class="layui-input address">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">是否海外</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="overseasExperience" class="overseasExperience" value="1" title="是">
+                    <input type="radio" name="overseasExperience" class="overseasExperience" value="0" title="否">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">起止时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="trainStartStopTime" id="trainStartStopTime_add"
+                           lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">内容</label>
+                <div class="layui-input-block">
+                                        <textarea name="trainInfo" lay-verify="required" placeholder="请输入内容"
+                                                  class="layui-textarea trainInfo"></textarea>
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="trainExperienceInfo">立即提交
+                    </button>
+                    <button type="reset" class="clearForm" style="display: none"></button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="trainExperienceInfo">
+    <div class="buttonAdd"><button class="layui-btn header_edit" style="float: right">新增</button></div>
+    <table class="layui-hide" id="trainExperienceInfo"
+           lay-filter="trainExperienceInfo"></table>
+</div>
+<!--访学，培训进修编辑-->
+<div id="edit_trainExperienceInfo" style="display: none">
+    <div style="display: none">
+        <input id="trainStartTime">
+        <input id="trainEndTime">
+    </div>
+    <form class="layui-form" action="" lay-filter="trainExperienceInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg8 layui-col-md121">
+                <label class="layui-form-label">地点</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" id="address" lay-verify="required"
+                           autocomplete="off" class="layui-input address">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">是否海外</label>
+                <div class="layui-input-block" id="overseasExperience">
+                    <input type="radio" name="overseasExperience" class="overseasExperience" value="1" title="是">
+                    <input type="radio" name="overseasExperience" class="overseasExperience" value="0" title="否">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <label class="layui-form-label">起止时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="trainStartStopTime" id="trainStartStopTime"
+                           lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">内容</label>
+                <div class="layui-input-block">
+                                        <textarea name="trainInfo" id="trainInfo" lay-verify="required"
+                                                  class="layui-textarea trainInfo"></textarea>
+                </div>
+            </div>
+            <div class="layui-col-lg4" style="display: none">
+                <label class="layui-form-label">ID</label>
+                <div class="layui-input-block" id="trainExperienceInfo_uid">
+                    <input type="text" name="id" id="id"  autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="trainExperienceInfo">立即提交
+                    </button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    layui.config({
+            base: '../../../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'educationDetailTab']);
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var beShowUsername=GetQueryString("username");
+</script>
+<script type="text/html" id="edit1">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"></script>
+    <title>LOGIN</title>
+</head>
+<body>
+<script th:inline="javascript">
+    let redirect_uri = [[${redirect_uri}]];
+    let authorize_uri = [[${authorize_uri}]];
+
+    $(function () {
+        document.location.href = authorize_uri + "?service=" + redirect_uri + "&renew=true";
+    });
+</script>
+</body>
+</html>

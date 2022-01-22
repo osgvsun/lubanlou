@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	<link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/registration/css/expand.css}" media="all">
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+	<script th:src="@{/js/initOAuth2.js}"></script>
+	<script th:src="@{/js/jquery.textareafullscreen.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<!--    <script type="text/javascript" th:src="@{${session.oauth2} + '/oauth/OAuth2.js'}"></script>-->
+	<link rel="stylesheet" th:href="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.css'}" media="all">
+	<script type="text/javascript" th:src="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.js'}"></script>
+
+	<script th:inline="javascript">
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var currentCname = [[${session.user.cname}]];
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var oauth2Host = [[${session.oauth2}]];
+		var oauth2 = [[${session.oauth2}]];
+		var dataSource = [[${session.dataSource}]];
+		var configType = [[${session.configType}]];
+		var resourceContainerHost = [[${resourceContainerHost}]];
+		var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+	</script>
+	<script th:src="@{/modules/configcenter/static/commonResource.js}"></script>
+	<link rel="stylesheet" th:href="@{/modules/configcenter/process/css/commonList.css}">
+		<style>
+			.layui-form-label {
+				width: 65px;
+			}
+			
+			.layui-input-block {
+				margin-left: 65px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="resource-container"></div>
+		<div class="main_content_box">
+			<!--主体开始-->
+			<div class="full_box">
+				<form class="layui-form lesson_card" action="" lay-filter="editacademicstudentworkachievementbox" id="editacademicstudentworkachievementbox">
+<!--					<blockquote class="layui-elem-quote layui-quote-nm tag_box">-->
+<!--						<fieldset class="layui-elem-field layui-field-title">-->
+<!--							<legend>-->
+<!--								这里显示项目的名称-->
+<!--								<div class="li_cell_box">-->
+<!--									<div class="li_cell"><i class="layui-icon layui-icon-console"></i>开始时间：2021-11-18 08:00:00</div>-->
+<!--									<div class="li_cell"><i class="layui-icon layui-icon-component"></i>范围：全校</div>-->
+<!--								</div>-->
+<!--							</legend>-->
+<!--							&lt;!&ndash;<div class="breadcrumb_top breadcrumb_division">-->
+<!--								<a class="breadcrumb_select">test1</a>-->
+<!--								<a>test2</a>-->
+<!--							</div>&ndash;&gt;-->
+<!--						</fieldset>-->
+<!--						<div class="field_btn_box layui-col-lg9">-->
+<!--							要求：这里显示要求/这里显示要求/这里显示要求/这里显示要求/这里显示要求-->
+<!--						</div>-->
+<!--						<div class="layui-col-lg3">-->
+<!--							<select name="template" lay-search="">-->
+<!--								<option value="">可切换项目</option>-->
+<!--								<option value="1">项目1</option>-->
+<!--								<option value="2">项目2</option>-->
+<!--								<option value="3">项目3</option>-->
+<!--							</select>-->
+<!--						</div>-->
+<!--						<div class="clearboth"></div>-->
+<!--					</blockquote>-->
+					<div class="layui-card">
+						<div class="layui-card-header"><span>学生工作管理</span>
+							<label style="margin-left: 15px;" class="layui-icon layui-icon-edit layui-btn-green header_btn editachievementboxbtn">编辑工作成果</label>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+								<ul class="layui-tab-title">
+									<li>
+										<a th:href="@{/configcenter/registration/academicTutorList}" th:name="@{/configcenter/registration/academicTutorList}" target="i">导师名单</a>
+									</li>
+									<li>
+										<a th:href="@{/configcenter/registration/editAcademicStudentWorkLog}" th:name="@{/configcenter/registration/editAcademicStudentWorkLog}" target="i">我的工作日志</a>
+									</li>
+									<li class="layui-this">
+										<a>我的工作成果</a>
+									</li>
+								</ul>
+								<div class="layui-tab-content">
+									<div class="layui-tab-item layui-show layui-row layui-col-space10">
+										<div class="showachievementbox">
+											<div class="case_box">
+												<div class="case_main_tit">
+													<input type="button" class="layui-input readinputbtn" name="name" autocomplete="off" disabled="disabled" readonly="readonly" />
+												</div>
+												<div class="case_nav">
+													<div class="case_nav_tit">简介</div>
+													<input type="button" class="layui-input readinputbtn" name="info" autocomplete="off" disabled="disabled" readonly="readonly" />
+												</div>
+												<div class="case_nav">
+													<div class="case_nav_tit">团队介绍</div>
+													<input type="button" class="layui-input readinputbtn" name="teaminfo" autocomplete="off" disabled="disabled" readonly="readonly" />
+												</div>
+												<div class="case_nav">
+													<div class="case_nav_tit">文件资料
+														<div class="layui-inline font_normal mt0-5">
+															<input type="button" class="layui-btn layui-btn-xs" value="全部下载">
+															<input type="button" class="layui-btn layui-btn-xs layui-btn-green" value="所选文件下载">
+															<input type="text" class="startvalue" hidden="" placeholder="shift键选择" />
+															<input type="text" class="ivalue" hidden="" placeholder="ctrl键选择" />
+															<font class="font_grey">(可按住ctrl键点选或按住shift键连选)</font>
+														</div>
+													</div>
+													<div class="pictext_box opacity_box mt10">
+														<div class="pictext_net opacity1" title="音频.mp3">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/audio.png}">
+																</div>
+															</div>
+															<div class="pn_info">音频.mp3</div>
+														</div>
+														<div class="pictext_net opacity1" title="视频.mp4">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/video.png}">
+																</div>
+															</div>
+															<div class="pn_info">视频.mp4</div>
+														</div>
+														<div class="pictext_net opacity1" title="图片.jpg">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/picture.png}" >
+																</div>
+															</div>
+															<div class="pn_info">图片.jpg</div>
+														</div>
+														<div class="pictext_net opacity1" title="txt文档.txt">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/txt.png}" >
+																</div>
+															</div>
+															<div class="pn_info">txt文档.txt</div>
+														</div>
+														<div class="pictext_net opacity1" title="未知文档.xxx">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/unknow.png}">
+																</div>
+															</div>
+															<div class="pn_info">未知文档.xxx</div>
+														</div>
+														<div class="pictext_net opacity1" title="我是文件夹">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/folder.png}">
+																</div>
+															</div>
+															<div class="pn_info">我是文件夹</div>
+														</div>
+														<div class="pictext_net opacity1" title="word文档.docx">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/word.png}">
+																</div>
+															</div>
+															<div class="pn_info">word文档.docx</div>
+														</div>
+														<div class="pictext_net opacity1" title="excel表格.xlsx">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/excel.png}">
+																</div>
+															</div>
+															<div class="pn_info">excel表格.xlsx</div>
+														</div>
+														<div class="pictext_net opacity1" title="ppt演示文档.pptx">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/ppt.png}" >
+																</div>
+															</div>
+															<div class="pn_info">ppt演示文档.pptx</div>
+														</div>
+														<div class="pictext_net opacity1" title="pdf文档.pdf">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/pdf.png}" >
+																</div>
+															</div>
+															<div class="pn_info">pdf文档.pdf</div>
+														</div>
+														<div class="pictext_net opacity1" title="压缩文档.rar">
+															<div class="pn_img_box">
+																<div class="pn_img">
+																	<img th:src="@{/modules/configcenter/static/images/rar.png}" >
+																</div>
+															</div>
+															<div class="pn_info">压缩文档.rar</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="editachievementbox hide">
+											<div class="fill_box">
+												<div class="layui-row layui-col-space10">
+<!--													<div class="layui-col-lg12">-->
+<!--														<label class="layui-form-label">名称</label>-->
+<!--														<div class="layui-input-block">-->
+<!--															<input class="layui-input" name="name" autocomplete="on" lay-verify="required" placeholder="请输入工作成果名称" />-->
+<!--														</div>-->
+<!--													</div>-->
+<!--													<div class="layui-col-lg12">-->
+<!--														<label class="layui-form-label">简介</label>-->
+<!--														<div class="layui-input-block">-->
+<!--															<input class="layui-input" name="info" autocomplete="on" lay-verify="required" placeholder="请输入工作成果简介" />-->
+<!--														</div>-->
+<!--													</div>-->
+<!--													<div class="layui-col-lg12">-->
+<!--														<label class="layui-form-label">团队介绍</label>-->
+<!--														<div class="layui-input-block">-->
+<!--															<textarea class="layui-textarea" name="teaminfo" autocomplete="on" lay-verify="required" placeholder="请输入工作成果的团队介绍"></textarea>-->
+<!--														</div>-->
+<!--													</div>-->
+<!--													&lt;!&ndash;上传开始&ndash;&gt;-->
+<!--													<div class="layui-col-md12">-->
+<!--														<label class="layui-form-label">上传文件</label>-->
+<!--														<div class="layui-input-block">-->
+<!--															<div class="mix_uploadbox">-->
+<!--																<div class="layui-upload">-->
+<!--																	<div class="layui-upload-drag" id="projectbook">-->
+<!--																		<i class="layui-icon"></i>-->
+<!--																		<p>点击选择文件，或将文件拖拽到此处</p>-->
+<!--																	</div>-->
+<!--																	<div class="layui-upload-list">-->
+<!--																		<table class="layui-table">-->
+<!--																			<thead>-->
+<!--																				<tr>-->
+<!--																					<th>文件名</th>-->
+<!--																					<th>大小</th>-->
+<!--																					<th>状态</th>-->
+<!--																					<th>操作</th>-->
+<!--																				</tr>-->
+<!--																			</thead>-->
+<!--																			<tbody id="pblist"></tbody>-->
+<!--																		</table>-->
+<!--																		<div class="upload_btn">-->
+<!--																			<input type="button" class="layui-btn" id="uploadfilesbtn" value="开始上传文件" />-->
+<!--																		</div>-->
+<!--																	</div>-->
+<!--																</div>-->
+<!--															</div>-->
+
+<!--														</div>-->
+<!--													</div>-->
+													<!--上传结束-->
+												</div>
+											</div>
+											<div class="tc mt10">
+												<input type="button" class="layui-btn" lay-filter="saveachievementboxbtn" id="saveachievementboxbtn" lay-submit value="提交成果" />
+												<input type="button" class="layui-btn layui-btn-red cancelachievementboxbtn" value="取消" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!--主体结束-->
+		</div>
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<!--<a href="#"><br/></a>-->
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/registration/editAcademicStudentWorkAchievement.js}"></script>
+	</body>
+
+</html>

@@ -1,0 +1,28 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"state": "test1",
+			"score": "test2",
+			"center": "test3"
+		}, {
+			"state": "test1",
+			"score": "test2",
+			"center": "test3"
+		}, {
+			"state": "test1",
+			"score": "test2",
+			"center": "test3"
+		}, {
+			"state": "test1",
+			"score": "test2",
+			"center": "test3"
+		}, {
+			"state": "test1",
+			"score": "test2",
+			"center": "test3"
+		}
+	]
+}

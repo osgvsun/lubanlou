@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/expand.css}" media="all">
+    <script th:inline="javascript">
+        //var attendanceHost = "http://localhost:8844"
+        var attendanceHost = [[${attendanceHost}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var currentUsername = [[${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}]];
+        var teachers = [[${teachers}]];
+        var courseName = [[${courseName}]];
+    </script>
+
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="coursestatisticbox" id="coursestatisticbox">
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">课程统计
+<!--                            <div class="head_hint">-->
+<!--                                <span>（</span>-->
+<!--                                <span>教师姓名：</label><th:block th:text="${teachers}"></th:block></span>-->
+<!--                                <span>课程名称：</label><th:block th:text="${courseName}"></th:block></span>-->
+<!--&lt;!&ndash;                                <span>学生总数：36</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>学期：2021-2022第一学期</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>打印日期：2021-04-25</span>&ndash;&gt;-->
+<!--                                <span>）</span>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-md12">
+                                    <!--搜索开始-->
+                                    <div class="search_line">
+                                        <div class="layui-inline">
+                                            <select name="courseName" lay-search>
+                                                <option value="">请选择课程名称</option>
+                                            </select>
+<!--                                            <div class="layui-input-inline" id="courseName"></div>-->
+                                        </div>
+                                        <div class="layui-inline">
+                                            <select name="teacher" lay-search>
+                                                <option value="">请选择授课教师</option>
+                                            </select>
+                                        </div>
+                                        <input type="button" class="layui-btn" data-type="reload" value="搜索"/>
+                                        <input type="reset" class="layui-btn layui-btn-primary" data-type="reset"
+                                               value="取消"/>
+<!--                                        <input type="button" class="layui-btn layui-btn-warm" value="导出"/>-->
+                                    </div>
+                                    <!--搜索结束-->
+                                </div>
+                                <div class="layui-col-md12">
+                                    <!--表单开始-->
+                                    <table class="layui-table" id="coursestatistic" lay-filter="coursestatistic">
+
+                                    </table>
+<!--                                    <table class="layui-table" id="coursestatistic" lay-filter="coursestatistic"-->
+<!--                                           lay-data="{url:'http://localhost:8844/courseStatistics', page: true, page: {layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'],groups: 1,first: false, last: false},limits: [5, 7, 10, 20],limit: 5}">-->
+<!--                                        <thead>-->
+<!--                                        <tr>-->
+<!--                                            <th lay-data="{type: 'numbers',fixed:'left',width:50}" rowspan="2">序号</th>-->
+<!--                                            <th lay-data="{field:'username'}" rowspan="2">学号</th>-->
+<!--                                            <th lay-data="{field:'cname'}" rowspan="2">姓名</th>-->
+<!--                                            <th lay-data="{field:'itemName'}" rowspan="2">班级</th>-->
+<!--                                            <th lay-data="{align:'weeks'}" colspan="4">周次</th>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <th lay-data="{field:'one'}">实验项目(第一周)</th>-->
+<!--                                            <th lay-data="{field:'two'}">实验项目(第二周)</th>-->
+<!--                                            <th lay-data="{field:'three'}">实验项目(第三周)</th>-->
+<!--                                            <th lay-data="{field:'four'}">实验项目(第四周)</th>-->
+<!--                                        </tr>-->
+<!--                                        </thead>-->
+<!--                                    </table>-->
+                                    <!--表单结束-->
+                                    <div id="page"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--主体结束-->
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:src="@{/js/xm-select.js}"></script>
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/global.js}"></script>
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/titleHash.js}"></script>
+<script th:src="@{/modules/iotAttendance/courseStatistic.js}"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="lubanlou-provider-gsquestionpool" />
+        <module name="lubanlou-provider-auditserver" />
+        <module name="lubanlou-eureka" />
+        <module name="lubanlou-provider-datashare" />
+        <module name="lubanlou-provider-message" />
+        <module name="lubanlou-provider-process" />
+        <module name="lubanlou-provider-usercenter" />
+        <module name="lubanlou-provider-gswork" />
+        <module name="lubanlou-canal" />
+        <module name="lubanlou-provider-device" />
+        <module name="lubanlou-provider-access" />
+        <module name="limsproduct" />
+        <module name="lubanlou-common" />
+        <module name="lubanlou-provider-configcenter" />
+        <module name="lubanlou-provider-oauth2" />
+        <module name="lubanlou-provider-gsexam" />
+        <module name="lubanlou-provider-transcript" />
+        <module name="lubanlou-feign" />
+        <module name="lubanlou-provider-attendance" />
+        <module name="es" />
+        <module name="lubanlou-provider-sync" />
+        <module name="lubanlou-provider-timetable" />
+        <module name="lubanlou-provider-iot" />
+        <module name="lubanlou-provider-appointment" />
+        <module name="lubanlou-provider-chapter" />
+        <module name="lubanlou-config" />
+        <module name="teacherInformationCenter" />
+        <module name="lubanlou-gateway" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="es" options="-parameters" />
+      <module name="limsproduct" options="-parameters" />
+      <module name="lubanlou-canal" options="-parameters" />
+      <module name="lubanlou-common" options="-parameters" />
+      <module name="lubanlou-config" options="-parameters" />
+      <module name="lubanlou-eureka" options="-parameters" />
+      <module name="lubanlou-feign" options="-parameters" />
+      <module name="lubanlou-gateway" options="-parameters" />
+      <module name="lubanlou-provider-access" options="-parameters" />
+      <module name="lubanlou-provider-appointment" options="-parameters" />
+      <module name="lubanlou-provider-attendance" options="-parameters" />
+      <module name="lubanlou-provider-auditserver" options="-parameters" />
+      <module name="lubanlou-provider-chapter" options="-parameters" />
+      <module name="lubanlou-provider-configcenter" options="-parameters" />
+      <module name="lubanlou-provider-datashare" options="-parameters" />
+      <module name="lubanlou-provider-device" options="-parameters" />
+      <module name="lubanlou-provider-gsexam" options="-parameters" />
+      <module name="lubanlou-provider-gsquestionpool" options="-parameters" />
+      <module name="lubanlou-provider-gswork" options="-parameters" />
+      <module name="lubanlou-provider-iot" options="-parameters" />
+      <module name="lubanlou-provider-message" options="-parameters" />
+      <module name="lubanlou-provider-oauth2" options="-parameters" />
+      <module name="lubanlou-provider-process" options="-parameters" />
+      <module name="lubanlou-provider-sync" options="-parameters" />
+      <module name="lubanlou-provider-timetable" options="-parameters" />
+      <module name="lubanlou-provider-transcript" options="-parameters" />
+      <module name="lubanlou-provider-usercenter" options="-parameters" />
+      <module name="teacherInformationCenter" options="-parameters" />
+    </option>
+  </component>
+</project>

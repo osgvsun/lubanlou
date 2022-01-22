@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: 65px;
+        }
+
+        .layui-input-block {
+            margin-left: 65px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main_content_box">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="newfieldbox" id="newfieldbox">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">预约类型</label>
+                    <div class="layui-input-block">
+                        <select name="appointment" lay-search lay-verify="required">
+                            <option value="">请选择预约类型</option>
+                            <option value="1">实验室预约</option>
+                            <option value="2">工作室预约</option>
+                            <option value="3">会议室预约</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">字段名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" autocomplete="on" class="layui-input" lay-verify="required"
+                               placeholder="请输入字段名称"/>
+                    </div>
+                </div>
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">字段类型</label>
+                    <div class="layui-input-block float_dd">
+                        <select name="type" lay-search lay-verify="required">
+                            <option value="">请选择字段类型</option>
+                            <option value="1">输入框</option>
+                            <option value="2">数字框</option>
+                            <option value="3">密码框</option>
+                            <option value="4">电话框</option>
+                            <option value="5">时间</option>
+                            <option value="6">日期</option>
+                            <option value="7">日期时间</option>
+                            <option value="8">时间范围</option>
+                            <option value="9">日期范围</option>
+                            <option value="10">日期时间范围</option>
+                            <option value="11">下拉单选框</option>
+                            <option value="12">下拉多选框</option>
+                            <option value="13">单选框</option>
+                            <option value="14">多选框</option>
+                            <option value="15">基础文本框</option>
+                            <option value="16">富文本框</option>
+                            <option value="17">添加附件</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-col-lg4">
+                    <label class="layui-form-label">选择状态</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="state" value="启用" title="启用" checked=""/>
+                        <input type="checkbox" name="state" value="必填" title="必填"/>
+                    </div>
+                </div>
+            </div>
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="newfieldbtn" id="newfieldbtn" class="layui-btn" lay-submit
+                       value="立即提交"/>
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+            </div>
+            <!--操作按钮结束-->
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <!--<a href="#"><br/></a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'openReservation/newField']);
+</script>
+</body>
+
+</html>

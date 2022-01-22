@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>温湿度</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labSafe/css/expand.css}" media="all">
+    <style>
+        .detail_item .layui-form-label {
+            box-sizing: border-box;
+            width: 75px;
+        }
+
+        .detail_item .layui-input-block {
+            margin-left: 75px;
+        }
+    </style>
+    <script th:inline="javascript">
+        var timetableHost = [[${timetableHost}]];
+        var labRoomId = [[${labRoomId}]];
+    </script>
+</head>
+
+<body>
+<div class="layui-fluid">
+    <form class="layui-form detail_item" action="" lay-filter="humiture" id="humiture">
+        <div class="layui-row">
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">级别</label>
+                <div class="layui-input-block">
+                    <input type="button" class="layui-input readinputbtn" name="level" autocomplete="off"
+                           disabled="disabled" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">温度</label>
+                <div class="layui-input-block">
+                    <input type="button" class="layui-input readinputbtn" name="temperature" autocomplete="off"
+                           disabled="disabled" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">湿度</label>
+                <div class="layui-input-block">
+                    <input type="button" class="layui-input readinputbtn" name="humidity" autocomplete="off"
+                           disabled="disabled" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">PM2.5</label>
+                <div class="layui-input-block">
+                    <input type="button" class="layui-input readinputbtn" name="pm25" autocomplete="off"
+                           disabled="disabled" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">整改状态</label>
+                <div class="layui-input-block">
+                    <input type="button" class="layui-input readinputbtn" name="state" autocomplete="off"
+                           disabled="disabled" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">下次检查</label>
+                <div class="layui-input-block">
+                    <input type="button" class="layui-input readinputbtn" name="nextinspect" autocomplete="off"
+                           disabled="disabled" readonly="readonly"/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript" th:src="@{/layui/layui.js?t=1}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script>
+        layui.config({
+            base: '../' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use(['index', 'labSafe/humiture']);
+    </script>
+</body>
+
+</html>

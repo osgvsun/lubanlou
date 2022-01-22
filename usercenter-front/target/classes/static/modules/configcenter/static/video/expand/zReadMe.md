@@ -1,0 +1,2 @@
+这个文件夹的video.js、video.css和lab_video下的不一样
+作用：不用flash播放flv流

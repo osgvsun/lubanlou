@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>个人主页</title>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}" media="all">
+<!--    <link href="../css/index_c.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" th:href="@{/css/userProfile/personMainPage.css}" media="all">
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <script th:src="@{/modules/userProfile/resourceContainer.js}"></script>
+    <script th:src="@{/modules/userProfile/personMainPage.js}"></script>
+    <script language="JavaScript">
+        // const httpBaseUrl = /*[[@{/}]]*/'';
+        //获取资源容器地址
+        let resource = serverHostFilter;
+        let resourceUrl = resource + '/shareApi/resourceContainer.js';
+        let script = '<script src=' + resourceUrl + '><' + '/script>'
+        document.write(script);
+    </script>
+<!--    <script src="../js/userCenter.js"></script>-->
+</head>
+<body>
+<!--顶部-->
+<div class="top">
+    <div class="logo">
+        <div style="display: inline-block;margin: 50px 10px">
+            <i class="fa fa-graduation-cap  fa-5x icon-white" aria-hidden="true">
+                <span id="title" style="font-size: 35px">XXXXXX的个人主页</span>
+            </i>
+        </div>
+    </div>
+    <div class="menuList">
+        <div id="menu">
+            <div id="leader">
+                <!--                  <li>研究课题</li>
+                                  <li>团队成员</li>
+                                  <li>科研成果</li>
+                                  <li>仪器设备</li>
+                                  <li>科研进展</li>
+                                  <li>课程</li>
+                                  <li>博后招聘</li>
+                                  <li>资助致谢</li>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--中间-->
+<div class="content">
+
+</div>
+<!--底部-->
+<div class="boottom">
+
+</div>
+
+</body>
+
+
+</html>

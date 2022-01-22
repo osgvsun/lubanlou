@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>开始评审</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	<link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/expandReview.css}" media="all">
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<!--masonry模块管理-->
+	<link rel="stylesheet" th:href="@{/modules/configcenter/static/masonry/masonry-docs.css}" media="all">
+	<script type="text/javascript" th:src="@{/modules/configcenter/static/masonry/masonry.pkgd.min.js}"></script>
+	<script th:inline="javascript">
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var commentId = [[${commentId}]];
+		var serverHostArray = document.location.href.split('/');
+		var serverHost = serverHostArray[0] + "//" + serverHostArray[2] + "/" + serverHostArray[3] + "/";
+		function logout() {
+			localStorage.clear();
+			$.cookie('currauth', '');
+			$.cookie('currentauthName', '');
+			location.href = serverHost + 'logout';
+		}
+	</script>
+	<script th:src="@{/modules/common.js}"></script>
+</head>
+<body class="mobile_mode editbox">
+<!--主体开始-->
+<div class="content_box">
+	<form class="layui-form lesson_card" action="" lay-filter="commentinfobox" id="commentinfobox">
+		<div class="layui-fluid">
+			<!--评语开始-->
+			<textarea class="layui-textarea" name="commentinfodetail" lay-verify="required" th:text="${commentinfoDeatil}" placeholder="请输入评语"></textarea>
+			<!--评语结束-->
+			<!--操作按钮开始-->
+			<div class="layui-col-lg12 bottom_btnbox layui-hide">
+				<input type="button" lay-filter="commentinfobtn" id="commentinfobtn" class="layui-btn" lay-submit value="立即提交" />
+				<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+			</div>
+			<!--操作按钮结束-->
+		</div>
+	</form>
+</div>
+<!--主体结束-->
+</body>
+<script th:src="@{/modules/configcenter/static/global.js}"></script>
+<script th:src="@{/modules/configcenter/transcript/commentInfo.js}"></script>
+<!--<script>-->
+<!--	layui.config({-->
+<!--//        version: true, //一般用于更新模块缓存，默认不开启。设为 true 即让浏览器不缓存。也可以设为一个固定的值，如：201610-->
+<!--		base:'../'-->
+<!--	}).extend({-->
+<!--		index:'lib/index'-->
+<!--	}).use(['index','configcenter/transcript/commentInfo'])-->
+<!--</script>-->
+
+
+
+</html>

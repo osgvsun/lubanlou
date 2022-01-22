@@ -1,0 +1,170 @@
+server:
+  port: 8765
+  servlet:
+    context-path: /uaa
+  tomcat:
+    accept-count: 200
+    max-connections: 2000
+    threads:
+      max: 1000
+      min-spare: 100
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 90 # 过期时间
+    lease-renewal-interval-in-seconds: 30 # 续约时间
+    status-page-url: http://localhost:${server.port}/swagger-ui.html
+  client:
+    serviceUrl:
+      defaultZone: ${eureka_host:http://localhost:8761/eureka/,http://localhost:8762/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+
+spring:
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    encoding: UTF-8
+    validate-on-migrate: false
+  application:
+    name: oauth2
+  redis:
+    host: ${redis_host:localhost}
+    port: ${redis_port:6379}
+    password: ${redis_password:123456}
+    timeout: 10s
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect       #不加这句则默认为myisam引擎
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        event:
+          merge:
+            entity_copy_observer: allow
+  kafka:
+    bootstrap-servers: ${boot_strap_servers:127.0.0.1:9092}
+    consumer:
+      group-id: oauth2
+      auto-startup: true #是否启用kafka false=否 true=是
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+EasyCache:
+  redis:
+    host: ${spring.redis.host}
+    port: ${spring.redis.port}
+    password: ${spring.redis.password}
+    database: 1
+
+tree:
+  project-name: ${datasource.projectName}
+  redis:
+    host: ${redis_host:127.0.0.1}
+    port: ${redis_port:6379}
+    password: ${redis_password:123456}
+
+datasource:
+  projectName: oauth2
+  enableExecuteFlywayOnMultiDatasource: true
+  strictMode: false
+
+usession:
+  project-name: ${datasource.projectName}
+  redis:
+    host: ${spring.redis.host}
+    port: ${spring.redis.port}
+    password: ${spring.redis.password}
+
+tokenTimeout: 7200 #访问令牌的有效时间（单位s）
+refreshTokenTimeout: 86400 #刷新令牌的有效时间（单位s）
+
+
+apiGateWayHost: ${apiGateWay_host:http://localhost:8760}
+
+#用于配置注册成功后的跳转路径
+apiSuccessfulJump: ${jump_host:http://localhost:8760}
+
+#开启测试验证码（登陆时输入AF46）
+enableTestCaptcha: ${enable_test_captcha:false}
+#开启测试手机号（可以同时向两个手机号发送验证码）
+enableTesterPhone: ${enable_tester_phone:true}
+enableLoginByPhone: ${enable_login_by_phone:true}
+#登陆是否加密
+passwordEncode: ${password_encode:true}
+#注册用户审核
+registerAudit:
+  # 配置的数据源列表
+  schoolName: ${register_audit_school:limsproduct}
+  # 是否需要注册审核
+  enable: ${register_audit_enable:false,true}
+  # 默认学院
+  collegeId: ${college_id:0001,-}
+
+# 登陆页面分为校外登陆看到的页面和校内人员登陆看到的页面
+outSchool: ${out_school:false}
+
+# 登陆页的忘记密码按钮点击行为
+# 1 弹出重置密码页面
+# 2 显示提示框（提示“联系管理员获取密码”）
+forgetPassword: ${forget_password:1}
+
+# 资源容器-下载
+resourceContainerHost: ${resource_host:http://localhost:31183}
+
+######################################################
+#
+#                 和其他认证服务对接
+#
+######################################################
+#Gitlab登陆
+gitlab:
+  enable: ${gitlab_enable:true}
+  host: ${gitlab_Host:http://localhost}
+  security:
+    oauth2:
+      host: ${gitlab.host}
+      client:
+        clientId:
+        clientSecret:
+        accessTokenUri: ${gitlab.host}/oauth/token
+        userAuthorizationUri: ${gitlab.host}/oauth/authorize
+      resource:
+        userInfoUri: ${gitlab.host}/api/v4/user
+
+#微信开放平台
+wechat:
+  enable: ${wechat_enable:true}
+  host: ${wechat_Host:https://open.weixin.qq.com}
+  APIhost: ${api_host:https://api.weixin.qq.com}
+  security:
+    oauth2:
+      host: ${wechat.host}
+      client:
+        clientId:
+        clientSecret:
+        accessTokenUri: ${wechat.APIhost}/sns/oauth2/access_token
+        userAuthorizationUri: ${wechat.host}/connect/qrconnect
+      resource:
+        userInfoUri: ${wechat.APIhost}/sns/userinfo
+
+#QQ互联平台
+qq:
+  enable: ${qq_enable:true}
+  host: ${qq_Host:https://graph.qq.com}
+  security:
+    oauth2:
+      host: ${qq.host}
+      client:
+        clientId:
+        clientSecret:
+        accessTokenUri: ${qq.host}/oauth2.0/token
+        userAuthorizationUri: ${qq.host}/oauth2.0/authorize
+      resource:
+        userInfoUri: ${qq.host}/oauth2.0/me

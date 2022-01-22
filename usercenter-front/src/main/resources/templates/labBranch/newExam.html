@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+    <style>
+        .main_content {
+            padding: 20px 20px 0;
+        }
+
+        .layui-form-label {
+            box-sizing: border-box;
+            width: 58px;
+            padding: 9px 0;
+        }
+
+        .layui-input-block {
+            margin-left: 68px;
+        }
+
+        .xm-select-parent .xm-select .xm-select-label {
+            width: auto;
+            white-space: nowrap;
+            overflow: visible;
+        }
+
+        @media screen and (max-height: 590px) {
+            .xm-select-parent .xm-form-selected dl,
+            .layui-form-selected dl {
+                max-height: 368px;
+            }
+        }
+
+        @media screen and (max-height: 500px) {
+            .xm-select-parent .xm-form-selected dl,
+            .layui-form-selected dl {
+                max-height: 155px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main_content">
+    <div class="full_box">
+        <!--主体开始-->
+        <div class="content_box">
+            <form class="layui-form lesson_card" action="" lay-filter="newexambox" id="newexambox">
+                <div class="layui-row layui-col-space10">
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">考试名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" id="name" placeholder="请输入考试名称" autocomplete="off"
+                                   class="layui-input" lay-verify="required"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">考试时间</label>
+                        <div class="layui-input-block">
+                            <input class="layui-input" name="date" id="date" autocomplete="on" placeholder="请选择考试时间范围"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">考试总分</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sumscore" id="sumscore" placeholder="请输入考试总分" autocomplete="off"
+                                   class="layui-input" lay-verify="required"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">准入分值</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="admittancescore" id="admittancescore" placeholder="请输入准入分值"
+                                   autocomplete="off" class="layui-input" lay-verify="required"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4 float_dd">
+                        <label class="layui-form-label">考试范围</label>
+                        <div class="layui-input-block">
+                            <select name="range" lay-search lay-filter="required">
+                                <option value="">请选择考试范围</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--操作按钮开始-->
+                <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                    <input type="button" lay-filter="newexambtn" id="newexambtn" class="layui-btn" lay-submit
+                           value="立即提交"/>
+                    <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+                </div>
+                <!--操作按钮结束-->
+            </form>
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script th:src="@{/modules/labBranch/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'labBranch/newExam']);
+</script>
+</body>
+
+</html>

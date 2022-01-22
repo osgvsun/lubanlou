@@ -1,0 +1,31 @@
+table.gridtable {
+    border: 1px solid #eee;
+    border-collapse: collapse;
+}
+table.gridtable th {
+    width: 240px;
+    padding: 8px;
+    border: 1px solid #eee;
+    background-color: #f3f3f3;
+}
+table.gridtable td {
+    padding: 8px;
+    border: 1px solid #eee;
+    background-color: #fff;
+}
+#itemBody input {
+    border: none;
+    outline: none;
+    line-height: 24px;
+    width: 200px;
+    text-align: center;
+}
+#itemBody .btn {
+    margin-left: 90px;
+    background-color: #FF5722;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 14px;
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>教育背景信息组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+
+    <style>
+        .fill_box {
+            display: none;
+        }
+
+        .buttonAdd{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<!--增加表单-->
+<div class="fill_box" id="edubgInfoAdd">
+    <form class="layui-form" action="" lay-filter="edubgInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">学校</label>
+                <div class="layui-input-block">
+                    <input type="text" name="school" lay-verify="required" autocomplete="off"
+                           class="layui-input school">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">学位</label>
+                <div class="layui-input-block">
+                    <select name="degree" class="degree" lay-filter="required" lay-search>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">学历</label>
+                <div class="layui-input-block">
+                    <select name="educationBackground" class="educationBackground" lay-filter="required" lay-search>
+                        <option value=""></option>
+                       <!-- <option value="博士后">博士后</option>-->
+                        <option value="博士">博士</option>
+                        <option value="硕士">硕士</option>
+                        <option value="研究生">研究生</option>
+                        <option value="大学本科">大学本科</option>
+                        <option value="大学专科">大学专科</option>
+                        <option value="高中">高中</option>
+                        <option value="初中">初中</option>
+                        <option value="小学">小学</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">国家</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nation" lay-verify="required" autocomplete="off"
+                           class="layui-input nation">
+                </div>
+            </div>
+            <div class="layui-col-lg8 layui-col-md121">
+                <label class="layui-form-label">专业</label>
+                <div class="layui-input-block">
+                    <input type="text" name="specialty" lay-verify="required" autocomplete="off"
+                           class="layui-input specialty">
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">起止时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="eduStartStopTime" id="eduStartStopTime_add"
+                           lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">海外获得学位</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="overseasDegree" class="overseasDegree" value="1" title="是">
+                    <input type="radio" name="overseasDegree" class="overseasDegree" value="0" title="否">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="edubgInfo">立即提交</button>
+                    <button type="reset" class="clearForm" style="display: none"></button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="edubginfo">
+    <div class="buttonAdd"><button class="layui-btn header_edit" style="float: right">新增</button></div>
+    <table class="layui-hide" id="edubgInfo" lay-filter="edubgInfo"></table>
+</div>
+<!-- 教育背景编辑-->
+<div id="edit_edubgInfo" style="display:none;">
+    <div style="display: none">
+        <input id="enrollmentTime">
+        <input id="graduationTime">
+    </div>
+    <form class="layui-form" action="" lay-filter="edubgInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg12 layui-col-md121">
+                <label class="layui-form-label">学校</label>
+                <div class="layui-input-block">
+                    <input type="text" name="school" id="school" lay-verify="required"
+                           autocomplete="off" class="layui-input school">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">学位</label>
+                <div class="layui-input-block">
+                    <select name="degree" id="degree" class="degree" lay-filter="required" lay-search>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">国家</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nation" id="nation" lay-verify="required" autocomplete="off"
+                           class="layui-input nation">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">学历</label>
+                <div class="layui-input-block">
+                    <select name="educationBackground" id="educationBackground" class="educationBackground" lay-filter="required" lay-search>
+                        <!--<option value="博士后">博士后</option>-->
+                        <option value="博士">博士</option>
+                        <option value="硕士">硕士</option>
+                        <option value="研究生">研究生</option>
+                        <option value="大学本科">大学本科</option>
+                        <option value="大学专科">大学专科</option>
+                        <option value="高中">高中</option>
+                        <option value="初中">初中</option>
+                        <option value="小学">小学</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg8 layui-col-md121">
+                <label class="layui-form-label">专业</label>
+                <div class="layui-input-block">
+                    <input type="text" name="specialty" id="specialty" lay-verify="required"
+                           autocomplete="off" class="layui-input specialty">
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <label class="layui-form-label">起止时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="eduStartStopTime" id="eduStartStopTime"
+                           lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">海外获得学位</label>
+                <div class="layui-input-block" id="overseasDegree">
+                    <input type="radio" name="overseasDegree" class="overseasDegree" value="1" title="是">
+                    <input type="radio" name="overseasDegree" class="overseasDegree" value="0" title="否">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">最高学位本校获得</label>
+                <div class="layui-input-block" id="schoolDegree">
+                    <input type="radio" name="schoolDegree" class="schoolDegree" value="1" title="是" checked="">
+                    <input type="radio" name="schoolDegree" class="schoolDegree" value="0" title="否">
+                </div>
+            </div>
+            <div class="layui-col-lg4" style="display: none">
+                <label class="layui-form-label">ID</label>
+                <div class="layui-input-block" id="edubgInfo_uid">
+                    <input type="text" name="id" id="id"  autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="edubgInfo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    layui.config({
+            base: '../../../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'educationDetailTab']);
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var beShowUsername=GetQueryString("username");
+
+</script>
+<script type="text/html" id="edit1">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+</body>
+</html>

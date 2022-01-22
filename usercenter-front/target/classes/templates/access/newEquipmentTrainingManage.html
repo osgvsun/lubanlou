@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 93px;
+			}
+
+			.layui-input-block {
+				margin-left: 93px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="newequipmenttrainingmanagebox" id="newequipmenttrainingmanagebox">
+				<div class="layui-row layui-col-space20">
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">培训老师</label>
+						<div class="layui-input-block" id="username">
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">培训地点</label>
+						<div class="layui-input-block">
+							<input class="layui-input address" name="address" autocomplete="on" lay-verify="required" placeholder="请输入培训地点" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">培训时间</label>
+						<div class="layui-input-block">
+							<input class="layui-input trainingDateTime" id="trainingDateTime" name="trainingDateTime" autocomplete="on" lay-verify="required" placeholder="请选择培训时间" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">培训内容</label>
+						<div class="layui-input-block">
+							<input class="layui-input content" name="content" autocomplete="on" lay-verify="required" placeholder="请输入培训内容" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">是否参加培训</label>
+						<div class="layui-input-block">
+							<input type="radio" name="flag" class="flag" value="1" title="必须" checked="">
+							<input type="radio" name="flag" class="flag" value="0" title="非必需">
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">提前预约时间</label>
+						<div class="layui-input-block">
+							<select name="advanceHour" class="advanceHour" lay-search lay-verify="required">
+								<option value="">请选择提前预约时间</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">最大报名人数</label>
+						<div class="layui-input-block">
+							<input type="number" class="layui-input maxNumber" name="maxNumber" autocomplete="on" lay-verify="required" placeholder="最大报名人数" />
+						</div>
+					</div>
+				</div>
+				<!--操作按钮开始-->
+				<div class="layui-col-lg12 bottom_btnbox layui-hide">
+					<input type="button" lay-filter="newequipmenttrainingmanagebtn" id="newequipmenttrainingmanagebtn" class="layui-btn" lay-submit value="立即提交" />
+					<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+				</div>
+				<!--操作按钮结束-->
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/access/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const entityId = [[${entityId}]];
+			const entityType = [[${entityType}]];
+			const type = [[${type}]];
+			const oauth2Host = [[${oauth2Host}]];
+		</script>
+		<script th:src="@{/modules/access/newEquipmentTrainingManage.js}"></script>
+	</body>
+</html>​​​

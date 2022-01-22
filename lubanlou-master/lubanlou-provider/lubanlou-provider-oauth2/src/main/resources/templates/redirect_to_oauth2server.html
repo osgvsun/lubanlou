@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"></script>
+    <title>LOGIN</title>
+</head>
+<body>
+<script th:inline="javascript">
+    let redirect_uri = [[${redirect_uri}]];
+    let authorize_uri = [[${authorize_uri}]];
+    let state = [[${state}]];
+    let client_id = [[${client_id}]];
+    let appid = [[${appid}]];
+    let response_type = [[${response_type}]];
+    let scope = [[${scope}]];
+    let wechat = [[${wechat}]];
+    let wechat_css_href = [[${href}]];
+    let cas = [[${cas}]];
+
+    $(function () {
+        let href;
+        if (cas === 'true') {
+            href = authorize_uri + "?service=" + redirect_uri;
+        } else {
+            href = authorize_uri + "?redirect_uri=" + redirect_uri + "&response_type=" + response_type;
+            if (state) {
+                href += "&state=" + state;
+            }
+            if (scope) {
+                href += "&scope=" + scope;
+            }
+            if (wechat === "true") {
+                href += "&appid=" + appid;
+                // iframe要调整二维码的样式,需传自定义二维码样式的地址
+                href += "&href=" + wechat_css_href;
+            } else {
+                href += "&client_id=" + client_id;
+            }
+        }
+        document.location.href = href;
+    });
+</script>
+</body>
+</html>

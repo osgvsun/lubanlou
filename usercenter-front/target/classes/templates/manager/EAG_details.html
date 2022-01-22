@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>单位详情</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
+    <style>
+        .layui-col-lg12{
+            padding: 10px;
+            width: 45%;
+        }
+        .layui-input-block{
+            width: 75%;
+        }
+        .multiple{
+            display: none!important;
+        }
+        .systemRole{
+            display: none;
+        }
+        .layui-btn{
+            color:#fff!important;
+        }
+        .layui-form-label{
+            font-size:13px;
+        }
+        .img_business{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+        .img_business img{
+            width: 150px;
+            height: 150px;
+            margin: 4% 4%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<!--    弹出企业详情-->
+<div class="layui-form-item layui-form-text" id="details">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名：</label>
+            <div class="layui-input-block">
+                <input name="title" id="username" class="layui-input" type="text" placeholder="" autocomplete="off" lay-verify="title" readonly value="">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label cname">单位名称：</label>
+            <div class="layui-input-block">
+                <input name="title" id="gsiName" class="layui-input" type="text" placeholder="" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属区域：</label>
+            <div class="layui-input-block">
+                <input name="title" id="gsiAddress" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">法人姓名：</label>
+            <div class="layui-input-block">
+                <input name="title" id="chargeName" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label idcard">身份证号码：</label>
+            <div class="layui-input-block">
+                <input name="title" id="idNumber" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item enTypeClass" style="display: none">
+            <label class="layui-form-label">企业类型：</label>
+            <div class="layui-input-block">
+                <input name="title" id="enType" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item legalIdClass" style="display: none">
+            <label class="layui-form-label">证件号码：</label>
+            <div class="layui-input-block">
+                <input name="title" id="legalId" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址：</label>
+            <div class="layui-input-block">
+                <input name="title" id="address" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱：</label>
+            <div class="layui-input-block">
+                <input name="title" id="email" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系方式：</label>
+            <div class="layui-input-block">
+                <input name="title" id="opPhone" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">经办人手机号：</label>
+            <div class="layui-input-block">
+                <input name="title" id="phone" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label business">负责人证件照：</label>
+            <div class="img_business">
+                <img id="img_business" title="点击查看预览"/>
+            </div>
+        </div>
+        <div class="layui-form-item" style="width:60%;display:inline-block">
+            <label class="layui-form-label evidentiary">事业单位证明材料：</label>
+            <div class="layui-input-block">
+                <input name="title" id="legalRepresentativeAnnex" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item" style="display: inline-block;float: right;">
+            <button class="layui-btn layui-btn-normal" type="button" style="display: inline-block" id="down">下载材料信息</button>
+        </div>
+    </form>
+</div>
+<script>
+    function child(d){
+        console.log(d)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/layui/css/layui.css}" >
+		<link media="all" rel="stylesheet" th:href="@{/modules/teachResource/style/admin.css}" >
+		<link media="all" rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+		<link media="all" rel="stylesheet" th:href="@{/modules/teachResource/static/css/expand.css}" >
+		<link rel="stylesheet" type="text/css" th:href="@{${resourceContainerHost} +  '/shareApi/resourceContainer.css'}"/>
+		<script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+		<style>
+			.layui-form-label {
+				width: 90px;
+			}
+			
+			.layui-input-block {
+				margin-left: 90px;
+			}
+			
+			.fill_box+.fill_box {
+				margin: 20px 0 0;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="layui-fluid">
+			<div class="layui-row layui-col-space20">
+				<form class="layui-form" action="" lay-filter="addlink" id="addlink">
+					<!--基本信息开始-->
+					<div class="layui-col-md12">
+						<div class="layui-card">
+							<div class="layui-card-header">外部链接
+								<input type="button" class="layui-btn header_edit newlink" value="新增链接" />
+							</div>
+							<div class="layui-card-body">
+								<div class="layui-row layui-form-item addlink_box" id="addlink_box">
+									<div class="fill_box pr">
+										<div class="layui-row layui-col-space10 layui-form-item">
+											<div class="layui-col-lg6">
+												<label class="layui-form-label">描述</label>
+												<div class="layui-input-block">
+													<input type="text" name="info" lay-verify="required" autocomplete="on" class="layui-input" value="" placeholder="请填写链接描述">
+												</div>
+											</div>
+											<div class="layui-col-lg6">
+												<label class="layui-form-label">地址</label>
+												<div class="layui-input-block">
+													<input type="text" name="address" lay-verify="required" autocomplete="on" class="layui-input" value="" placeholder="请填写链接地址">
+												</div>
+											</div>
+											<div class="layui-icon layui-icon-close delete_link" title="删除该链接"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--基本信息结束-->
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<button lay-filter="addlinkbtn" id="addlinkbtn" class="layui-btn" lay-submit>立即提交</button>
+						<button type="reset" class="layui-btn layui-btn-primary">取消</button>
+					</div>
+					<!--操作按钮结束-->
+				</form>
+			</div>
+		</div>
+		<!--右侧栏开始-->
+		<div class="quick_line">
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script th:src="@{/modules/teachResource/static/layui/layui.js}"></script>
+		<script th:src="@{/modules/teachResource/static/js/vue.js}"></script>
+		<script th:src="@{/modules/teachResource/static/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{/modules/teachResource/static/js/global.js}"></script>
+
+		<script th:inline="javascript">
+			const apiGateWayHost = [[${apiGateWayHost}]];
+			const httpBaseUrl = /*[[${gvsunExam}]]*/'';
+			const pathType = "knowledge";
+			const siteId = "1218";
+			const username = "20180218";
+			const chapName =[[${name}]]
+		</script>
+		<script th:src="@{/modules/teachResource/knowledge/addLink.js}"></script>
+		<script th:src="@{/modules/teachResource/common.js}"></script>
+
+
+	</body>
+
+</html>

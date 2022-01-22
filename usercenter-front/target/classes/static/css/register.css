@@ -1,0 +1,220 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	list-style: none;
+	text-decoration: none;
+	font-family: "微软雅黑";
+}
+
+
+/*所有字体不可复制*/
+/*
+* {
+	-moz-user-select:;
+	-khtml-user-select: none;
+	user-select: none;
+}*/
+
+img {
+	border: none;
+}
+
+
+/*注册模块*/
+
+.register_bg,
+.register_box {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.register_bg {
+	background: url(../images/register_bg.jpg) center;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+
+.register_box {
+	box-sizing: border-box;
+	padding: 3% 4%;
+}
+
+.register_box .big_tit {
+	font-size: 2rem;
+	color: rgba(255, 255, 255, 0.8);
+	text-shadow: 7px 7px 5px rgba(0, 0, 0, 0.75);
+}
+
+.register_content {
+	text-align: center;
+	position: relative;
+	top: 50%;
+	margin: -17.7rem 0 0;
+}
+
+.register_top {
+	width: 100%;
+	text-align: center;
+	margin: 1.7rem 0 1.5rem;
+}
+
+.register_top div {
+	display: inline-block;
+	font-size: 1rem;
+	color: rgba(255, 255, 255, 0.75);
+	letter-spacing: 1px;
+}
+
+.register_top div:after {
+	content: "——";
+	letter-spacing: 0;
+	margin: 0 1rem;
+	color: rgba(255, 255, 255, 0.5);
+	font-weight: bold;
+	text-shadow: none;
+}
+
+.register_top div:last-child:after {
+	content: "";
+	margin: 0;
+}
+
+.register_top .rt_select {
+	color: #fff;
+	font-weight: bold;
+	text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8);
+}
+
+.register_top div font {
+	font-size: 0.8rem;
+	color: #333;
+	background: rgba(255, 255, 255, 0.5);
+	margin: 0 0.3rem 0 0;
+	padding: 0 0.35rem;
+	border-radius: 100%;
+}
+
+.register_top .rt_select font {
+	color: #111;
+	background: #fff;
+	text-shadow: none;
+}
+
+.register_btm {
+	display: none;
+	background: rgba(255, 255, 255, 0.32);
+	margin: auto;
+	box-sizing: border-box;
+	padding: 1rem 4rem;
+	border-radius: 3px;
+}
+
+.rb_box input[type="text"],
+.rb_box input[type="file"],
+.rb_box input[type="password"],
+.rb_box input[type="tel"],
+.rb_box select,
+.rb_btn {
+	box-sizing: border-box;
+	display: block;
+	font-size: 0.9rem;
+	width: 19rem;
+	margin: 1rem auto;
+	padding: 0.5rem 1rem;
+	border: none;
+	background: rgba(255, 255, 255, 0.7);
+	border-radius: 3px;
+	transition: all 1s;
+	-moz-transition: all 1s;
+	/* Firefox 4 */
+	-webkit-transition: all 1s;
+	/* Safari 和 Chrome */
+	-o-transition: all 1s;
+	/* Opera */
+}
+
+.rb_box select {
+	color: #666;
+	padding: 0.5rem 0.7rem;
+}
+
+.rb_box input[type="text"]:focus,
+.rb_box input[type="password"]:focus,
+.rb_box input[type="tel"]:focus,
+.rb_box select:focus {
+	color: #000;
+	background: #fff;
+}
+
+.register_btm .rb_btn {
+	display: inline-block!important;
+	color: #333;
+	width: 5rem!important;
+	text-align: center;
+	margin: 0 0 1rem;
+}
+
+.register_btm .rb_btn:hover {
+	color: #000;
+	background: #fff;
+	cursor: pointer;
+}
+
+.tr {
+	text-align: right;
+}
+
+.rb_block {
+	display: inline-block;
+}
+
+@media only screen and (min-width: 1920px) {
+	.register_box .big_tit {
+		font-size: 3.6rem;
+		text-shadow: 14px 14px 10px rgba(0, 0, 0, 0.75);
+	}
+	.register_content {
+		margin: -31rem 0 0;
+	}
+	.register_top {
+		margin: 3.2rem 0 2.5rem;
+	}
+	.register_top div {
+		font-size: 1.8rem;
+		letter-spacing: 2px;
+	}
+	.register_top div font {
+		font-size: 1.6rem;
+		margin: 0 0.5rem 0 0;
+		padding: 0 0.6rem;
+	}
+	.register_top div:after {
+		margin: 0 1.5rem;
+	}
+	.register_btm {
+		padding: 1.5rem 7rem;
+		border-radius: 6px;
+	}
+	.rb_box input[type="text"],
+	.rb_box input[type="password"],
+	.rb_box input[type="tel"],
+	.rb_box select,
+	.rb_btn {
+		font-size: 1.5rem;
+		width: 33rem;
+		margin: 1.6rem auto;
+		padding: 1rem 2rem;
+		border-radius: 6px;
+	}
+	.rb_box select {
+		padding: 1rem 1.6rem;
+	}
+	.register_btm .rb_btn {
+		width: 9rem!important;
+		margin: 0 0 1rem 0.5rem;
+	}
+}

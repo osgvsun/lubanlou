@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title></title>
+	<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="Generator" content="GVSUN" />
+	<meta name="Author" content="chenyawen" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/projectManagement/css/expand.css}" media="all">
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<script th:inline="javascript">
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var oauth2Host = [[${session.oauth2}]];
+		var resourceContainerHost = [[${session.resourceContainerHost}]];
+		var resourceContainerHostForUpload = [[${session.resourceContainerHostForUpload}]];
+		var oauth2 = [[${session.oauth2}]];
+		const timetableHost = apiGateWayHost+"/timetable/";
+		function logout() {
+			localStorage.clear();
+			$.cookie('currauth', '');
+			$.cookie('currentauthName', '');
+			location.href = serverHost + 'logout';
+		}
+	</script>
+	<link rel="stylesheet" th:href="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.css'}" media="all">
+	<script type="text/javascript" th:src="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.js'}"></script>
+	<script th:src="@{/modules/configcenter/static/commonResource.js}"></script>
+	<script th:src="@{/js/initOAuth2.js}"></script>
+		<style>
+			.detail_item .layui-form-label {
+				width: 86px;
+			}
+			
+			.detail_item .layui-input-block {
+				margin-left: 86px;
+			}
+
+			.audit_group {
+				display: none;
+				padding: 10px 0;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="allprojectdetailbox" id="allprojectdetailbox">
+				<input type="hidden" id="proId" name="id" th:value="${proId}"/>
+				<input type="hidden" id="audit" th:value="${audit}"/>
+				<div class="layui-fluid">
+					<!--基础信息开始-->
+					<div class="layui-card" id="info">
+						<div class="layui-card-header">基础信息</div>
+						<div class="layui-card-body">
+							<div class="detail_item">
+								<div class="layui-row">
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">实验名称</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpName" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">项目状态</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="auditStatus" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">所属课程</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="courseName" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">所属学期</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="termName" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">所属学科</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpSubject" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验要求</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpCategoryRequire" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">所属实验室</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="labRoomName" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验学时数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpDepartmentHours" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+<!--									<div class="layui-col-lg4">-->
+<!--										<label class="layui-form-label">实验总学时</label>-->
+<!--										<div class="layui-input-block">-->
+<!--											<input type="button" class="layui-input readinputbtn" name="classsumhour" autocomplete="off" disabled="disabled" readonly="readonly">-->
+<!--										</div>-->
+<!--									</div>-->
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">课程总学时</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpCourseHoursTotal" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验者人数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpStudentNumber" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验组数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpSetNumber" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">每组人数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpStudentNumberGroup" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验类别</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpCategoryMain" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验类型</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpCategoryApp" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验性质</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpCategoryNature" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">实验者类型</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpCategoryStudent" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">变动状态</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpStatusChange" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">开放范围</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpCategoryPublic" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">首开人</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="updateUser" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">首开学院</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="academyName" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">首开日期</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="updateTime" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">获奖等级</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpCategoryRewardLevel" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">所属专业</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpMajor" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">主讲教师</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpTeacherSpeakerId" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">辅导教师</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpTeacherAssistantId" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">指导书名称</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpGuideBookTitle" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">编者</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpGuideBookAuthor" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">考核方法</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpAssessmentMethods" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">开课周次</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="planWeek" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">实验内容</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpIntroduction" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">课前准备</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpPreparation" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">备注</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="lpPurposes" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!--基础信息结束-->
+					<div class="audit_group">
+						<input type="button" class="layui-btn" data-type="auditsuccess" value="审核通过" />
+						<input type="button" style="background-color: #FF5722;" class="layui-btn" data-type="auditfail" value="退回修改" />
+					</div>
+					<!--材料使用开始-->
+					<div class="layui-card" id="materialmodel">
+						<div class="layui-card-header">材料使用</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="materialusedetail" lay-filter="materialusedetail"></table>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--材料使用结束-->
+					<!--仪器设备开始-->
+					<div class="layui-card" id="equipmentmodel">
+						<div class="layui-card-header">仪器设备</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="equipmentdetail" lay-filter="equipmentdetail"></table>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--仪器设备结束-->
+					<!--查看附件开始-->
+					<div class="layui-card" id="enclosuredetailmodel">
+						<div class="layui-card-header">附件</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="enclosuredetail" lay-filter="enclosuredetail"></table>
+							<script type="text/html" id="enclosuredetailtoolbar">
+								<a class="layui-btn layui-btn-xs" lay-event="download">下载</a>
+							</script>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--查看附件结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line">
+			<a href="#info">基础<br/>信息</a>
+			<a href="#materialmodel">材料<br/>使用</a>
+			<a href="#equipmentmodel">仪器<br/>设备</a>
+			<a href="#enclosuredetailmodel">查看<br/>附件</a>
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/static/js/mainindex.js}"></script>
+		<script th:src="@{/modules/projectManagement/allProjectDetail.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../layuiadmin/' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'allProjectDetail']);-->
+<!--		</script>-->
+	</body>
+
+</html>​​​

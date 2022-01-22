@@ -1,0 +1,227 @@
+* {
+	font-size: 13px;
+	margin: 0;
+	padding: 0;
+	outline: none;
+	list-style: none;
+	text-decoration: none;
+	font-family: "微软雅黑";
+}
+
+
+/*所有字体不可复制*/
+
+* {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+html {
+	font-family: sans-serif;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%
+}
+
+img {
+	border: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+body {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	background: #fff;
+}
+
+.blur {
+	filter: url(blur.svg#blur);
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
+	filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius=5, MakeShadow=false);
+}
+
+.ovh {
+	overflow: hidden;
+}
+
+.body_limit {
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+}
+
+
+/*框架分配*/
+
+.limited_box {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.chart_box,
+.table_box {
+	box-sizing: border-box;
+	height: 100%;
+	padding: 20px;
+}
+
+.chart_box {
+	float: left;
+	width: 35%;
+	background: #f4f9fd;
+	background: #f3f6fb;
+	border-right: 1px solid #e6e6e6;
+	overflow: auto;
+}
+
+.table_box {
+	float: right;
+	width: 65%;
+}
+
+
+/*卡片图表*/
+
+.chart_box .layui-card+.layui-card {
+	margin: 70px 0 0;
+}
+
+.card_chart {
+	width: 100%;
+	min-height: 310px;
+}
+
+
+/*图表盒子内部设置*/
+
+
+/*.card_chart>div{
+	width: 100%!important;
+}
+
+.card_chart>div>canvas{
+	width: 100%!important;
+}
+*/
+
+
+/*汇总图表*/
+
+.summary_box {
+	box-sizing: border-box;
+	padding: 25px;
+	background-image: radial-gradient(#3f46ad, #0a245d, #0a0213);
+}
+
+.summary_tit {
+	box-sizing: border-box;
+	position: absolute;
+	top: 25px;
+	left: 0;
+	text-align: center;
+	width: 38%;
+	padding: 0 0 0 25px;
+}
+
+.summary_tit_btn {
+	display: flex;
+	font-size: 0;
+	margin: 0 0 28px;
+}
+
+.summary_tit_btn a {
+	flex: auto;
+	box-sizing: border-box;
+	font-size: 14px;
+	color: #fff;
+	height: 78px;
+	background: rgba(255, 255, 255, 0.3);
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-radius: 8px;
+	opacity: 0.95;
+	cursor: pointer;
+}
+
+.summary_tit_btn a:hover {
+	opacity: 0.7;
+}
+
+.summary_tit_btn a+a {
+	margin: 0 0 0 3%;
+}
+
+.summary_tit_btn a:before {
+	display: block;
+	text-align: center;
+	font-size: 32px;
+	height: 32px;
+	line-height: 32px;
+	margin: 11px 0 7px;
+}
+
+.summary_tit_text {
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+}
+
+.son_chart_box {
+	box-sizing: border-box;
+	float: left;
+}
+
+.son_chart_box:nth-child(1) {
+	width: 38%;
+	height: 100%;
+	padding: 160px 0 0;
+}
+
+.son_chart_box:nth-child(2),
+.son_chart_box:nth-child(3),
+.son_chart_box:nth-child(4),
+.son_chart_box:nth-child(5) {
+	width: 31%;
+	height: 50%;
+	padding-left: 25px;
+}
+
+.son_chart_box:nth-child(2),
+.son_chart_box:nth-child(3) {
+	padding-bottom: 12.5px;
+}
+
+.son_chart_box:nth-child(4),
+.son_chart_box:nth-child(5) {
+	padding-top: 12.5px;
+}
+
+.light_line_box {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	padding: 25px;
+	border: 1px solid #3691d0;
+	border-radius: 8px;
+	box-shadow: inset 0 0 34px #3cdbff;
+	background: rgba(65, 119, 216, 0.1);
+}
+
+.light_line_chart {
+	width: 100%;
+	height: 100%;
+}

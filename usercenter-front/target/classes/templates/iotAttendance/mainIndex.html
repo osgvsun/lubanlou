@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/style/admin.css}" media="all">
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/expand.css}" media="all">
+</head>
+
+<body>
+<div class="main_content_box">
+    <div class="head_box">
+        <img class="head_img" th:src="@{/modules/iotAttendance/static/images/logo.png}"/>
+        <!--头部左侧目录开始-->
+        <div class="head_nav">
+            <a href="courseAttendance" name="courseAttendance" id="courseAttendance" target="i">课程考勤</a>
+            <div class="head_info basic_head_info">
+                <div class="head_tit">
+                    <label>考勤统计</label>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+                <div class="user_detail">
+                    <div class="ud_pointer"></div>
+                    <div class="operation_mid">
+                        <a href="courseStatistic" name="courseStatistic" target="i">课程统计</a>
+                        <a href="myAttendance" name="myAttendance" target="i">我的统计(学生)</a>
+                    </div>
+                </div>
+            </div>
+            <a href="reservationAttendance" name="reservationAttendance" target="i">预约考勤</a>
+            <a href="setAttendance" name="setAttendance" target="i">考勤设置</a>
+        </div>
+        <!--头部左侧目录结束-->
+        <!--头部右侧工具栏开始-->
+        <div class="head_tool">
+            <div class="head_info user_info">
+                <div class="head_tit">
+                    <img th:src="@{/modules/iotAttendance/static/images/user_head.jpg}"/>
+                    <label class="username">用户名</label>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+                <div class="user_detail">
+                    <div class="ud_pointer"></div>
+                    <div class="ud_top">
+                        <img th:src="@{/modules/iotAttendance/static/images/user_head.jpg}">
+                        <div class="ud_info">
+                            <div class="username">用户名</div>
+                            <div class="authorities">身份信息</div>
+                        </div>
+                    </div>
+                    <div class="operation_mid">
+                        <a href="#" class="switchpermissions" data-method="switchpermissions">切换权限</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--头部右侧工具栏结束-->
+    </div>
+    <div class="main_box">
+        <!--主体开始-->
+        <div class="content_box full_screen">
+            <iframe id="iframe" src="" name="i"></iframe>
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/js/jquery.cookie.js}"></script>
+<script th:src="@{/modules/iotAttendance/static/js/global.js}"></script>
+<script th:src="@{/modules/iotAttendance/static/js/mainIndex.js}"></script>
+<script th:src="@{/modules/iotAttendance/mainindex.js}"></script>
+</body>
+</html>

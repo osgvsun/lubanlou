@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lubanlou-provider</artifactId>
+        <groupId>net.gvsun.lubanlou.provider</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lubanlou-provider-gsquestionpool</artifactId>
+    <name>lubanlou-provider-gsquestionpool</name>
+    <version>${release.version}</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <release.version>0.0.1-SNAPSHOT</release.version>
+        <!--maven.build.timestamp 默认时间戳格式 -->
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.cwbase</groupId>
+            <artifactId>logback-redis-appender</artifactId>
+            <version>1.1.7-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.54</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.26.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 谷歌·jib 镜像打包插件 -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>1.7.0</version>
+                <configuration>
+                    <from>
+                        <image>registry.cn-shanghai.aliyuncs.com/gvsun/jdk:8u141</image>
+                    </from>
+                    <to>
+                        <image>lubanlou/${project.name}:${project.version}</image>
+                    </to>
+                    <!--容器相关的属性-->
+                    <container>
+                        <mainClass>net.gvsun.gsquestionpool.QuestionpoolApplication</mainClass>
+                    </container>
+                    <!--允许非https-->
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>local-nexus</id>
+            <url>http://library.gvsun.net/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
+</project>

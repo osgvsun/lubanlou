@@ -1,0 +1,1 @@
+update t_weight_setting set type = 'attendance' where type = 'attendence'

@@ -1,0 +1,2 @@
+UPDATE `authorities` SET `authority_cname` = '学生' WHERE `client_id` = 'GvsunTeach' AND `client_authority_id` = 1;
+UPDATE `authorities` SET `authority_cname` = '教师' WHERE `client_id` = 'GvsunTeach' AND `client_authority_id` = 2;

@@ -1,0 +1,43 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"grade": "test4",
+			"mintime": "test5",
+			"maxtime": "test6"
+		}, {
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"grade": "test4",
+			"mintime": "test5",
+			"maxtime": "test6"
+		}, {
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"grade": "test4",
+			"mintime": "test5",
+			"maxtime": "test6"
+		}, {
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"grade": "test4",
+			"mintime": "test5",
+			"maxtime": "test6"
+		}, {
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"grade": "test4",
+			"mintime": "test5",
+			"maxtime": "test6"
+		}
+	]
+}

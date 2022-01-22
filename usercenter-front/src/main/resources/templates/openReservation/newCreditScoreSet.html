@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: 78px;
+        }
+
+        .layui-input-block {
+            margin-left: 78px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="main_content_box">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="newcreditscoresetbox" id="newcreditscoresetbox">
+            <div class="short65_input">
+                <!--迟到项设置开始-->
+                <div class="layui-card">
+                    <div class="layui-card-header">迟到项设置</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-lg8">
+                                    迟到超过
+                                    <div class="layui-inline">
+                                        <input type="number" class="layui-input" name="lateminute" autocomplete="on"
+                                               placeholder="请输入"/>
+                                    </div>
+                                    分钟，扣
+                                    <div class="layui-inline">
+                                        <input type="number" class="layui-input" name="latescore" autocomplete="on"
+                                               placeholder="请输入"/>
+                                    </div>
+                                    分。
+                                </div>
+                                <div class="layui-col-lg4 auto100_input">
+                                    <label class="layui-form-label">所属中心：</label>
+                                    <div class="layui-input-block">
+                                        <select name="center" lay-verify="required" lay-search="">
+                                            <option value="">请选择所属中心</option>
+                                            <option value="1">实验中心1</option>
+                                            <option value="2">实验中心2</option>
+                                            <option value="3">实验中心3</option>
+                                            <option value="4">实验中心4</option>
+                                            <option value="5">实验中心5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--迟到项设置结束-->
+                <!--延迟预约设置开始-->
+                <div class="layui-card">
+                    <div class="layui-card-header">延迟预约设置</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-lg8">
+                                    后续无预约，延迟
+                                    <div class="layui-inline">
+                                        <input type="number" class="layui-input" name="delayminute" autocomplete="on"
+                                               placeholder="请输入"/>
+                                    </div>
+                                    分钟，扣
+                                    <div class="layui-inline">
+                                        <input type="number" class="layui-input" name="delayscore" autocomplete="on"
+                                               placeholder="请输入"/>
+                                    </div>
+                                    分。
+                                </div>
+                                <div class="layui-col-lg4 auto100_input">
+                                    <label class="layui-form-label">所属中心：</label>
+                                    <div class="layui-input-block">
+                                        <select name="center" lay-verify="required" lay-search="">
+                                            <option value="">请选择所属中心</option>
+                                            <option value="1">实验中心1</option>
+                                            <option value="2">实验中心2</option>
+                                            <option value="3">实验中心3</option>
+                                            <option value="4">实验中心4</option>
+                                            <option value="5">实验中心5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--延迟预约设置结束-->
+                <!--取消预约设置开始-->
+                <div class="layui-card">
+                    <div class="layui-card-header">取消预约设置</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-lg8">
+                                    开始预约前30分钟内，取消预约
+                                    <div class="layui-inline">
+                                        <input type="number" class="layui-input" name="canceltimes" autocomplete="on"
+                                               placeholder="请输入"/>
+                                    </div>
+                                    次，扣
+                                    <div class="layui-inline">
+                                        <input type="number" class="layui-input" name="cancelscore" autocomplete="on"
+                                               placeholder="请输入"/>
+                                    </div>
+                                    分。
+                                </div>
+                                <div class="layui-col-lg4 auto100_input">
+                                    <label class="layui-form-label">所属中心：</label>
+                                    <div class="layui-input-block">
+                                        <select name="center" lay-verify="required" lay-search="">
+                                            <option value="">请选择所属中心</option>
+                                            <option value="1">实验中心1</option>
+                                            <option value="2">实验中心2</option>
+                                            <option value="3">实验中心3</option>
+                                            <option value="4">实验中心4</option>
+                                            <option value="5">实验中心5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--取消预约设置结束-->
+                <!--预约未到设置开始-->
+                <div class="layui-card">
+                    <div class="layui-card-header">预约未到设置</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-lg8">
+                                    预约未到
+                                    <div class="layui-inline">
+                                        <input type="number" class="layui-input" name="noyettimes" autocomplete="on"
+                                               placeholder="请输入"/>
+                                    </div>
+                                    次，扣
+                                    <div class="layui-inline">
+                                        <input type="number" class="layui-input" name="noyetscore" autocomplete="on"
+                                               placeholder="请输入"/>
+                                    </div>
+                                    分。
+                                </div>
+                                <div class="layui-col-lg4 auto100_input">
+                                    <label class="layui-form-label">所属中心：</label>
+                                    <div class="layui-input-block">
+                                        <select name="center" lay-verify="required" lay-search="">
+                                            <option value="">请选择所属中心</option>
+                                            <option value="1">实验中心1</option>
+                                            <option value="2">实验中心2</option>
+                                            <option value="3">实验中心3</option>
+                                            <option value="4">实验中心4</option>
+                                            <option value="5">实验中心5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--预约未到设置结束-->
+                <!--其他羡慕设置开始-->
+                <div class="layui-card">
+                    <div class="layui-card-header">其他项目设置</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">扣分项:</label>
+                                    <div class="layui-input-block auto100_input">
+                                        <input class="layui-input" name="scoreinfo" autocomplete="on"
+                                               placeholder="请输入扣分项"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">扣分:</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-inline">
+                                            <input type="number" class="layui-input" name="scoredetail"
+                                                   autocomplete="on" placeholder="请输入"/>
+                                        </div>
+                                        分。
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 auto100_input">
+                                    <label class="layui-form-label">所属中心：</label>
+                                    <div class="layui-input-block">
+                                        <select name="center" lay-verify="required" lay-search="">
+                                            <option value="">请选择所属中心</option>
+                                            <option value="1">实验中心1</option>
+                                            <option value="2">实验中心2</option>
+                                            <option value="3">实验中心3</option>
+                                            <option value="4">实验中心4</option>
+                                            <option value="5">实验中心5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--其他项目设置结束-->
+                <!--操作按钮开始-->
+                <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                    <input type="button" lay-filter="newcreditscoresetbtn" id="newcreditscoresetbtn" class="layui-btn"
+                           lay-submit value="立即提交"/>
+                    <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+                </div>
+                <!--操作按钮结束-->
+            </div>
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <!--<a href="#"><br/></a>-->
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'openReservation/newcreditscoreset']);
+</script>
+</body>
+
+</html>​​​

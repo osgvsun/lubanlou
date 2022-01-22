@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+		<!--新增样式-->
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/editExam.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/formselect/formSelects-v4.css}" media="all">
+<!--		<script type="text/javascript" th:src="@{/layuiadmin/static/js/xm-select.js}"></script>-->
+		<style>
+			.layui-form-label {
+				width: 144px;
+			}
+			.layui-input{
+				width: 92%;
+			}
+			.layui-form-select .layui-edge{
+				right: 9%;
+			}
+			.layui-input-block {
+				margin-left: 144px;
+			}
+			.tip-title{
+				color: red;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" th:action="@{${gvsunExam} + '/views/saveExam?siteId=' + ${session.cid} + '&currUsername=' + ${session.user.username}}" lay-filter="editexambox" id="editexambox" method="post">
+				<div class="layui-fluid">
+					<!--基础信息开始-->
+					<div class="layui-card">
+						<div class="layui-card-header">基础信息</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space20">
+								<div class="layui-col-lg8">
+									<label class="layui-form-label">考试名称<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="testTitle" id="testTitle" autocomplete="on" lay-verify="required" placeholder="请输入考试名称"/>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">考试分值:</label>
+									<div class="layui-input-block">
+										<input type="button" class="btn_article" name="testScoreTestShow" id="testScoreTest" autocomplete="off" disabled="disabled" readonly="readonly"/>
+										<input type="hidden"  name="testScoreTest" autocomplete="off" value="100" />
+									</div>
+								</div>
+								<div class="layui-col-lg12 float_dd sort">
+									<label class="layui-form-label">考试类型<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select lay-filter="sort" id="isMakeUpExam" name="isMakeUpExam" lay-search>
+											<option value="">请选择类型</option>
+											<option value="0">普通考试</option>
+											<option value="1">补考</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg8 float_dd basicexam hide">
+									<label class="layui-form-label">原考试</label>
+									<div class="layui-input-block">
+										<select name="oldAssignmentId" id="oldAssignmentId" lay-search lay-filter="required">
+											<option value="">请选择原考试</option>
+<!--											<option th:each="makeUpExam : ${makeUpExamList}"-->
+<!--													th:text="${makeUpExam.title}"-->
+<!--													th:selected="${editTestVo.oldAssignmentId == makeUpExam.id}"-->
+<!--											></option>-->
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4 float_dd hide a1">
+									<label class="layui-form-label">分类<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="testChapterType" id="testChapterType" lay-search lay-filter="changeTestChaptersByModuleType">
+											<option value="">请选择分类</option>
+											<option value="1">知识</option>
+											<option value="2">技能</option>
+											<option value="3">体验</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4 float_dd hide a2">
+									<label class="layui-form-label">章节<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select lay-search lay-filter="changeTestLessonsByChapterId" name="testWkChapterId" id="testWkChapterId">
+											<option value="">请选择章节</option>
+<!--											<option th:each="chap,chapStat : ${wkChapters}"-->
+<!--												th:value="${chap.id}" th:text="${chap.name}"></option>-->
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4 float_dd hide a3">
+									<label class="layui-form-label">课时</label>
+									<div class="layui-input-block">
+										<select lay-search name="testWkLessonId" id="testWkLessonId">
+											<option value="">请选择课时</option>
+<!--											<th:block th:each="chap,chapStat : ${wkChapters}">-->
+<!--												<th:block th:each="less,lessStat : ${chap.wkLessons}">-->
+<!--													<option th:value="${less.id}" th:text="${less.title}"></option>-->
+<!--												</th:block>-->
+<!--											</th:block>-->
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">考试时长(分钟)<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" id="mins" name="mins" autocomplete="on" lay-verify="required" placeholder="请输入考试时长"/>
+									</div>
+								</div>
+								<div class="layui-col-lg6">
+									<div class="layui-form-item">
+										<div class="layui-inline">
+											<label class="layui-form-label">日期范围</label>
+											<div class="layui-inline" id="duedateTest">
+												<div class="layui-input-inline">
+													<input type="text" name="startdateTest" autocomplete="off" id="startDate-1" class="layui-input" placeholder="开始日期">
+												</div>
+												<div class="layui-form-mid">-</div>
+												<div class="layui-input-inline">
+													<input type="text" name="duedateTest" autocomplete="off" id="endDate-1" class="layui-input" placeholder="结束日期">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">及格分值<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="passingScore" id="passingScore" autocomplete="on" lay-verify="required" placeholder="请输入考试及格分值"/>
+									</div>
+								</div>
+								<div class="layui-col-lg8 float_dd hide a4" id="academy">
+									<label class="layui-form-label">学院</label>
+									<div class="layui-input-block">
+										<select name="schoolAcademy" id="schoolAcademy" xm-select="schoolAcademy" xm-select-skin="default"
+												xm-select-search="" xm-select-search-type="dl">
+											<option value="">请选择学院</option>
+<!--											<div th:each="schoolAcademy : ${schoolAcademyVoList}">-->
+<!--												<option th:if="${editTestVo.schoolAcademy ne schoolAcademy.academyNumber}"-->
+<!--														th:value="${schoolAcademy.academyNumber}"-->
+<!--														th:text="${schoolAcademy.academyName}"></option>-->
+<!--												<option th:if="${editTestVo.schoolAcademy eq schoolAcademy.academyNumber}"-->
+<!--														th:selected="selected" th:value="${schoolAcademy.academyNumber}"-->
+<!--														th:text="${schoolAcademy.academyName}"></option>-->
+<!--											</div>-->
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4 float_dd hide a5" id="class">
+									<label class="layui-form-label">班级</label>
+									<div class="layui-input-block">
+										<select name="schoolClass" id="schoolClass" xm-select="schoolClass" xm-select-skin="default"
+												xm-select-search="" xm-select-search-type="dl">
+											<option value="">请选择班级</option>
+<!--											<div th:each="schoolClass : ${schoolClasses}">-->
+<!--												<option th:if="${editTestVo.schoolClass ne schoolClass.classNumber}"-->
+<!--														th:value="${schoolClass.classNumber}"-->
+<!--														th:text="${schoolClass.className}"></option>-->
+<!--												<option th:if="${editTestVo.schoolClass eq schoolClass.classNumber}"-->
+<!--														th:selected="selected" th:value="${schoolClass.classNumber}"-->
+<!--														th:text="${schoolClass.className}"></option>-->
+<!--											</div>-->
+										</select>
+									</div>
+								</div>
+								</th:block>
+							</div>
+						</div>
+					</div>
+					<!--基础信息结束-->
+					<!--考试设置开始-->
+					<div class="layui-card">
+						<div class="layui-card-header">考试设置</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space20">
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">提交次数:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="customTime" value="1" title="一次" lay-filter="submittimes" checked="">
+										<input type="radio" name="customTime" value="自定义" title="自定义" lay-filter="submittimes">
+										<input type="text" class="layui-input submitnum" name="customTime1" autocomplete="on" placeholder="次数" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">测试添加到成绩簿:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="checknameTest" value="yes" title="是" lay-filter="testine" checked="">
+										<input type="radio" name="checknameTest" value="no" title="否" lay-filter="testine">
+									</div>
+								</div>
+								<!--<div class="layui-col-lg4">-->
+									<!--<label class="layui-form-label">成绩公布给学生:</label>-->
+									<!--<div class="layui-input-block">-->
+										<!--<input type="radio" name="checkname1Test" value="yes" title="是" checked="">-->
+										<!--<input type="radio" name="checkname1Test" value="no" title="否">-->
+									<!--</div>-->
+								<!--</div>-->
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">成绩计入总成绩:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="checkname2Test" value="yes" title="是" checked="">
+										<input type="radio" name="checkname2Test" value="no" title="否">
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">是否显示答题详情:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="checkname3Test" value="yes" title="是" checked="">
+										<input type="radio" name="checkname3Test" value="no" title="否">
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">题目来源:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="testFrom" value="question" title="题库" lay-filter="source" checked="" id="question">
+										<input type="radio" name="testFrom" value="testpool" title="试卷库" lay-filter="source" id="testpool">
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">是否作答:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="testNeedSubmit" value="1" title="是" checked="">
+										<input type="radio" name="testNeedSubmit" value="0" title="否">
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">合格有效天数:</label>
+									<div class="layui-input-block">
+										<input type="radio" name="effectiveDays" value="0" title="不设置" lay-filter="effective" checked="">
+										<input type="radio" name="effectiveDays" value="设置" title="设置" lay-filter="effective">
+										<input type="text" class="layui-input effectivenum" name="effectiveDays1" autocomplete="on" placeholder="天" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--考试设置结束-->
+					<!--题库开始-->
+					<div class="layui-card questionbank_box">
+						<div class="layui-card-header">题库
+							<label class="layui-btn header_edit addexamquestionbank" data-method="addexamquestionbank">添加</label>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space20">
+								<!--表单开始-->
+								<div class="layui-col-md12">
+<!--									<table class="layui-hide new_progress" id="questionbank" lay-filter="questionbank"></table>-->
+									<table class="gridtable">
+										<thead>
+											<tr>
+												<th>试题大项</th>
+												<th>试题类型</th>
+												<th>所属题库</th>
+												<th>试题数量</th>
+												<th>每题分值（仅用于该次考试）</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody id="itemBody">
+
+										</tbody>
+									</table>
+									<!--行内工具栏开始-->
+									<script type="text/html" id="toolbar">
+										<a class="layui-btn layui-btn-red layui-btn-xs" lay-event="del">删除</a>
+									</script>
+									<!--行内工具栏结束-->
+								</div>
+								<!--表单结束-->
+							</div>
+						</div>
+					</div>
+					<!--题库结束-->
+					<!--试题库开始-->
+					<div class="layui-card testbank hide">
+						<div class="layui-card-header">试卷库</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space20">
+								<div class="layui-col-lg4 float_dd">
+									<label class="layui-form-label">试卷库分类<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="examQuestionpoolCategory" id="examQuestionpoolCategory" lay-search lay-filter="changeExamQuestionpoolCategory">
+											<option value="">请选择试卷库分类</option>
+<!--											<option th:each="category,categoryStat : ${questionpoolCategory}"-->
+<!--													th:value="${category.id}" th:text="${category.title}"></option>-->
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4 float_dd">
+									<label class="layui-form-label">试卷库</label>
+									<div class="layui-input-block">
+										<select  name="examQuestionpool" id="examQuestionpool" lay-search lay-filter="required">
+											<option value="">请选择试卷库</option>
+<!--											<option th:each="pool,poolStat : ${examQuestionpool}"-->
+<!--													th:value="${pool.examQuestionpoolId}" th:text="${pool.title}+'(试卷总分:'+${pool.score}+')'"></option>-->
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--试题库结束-->
+					<!--考试详情开始-->
+					<div class="layui-card">
+						<div class="layui-card-header">考试须知</div>
+						<div class="layui-card-body">
+							<div class="layui-col-lg12">
+								<textarea class="layui-textarea" name="contentTest" id="contentTest" placeholder="请输入考试详情"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-lg8">
+						<div class="layui-card-header">测评说明 <span class="tip-title">*此内容用于考试标准报告功能</span></div>
+						<div class="layui-card-body">
+							<div class="layui-col-lg12">
+								<textarea class="layui-textarea" name="evaluation" id="evaluation" placeholder="请输入测评说明"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-lg8">
+						<label class="layui-form-label">关键词<font class="red_dot">*</font></label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="keyword" id="keyword" autocomplete="on"  placeholder="请输入测评关键词" />
+						</div>
+					</div>
+					<div class="layui-col-lg8">
+						<div class="layui-card-header">测评结论 <span class="tip-title">*此内容用于考试标准报告功能</span> </div>
+						<div class="layui-card-body">
+							<div class="layui-col-lg12">
+								<textarea class="layui-textarea" name="conclusion" id="conclusion" placeholder="请输入测评结论"></textarea>
+							</div>
+						</div>
+					</div>
+					<!--考试详情结束-->
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="editexambtn" id="editexambtn" class="layui-btn" lay-submit value="立即发布" />
+						<input type="button" lay-filter="saveexambtn" id="saveexambtn" class="layui-btn" lay-submit value="保存草稿" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+					<input type="hidden" name="testId" id="testId"/>
+					<input type="hidden" name="status" id="testStatus" value="1"/>
+					<input type="hidden" name="type" value="exam"/>
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--主体结束-->
+		<div th:replace="/gvsunExam/globalscript"></div>
+		<script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+		<script th:src="@{/modules/gvsunExam/static/formselect/formSelects-v4.min.js}"></script>
+		<script th:inline="javascript">
+			const assignmentId = [[${assignmentId}]];
+			const siteId = [[${session.cid}]];
+		</script>
+		<script th:src="@{/modules/gvsunExam/common.js}"></script>
+		<script type="text/javascript" th:src="@{/modules/gvsunExam/exam/editExam.js}"></script>
+	</body>
+</html>​​​

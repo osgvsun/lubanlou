@@ -1,0 +1,1 @@
+alter table users modify wechat_openid varchar(255) unique ;

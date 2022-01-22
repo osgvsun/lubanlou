@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iot/static/css/expand.css}" media="all">
+    <script th:inline="javascript">
+        var iotHost = [[${iotHost}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var currentUsername = [[${session.user.username}]];
+    </script>
+</head>
+
+<body>
+<div class="layui-fluid">
+    <form class="layui-form" action="" lay-filter="logstation" id="logstation">
+        <div class="layui-col-md12">
+            <blockquote class="layui-elem-quote layui-quote-nm tag_box">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend class="multi_legend">
+                        <a href="iotStationInstrument">物联设备</a>
+<!--                        <a href="authorityStationInstrument">授权管理</a>-->
+                        <a href="iotLogStation">物联日志</a>
+                        <a href="logStation" class="legend_select">日志管理</a>
+                        <a href="iotCloudDownLog">云地通信</a>
+                        <a href="guideStation">数据交换</a>
+                    </legend>
+                    <div class="breadcrumb_top breadcrumb_division">
+                        <a href="logAcc">门禁</a>
+                        <a href="logIns">电源控制器</a>
+                        <a href="logAtt">考勤机</a>
+                        <a href="logClass">班牌</a>
+                        <a href="logVideo">视频</a>
+                        <a href="logStation" class="breadcrumb_select">工位仪</a>
+                    </div>
+                </fieldset>
+            </blockquote>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header mix_card_header">工位仪
+                    <!--                    <label class="layui-icon layui-icon-add-1 header_btn newattendance" data-method="newattendance" lay-tips="新增考勤机"></label>-->
+                    <!--<div class="header_info">
+                        <input type="button" class="layui-btn layui-btn-mid newattendance" data-method="newattendance" value="新增考勤机" />
+                    </div>-->
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space10">
+                        <!--搜索开始-->
+                        <div class="search_line left-form">
+                            <div class="layui-col-space4">
+                                <label>姓名/学号/IP：</label>
+                                <div class="layui-inline">
+                                    <input class="layui-input" name="search" id="search_box" autocomplete="on" placeholder="" />
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">时间范围:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="datetime-local" class="layui-input" id="start_time" placeholder=" - ">
+                                    </div> 至
+                                    <div class="layui-input-inline">
+                                        <input type="datetime-local" class="layui-input" id="end_time" placeholder=" - ">
+                                    </div>
+                                </div>
+                                <input type="button" class="layui-btn searchbtn" data-type="reload" value="搜索" />
+                            </div>
+                        </div>
+                        <!--搜索结束-->
+                        <!--表单开始-->
+                        <div class="layui-col-md12">
+                            <table class="layui-hide" id="logStationtab" lay-filter="logStationtab"></table>
+                        </div>
+                        <!--表单结束-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--右侧栏开始-->
+<div class="quick_line">
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script th:src="@{/modules/iot/static/layui/layui.js}"></script>
+<script th:src="@{/modules/iot/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/iot/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+
+    ).use(['index', 'iot/logStation']);
+</script>
+</body>
+
+</html>

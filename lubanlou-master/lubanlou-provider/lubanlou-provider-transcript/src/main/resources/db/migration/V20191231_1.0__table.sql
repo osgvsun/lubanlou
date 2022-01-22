@@ -1,0 +1,1 @@
+alter table `t_test_grading` add group_ranking int(40) DEFAULT NULL COMMENT '组内排名';

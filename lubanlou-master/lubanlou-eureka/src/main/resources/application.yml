@@ -1,0 +1,19 @@
+server:
+  port: ${server_port:8761} #eureka服务器将要监听的端口
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 90 #过期时间
+    lease-renewal-interval-in-seconds: 30 #续约时间
+  client:
+    register-with-eureka: ${register_with_eureka:true}  #要使用Eureka服务进行注册
+    fetch-registry: ${fetch_registry:true}              #要在本地缓存注册表信息
+    service-url:
+      defaultZone: ${eureka_host:http://localhost:8762/eureka/}
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
+    wait-time-in-ms-when-sync-empty: 5
+
+spring:
+  application:
+    name: zurekaService

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <title>学生名单</title>
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/answering/static/css/expand.css}" media="all">
+</head>
+<body>
+    <div class="content_box">
+        <form class="layui-form lesson_card" action="" lay-filter="creditcardrecordsattendcebox" id="creditcardrecordsattendcebox">
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space20">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <span></span>
+<!--                                <button type="button" class="layui-btn header_edit changeStudent" lay-tips="导出学生名单">导出学生名单</button>-->
+                            </div>
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-md12">
+                                        <div class="layui-col-md12">
+                                            <!--表单开始-->
+                                            <table class="layui-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>编号</th>
+                                                        <th>学生信息</th>
+                                                        <th>所属学院</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="student">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:replace="/answering/globalscript"></div>
+    <script th:inline="javascript">
+        const termId = [[${termId}]];
+        const courseNo = [[${courseNo}]];
+        const type = [[${type}]];
+        const username = [[${session.user.username}]];
+    </script>
+<!--    <script th:src="@{/modules/answering/static/js/Blob.js}"></script>-->
+<!--    <script th:src="@{/modules/answering/static/js/Export2Excel.js}"></script>-->
+    <script th:src="@{/modules/answering/static/js/common.js}"></script>
+    <script th:src="@{/modules/answering/schoolCourseStudnetList.js}"></script>
+</body>
+</html>

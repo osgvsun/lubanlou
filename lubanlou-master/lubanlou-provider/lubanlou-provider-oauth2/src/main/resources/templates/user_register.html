@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>用户注册</title>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content=""/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=0.5, maximum-scale=1"/>
+    <link rel=icon th:href="@{/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/pretty-checkbox.min.css}">
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/plugin/js.cookie.min.js}"></script>
+    <script th:src="@{/plugins/layer/layer.js}"></script>
+    <style>
+        /* 调整layer弹框边框css */
+        body .layui-layer-rim {
+            border: 6px solid rgba(0, 0, 0, .1)
+        }
+        .chooseType {
+            top: 25%;
+        }
+    </style>
+    <script th:inline="javascript">
+        var dataSourceDtosSize = [[${dataSourceDtos.size()}]];
+        var defaultSource = [[${defaultSource}]];
+        var apiGateWayHost = [[${apiGateWayHost}]];
+        var apiSuccessfulJump = [[${apiSuccessfulJump}]];
+        var strictMode = [[${strictMode}]];
+        if(defaultSource != null){
+            Cookies.set("datasource.cookie",defaultSource)
+        }
+        $(function(){
+            let defaultType = [[${type}]];
+            switch (+defaultType){
+                case 1:
+                    $(".type_choose>.item_step_tip:eq(0)").click();
+                    break;
+                case 2:
+                    $(".type_choose>.item_step_tip:eq(1)").click();
+                    break;
+            }
+            $(".login_form").css("visibility","");
+        })
+        window.resourceContainerHost = [[${resourceContainerHost}]];
+    </script>
+</head>
+<body>
+<div class="layui-form-item layui-form-text" id="details" style="display: none">
+    <p id="infoTest"></p>
+</div>
+<header>
+    <div class="logo" onclick="javascript:window.open(location.origin)"></div>
+</header>
+<div class="banner" style="min-height: 633px;">
+    <div class="w">
+        <div class="login_form chooseType" style="visibility:hidden;">
+            <div class="login_type_btn">
+                <div class="login_type_btn_choose only_one_choose">用户注册与绑定</div>
+            </div>
+            <div class="login_detail">
+                <div class="account_login type_choose">
+                    <button class="item_step_tip" style="display: block;"onclick="boundPhoneNumberType()">手机绑定学工号</button>
+                    <button class="item_step_tip" style="display: block;"onclick="userRegisterType()">新用户注册</button>
+                </div>
+                <div class="account_login userRegister" style="display: none">
+                    <form th:action="@{/userRegister}" id="loginForm" method="post">
+                        <div class="msg">
+                            <div>
+                                <i class="fa fa-minus-circle"></i>
+                            </div>
+                            <div>
+                                <span id="error_text"></span>
+                            </div>
+                        </div>
+                        <ul class="item_step">
+                            <li>
+                                <button class="item_step_tip" disabled="true">1.绑定学号/工号与数据源</button>
+                                <div class="item item_force">
+                                    <label class="item_label" for="username">
+                                        <i class="fa fa-user"></i>
+                                    </label>
+                                    <input type="text" name="username" id="username" class="itext"
+                                           th:value="${username}"
+                                           placeholder="请输入您的学号/工号"/>
+                                </div>
+                                <div class="item item_force" th:if="${dataSourceDtos.size()} ne 1">
+                                    <select name="schoolName" class="iselect" id="dataSource">
+                                        <option value="">请输入学号/工号绑定的数据源</option>
+                                        <option th:each="dataSourceDto:${dataSourceDtos}"
+                                                th:value="${dataSourceDto.schoolName}"
+                                                th:selected="${schoolName!=null?schoolName:null}"
+                                                th:text="${dataSourceDto.schoolCname}"></option>
+                                    </select>
+                                </div>
+                                <div class="item item_force" th:if="${dataSourceDtos.size()} eq 1" hidden="hidden">
+                                    <select name="schoolName" class="iselect" id="dataSource">
+                                        <option value="">请输入学号/工号绑定的数据源</option>
+                                        <option th:each="dataSourceDto:${dataSourceDtos}"
+                                                th:value="${dataSourceDto.schoolName}"
+                                                th:selected="${schoolName!=null?schoolName:null}"
+                                                th:text="${dataSourceDto.schoolCname}"></option>
+                                    </select>
+                                </div>
+                                <div class="item item_force f_l">
+                                    <label class="item_label" for="phone">
+                                        <i class="fa fa-phone"></i>
+                                    </label>
+                                    <input type="text" name="phone" id="phone" class="itext" th:value="${phone}"
+                                           placeholder="请输入您的登录手机号码"/>
+                                </div>
+                                <div class="item item_force f_l" th:if="${enableTesterPhone}">
+                                    <label class="item_label" for="tester_phone">
+                                        <i class="fa fa-phone"></i>
+                                    </label>
+                                    <input type="text" name="tester_phone" id="tester_phone" class="itext"
+                                           th:value="${testerPhone}"
+                                           placeholder="请输入测试人员手机号"/>
+                                </div>
+                                <div class="item item_code_pic">
+                                    <input type="text" name="securityCode" class="item_force" id="login_code"
+                                           th:value="${securityCode}" placeholder="验证码">
+                                    <input type="button" onclick="getSecurityCode();" value="点击获取验证码"
+                                           title="验证码有效时间为5分钟"
+                                           class="ibtn code_btn m_l_10">
+                                </div>
+                                <div class="item item_force">
+                                    <label class="item_label" for="password">
+                                        <i class="fa fa-lock"></i>
+                                    </label>
+                                    <input type="password" name="password" id="password" class="itext"
+                                           th:value="${password}"
+                                           placeholder="请设置您的登录密码"/>
+                                </div>
+                                <div class="item item_force">
+                                    <label class="item_label" for="confirmPassword">
+                                        <i class="fa fa-lock"></i>
+                                    </label>
+                                    <input type="password" name="confirmPassword" id="confirmPassword" class="itext"
+                                           th:value="${password}"
+                                           placeholder="请再次确认您的登录密码"/>
+                                </div>
+                            </li>
+                            <!--<li>-->
+                                <!--<button class="item_step_tip" disabled="true">2.填写登录信息</button>-->
+                                <!--<div class="item item_force f_l">-->
+                                    <!--<label class="item_label" for="phone">-->
+                                        <!--<i class="fa fa-phone"></i>-->
+                                    <!--</label>-->
+                                    <!--<input type="text" name="phone" id="phone" class="itext" th:value="${phone}"-->
+                                           <!--placeholder="请输入您的登录手机号码"/>-->
+                                <!--</div>-->
+                                <!--<div class="item item_force f_l" th:if="${enableTesterPhone}">-->
+                                    <!--<label class="item_label" for="tester_phone">-->
+                                        <!--<i class="fa fa-phone"></i>-->
+                                    <!--</label>-->
+                                    <!--<input type="text" name="tester_phone" id="tester_phone" class="itext"-->
+                                           <!--th:value="${testerPhone}"-->
+                                           <!--placeholder="请输入测试人员手机号"/>-->
+                                <!--</div>-->
+                                <!--<div class="item item_code_pic">-->
+                                    <!--<input type="text" name="securityCode" class="item_force" id="login_code"-->
+                                           <!--th:value="${securityCode}" placeholder="验证码">-->
+                                    <!--<input type="button" onclick="getSecurityCode();" value="点击获取验证码"-->
+                                           <!--title="验证码有效时间为5分钟"-->
+                                           <!--class="ibtn code_btn m_l_10">-->
+                                <!--</div>-->
+                                <!--<div class="item item_force">-->
+                                    <!--<label class="item_label" for="password">-->
+                                        <!--<i class="fa fa-lock"></i>-->
+                                    <!--</label>-->
+                                    <!--<input type="password" name="password" id="password" class="itext"-->
+                                           <!--th:value="${password}"-->
+                                           <!--placeholder="请设置您的登录密码"/>-->
+                                <!--</div>-->
+                                <!--<div class="item item_force">-->
+                                    <!--<label class="item_label" for="confirmPassword">-->
+                                        <!--<i class="fa fa-lock"></i>-->
+                                    <!--</label>-->
+                                    <!--<input type="password" name="confirmPassword" id="confirmPassword" class="itext"-->
+                                           <!--th:value="${password}"-->
+                                           <!--placeholder="请再次确认您的登录密码"/>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <li>
+                                <button class="item_step_tip" disabled="true">2.完善个人信息</button>
+                                <div class="item item_force">
+                                    <label class="item_label" for="cname">
+                                        <i class="fa fa-vcard-o"></i>
+                                    </label>
+                                    <input type="text" id="cname" name="cname" class="itext"
+                                           th:value="${cname}"
+                                           placeholder="请输入您的姓名"/>
+                                </div>
+                                <div class="item item_force">
+                                    <label class="item_label" for="email">
+                                        <i class="fa fa-envelope"></i>
+                                    </label>
+                                    <input type="email" name="email" id="email" class="itext"
+                                           th:value="${email}"
+                                           placeholder="请输入您的邮箱地址"/>
+                                </div>
+                            </li>
+
+                            <li>
+                                <img id="registerSuccessImg" th:src="@{/images/login/register.png}"
+                                     alt="图片显示出错，但是您已经注册成功了" title="您已经注册成功啦(。・∀・)ノ">
+                            </li>
+                        </ul>
+                        <div class="step_console">
+                            <button type="button" data-step-type="goLogin" class="ibtn item_step_btn"
+                                    onclick="loginUrl()" style="display:none;">现在登录
+                            </button>
+                            <button type="button" data-step-type="submit" class="ibtn item_step_btn"
+                                    onclick="verSubmit()" style="display:none;">提交
+                            </button>
+                            <button type="button" data-step-type="next" class="ibtn item_step_btn"
+                                    onclick="stepJump(1)">下一步
+                            </button>
+                            <button type="button" data-step-type="pre" class="ibtn item_step_btn ibtn_gray"
+                                    style="border-color:unset;display:none;"
+                                    onclick="stepJump(-1)">上一步
+                            </button>
+                        </div>
+                        <div class="item item_force item_tos">
+                            <div class="pretty p-icon ">
+                                <input type="radio" id="tos"/>
+                                <div class="state p-success">
+                                    <i class="icon fa fa-check"></i>
+                                    <label for="tos">
+                                        阅读并接受
+                                    </label>
+                                </div>
+                            </div>
+                            <a href="./tos" target="_blank" class="tos_name">
+                                《庚商用户服务条款M》
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="account_login boundPhoneNumber" style="display: none">
+                    <form th:action="@{/boundPhoneNumber}" id="boundForm" method="post">
+                        <div class="msg">
+                            <div>
+                                <i class="fa fa-minus-circle"></i>
+                            </div>
+                            <div>
+                                <span id="bound_phone_error_text"></span>
+                            </div>
+                        </div>
+                        <ul class="item_step_bp">
+                            <li>
+                                <button class="item_step_tip" disabled="true">1.填写学号/工号信息</button>
+                                <div class="item item_force">
+                                    <label class="item_label" for="username">
+                                        <i class="fa fa-user"></i>
+                                    </label>
+                                    <input type="text" name="username" id="username_bp" class="itext"
+                                           th:value="${username}"
+                                           placeholder="请输入您的学号/工号"/>
+                                </div>
+                                <div class="item item_force">
+                                    <select name="schoolName" class="iselect" id="dataSource_bp">
+                                        <option value="">请输入学号/工号绑定的数据源</option>
+                                        <option th:each="dataSourceDto:${dataSourceDtos}"
+                                                th:value="${dataSourceDto.schoolName}"
+                                                th:selected="${schoolName!=null?schoolName:null}"
+                                                th:text="${dataSourceDto.schoolCname}"></option>
+                                    </select>
+                                </div>
+                                <div class="item item_force">
+                                    <label class="item_label" for="password">
+                                        <i class="fa fa-lock"></i>
+                                    </label>
+                                    <input type="password" name="password" id="password_bp" class="itext"
+                                           th:value="${password}"
+                                           placeholder="请输入正确的初始密码"/>
+                                </div>
+                                <!--<div class="item item_force">
+                                    <label class="item_label" for="confirmPassword">
+                                        <i class="fa fa-lock"></i>
+                                    </label>
+                                    <input type="password" name="confirmPassword" id="confirmPassword_bp" class="itext"
+                                           th:value="${password}"
+                                           placeholder="请确认初始密码"/>
+                                </div>-->
+                            </li>
+                            <li>
+                                <button class="item_step_tip" disabled="true">2.绑定手机号</button>
+                                <div class="item item_force f_l">
+                                    <label class="item_label" for="phone">
+                                        <i class="fa fa-phone"></i>
+                                    </label>
+                                    <input type="text" name="phone" id="phone_bp" class="itext" th:value="${phone}"
+                                           placeholder="请输入您的登录手机号码"/>
+                                </div>
+                                <div class="item item_force f_l" th:if="${enableTesterPhone}">
+                                    <label class="item_label" for="tester_phone">
+                                        <i class="fa fa-phone"></i>
+                                    </label>
+                                    <input type="text" name="tester_phone" id="tester_phone_bp" class="itext"
+                                           th:value="${testerPhone}"
+                                           placeholder="请输入测试人员手机号"/>
+                                </div>
+                                <div class="item item_code_pic">
+                                    <input type="text" name="securityCode" class="item_force" id="login_code_bp"
+                                           th:value="${securityCode}" placeholder="验证码">
+                                    <input type="button" onclick="getSecurityCodeBp();" value="点击获取验证码"
+                                           title="验证码有效时间为5分钟"
+                                           class="ibtn code_btn m_l_10">
+                                </div>
+                            </li>
+                            <li>
+                                <button class="item_step_tip" disabled="true">3.完善个人信息</button>
+                                <div class="item item_force">
+                                    <label class="item_label" for="cname">
+                                        <i class="fa fa-vcard-o"></i>
+                                    </label>
+                                    <input type="text" id="cname_bp" name="cname" class="itext"
+                                           th:value="${cname}"
+                                           placeholder="请输入您的姓名"/>
+                                </div>
+                                <div class="item item_force">
+                                    <label class="item_label" for="email">
+                                        <i class="fa fa-envelope"></i>
+                                    </label>
+                                    <input type="email" name="email" id="email_bp" class="itext"
+                                           th:value="${email}"
+                                           placeholder="请输入您的邮箱地址"/>
+                                </div>
+                                <!--<button class="item_step_tip" disabled="true">4.修改密码</button>
+                                <div class="item item_force">
+                                    <label class="item_label" for="password">
+                                        <i class="fa fa-lock"></i>
+                                    </label>
+                                    <input type="password" name="newPassword" id="password_bp_check" class="itext"
+                                           th:value="${password}"
+                                           placeholder="请输入密码"/>
+                                </div>
+                                <div class="item item_force">
+                                    <label class="item_label" for="confirmPassword">
+                                        <i class="fa fa-lock"></i>
+                                    </label>
+                                    <input type="password" name="newConfirmPassword" id="confirmPassword_bp_check" class="itext"
+                                           th:value="${password}"
+                                           placeholder="请确认密码"/>
+                                </div>-->
+                            </li>
+
+                            <li>
+                                <img id="registerSuccessImg" th:src="@{/images/login/register.png}"
+                                     alt="图片显示出错，但是您已经注册成功了" title="您已经注册成功啦(。・∀・)ノ">
+                            </li>
+                        </ul>
+                        <div class="step_console">
+                            <button type="button" data-step-type="goLoginBp" class="ibtn item_step_btn"
+                                    onclick="loginUrl()" style="display:none;">现在登录
+                            </button>
+                            <button type="button" data-step-type="submitBp" class="ibtn item_step_btn"
+                                    onclick="verSubmitBp()" style="display:none;">提交
+                            </button>
+                            <button type="button" data-step-type="nextBp" class="ibtn item_step_btn"
+                                    onclick="stepJumpBp(1)">下一步
+                            </button>
+                            <button type="button" data-step-type="preBp" class="ibtn item_step_btn ibtn_gray"
+                                    style="border-color:unset;display:none;"
+                                    onclick="stepJumpBp(-1)">上一步
+                            </button>
+                        </div>
+                        <div class="item item_force item_tos">
+                            <div class="pretty p-icon ">
+                                <input type="radio" id="tos_bp"/>
+                                <div class="state p-success">
+                                    <i class="icon fa fa-check"></i>
+                                    <label for="tos">
+                                        阅读并接受
+                                    </label>
+                                </div>
+                            </div>
+                            <a href="./tos" target="_blank" class="tos_name">
+                                《庚商用户服务条款M》
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="coagent">
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <p>Copyright © 2020 庚商教育智能科技 沪ICP备14016833号</p>
+    <p>
+        <img th:src="@{/images/login/bei.png}" alt="">
+        <span>沪公网安备 31011702007343号</span>
+    </p>
+</footer>
+<script th:inline="javascript">
+    let isRegisterBack = false;
+    let success = [[${success}]];
+    if (success != null) {
+        isRegisterBack = true;
+    }
+</script>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<script type="text/javascript" th:src="@{/js/user_register.js}"></script>
+<script type="text/javascript" th:src="@{/js/securityCode.js}"></script>
+<script type="text/javascript" th:src="@{/js/cmsSetting.js}"></script>
+<script th:inline="javascript">
+    function loginUrl() {
+        location.href = apiSuccessfulJump + [[${original_uri}]]
+    }
+
+    function asyncFocus(id) {
+        setTimeout(function () {
+            $("#" + id).focus();
+        }, 200)
+    }
+
+    let msg = [[${msg}]]
+    if (success != null) {
+        $("#tos").attr("checked", "checked");
+        if (success) {
+            // 注册成功
+            msgTextShow(msg, 1)
+            $(".item_step").css("margin-left", `calc(-346px * 3)`)
+            $(".step_console>button").hide();
+            $("button[data-step-type=goLogin]").show();
+        } else {
+            // 失败
+            msgTextShow(msg)
+            let msgArr = ["用户已存在", "手机号已被绑定", "验证码错误"];
+            let index = msgArr.indexOf(msg)
+            switch (index) {
+                case 0:
+                    asyncFocus("username")
+                    break;
+                case 1:
+                    stepNonstop(2)
+                    asyncFocus("phone")
+                    break;
+                case 2:
+                    stepNonstop(2)
+                    asyncFocus("login_code")
+                    break;
+            }
+        }
+    }
+</script>
+</body>
+</html>

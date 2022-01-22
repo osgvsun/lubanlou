@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+		<script type="text/javascript" src="../layuiadmin/layui/layui.js"></script>
+		<!--多选-->
+		<link rel="stylesheet" href="../layuiadmin/static/plugins/formselect/formSelects-v4.css" media="all">
+		<script type="text/javascript" src="../layuiadmin/static/plugins/formselect/formSelects-v4.min.js"></script>
+		<!-- expand -->
+		<link rel="stylesheet" href="../layuiadmin/static/css/font-awesome.min.css" media="all">
+		<link rel="stylesheet" href="../layuiadmin/static/css/expand.css" media="all">
+		<style>
+			.layui-form-label {
+				width: 79px;
+			}
+			
+			.layui-input-block {
+				margin-left: 79px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="editmyprojectbox" id="editmyprojectbox">
+				<div class="layui-fluid">
+					<!--基础信息开始-->
+					<div class="layui-card" id="info">
+						<div class="layui-card-header">基础信息</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space20">
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">实验名称<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="name" autocomplete="on" lay-verify="required" placeholder="请输入实验名称" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验编号<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="id" autocomplete="on" lay-verify="required" placeholder="请输入实验编号" />
+									</div>
+								</div>
+								<div class="layui-col-lg8">
+									<label class="layui-form-label">所属课程<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="lesson" lay-search lay-filter="required">
+											<option value="">请选择所属课程</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">所属学期<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="term" lay-search lay-filter="required">
+											<option value="">请选择所属学期</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg8">
+									<label class="layui-form-label">所属学科<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="subject" lay-search lay-filter="required">
+											<option value="">请选择所属学科</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验要求<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="experimentalrequirement" lay-search lay-filter="required">
+											<option value="">请选择实验要求</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg8">
+									<label class="layui-form-label">所属实验室</label>
+									<div class="layui-input-block">
+										<select name="labroom" xm-select="labroom" xm-select-skin="normal" xm-select-search="" lay-filter="" lay-search="">
+											<option value="">请选择所属实验室</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验学时数<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="classhour" autocomplete="on" lay-verify="required" placeholder="请输入大于0的数" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验总学时</label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="classsumhour" autocomplete="on" placeholder="请输入大于0的数" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">课程总学时</label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="lessonclasssumhour" autocomplete="on" placeholder="请输入大于0的数" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验者人数<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="person" autocomplete="on" lay-verify="required" placeholder="请输入大于0的数" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验组数<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="team" autocomplete="on" lay-verify="required" placeholder="请输入大于0的数" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">每组人数<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="teammember" autocomplete="on" lay-verify="required" placeholder="请输入大于0的数" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验类别<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="type" lay-search lay-filter="required">
+											<option value="">请选择实验类别</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验类型<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="kind" lay-search lay-filter="required">
+											<option value="">请选择实验类型</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验性质<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="nature" lay-search lay-filter="required">
+											<option value="">请选择实验性质</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">实验者类型<font class="red_dot">*</font></label>
+									<div class="layui-input-block">
+										<select name="experimenterkind" lay-search lay-filter="required">
+											<option value="">请选择实验者类型</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">变动状态</label>
+									<div class="layui-input-block">
+										<select name="changestatus" lay-search>
+											<option value="">请选择变动状态</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">开放范围</label>
+									<div class="layui-input-block">
+										<select name="openscope" lay-search>
+											<option value="">请选择开放范围</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">获奖等级</label>
+									<div class="layui-input-block">
+										<select name="awardlevel" lay-search>
+											<option value="">请选择获奖等级</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg8">
+									<label class="layui-form-label">所属专业</label>
+									<div class="layui-input-block">
+										<select name="major" lay-search>
+											<option value="">请选择所属专业</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">主讲教师</label>
+									<div class="layui-input-block">
+										<select name="lecturer" xm-select="lecturer" xm-select-skin="normal" xm-select-search="" lay-filter="" lay-search="">
+											<option value="">请选择主讲教师</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">辅导教师</label>
+									<div class="layui-input-block">
+										<select name="tutor" xm-select="tutor" xm-select-skin="normal" xm-select-search="" lay-filter="" lay-search="">
+											<option value="">请选择辅导教师</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg8">
+									<label class="layui-form-label">指导书名称</label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="instructionname" autocomplete="on" placeholder="请输入指导书名称" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">编者</label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="editor" autocomplete="on" placeholder="请输入编者" />
+									</div>
+								</div>
+								<div class="layui-col-lg8">
+									<label class="layui-form-label">考核方法</label>
+									<div class="layui-input-block">
+										<input class="layui-input" name="assessmentmethod" autocomplete="on" placeholder="请输入考核方法" />
+									</div>
+								</div>
+								<div class="layui-col-lg4">
+									<label class="layui-form-label">开课周次</label>
+									<div class="layui-input-block">
+										<select name="classstart" lay-search>
+											<option value="">请选择开课周次</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">实验内容</label>
+									<div class="layui-input-block">
+										<textarea class="layui-textarea" name="experimentcontent" autocomplete="on" placeholder="请输入实验内容"></textarea>
+									</div>
+								</div>
+								<div class="layui-col-lg12">
+									<label class="layui-form-label">课前准备</label>
+									<div class="layui-input-block">
+										<textarea class="layui-textarea" name="preparation" autocomplete="on" placeholder="请输入课前准备"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--基础信息结束-->
+					<!--材料使用开始-->
+					<div class="layui-card" id="materialmodel">
+						<div class="layui-card-header">材料使用
+							<label class="layui-icon layui-icon-add-1 addmaterial header_btn" data-method="addmaterial" lay-tips="添加材料使用"></label>
+						</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="materialuse" lay-filter="materialuse"></table>
+							<script type="text/html" id="materialtoolbar">
+								<a class="layui-btn layui-btn-green layui-btn-xs" lay-event="edit">编辑</a>
+								<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+							</script>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--材料使用结束-->
+					<!--仪器设备开始-->
+					<div class="layui-card" id="equipmentmodel">
+						<div class="layui-card-header">仪器设备
+							<label class="layui-icon layui-icon-add-1 addequipment header_btn" data-method="addequipment" lay-tips="批量添加仪器设备"></label>
+						</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="equipment" lay-filter="equipment"></table>
+							<script type="text/html" id="equipmenttoolbar">
+								<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+							</script>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--仪器设备结束-->
+					<!--上传附件开始-->
+					<div class="layui-card" id="uploadenclosuremodel">
+						<div class="layui-card-header">上传附件
+							<label class="layui-icon layui-icon-upload uploadenclosure header_btn" data-method="uploadenclosure" lay-tips="上传附件"></label>
+						</div>
+						<div class="layui-card-body">
+							<!--表单开始-->
+							<table class="layui-hide" id="uploadenclosure" lay-filter="uploadenclosure"></table>
+							<script type="text/html" id="uploadenclosuretoolbar">
+								<a class="layui-btn layui-btn-xs" href="editmyproject.html" download="editmyproject.html">下载</a>
+								<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+							</script>
+							<!--表单结束-->
+						</div>
+					</div>
+					<!--上传附件结束-->
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="editmyprojectbtn" id="editmyprojectbtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<!--右侧栏开始-->
+		<div class="quick_line">
+			<a href="#info">基础<br/>信息</a>
+			<a href="#materialmodel">材料<br/>使用</a>
+			<a href="#equipmentmodel">仪器<br/>设备</a>
+			<a href="#uploadenclosuremodel">上传<br/>附件</a>
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script type="text/javascript" src="../layuiadmin/static/js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../layuiadmin/static/js/global.js"></script>
+		<script>
+			layui.config({
+					base: '../layuiadmin/' //静态资源所在路径
+				}
+
+			).extend({
+					index: 'lib/index' //主入口模块
+				}
+
+			).use(['index', 'editMyProject']);
+		</script>
+	</body>
+
+</html>​​​

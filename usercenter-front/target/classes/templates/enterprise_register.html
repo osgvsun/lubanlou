@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/register.css}" media="all" />
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <script th:src="@{/modules/common.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${usercenterHost}]];
+        var currentUsername = "anonymous";
+        var encryptUsername="anonymous";
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var currentsiteEnName = [[${siteEnName}]];
+        var currentsiteSecret = [[${siteSecret}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var oauth2 = [[${oauth2Host}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+        var ds = [[${gvsunDataSource}]];
+        var datasource;
+        for(i = 0; i < ds.length; i++) {
+            if(ds[i].defaultDataSource) {
+                datasource = ds[i].schoolName;
+            }
+        }
+        resourceContainer.initResourceContainer({
+            oauth2Host: oauth2,
+            resourceContainerHost: resourceContainerHost + "/gvsunResource",
+            directoryEngineHost: resourceContainerHost + "/gvsunDirectory",
+            siteName: "用户中心",
+            authorizationURL: resourceContainerHost + "/shareApi/getAuthorization",
+            username: currentUsername,
+            resourceContainerHostForUpload: resourceContainerHostForUpload,
+            unfixed: true,
+            datasource: function () {
+                return datasource;
+            },
+            imageWHSupplier: function () {
+                return { width: 1080 };
+            },
+        });
+    </script>
+    <style>
+        .register_bg{
+            position: unset;
+            width: 100%;
+            height: 100%;
+        }
+
+        input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color:    grey;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color:    grey;
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color:    grey;
+        }
+        input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color:   grey;
+        }
+        input::-ms-input-placeholder { /* Microsoft Edge */
+            color: grey;
+        }
+        .layui-upload-choose{
+            position: absolute;
+            color: #000;
+            text-align: center;
+            right: 65px;
+            top: 25px;
+        }
+        .business, .legalRepresen{
+            position: relative;
+            text-align: left;
+        }
+        #businessLicenseAnnex, #legalRepresentativeAnnex{
+            position: absolute;
+            right: 0;
+            top: 16px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="register_bg" style="position: unset;background-size:cover">
+        <div class="register_box" style="position: unset">
+            <div class="big_tit">企业用户注册</div>
+            <div class="register_content" style="text-align: center;position: unset;margin: 0">
+                <div class="register_top">
+                    <div class="rt_select">
+                        信息登记
+                    </div>
+                </div>
+                <form id="registershow"  class="layui-form" >
+                    <div class="register_btm rb_block">
+                        <div class="rb_box">
+                            <input id="username" type="text" name="username" value="" placeholder="【用户名（7-13位字母或数字）】" />
+                            <input type="password" id="pwd" name="password" value="" placeholder="密码">
+                            <input id="repwd" type="password" name="rePassword" value="" placeholder="确认密码" />
+                            <input id="enterpriseName" type="text" name="enterpriseName" value="" placeholder="企业名称" />
+                            <input id="enAddress" type="text" name="enAddress" value="" placeholder="所属区域" />
+                            <input id="legalName" type="text" name="legalName" value="" placeholder="法人姓名" />
+                            <input id="legalId" type="text" name="legalId" value="" placeholder="法人身份证" />
+                            <input id="enType" type="text" name="enType" value="" placeholder="企业类型" />
+                            <input id="idNumber" type="text" name="idNumber" value="" placeholder="证件号码" />
+                            <input id="address" type="text" name="address" value="" placeholder="地址" />
+                            <input id="phone" type="text" name="phone" value="" placeholder="联系方式" />
+                            <input id="email" type="text" name="email" value="" placeholder="邮箱" />
+                            <input id="opPhone" type="text" name="email" value="" placeholder="经办人手机号" />
+                            <div class="layui-form-item business">
+                                <label  style="display: inline-block;color: white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;营业执照扫描件：</label>
+                                <input type="text" id="businessLicenseAnnexFile" style="display: inline-block; margin-right: 65px" value="点击上传文件" readonly/>
+                                <div class="layui-btn" name="businessLicenseAnnex" id="businessLicenseAnnex" style="display: inline-block" >提交</div>
+                            </div>
+                            <div class="layui-form-item legalRepresen">
+                                <label  style="display: inline-block;color: white">经办人身份证扫描件：</label>
+                                <input type="text" id="legalRepresentativeAnnexFile" style="display: inline-block; margin-right: 65px" value="点击上传文件" readonly/>
+                                <div class="layui-btn" name="legalRepresentativeAnnex" id="legalRepresentativeAnnex" style="display: inline-block">提交</div>
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item" th:if="${gvsunDataSource.size()} ne 1">
+                            <label class="layui-form-label">注册数据源:</label>
+                            <div class="layui-input-block">
+                                <select name="schoolName" class="iselect" id="datasource" lay-filter="datasource">
+                                    <option th:each="dataSourceDto:${gvsunDataSource}"
+                                            th:value="${dataSourceDto.schoolName}"
+                                            th:selected="${dataSourceDto.defaultDataSource}"
+                                            th:text="${dataSourceDto.schoolCname}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" th:if="${gvsunDataSource.size()} eq 1" hidden="hidden">
+                            <label class="layui-form-label">注册数据源:</label>
+                            <div class="layui-input-block">
+                                <select name="schoolName" class="iselect" id="datasource" lay-filter="datasource">
+                                    <option th:each="dataSourceDto:${gvsunDataSource}"
+                                            th:value="${dataSourceDto.schoolName}"
+                                            th:selected="${dataSourceDto.defaultDataSource}"
+                                            th:text="${dataSourceDto.schoolCname}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="tr">
+                            <input class="rb_btn" type="button" value="确认注册" onclick="register()"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="schoolInfor_edit">
+    <div id="layerDemo1">
+        <button data-method="offset1" data-type="auto" class="layui-btn table_edit" lay-event="detail">查看</button>
+        <button data-method="offset1" data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</button>
+        <button data-method="offset1" data-type="auto" class="layui-btn table_edit" lay-event="del">删除</button>
+    </div>
+</script>
+<div class="layui-form-item layui-form-text" id="details" style="display: none;">
+    <p id="infoTest"></p>
+</div>
+</body>
+<script th:src="@{/modules/register/enterprise_register.js}"></script>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+	<title></title>
+	<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="Generator" content="GVSUN" />
+	<meta name="Author" content="chenyawen" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+	<script th:src="@{/js/directoryEngine/directoryEngine-core.js}" type="text/javascript"></script>
+	<script type="text/javascript" th:src="@{/modules/timetable/static_limsproduct/js/layerSilica.js}"></script>
+	<link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/layui/css/layui.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/style/admin.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/font-awesome.min.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/registration/css/expand.css}" media="all">
+	<script th:inline="javascript">
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var currentCname = [[${session.user.cname}]];
+		var timetableId = [[${timetableId}]];
+		var type = [[${type}]];
+		var teacher = [[${teacher}]];
+		var teacherusername = [[${teacherusername}]];
+	</script>
+</head>
+
+
+<body>
+		<div class="main_content_box">
+			<!--主体开始-->
+			<div class="full_box">
+				<form class="layui-form lesson_card" action="" lay-filter="tutorchangeacademicstudentbox" id="tutorchangeacademicstudentbox">
+					<div class="layui-card">
+						<div class="layui-card-header">调整学生名单
+<!--							<label class="layui-icon layui-icon-add-1 layui-btn-green header_btn addstudentlist" data-method="addstudentlist">添加所选学生</label>-->
+<!--							<label class="layui-icon layui-icon-close layui-btn-red header_btn cancelstudentlist" data-method="cancelstudentlist">取消所选学生</label>-->
+							<font class="font_red">(可从当前项目中退选或添加学生，学生总名额最多不超过5人。)</font>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space10">
+								<!--搜索开始-->
+								<div class="layui-col-md12 search_line">
+									<div class="layui-inline">
+										<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+									</div>
+									<input type="button" class="layui-btn" data-type="reload" value="搜索" />
+									<input type="reset" class="layui-btn layui-btn-primary" value="取消">
+								</div>
+								<!--搜索结束-->
+								<!--选中人员信息开始-->
+								<div class="layui-col-md12">
+									<blockquote class="layui-elem-quote layui-quote-nm line_tag_box">
+										<div class="field_btn_box">
+											已选中学生:
+										</div>
+										<div class="inline_inside ml5">
+											<!--单次选中区域开始-->
+<!--											<div class="layui-inline add_nav_box">-->
+<!--												<div class="mix_short_input add_nav_single">-->
+<!--													<input class="layui-input readinputbtn" type="button" name="originalstudentinfo" disabled="disabled" readonly="readonly" />-->
+<!--													<label class="layui-icon layui-icon-close delete_nav " onClick="deletenav(this);" title="取消选择"></label>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											<div class="layui-inline add_nav_box">-->
+<!--												<div class="mix_short_input add_nav_single">-->
+<!--													<input class="layui-input readinputbtn" type="button" name="originalstudentinfo" disabled="disabled" readonly="readonly" />-->
+<!--													<label class="layui-icon layui-icon-close delete_nav " onClick="deletenav(this);" title="取消选择"></label>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											<div class="layui-inline add_nav_box">-->
+<!--												<div class="mix_short_input add_nav_single">-->
+<!--													<input class="layui-input readinputbtn" type="button" name="originalstudentinfo" disabled="disabled" readonly="readonly" />-->
+<!--													<label class="layui-icon layui-icon-close delete_nav " onClick="deletenav(this);" title="取消选择"></label>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											<div class="layui-inline add_nav_box">-->
+<!--												<div class="mix_short_input add_nav_single">-->
+<!--													<input class="layui-input readinputbtn" type="button" name="originalstudentinfo" disabled="disabled" readonly="readonly" />-->
+<!--													<label class="layui-icon layui-icon-close delete_nav " onClick="deletenav(this);" title="取消选择"></label>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											<div class="layui-inline add_nav_box">-->
+<!--												<div class="mix_short_input add_nav_single">-->
+<!--													<input class="layui-input readinputbtn" type="button" name="originalstudentinfo" disabled="disabled" readonly="readonly" />-->
+<!--													<label class="layui-icon layui-icon-close delete_nav " onClick="deletenav(this);" title="取消选择"></label>-->
+<!--												</div>-->
+<!--											</div>-->
+											<!--单次选中区域结束-->
+											<!--新增区域开始-->
+											<div class="layui-inline new_nav_box">
+											</div>
+											<!--新增区域结束-->
+										</div>
+									</blockquote>
+								</div>
+								<!--选中人员信息结束-->
+								<div class="layui-col-md12">
+									<!--表单开始-->
+									<table class="layui-hide" id="tutorchangeacademicstudent" lay-filter="tutorchangeacademicstudent"></table>
+									<script type="text/html" id="toolbar">
+										<a class="layui-btn layui-btn-green layui-btn-xs" lay-event="addstudent">添加</a>
+<!--										<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="cancelstudent">取消</a>-->
+									</script>
+									<!--表单结束-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="tutorchangeacademicstudentbtn" id="tutorchangeacademicstudentbtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</form>
+			</div>
+			<!--主体结束-->
+		</div>
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<!--<a href="#"><br/></a>-->
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script th:src="@{/modules/timetable/layui_admin/static/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+		<script th:src="@{/js/initOAuth2.js}"></script>
+		<script th:src="@{/modules/timetable/layui_admin/layui/layui.js}"></script>
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/registration/tutorChangeAcademicStudent.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../layuiadmin/' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'tutorChangeAcademicStudent']);-->
+<!--		</script>-->
+	</body>
+
+</html>​​​

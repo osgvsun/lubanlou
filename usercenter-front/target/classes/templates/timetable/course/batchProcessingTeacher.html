@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/timetable/iframe">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="Generator" content="GVSUN" />
+    <meta name="Author" content="chenyawen" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+    <meta name="contextPath" th:content="${session.limsproductHost}"/>
+    <script th:src="@{/js/directoryEngine/directoryEngine-core.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/modules/timetable/static_limsproduct/js/layerSilica.js}"></script>
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/plugins/formselect/formSelects-v4.css}" media="all">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/modules/timetable/layui_admin/static/css/expandSec.css}" media="all">
+    <style>
+        .main_content {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 20px 33px 99px;
+        }
+        .font {
+            font-size: 20px;
+            font-weight: bolder;
+            margin: 7px 0;
+        }
+        .layui-card {
+            padding: 20px 0;
+        }
+        .layui-form-checkbox span {
+            height: auto;
+        }
+        .layui-form-checked span, .layui-form-checked:hover span {
+            background-color: #fff0!important;
+        }
+        .layui-transfer-active .layui-btn:not(.layui-btn-disabled) .layui-icon {
+            color: #fff;
+        }
+    </style>
+    <script th:inline="javascript">
+        var currentUsername = [[${session.user.username}]];
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var username = [[${session.user.username}]];
+        var role = [[${session.selected_role}]];
+        var academyNumber = [[${session.selected_academy}]];
+    </script>
+</head>
+
+<body layout:fragment="timetable">
+<div class="main_content">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md12">
+        <input type="hidden" id="zuulServerUrl" th:value="${zuulServerUrl}" />
+        <input type="hidden" id="timetableStyle" th:value="${timetableStyle}" />
+        <input type="hidden" id="courseNo" th:value="${courseNo}" />
+        <div class="font" th:if="${timetableStyle == 3}">注:批量调整的删除及添加都是针对当前课程，即某教师将会从该课程内删除或添加到所有课次中，需部分调整请转至调课单独进行</div>
+        <div class="font" th:if="${timetableStyle == 4}">注:批量调整的删除及添加都是针对所选批组，即某教师将会从该课程内删除或添加到所有课次中，需部分调整请转至调课单独进行</div>
+        <div class="layui-col-md12" th:if="${timetableStyle == 4}">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    需要调整的批组
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-form-item">
+                        <div id="group" class="demo-transfer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12" style="width: 40%;">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    主讲教师
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-form-item">
+                        <div id="teachers" class="demo-transfer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12" style="width: 40%;">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    辅助教师
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-form-item">
+                        <div id="tutors" class="demo-transfer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!--<div class="iStyle_RightInner">-->
+<!--    <div id="TabbedPanels1" class="TabbedPanels">-->
+<!--        <div class="site-box">-->
+<!--            <div class="site-content">-->
+<!--                <div>-->
+<!--                    <input type="hidden" id="zuulServerUrl" th:value="${zuulServerUrl}" />-->
+<!--                    <input type="hidden" id="timetableStyle" th:value="${timetableStyle}" />-->
+<!--                    <input type="hidden" id="courseNo" th:value="${courseNo}" />-->
+<!--                    <div class="layui-col-md12">-->
+<!--                        <div class="layui-card">-->
+<!--                            <div class="layui-card-header">-->
+<!--                                需要调整的批组-->
+<!--                            </div>-->
+<!--                            <div class="layui-card-body">-->
+<!--                                <div class="layui-row layui-form-item">-->
+<!--                                    <div id="teachers" class="demo-transfer">-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<script th:src="@{/modules/timetable/layui_admin/static/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/timetable/layui_admin/layui/layui.js}"></script>
+<script th:src="@{/modules/timetable/layui_admin/static/js/global.js}"></script>
+<script th:src="@{/modules/timetable/layui_admin/modules/batchProcessingTeacher.js}"></script>
+</body>
+
+</html>

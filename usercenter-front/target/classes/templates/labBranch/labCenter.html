@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <!--masonry模块管理-->
+    <link rel="stylesheet" th:href="@{/plugins/masonry/masonry-docs.css}" media="all">
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+</head>
+<body>
+    <div class="main_content_box">
+        <div class="full_box">
+            <!--主体开始-->
+            <div class="content_box">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <!--title-->
+                            <span></span>
+                        </div>
+                        <div class="layui-card-body">
+                            <form class="layui-form" action="" lay-filter="labmainbox" id="labmainbox">
+                                <div class="layui-row layui-col-space20">
+                                    <!--模板搜索开始-->
+                                    <div class="layui-col-md12 tabsearch search_line">
+                                        <div class="layui-col-lg4 search_top">
+                                            <input class="layui-input" name="searchid" id="searchbox" autocomplete="on"
+                                                   placeholder="请输入搜索内容" oninput="labRoomSearch()">
+                                        </div>
+                                        <!--<input type="button" class="layui-btn" data-type="reload" value="搜索"-->
+                                        <!--onclick="labRoomSearch()"/>-->
+                                    </div>
+                                    <!--模板搜索结束-->
+                                    <div class="layui-col-md12">
+                                        <div class="duo">
+                                            <!--按数字排序吸附-->
+                                            <!--<div class="grid" data-masonry='{"percentPosition": true,"horizontalOrder":true }'>-->
+                                            <!--按位置排序吸附-->
+                                            <div class="grid" data-masonry='{"percentPosition": true}'>
+                                                <!--实验分室开始-->
+                                                <!--html-->
+                                                <!--实验分室结束-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/masonry/masonry.pkgd.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/pinyinMatch.js}"></script>
+    <script th:src="@{/js/cookie.js}"></script>
+<!--    <script th:src="@{/js/jquery.cookie.js}"></script>-->
+    <script th:inline="javascript">
+        const timetableHost = [[${timetableHost}]];
+        const labCenterId = [[${labCenterId}]];
+        const type = [[${type}]];
+    </script>
+    <script th:src="@{/modules/labBranch/labCenter.js}"></script>
+</body>
+</html>

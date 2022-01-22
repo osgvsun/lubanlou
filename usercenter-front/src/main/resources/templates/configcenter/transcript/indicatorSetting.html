@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+       xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:with="unixstamp=${#dates.createNow().time}">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/newExpand.css}">
+    <link rel="stylesheet" th:href="@{/modules/configcenter/static/css/examine.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <!--<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/font-awesome.min.css}" media="all">-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/jquery.cookie.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/modules/configcenter/static/xm-select.js}"></script>
+    <!--资源容器-->
+    <link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/default/easyui.css}">
+    <link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.easyui.min.js}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var proId = [[${proId}]];
+        var configType = [[${configType}]];
+        var state = [[${state}]];
+        var sourceProject = [[${sourceProject}]];
+    </script>
+<!--    <script th:src="@{/modules/configcenter/static/commonResource.js}"></script>-->
+    <script th:src="@{/modules/common.js}"></script>
+</head>
+<style>
+    #dept_main, #dept_particulars{
+        width: 48.5%;
+        display: inline-block;
+        vertical-align: top;
+        padding: 20px;
+        background: white;
+        box-sizing: border-box;
+    }
+    #dept_tree{
+        margin-top: 20px;
+    }
+    .layui-icon{
+        color: #fff
+    }
+    .layui-tree-icon .layui-icon {
+        position: absolute;
+        right: -1px;
+    }
+    body .selectDiv .layui-layer-content{
+        overflow: visible;
+    }
+    .myData .layui-form-item{
+        margin: 20px 100px 10px 45px;
+    }
+    .myData .layui-btn{
+        margin-right: 5px!important;
+    }
+    .layui-input-block {
+        margin-left: 120px;
+    }
+    .layui-tree-entry {
+        height: auto;
+    }
+    .layui-tree-txt {
+        word-break: normal;
+        width: auto;
+        /* display: block; */
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow: hidden;
+    }
+</style>
+<body>
+<div class="main_content">
+    <div id="dept_main" style="margin-right: 2%;">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>所有指标</legend>
+        </fieldset>
+        <button th:if="${state == 0}" class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal" lay-demo="addIndicator"><i class="layui-icon layui-icon-addition"></i>添加指标</button>
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal" id="allSpread" lay-demo="allSpread"><i class="layui-icon layui-icon-screen-full"></i>一键展开</button>
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal layui-hide" id="allFold" lay-demo="allFold"><i class="layui-icon layui-icon-screen-restore"></i>一键折叠</button>
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal" id="import" type="button"><i class="layui-icon layui-icon-import"></i>导入</button>
+        <a class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal" download="导入指标模板" style="margin-left: 10px;" th:href="@{/downloadFile/indicatorTemplate.xlsx}">下载导入模板</a>
+<!--        <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal" lay-demo="gain">获取选中节点</button>-->
+        <div id="dept_tree">
+
+        </div>
+    </div>
+    <div id="dept_particulars">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>指标详情</legend>
+        </fieldset>
+        <div id="dept_home">
+            <div class="layui-tree-emptyText">无数据</div>
+        </div>
+    </div>
+</div>
+</body>
+<!--<script type="text/javascript" th:src="@{/modules/configcenter/process/templateSP.js}"></script>-->
+<script th:src="@{/modules/treeSelect.js}"></script>
+<script th:src="@{/modules/configcenter/transcript/indicatorSetting.js}"></script>
+<!--<script>-->
+<!--    layui.config({-->
+<!--//        version: true, //一般用于更新模块缓存，默认不开启。设为 true 即让浏览器不缓存。也可以设为一个固定的值，如：201610-->
+<!--        base:'../'-->
+<!--    }).extend({-->
+<!--        index:'lib/index',-->
+<!--        treeSelect: "treeSelect"-->
+<!--    }).use(['index','configcenter/transcript/indicatorSetting'])-->
+<!--</script>-->
+
+</html>

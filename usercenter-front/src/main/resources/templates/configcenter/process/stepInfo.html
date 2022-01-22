@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+       xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/modules/configcenter/static/css/expand.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/configcenter/static/css/examine.css}" media="all">
+    <link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/newExpand.css}">
+    <link rel="stylesheet" th:href="@{/modules/configcenter/static/css/font-awesome.min.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}"></script>
+    <script th:src="@{/modules/configcenter/static/jquery-migrate-1.4.1.js}"></script>
+    <script th:src="@{/js/jquery.cookie.js}"></script>
+    <script th:src="@{/js/jquery.textareafullscreen.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/textareafullscreen.css}" media="all">
+    <script th:src="@{/modules/configcenter/static/jquery.jqprint-0.3.js}"></script>
+    <script th:src="@{/modules/configcenter/static/html2pdf.js-master/dist/html2pdf.bundle.min.js}"></script>
+<!--    <script th:src="@{/modules/configcenter/static/FileSaver.js}"></script>-->
+<!--    <script th:src="@{/modules/configcenter/static/jquery.wordexport.js}"></script>-->
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/modules/configcenter/static/xm-select.js}"></script>
+    <!--资源容器-->
+    <link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/default/easyui.css}">
+    <link rel="stylesheet" th:href="@{/js/jquery-easyui-1.7.0/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-easyui-1.7.0/jquery.easyui.min.js}"></script>
+    <link rel="stylesheet" th:href="@{${resourceContainerHostForUpload} + '/shareApi/resourceContainer.css'}" media="all">
+    <script type="text/javascript" th:src="@{${resourceContainerHostForUpload} + '/shareApi/resourceContainer.js'}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var timetableId = [[${timetableId}]];
+        var clientId = [[${clientId}]];
+        var templateId = [[${templateId}]];
+        var currentStep = [[${currentStep}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+        var oauth2Host = [[${session.oauth2}]];
+        const evaluationHost =apiGateWayHost+"/configcenter/";
+        var objectLevel = 2;
+    </script>
+    <script th:src="@{/js/initOAuth2.js}"></script>
+    <script th:src="@{/modules/configcenter/static/commonResource.js}"></script>
+    <script th:src="@{/modules/common.js}"></script>
+    <link rel="stylesheet" th:href="@{/modules/configcenter/process/css/stepInfo.css}">
+</head>
+<body>
+<div class="main_content">
+    <a href="#history_box" class="layui-btn mobile_btn">
+        流转历史
+    </a>
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md8 layui-col-xs12 layui-col-sm8 step-all-info">
+            <span>请稍等······</span>
+        </div>
+        <div class="layui-col-md4 layui-col-xs12 layui-col-sm4 right_decoration noprint">
+            <div class="adc_right">
+                <div class="decoration_box">
+                    <div class="big_title"><a name="history_box">流转历史</a></div>
+                    <div class="item_box_bg">
+                        <div class="item_box_limit">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="quick_line">-->
+<!--    <a href="#info">基础<br/>信息</a>-->
+<!--    <a href="#pic">课程<br/>图片</a>-->
+<!--    <a href="#teacher">课程<br/>教师</a>-->
+<!--    <a href="#atlas">课程<br/>图谱</a>-->
+<!--    <a href="#studentlist">学生<br/>名单</a>-->
+<!--    <a href="#project">课程<br/>项目</a>-->
+<!--&lt;!&ndash;    <div class="top layui-icon layui-icon-top"></div>&ndash;&gt;-->
+<!--</div>-->
+<!--步骤完成交接开始-->
+<!--<div class="step_bottom">-->
+<!--&lt;!&ndash;教师设置完成&ndash;&gt;-->
+
+<!--<a th:if="${step > 1}" class="layui-btn lastStep" data-method="lastStep">上一步</a>-->
+<!--<a class="layui-btn submitStep" data-method="submitStep">提交</a>-->
+<!--<a class="layui-btn nextStep layui-hide" data-method="nextStep">下一步</a>-->
+<!--</div>-->
+</body>
+<script type="text/javascript" th:src="@{/modules/configcenter/static/global.js}"></script>
+<script type="text/javascript" th:src="@{/modules/configcenter/process/templateSP.js}"></script>
+<script type="text/javascript" th:src="@{/modules/configcenter/process/stepInfo.js}"></script>
+<!--<script>-->
+<!--    layui.config({-->
+<!--        // version: true, //一般用于更新模块缓存，默认不开启。设为 true 即让浏览器不缓存。也可以设为一个固定的值，如：201610-->
+<!--        base:'../'-->
+<!--    }).extend({-->
+<!--        index:'lib/index'-->
+<!--    }).use(['index','configcenter/process/stepInfo'])-->
+<!--</script>-->
+
+</html>

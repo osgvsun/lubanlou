@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/labBranch/static/css/expand.css}" media="all">
+    <style>
+        .main_content {
+            padding: 20px 20px 0;
+        }
+
+        .layui-form-label {
+            box-sizing: border-box;
+            width: 80px;
+            padding: 9px 0;
+        }
+
+        .layui-input-block {
+            margin-left: 90px;
+        }
+
+        .xm-select-parent .xm-select .xm-select-label {
+            width: auto;
+            white-space: nowrap;
+            overflow: visible;
+        }
+
+        @media screen and (max-height: 590px) {
+            .xm-select-parent .xm-form-selected dl,
+            .layui-form-selected dl {
+                max-height: 368px;
+            }
+        }
+
+        @media screen and (max-height: 500px) {
+            .xm-select-parent .xm-form-selected dl,
+            .layui-form-selected dl {
+                max-height: 155px;
+            }
+        }
+    </style>
+    <script th:inline="javascript">
+        var labRoomHost = [[${labRoomHost}]];
+        var labRoomId = [[${labRoomId}]];
+    </script>
+</head>
+
+<body>
+
+<div class="main_content">
+    <div class="full_box">
+        <!--主体开始-->
+        <div class="content_box">
+            <form class="layui-form lesson_card" action="" lay-filter="addiothardwarebox" id="addiothardwarebox">
+                <div class="layui-row layui-col-space10">
+                    <div class="layui-col-lg4 float_dd">
+                        <label class="layui-form-label">物联设备名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="type" id="type" placeholder="请输入类型" autocomplete="off"
+                                   class="layui-input" lay-verify="required"/>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">物联类型</label>
+                        <div class="layui-input-block">
+                            <select name="name" id="name" lay-search lay-filter="required">
+                                <option value="">请选择硬件</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">IP</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="ip" id="ip" required  lay-verify="required" placeholder="请输入IP" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4 float_dd">
+                        <label class="layui-form-label">制造商</label>
+                        <div class="layui-input-block">
+                            <select name="manufactor" lay-search lay-filter="required" id="manufacturer">
+                                <option value="">请选择制造商</option>
+                                <option value="ADKFP">ADKFP</option>
+                                <option value="AOPU">AOPU</option>
+                                <option value="GVSUN">GVSUN</option>
+                                <option value="WIEGAND">WIEGAND</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">规格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="specification" id="specification" placeholder="请输入规格"
+                                   autocomplete="off" class="layui-input" lay-verify="required"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">设备号/门号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="code" id="code" placeholder="请输入设备号/门号" autocomplete="off"
+                                   class="layui-input" lay-verify="required|number"
+                                   onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">version</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="version" id="version" placeholder="请输入version" autocomplete="off"
+                                   class="layui-input" lay-verify="required"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">SN/电表号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sn" id="sn" placeholder="请输入SN/电表号" autocomplete="off"
+                                   class="layui-input" lay-verify="required"/>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <label class="layui-form-label">是否支持考勤</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="attendance" value="1" title="是" checked="">
+                            <input type="radio" name="attendance" value="0" title="否">
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4 float_dd" style="padding: 18px 0 0 0">
+                        <label class="layui-form-label">服务器</label>
+                        <div class="layui-input-block">
+                            <select name="server" lay-search lay-filter="required" id="server">
+                                <option value="">请选择服务器</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--操作按钮开始-->
+                <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                    <input type="button" lay-filter="addiothardwarebtn" id="addiothardwarebtn" class="layui-btn"
+                           lay-submit value="立即提交"/>
+                    <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+                </div>
+                <!--操作按钮结束-->
+            </form>
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script th:src="@{/modules/labBranch/static/js/global.js}"></script>
+<script th:src="@{/modules/labBranch/static/js/commonSelectInit.js}"></script>
+<script th:src="@{/modules/labBranch/addIOThardware.js}"></script>
+</body>
+</html>

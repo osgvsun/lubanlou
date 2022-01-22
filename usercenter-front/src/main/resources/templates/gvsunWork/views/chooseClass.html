@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+		<style>
+			html {
+				background: transparent;
+			}
+			
+			.layui-table-cell {
+				height: auto;
+			}
+			
+			.layui-table tbody tr:hover,
+			.layui-table-click,
+			.layui-table-hover {
+				background: transparent;
+			}
+			
+			table tr td {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form" action="" lay-filter="chooseclassbox" id="chooseclassbox">
+				<div class="layui-fluid">
+					<!--本周课程开始-->
+					<div class="layui-row layui-col-space20 timetable_set mini_timetable">
+						<div class="layui-col-md12 tab_timetable">
+							<div class="layui-input-inline" style="margin: 5px 0;">
+								<select name="weekList" lay-verify="required" lay-filter="weekList">
+
+								</select>
+							</div>
+							<table class="layui-table tab_timetable">
+								<thead>
+									<tr>
+										<th class="tab_timetable_tit">
+											<!--此处div层不可删除，为支撑样式-->
+											<div>
+												<span>星期</span>
+												<div class="tab_timetable_titline"></div>
+												<span>节次</span>
+											</div>
+										</th>
+
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<input type="hidden" id="selectDate">
+					<!--本周课程结束-->
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="chooseclassbtn" id="chooseclassbtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/gvsunWork/globalscript"></div>
+		<script th:src="@{/modules/gvsunWork/static/js/global.js}"></script>
+		<!--表单单元格锁定列-->
+		<script type="text/javascript" th:src="@{/modules/gvsunWork/static/js/tableColHover.js}"></script>
+		<script th:inline="javascript">
+			const siteId = [[${session.cid}]];
+		</script>
+		<script th:src="@{/modules/gvsunWork/chooseClass.js}"></script>
+	</body>
+</html>

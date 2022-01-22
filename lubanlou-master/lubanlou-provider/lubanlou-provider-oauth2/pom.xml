@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <release.version>1.0.0-SNAPSHOT</release.version>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <!-- 标签线 -->
+        <tag.version>beta</tag.version>
+    </properties>
+
+    <artifactId>lubanlou-provider-oauth2</artifactId>
+    <version>${release.version}</version>
+
+    <parent>
+        <groupId>net.gvsun.lubanlou.provider</groupId>
+        <artifactId>lubanlou-provider</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <!--排除父pom依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.3.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cwbase</groupId>
+            <artifactId>logback-redis-appender</artifactId>
+            <version>1.1.7-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.0.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.gvsun.util</groupId>
+            <artifactId>AESUtil</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>1.46</version>
+        </dependency>
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>UnifySession</artifactId>
+            <version>1.2.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>datasource</artifactId>
+            <version>3.1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>tree</artifactId>
+            <version>0.1.17-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.gvsun.utils</groupId>
+            <artifactId>RBAC</artifactId>
+            <version>0.0.5-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+            </plugin>
+            <!-- 谷歌·jib 镜像打包插件 -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <from>
+                        <image>registry.cn-shanghai.aliyuncs.com/gvsun/jdk:8u141</image>
+                    </from>
+                    <to>
+                        <image>lbl-${tag.version}/oauth2:${project.version}</image>
+                    </to>
+                    <!--容器相关的属性-->
+                    <container>
+                        <mainClass>net.gvsun.Oauth2Application</mainClass>
+                    </container>
+                    <!--允许非https-->
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                </configuration>
+            </plugin>
+            <!-- 缓存 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <!-- 打包前进行替换 -->
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 自动识别到项目target文件夹 -->
+                    <basedir>${build.directory}</basedir>
+                    <!-- 替换的文件所在目录规则 -->
+                    <includes>
+                        <include>**/*.html</include>
+                    </includes>
+                    <replacements>
+                        <!-- 更改规则，在css/js文件末尾追加?v=时间戳，反斜杠表示字符转义 -->
+                        <replacement>
+                            <token>\.css}\"</token>
+                            <value>.css(v=${maven.build.timestamp})}\"</value>
+                        </replacement>
+                        <replacement>
+                            <token>\.css}\'</token>
+                            <value>.css?(v=${maven.build.timestamp})}\'</value>
+                        </replacement>
+                        <replacement>
+                            <token>\.js}\"</token>
+                            <value>.js(v=${maven.build.timestamp})}\"</value>
+                        </replacement>
+                        <replacement>
+                            <token>\.js}\'</token>
+                            <value>.js(v=${maven.build.timestamp})}\'</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>local-nexus</id>
+            <url>http://library.gvsun.net/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

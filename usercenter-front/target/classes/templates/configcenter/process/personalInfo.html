@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>个人基本情况</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}"></script>
+    <script th:src="@{/js/initOAuth2.js}"></script>
+    <!--资源容器-->
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/modules/common.js}"></script>
+
+    <style>
+        .fill_box {
+            display: none;
+        }
+
+        .basic {
+            float: right;
+            height: 24px;
+            line-height: 24px;
+            border-radius: 24px;
+        }
+    </style>
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var oauth2 = [[${session.oauth2}]];
+        var username = [[${username}]];
+        // var resourceContainerHost = [[${resourceContainerHost}]];
+        // var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+        //
+        // resourceContainer.initResourceContainer({
+        //     oauth2Host: oauth2,
+        //     resourceContainerHost: resourceContainerHost + "/gvsunResource",
+        //     directoryEngineHost: resourceContainerHost + "/gvsunDirectory",
+        //     siteName: "用户中心",
+        //     authorizationURL: resourceContainerHost + "/shareApi/getAuthorization",
+        //     username: currentUsername,
+        //     resourceContainerHostForUpload: resourceContainerHostForUpload,
+        //     unfixed: true
+        // });
+    </script>
+</head>
+
+<body>
+<i class="fa fa-spinner fa-3x fa-spin loading"></i>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15" id="basicInfo_containner">
+        <div>
+            <!--基本信息开始-->
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="fill_box"  id="basicInfoAdd">
+                        <form class="layui-form" action="" lay-filter="basicInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">姓名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="cname" id="cname"
+                                               autocomplete="off" disabled="disabled" readonly="readonly"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">英文名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="ename" id="ename"
+                                               autocomplete="off" class="layui-input ename">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">教工号</label>
+                                    <div class="layui-input-block">
+                                        <input type="number" name="employeeNo" id="employeeNo" disabled="disabled"
+                                               autocomplete="off" class="layui-input employeeNo">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">卡号</label>
+                                    <div class="layui-input-block">
+                                        <input type="number" name="cardNo" id="cardNo" disabled="disabled"
+                                             class="layui-input cardNo">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">民族
+                                        <span style="color:red">*</span></label>
+
+                                    <div class="layui-input-block">
+                                        <input type="text" name="nation" id="nation"
+                                               autocomplete="off" class="layui-input nation" lay-verify="required">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">户籍所在地
+                                        <span style="color:red">*</span></label>
+
+                                    <div class="layui-input-block">
+                                        <input type="text" name="placeOfDomicile" id="placeOfDomicile"
+                                               autocomplete="off" class="layui-input placeOfDomicile" lay-verify="required">
+
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">性别
+                                        <span style="color:red">*</span></label>
+                                    <div class="layui-input-block">
+                                        <select name="gender" id="gender" class="gender" lay-search lay-verify="required">
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">籍贯
+                                        <span style="color:red">*</span></label>
+
+                                    <div class="layui-input-block">
+                                        <input type="text" name="nativePlace" id="nativePlace"
+                                               autocomplete="off"
+                                               class="layui-input nativePlace" lay-verify="required"/>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">照片</label>
+                                    <div class="layui-input-block">
+                                        <a class="layui-btn layui-btn-primary" id="uploadPhoto">上传照片</a>
+                                    </div>
+                                </div>
+                                <div class="layui-input-block" style="display: none">
+                                    <label class="layui-form-label">人员状态</label>
+                                    <select name="state" class='state' id="state" lay-search>
+                                        <option value="">请选择</option>
+                                        <option value="在职">在职</option>
+                                        <option value="离任">离任</option>
+                                        <option value="退休">退休</option>
+                                    </select>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121" >
+                                    <label class="layui-form-label">座机</label>
+                                    <div class="layui-input-block">
+                                        <input type="tel" name="landline" id="landline"
+                                               autocomplete="off" class="layui-input landline">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">手机
+                                        <span style="color:red">*</span></label>
+                                    <div class="layui-input-block">
+                                        <input type="tel" name="phone" id="phone" lay-verify="phone"
+                                               autocomplete="off"
+                                               class="layui-input phone">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">邮箱
+                                        <span style="color:red">*</span></label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="email" id="email" lay-verify="email"
+                                               autocomplete="off"
+                                               class="layui-input  email">
+
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">学院
+                                        <span style="color:red">*</span></label>
+                                    <div class="layui-input-block">
+                                        <select class=" college" id="college" name="college" lay-search lay-verify="required" lay-filter="schoolTest">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">部门
+                                        <span style="color:red">*</span></label>
+                                    <div class="layui-input-block">
+                                        <select class='department' id="department" name="department"  lay-search lay-verify="required" lay-filter="departmentTest">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-col-lg4 layui-col-md121">
+                                        <label class="layui-form-label">政治面貌
+                                            <span style="color:red">*</span></label>
+                                        <div class="layui-input-block">
+                                            <select name="political" id="political" lay-filter="political" class="political" lay-search lay-verify="required">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4 layui-col-md121" id="JoinPatyTime">
+                                        <label class="layui-form-label">入党时间
+                                            <span style="color:red">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="partyTime" id="partyTime"
+                                                   autocomplete="off" class="layui-input partyTime" lay-verify="required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">办公室
+                                        <span style="color:red">*</span></label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="officeRoom" id="officeRoom"
+                                               autocomplete="off" class="layui-input officeRoom" lay-verify="required">
+                                    </div>
+                                </div>
+                                    <div class="layui-col-lg4" style="width: 100%;display: none" >
+                                        <label class="layui-form-label">证件照</label>
+                                        <div class="layui-input-block">
+                                            <input class="img_fileId" name="identificationPhoto"/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4" style="width: 100%">
+                                        <div class="layui-col-lg4 layui-col-md121">
+                                            <label class="layui-form-label">身份证号
+                                                <span style="color:red">*</span></label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="idNo" id="idNo" onBlur='checktheform()'
+                                                       autocomplete="off" class="layui-input idNo" lay-verify="required">
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-lg4 layui-col-md121">
+                                            <label class="layui-form-label">身份证号有效期开始时间</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="idNoStartDatetime" id="idNoStartDatetime"
+                                                       autocomplete="off" class="layui-input idNoStartDatetime">
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-lg4 layui-col-md121">
+                                            <label class="layui-form-label">身份证号有效期结束时间</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="idNoEndDatetime" id="idNoEndDatetime"
+                                                       autocomplete="off" class="layui-input idNoEndDatetime">
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="layui-col-lg4" style="width: 100%">
+
+                                    <div class="layui-col-lg4 layui-col-md121">
+                                        <label class="layui-form-label">护照号</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="passport" id="passport"
+                                                   autocomplete="off" class="layui-input passport">
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4 layui-col-md121">
+                                        <label class="layui-form-label">护照有效期开始时间</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="passportStartDatetime" id="passportStartDatetime"
+                                                   autocomplete="off" class="layui-input passportStartDatetime">
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4 layui-col-md121">
+                                        <label class="layui-form-label">护照有效期结束时间</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="passportEndDatetime" id="passportEndDatetime"
+                                                   autocomplete="off" class="layui-input passportEndDatetime">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                  <div class="layui-col-lg4" style="width: 100%">
+                                      <div class="layui-col-lg4 layui-col-md121">
+                                          <label class="layui-form-label">港澳通行证</label>
+                                          <div class="layui-input-block">
+                                              <input type="text" name="hmtTrafficPermit" id="hmtTrafficPermit"
+                                                     autocomplete="off" class="layui-input hmtTrafficPermit">
+                                          </div>
+                                      </div>
+                                      <div class="layui-col-lg4 layui-col-md121">
+                                          <label class="layui-form-label">港澳通行证有效期开始时间</label>
+                                          <div class="layui-input-block">
+                                              <input type="text" name="hmtTrafficPermitStartDatetime" id="hmtTrafficPermitStartDatetime"
+                                                     autocomplete="off" class="layui-input hmtTrafficPermitStartDatetime">
+                                          </div>
+                                      </div>
+                                      <div class="layui-col-lg4 layui-col-md121">
+                                          <label class="layui-form-label">港澳通行证有效期结束时间</label>
+                                          <div class="layui-input-block">
+                                              <input type="text" name="hmtTrafficPermitEndDatetime" id="hmtTrafficPermitEndDatetime"
+                                                     autocomplete="off" class="layui-input hmtTrafficPermitEndDatetime">
+                                          </div>
+                                      </div>
+                                  </div>
+                                    <div class="layui-col-lg12 layui-col-md121">
+                                        <lable class="layui-form-label">研究兴趣</lable>
+                                        <div class="layui-input-block">
+                                        <textarea type="text" name="researchInterests" id="researchInterests" autocomplete="off"
+                                                  class="layui-textarea researchInterests" placeholder="输入内容"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg12 layui-col-md121">
+                                        <lable class="layui-form-label">个人简介</lable>
+                                        <div class="layui-input-block">
+                                        <textarea type="text" name="resume" id="resume" autocomplete="off"
+                                                  class="layui-textarea resume"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-lg4 layui-col-md121">
+                                        <label class="layui-form-label">最高学位是否本校获得
+                                            <span style="color:red">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="radio" name="highestDegreeGetFromMatherSchool" class="highestDegreeGetFromMatherSchool" value="1" title="是"
+                                            >
+                                            <input type="radio" name="highestDegreeGetFromMatherSchool" class='highestDegreeGetFromMatherSchool' value="0" title="否">
+                                        </div>
+                                    </div>
+
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="basicInfo">立即提交</button>
+                                        <button type="reset" class="'clearForm" style="display:none "></button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <form class="layui-form detail_item" action="" lay-filter="showBasicInfo">
+                        <div class="layui-row">
+                            <div class="layui-col-lg12">
+                                <div class="layui-card-header" style="background: #fff">基本信息
+                                    <button id="editInfo" class="layui-btn basic" lay-submit lay-filter="showBasicInfo">编辑</button>
+                                    <a class="layui-btn basic" onclick="upload()" style="float: right">导出</a>
+                                </div>
+
+                                <label class="layui-form-label user_head">
+                                    <img src="" id="photo_img"/>
+                                </label>
+                                <div class="user-input-block" id="basicInfoShow">
+                                    <div class="layui-col-lg12">
+                                        <label class="layui-form-label">姓名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="cname" autocomplete="off" class="layui-input"
+                                                   disabled="disabled" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--基本信息结束-->
+        <!--管理员填写部分开始-->
+        <!--人事信息-->
+        <div class="layui-col-md121" id="user_personnel_category_info">
+            <div class="layui-card">
+                <div class="layui-card-header">人事信息</span>
+                   <!-- <button class="layui-btn header_edit">新增</button>-->
+                </div>
+                <div class="layui-card-body">
+                    <!--新增表单-->
+                    <div class="fill_box" id="personnelCategoryAdd">
+                        <form class="layui-form" action="" lay-filter="personnelCategory">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">人事类别</label>
+                                    <div class="layui-input-block">
+                                        <select name="personnelCategory" class="personnelCategory" lay-search>
+                                            <option value=""></option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">聘用时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="startDatetime"
+                                               lay-verify="required" autocomplete="off" class="layui-input startDatetime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="personnelCategory">立即提交</button>
+                                        <button type="reset" class="clearForm" style="display: none">取消</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--编辑表单-->
+                    <div id="edit_personnelCategory" style="display:none;">
+<!--                        <div style="display: none">-->
+<!--                            <input type="text"-->
+<!--                                   id="startDatetime"-->
+<!--                                   autocomplete="off" class="layui-input">-->
+<!--                            <input type="text"-->
+<!--                                   id="endDatetime"-->
+<!--                                   autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+                        <form class="layui-form" action="" lay-filter="personnelCategory">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">人事类别</label>
+                                    <div class="layui-input-block">
+                                        <select class="personnelCategory" name="personnelCategory" id="personnelCategory" lay-search>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">聘用时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="startDatetime" id="startDatetime"
+                                               lay-verify="required" autocomplete="off" class="layui-input startDatetime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4" style="display: none">
+                                    <label class="layui-form-label">ID</label>
+                                    <div class="layui-input-block" id="personnelCategory_uid">
+                                        <input type="text" name="id" id="id" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="personnelCategory">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="layui-hide" id="personnelCategoryInfo" lay-filter="personnelCategory"></table>
+                </div>
+            </div>
+        </div>
+        <!--职称信息-->
+        <div class="layui-col-md121" id="user_position_info">
+            <div class="layui-card">
+                <div class="layui-card-header">职称信息</span>
+                   <!-- <button class="layui-btn header_edit">新增</button>-->
+                </div>
+                <div class="layui-card-body">
+                    <!--新增表单-->
+                    <div class="fill_box" id="postInfoAdd">
+                        <form class="layui-form" action="" lay-filter="postInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">职称</label>
+                                    <div class="layui-input-block">
+                                        <select name="profession" class="profession" lay-search lay-filter="test">
+                                            <option value=""></option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">职别</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="officialRank" id="officialRankAdd"
+                                               autocomplete="off"
+                                               class="layui-input officialRank" readonly>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">职级晋升年月</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="upgradeTime" id="upgradeTime_add"
+                                               lay-verify="required|date" autocomplete="off" class="layui-input upgradeTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">岗位等级</label>
+                                    <div class="layui-input-block">
+                                        <select name="jobRank" class="jobRank" lay-search>
+                                            <option value=""></option>
+<!--                                            <option value="一级">一级</option>-->
+<!--                                            <option value="二级">二级</option>-->
+<!--                                            <option value="三级">三级</option>-->
+<!--                                            <option value="四级">四级</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">岗位类别</label>
+                                    <div class="layui-input-block">
+                                        <select name="jobCategory" class="jobCategory" lay-filter="required" lay-search>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="postInfo">立即提交</button>
+                                        <button type="reset" class="clearForm" style="display: none">取消</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--编辑表单-->
+                    <div id="edit_postInfo" style="display:none;">
+                        <form class="layui-form" action="" lay-filter="postInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">职称</label>
+                                    <div class="layui-input-block">
+                                        <select class="profession" name="profession" id="profession" lay-filter="edit_test" lay-search>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">职别</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="officialRank" id="officialRank"
+                                               lay-verify="required" autocomplete="off"
+                                               class="layui-input officialRank" readonly>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">职级晋升年月</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="upgradeTime" id="upgradeTime"
+                                               lay-verify="required|date" autocomplete="off" class="layui-input upgradeTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">岗位等级</label>
+                                    <div class="layui-input-block">
+                                        <select id="jobRank" name="jobRank" class="jobRank" lay-search>
+                                            <!--<option value=""></option>-->
+<!--                                            <option value="一级">一级</option>-->
+<!--                                            <option value="二级">二级</option>-->
+<!--                                            <option value="三级">三级</option>-->
+<!--                                            <option value="四级">四级</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">岗位类别</label>
+                                    <div class="layui-input-block">
+                                        <select id="jobCategory" name="jobCategory" class='jobCategory'
+                                                lay-filter="required" lay-search>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4" style="display: none">
+                                    <label class="layui-form-label">ID</label>
+                                    <div class="layui-input-block" id="postInfo_uid">
+                                        <input type="text" name="id" id="id" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="postInfo">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="layui-hide" id="postInfo" lay-filter="postInfo"></table>
+                </div>
+            </div>
+        </div>
+        <!--人才信息-->
+        <div class="layui-col-md121" id="user_talent_info">
+            <div class="layui-card">
+                <div class="layui-card-header">人才信息
+                  <!--  <button class="layui-btn header_edit">新增</button>-->
+                </div>
+                <div class="layui-card-body">
+                    <!--新增表单-->
+                    <div class="fill_box" id="talentInfoAdd">
+                        <form class="layui-form" action="" lay-filter="talentInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">人才称号</label>
+                                    <div class="layui-input-block">
+                                        <select class="talent" name="talent" lay-filter="required"
+                                                lay-search>
+                                            <option value=""></option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">称号获批时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="talentTime" id="talentTime_add"
+                                               lay-verify="required" autocomplete="off" class="layui-input talentTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="talentInfo">立即提交</button>
+                                        <button type="reset" class="clearForm" style="display: none"></button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--编辑表单-->
+                    <div id="edit_talentInfo" style="display: none">
+                        <form class="layui-form" action="" lay-filter="talentInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">人才称号</label>
+                                    <div class="layui-input-block">
+                                        <select class="talent" id="talent" name="talent" lay-filter="required"
+                                                lay-search>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">称号获批时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="talentTime" name="talentTime" lay-verify="required"
+                                               autocomplete="off"
+                                               class="layui-input talentTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4" style="display: none">
+                                    <label class="layui-form-label">ID</label>
+                                    <div class="layui-input-block" id="talentInfo_uid">
+                                        <input type="text" name="id" id="id" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="talentInfo">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="layui-hide" id="talentInfo" lay-filter="talentInfo"></table>
+                </div>
+            </div>
+        </div>
+        <!--职务信息-->
+        <div class="layui-col-md121" id="user_administration_info">
+            <div class="layui-card">
+                <div class="layui-card-header">职务信息
+                  <!--  <button class="layui-btn header_edit">新增</button>-->
+                </div>
+                <div class="layui-card-body">
+                    <!--新增表单-->
+                    <div class="fill_box" id="administrationInfoAdd">
+                        <form class="layui-form" action="" lay-filter="administrationInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">行政职务</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="administrationDuty" lay-verify="required"
+                                               autocomplete="off" class="layui-input administrationDuty">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">任职时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="appointmentTime" id="appointmentTime_add"
+                                               lay-verify="required|date" autocomplete="off" class="layui-input appointmentTime">
+                                    </div>
+                                </div>
+<!--                                西北需求隐掉-->
+<!--                                <div class="layui-col-lg12 layui-col-md121">-->
+<!--                                    <lable class="layui-form-label">研究方向</lable>-->
+<!--                                    <div class="layui-input-block">-->
+<!--                                        <textarea type="text" name="researchDirection" autocomplete="off"-->
+<!--                                                  class="layui-textarea researchDirection" placeholder="最多只能输入40个字符" maxlength="40"></textarea>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="administrationInfo">立即提交</button>
+                                        <button type="reset" class="clearForm" style="display: none"></button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--编辑表单-->
+                    <div id="edit_administrationInfo" style="display: none">
+                        <form class="layui-form" action="" lay-filter="administrationInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">行政职务</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="administrationDuty" id="administrationDuty"
+                                               lay-verify="required" autocomplete="off" class="layui-input administrationDuty">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">任职时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="appointmentTime" id="appointmentTime"
+                                               lay-verify="required|date" autocomplete="off" class="layui-input appointmentTime">
+                                    </div>
+                                </div>
+<!--                                西北需求隐掉-->
+                                <!--<div class="layui-col-lg12 layui-col-md121">
+                                    <lable class="layui-form-label">研究方向</lable>
+                                    <div class="layui-input-block">
+                                        <textarea type="text" name="researchDirection" id="researchDirection" autocomplete="off"
+                                                  class="layui-textarea researchDirection" placeholder="最多只能输入40个字符" maxlength="40"></textarea>
+                                    </div>
+                                </div>-->
+                                <div class="layui-col-lg4" style="display: none">
+                                    <label class="layui-form-label">ID</label>
+                                    <div class="layui-input-block" id="administrationInfo_uid">
+                                        <input type="text" name="id" id="id" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="administrationInfo">立即提交
+                                        </button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="layui-hide" id="administrationInfo" lay-filter="administrationInfo"></table>
+                </div>
+            </div>
+        </div>
+        <!--导师信息-->
+        <div class="layui-col-md121" id="user_tutor_info">
+            <div class="layui-card">
+                <div class="layui-card-header">导师信息
+                   <!-- <button class="layui-btn header_edit">新增</button>-->
+                </div>
+                <div class="layui-card-body">
+                    <!--新增表单-->
+                    <div class="fill_box" id="tutorInfoAdd">
+                        <form class="layui-form" action="" lay-filter="tutorInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">导师类别</label>
+                                    <div class="layui-input-block">
+                                        <select class="tutorCategory" name="tutorCategory" lay-filter="required"
+                                                lay-search>
+                                            <option value=""></option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">获批时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="receiveApprovalTime" id="approvalTime_add"
+                                               lay-verify="required|date" autocomplete="off" class="layui-input receiveApprovalTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">专硕导师</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="professionalTutor" class="professionalTutor" value="1" title="是">
+                                        <input type="radio" name="professionalTutor" class="professionalTutor" value="0" title="否" checked>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="tutorInfo">立即提交</button>
+                                        <button type="reset" class="clearForm" style="display: none"></button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--编辑表单-->
+                    <div id="edit_tutorInfo" style="display: none">
+                        <form class="layui-form" action="" lay-filter="tutorInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">导师类别</label>
+                                    <div class="layui-input-block">
+                                        <select class="tutorCategory" name="tutorCategory" id="tutorCategory"
+                                                lay-filter="required" lay-search>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">获批时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="receiveApprovalTime" id="receiveApprovalTime"
+                                               lay-verify="required|date" autocomplete="off" class="layui-input receiveApprovalTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">专硕导师</label>
+                                    <div class="layui-input-block" id="professionalTutor">
+                                        <input type="radio" name="professionalTutor" class='professionalTutor' value="1" title="是">
+                                        <input type="radio" name="professionalTutor" class='professionalTutor' value="0" title="否" checked>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 " style="display: none">
+                                    <label class="layui-form-label">ID</label>
+                                    <div class="layui-input-block" id="tutorInfo_uid">
+                                        <input type="text" name="id" id="id" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="tutorInfo">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="layui-hide" id="tutorInfo" lay-filter="tutorInfo"></table>
+                </div>
+            </div>
+        </div>
+        <!--学术信息-->
+        <div class="layui-col-md121" id="user_academic_info">
+            <div class="layui-card">
+                <div class="layui-card-header">学术兼职
+                    <button class="layui-btn header_edit">新增</button>
+                </div>
+                <div class="layui-card-body">
+                    <!--新增表单-->
+                    <div class="fill_box" id="academicInfoAdd">
+                        <form class="layui-form" action="" lay-filter="academicInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">任职时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="academicAppointmentTime"
+                                               id="academicAppointmentTime_add" lay-verify="required"
+                                               autocomplete="off" class="layui-input academicAppointmentTime">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">国家</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="country" lay-verify="required"
+                                               autocomplete="off" class="layui-input country">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">院校</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="institution" lay-verify="required"
+                                               autocomplete="off" class="layui-input institution">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">专业</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="major" lay-verify="required"
+                                               autocomplete="off" class="layui-input major">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">学术兼职</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="academicParttime" lay-verify="required" placeholder="请输入内容"
+                                                  class="layui-textarea academicParttime"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="academicInfo">立即提交</button>
+                                        <button type="reset" class="clearForm" style="display: none"></button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--编辑表单-->
+                    <div id="edit_academicInfo" style="display: none">
+                        <div style="display: none">
+                            <input type="text"
+                                   id="startTime"
+                                   autocomplete="off" class="layui-input">
+                            <input type="text"
+                                   id="endTime"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                        <form class="layui-form" action="" lay-filter="academicInfo">
+                            <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">任职时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="academicAppointmentTime"
+                                               id="academicAppointmentTime" lay-verify="required" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">国家</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="country" id="country" lay-verify="required"
+                                               autocomplete="off" class="layui-input country">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">院校</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="institution" id="institution" lay-verify="required"
+                                               autocomplete="off" class="layui-input institution">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4 layui-col-md121">
+                                    <label class="layui-form-label">专业</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="major" id="major" lay-verify="required"
+                                               autocomplete="off" class="layui-input major">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 layui-col-md121">
+                                    <label class="layui-form-label">学术兼职</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="academicParttime" id="academicParttime" lay-verify="required"
+                                                  placeholder="请输入内容"
+                                                  class="layui-textarea academicParttime"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4" style="display: none">
+                                    <label class="layui-form-label">ID</label>
+                                    <div class="layui-input-block" id="academicInfo_uid">
+                                        <input type="text" name="id" id="id" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="academicInfo">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="layui-hide" id="academicInfo" lay-filter="academicInfo"></table>
+                </div>
+            </div>
+        </div>
+        <!--个人主页-->
+        <div class="layui-col-md121">
+            <div class="layui-card">
+                <div class="layui-card-header">个人主页</div>
+                <div class="layui-card-body">
+                    <form class="layui-form" action="" lay-filter="component-form-group">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <a href="https://www.baidu.com/" class="layui-btn layui-btn-normal" target="_blank">进入个人主页</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--管理员填写部分结束-->
+    </div>
+</div>
+<div id="resource-container"></div>
+`
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+        index:'lib/index'
+    }).use(['index','configcenter/process/personalInfo'])
+</script>
+
+<script type="text/html" id="edit1">
+    <a data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="edit2">
+    <a data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="edit3">
+    <a data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="edit4">
+    <a data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="edit5">
+    <a d data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="edit6">
+    <a d data-type="auto" class="layui-btn table_edit" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    function checktheform() {
+        if(isCardNo(card) === false)
+        {
+            alert('您输入的身份证号码不正确，请重新输入');
+            $('.idNo').focus;
+            return false;
+        }
+    }
+    function isCardNo(card) {
+//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+        var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;
+        if(reg.test(card) === false)
+        {
+            return false;
+        }
+        return true;
+    };
+</script>
+</body>
+
+</html>

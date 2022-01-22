@@ -1,0 +1,223 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+.layui-table-cell {
+    height: auto;
+}
+
+.layui-table tbody tr:hover,
+.layui-table-click,
+.layui-table-hover {
+    background: transparent;
+}
+
+.layui-form-label {
+    box-sizing: border-box;
+    width: 79px;
+    padding-left: 0;
+}
+
+.layui-input-block {
+    margin-left: 79px;
+}
+.layui-btn-radius{
+    height: 22px;
+    line-height: 25px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+.video_box img,video{
+    width: 100%;
+    height: 100%;
+}
+.video_select {
+    border: 2px solid #1E9FFF;
+}
+.detail_item {
+    padding: 0;
+}
+.layui-layer-tips {
+    word-wrap: break-word;
+}
+.video-js {
+    width: 100%;
+    height: 100%;
+}
+.score_top {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    z-index: 998;
+    background-color: white;
+}
+.score_card{
+    /*border: 1px solid #e3e9ef;*/
+    width: 37.3%;
+    font-size: 25px;
+    font-weight: bold;
+    position: fixed;
+    background-color: white;
+    height: 48px;
+    z-index: 999;
+}
+#hideVideo {
+    display: none;
+}
+.grid {
+    padding-top: 7%;
+}
+#total_deduct,#total_score {
+    color: #409eff;
+}
+.layui-text-content {
+    position: relative;
+}
+.layui-text-center:after {
+    border: solid .1em red;
+    border-radius: .2em;
+    color: red;
+    content: '\2714';
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1;
+    opacity: 0;
+    position: absolute;
+    padding: .1em .5em;
+    margin: 0 auto;
+    top: 0;
+    left: 55%;
+    text-transform: uppercase;
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: rotate(-2deg) scale(5);
+    transition: all .3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    z-index: -1;
+}
+.loaded:after {
+    opacity: .1;
+    transform: rotate(-15deg) scale(1);
+    z-index: 1;
+}
+.addition {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #409eff;
+    top: 33%;
+    /*left: 6%;*/
+    right: 66px!important;
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    -webkit-transition: 0.4s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+    transition: 0.4s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+}
+.addition:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 2px;
+    width: 50%;
+    background: white;
+}
+.addition:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 2px;
+    background: white;
+}
+.subtraction {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff0000;
+    top: 33%;
+    /*left: 1%;*/
+    right: 166px!important;
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    -webkit-transition: 0.4s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+    transition: 0.4s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+}
+.subtraction:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 2px;
+    width: 50%;
+    background: white;
+}
+.deduct_now_score {
+    border: none;
+    position: absolute;
+    right: 100px;
+    width: 65px;
+    top: -4px;
+    text-align: center;
+}
+.default_now_score {
+    /*border: none;*/
+    position: absolute;
+    right: 100px;
+    /*width: 65px;*/
+    top: -4px;
+    text-align: center;
+}
+.grid {
+    padding-top: 7%;
+}
+#startreview {
+    height: 100%;
+    width: 100%;
+}
+@media only screen and (max-width: 1024px) {
+    .control_left {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+
+    }
+    .score_card{
+        /*border: 1px solid #e3e9ef;*/
+        width: 100%;
+    }
+    #hideVideo {
+        display: inline;
+    }
+}
+@media screen and (max-width: 768px) {
+
+}
+/* 设备横屏时调用该段css代码 */
+@media all and (orientation : landscape) {
+    /*横屏样式*/
+    .control_right {
+        padding: 0!important;
+    }
+}
+/* 设备竖屏时调用该段css代码 */
+@media all and (orientation : portrait){
+
+}

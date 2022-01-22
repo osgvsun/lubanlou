@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/openReservation/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: 176px;
+        }
+
+        .layui-input-block {
+            margin-left: 176px;
+        }
+    </style>
+
+</head>
+
+<body>
+<input type="hidden" th:value="${configType}">
+<div class="main_content_box" id="app">
+    <!--主体开始-->
+    <div class="full_box">
+        <form class="layui-form lesson_card" action="" lay-filter="equipmenttimebookingbox"
+              id="equipmenttimebookingbox">
+            <div class="main_content">
+                <blockquote class="layui-elem-quote layui-quote-nm tag_box">
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>
+                            <span></span>
+                            <div class="li_cell_box">
+                                <div class="li_cell"><i class="layui-icon layui-icon-console"></i></div>
+                                <div class="li_cell"><i class="layui-icon layui-icon-component"></i></div>
+                                <div class="li_cell"><i class="layui-icon layui-icon-user"></i></div>
+                            </div>
+                        </legend>
+                        <span class="layui-breadcrumb breadcrumb_top" lay-separator="|">
+							<a th:href="@{/openReservation/openMain}" th:name="@{/openReservation/openMain}" target="i" class="breadcrumb_btn">返回实验室列表</a>
+							</span>
+                    </fieldset>
+                    <div class="field_btn_box layui-col-lg9">
+                        <a th:href="@{/openReservation/equipmentReserve(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/equipmentReserve(configType=${configType},labRoomId=${labRoomId})}"
+                           target="i">预约设置</a>
+                        <a th:href="@{/openReservation/equipmentAdmittanceMode(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/equipmentAdmittanceMode(configType=${configType},labRoomId=${labRoomId})}"
+                           target="i">准入设置</a>
+                        <a th:href="@{/openReservation/equipmentTimeBooking(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/equipmentTimeBooking(configType=${configType},labRoomId=${labRoomId})}"
+                           target="i" class="field_btn_select">机时预约</a>
+                        <a th:href="@{/openReservation/authorizationList(configType=${configType},labRoomId=${labRoomId})}"
+                           th:name="@{/openReservation/authorizationList(configType=${configType},labRoomId=${labRoomId})}"
+                           target="i">准入名单</a>
+                    </div>
+                    <div class="layui-col-lg3">
+                        <select name="template" lay-search="" lay-filter="template">
+                            <option value="">请选择模板</option>
+                        </select>
+                    </div>
+                    <div class="clearboth"></div>
+                </blockquote>
+                <!--基础设置开始-->
+                <div id="info_box" class="layui-card">
+                    <div class="layui-card-header">基础设置</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10 short90_input">
+<!--                                <div class="layui-col-lg4">-->
+<!--                                    <label class="layui-form-label">最少提前预约时间：</label>-->
+<!--                                    <div class="layui-input-block">-->
+<!--                                        <div class="layui-inline">-->
+<!--                                            <input class="layui-input" type="number" name="minAheadHour" autocomplete="on" lay-verify="required" placeholder="请输入">-->
+<!--                                        </div>-->
+<!--                                        小时-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="layui-col-lg4">-->
+<!--                                    <label class="layui-form-label">最大提前预约时间：</label>-->
+<!--                                    <div class="layui-input-block">-->
+<!--                                        <div class="layui-inline">-->
+<!--                                            <input class="layui-input" type="number" name="maxAheadHour" autocomplete="on" lay-verify="required" placeholder="请输入">-->
+<!--                                        </div>-->
+<!--                                        小时-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">审核最少提前时间：</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="minAheadByTutor" autocomplete="on" lay-verify="required" placeholder="请输入">
+                                        </div>
+                                        小时
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">预约最小时间段：</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="minInterval" autocomplete="on" lay-verify="required" placeholder="请输入">
+                                        </div>
+                                        小时
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">预约最长时间段：</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="maxInterval" autocomplete="on" lay-verify="required" placeholder="请输入">
+                                        </div>
+                                        小时
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">预约时间块单位：</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="timeLineInterval" autocomplete="on" lay-verify="required" placeholder="请输入">
+                                        </div>
+                                        小时
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg4">
+                                    <label class="layui-form-label">是否允许跨天预约：</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="isAcrossDay" value="1" title="是" checked="">
+                                        <input type="radio" name="isAcrossDay" value="0" title="否">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">延时(后续无预约)：</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="isDelay" value="1" title="是"
+                                               lay-filter="delaytimetwo">
+                                        <input type="radio" name="isDelay" value="0" title="否"
+                                               lay-filter="delaytimetwo" checked="">
+                                        <font class="font_grey relative_top2">（预约时间到，后续无预约，根据时间延时。）</font>
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 delaytimetwo_box hide">
+                                    <label class="layui-form-label">延时设置：</label>
+                                    <div class="layui-input-block">
+                                        在后续
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="minDelayAhead" autocomplete="on"
+                                                   lay-verify="required" placeholder="请输入"/>
+                                        </div>
+                                        分钟内无预约，最长可延时
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="maxDelay" autocomplete="on" lay-verify="required" placeholder="请输入">
+                                        </div>
+                                        分钟。
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">可以取消预约：</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="isCancel" value="1" title="是"
+                                               lay-filter="cancelbooking">
+                                        <input type="radio" name="isCancel" value="0" title="否"
+                                               lay-filter="cancelbooking" checked="">
+                                    </div>
+                                </div>
+                                <div class="layui-col-lg12 cancelbooking_box hide">
+                                    <label class="layui-form-label">取消预约设置：</label>
+                                    <div class="layui-input-block">
+                                        在预约时间前
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="aheadCancel" autocomplete="on" lay-verify="required" placeholder="请输入">
+                                        </div>
+                                        小时，可取消
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="timesCancel" autocomplete="on" lay-verify="required" placeholder="请输入">
+                                        </div>
+                                        次/
+                                        <div class="layui-inline">
+                                            <select name="countPerTime" lay-search="" lay-verify="required">
+                                                <option value="">请选择</option>
+                                                <option value="WEEK">周</option>
+                                                <option value="MONTH">月</option>
+                                                <option value="YEAR">年</option>
+                                            </select>
+                                        </div>
+                                        。如超出，每次扣除信誉积分
+                                        <div class="layui-inline">
+                                            <input class="layui-input" type="number" name="deductCreditScore"
+                                                   autocomplete="on" lay-verify="required" placeholder="请输入"/>
+                                        </div>
+                                        分。
+                                        <font class="font_grey relative_top2">（注：一旦开始审核则不允许取消。）</font>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--基础设置结束-->
+                <!--审核设置开始-->
+                <div id="examine_box" class="layui-card">
+                    <div class="layui-card-header">审核设置</div>
+                    <div class="layui-card-body">
+                        <div class="fill_box">
+                            <div class="layui-row layui-col-space10 short90_input">
+                                <div class="layui-col-lg12">
+                                    <label class="layui-form-label">审核层级一致：</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="examinelevelconsistent" value="true" title="是" lay-filter="changeStatus" v-model="auditList.isAuditUnanimous">
+                                        <input type="radio" name="examinelevelconsistent" value="false" title="否" lay-filter="changeStatus" v-model="auditList.isAuditUnanimous">
+                                        <font class="font_grey relative_top2">（此实验室对院外学院/学部开放，院内、院外审核层级是否一致。）</font>
+                                    </div>
+                                </div>
+                                <template v-for="(item, key) in auditList.auditConfigVOList">
+                                    <div class="layui-col-lg12"  >
+                                        <label class="layui-form-label">{{item.auditTypeName}}层级：</label>
+                                        <div class="layui-input-block">
+                                            <div class="layui-inline">
+                                                <select name="collegeinside" lay-search="" lay-filter="collegeinside" v-model="item.auditLevelSum" :data="key">
+                                                    <option value="0">请选择</option>
+                                                    <option value="1">一级</option>
+                                                    <option value="2">二级</option>
+                                                    <option value="3">三级</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="layui-inline short130_input" v-for="(itemAuditLevel, i) in item.auditLevelSum">
+                                                <div class="layui-inline space20_l collegefirstexamine_box" >
+                                                    {{conversion(itemAuditLevel)}}级审核:
+                                                    <div class="layui-inline">
+                                                        <template v-if="flag">
+                                                            <select name="collegefirstexamine" lay-search="" :data="key + ',' + itemAuditLevel" v-model="item.auditLevelVOList[i].auditLevel" lay-filter="collegefirstexamine">
+                                                                <option value="">请选择</option>
+                                                                <option v-for="items in listLevel" :value="items.value" >{{items.name}}</option>
+                                                            </select>
+                                                        </template>
+                                                        <template v-else>
+                                                            <select name="collegefirstexamine" lay-search="" :data="key + ',' + itemAuditLevel" lay-filter="collegefirstexamine">
+                                                                <option value="">请选择</option>
+                                                                <option v-for="items in listLevel" :value="items.value" >{{items.name}}</option>
+                                                            </select>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-col-lg12" >
+                                        <label class="layui-form-label">{{item.auditTypeName}}方式：</label>
+                                        <div class="layui-input-block">
+                                             <input type="radio" :name="'collegeexaminetype' + item.auditConfigId" :data="key" value="true" title="并行审核" lay-filter="changeStatusAudit" v-model="auditList.auditConfigVOList[key].isParallelAudit"
+                                                     checked="">
+                                              <input type="radio" :name="'collegeexaminetype' + item.auditConfigId" :data="key" value="false" title="顺序审核" lay-filter="changeStatusAudit" v-model="auditList.auditConfigVOList[key].isParallelAudit">
+                                        </div>
+                                    </div>
+                                </template>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--审核设置结束-->
+                <!--开放时间设置开始-->
+                <div id="opentime_box" class="layui-card">
+                    <div class="layui-card-header">开放时间设置
+                        <label class="layui-icon layui-icon-add-1 newopentime header_btn" data-method="newopentime"
+                               lay-tips="新增开放时间设置"></label>
+<!--                        <label class="layui-icon layui-icon-star-fill opentimetemplate header_btn"-->
+<!--                               data-method="opentimetemplate" lay-tips="从模板处添加">从模板处添加</label>-->
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="layui-row layui-col-space10">
+                            <!--搜索开始-->
+<!--                            <div class="layui-col-md12 search_line">-->
+<!--                                <div class="layui-inline">-->
+<!--                                    <input class="layui-input" name="opentimesearchid" id="opentimesearchbox"-->
+<!--                                           autocomplete="on" placeholder="请输入搜索内容"/>-->
+<!--                                </div>-->
+<!--                                <input type="button" class="layui-btn opentimesearch" data-type="reload" value="搜索"/>-->
+<!--                                <input type="reset" class="layui-btn layui-btn-primary" value="取消">-->
+<!--                            </div>-->
+                            <!--搜索结束-->
+                            <div class="layui-col-md12">
+                                <!--表单开始-->
+                                <table class="layui-hide" id="opentime" lay-filter="opentime"></table>
+                                <script type="text/html" id="opentimetoolbar">
+                                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                </script>
+                                <!--表单结束-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--开放时间设置结束-->
+                <!--不可预约时间设置开始-->
+                <div id="nobooking_box" class="layui-card">
+                    <div class="layui-card-header">不可预约时间设置
+                        <label class="layui-icon layui-icon-add-1 newnobooking header_btn" data-method="newnobooking"
+                               lay-tips="新增不可预约时间设置"></label>
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="layui-row layui-col-space10">
+                            <!--搜索开始-->
+<!--                            <div class="layui-col-md12 search_line">-->
+<!--                                <div class="layui-inline">-->
+<!--                                    <input class="layui-input" name="nobookingsearchid" id="nobookingsearchbox"-->
+<!--                                           autocomplete="on" placeholder="请输入搜索内容"/>-->
+<!--                                </div>-->
+<!--                                <input type="button" class="layui-btn nobookingsearch" data-type="reload" value="搜索"/>-->
+<!--                                <input type="reset" class="layui-btn layui-btn-primary" value="取消">-->
+<!--                            </div>-->
+                            <!--搜索结束-->
+                            <div class="layui-col-md12">
+                                <!--表单开始-->
+                                <table class="layui-hide" id="nobooking" lay-filter="nobooking"></table>
+                                <script type="text/html" id="nobookingtoolbar">
+                                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                </script>
+                                <!--表单结束-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--不可预约时间设置结束-->
+                <!--其他内容字段设置开始-->
+                <div id="otherfield_box" class="layui-card">
+                    <div class="layui-card-header">其他内容字段设置
+                        <label class="layui-icon layui-icon-add-1 newotherfield header_btn" data-method="newotherfield"
+                               lay-tips="新增不可预约时间设置"></label>
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="layui-row layui-col-space10">
+                            <!--搜索开始-->
+<!--                            <div class="layui-col-md12 search_line">-->
+<!--                                <div class="layui-inline">-->
+<!--                                    <input class="layui-input" name="otherfieldsearchid" id="otherfieldsearchbox"-->
+<!--                                           autocomplete="on" placeholder="请输入搜索内容"/>-->
+<!--                                </div>-->
+<!--                                <input type="button" class="layui-btn otherfieldsearch" data-type="reload" value="搜索"/>-->
+<!--                                <input type="reset" class="layui-btn layui-btn-primary" value="取消">-->
+<!--                            </div>-->
+                            <!--搜索结束-->
+                            <div class="layui-col-md12">
+                                <!--表单开始-->
+                                <table class="layui-hide" id="othercontent" lay-filter="othercontent"></table>
+                                <script type="text/html" id="otherfieldtoolbar">
+<!--                                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                </script>
+                                <!--表单结束-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--其他内容字段设置结束-->
+            </div>
+            <div class="step_bottom">
+                <input type="button" lay-filter="equipmenttimebookingbtn" id="equipmenttimebookingbtn" class="layui-btn"
+                       lay-submit="" value="保存">
+                <input type="button" lay-filter="saveastimetemplate" class="layui-btn layui-btn-warm saveastimetemplate"
+                       data-method="saveastimetemplate" value="另存为模板">
+            </div>
+        </form>
+    </div>
+    <!--主体结束-->
+</div>
+<!--右侧栏开始-->
+<div class="quick_line blueside_quick_line">
+    <a href="#info_box">基础<br/>设置</a>
+    <a href="#examine_box">审核<br/>设置</a>
+    <a href="#opentime_box">开放<br/>时间</a>
+    <a href="#nobooking_box">不可<br/>预约</a>
+    <a href="#otherfield_box">其他<br/>字段</a>
+    <div class="top layui-icon layui-icon-top"></div>
+</div>
+<!--右侧栏结束-->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/global.js}"></script>
+<script th:src="@{/modules/openReservation/static/js/vue.min.js}"></script>
+<script th:src="@{/js/cookie.js}"></script>
+<script th:inline="javascript">
+    const deviceHost = [[${deviceHost}]];
+    const auditserverHost = [[${auditserverHost}]];
+    const uid = [[${labRoomId}]];
+    const configType = [[${configType}]];
+</script>
+<script th:src="@{/modules/openReservation/equipmentTimeBooking.js}"></script>
+</body>
+</html>​​​

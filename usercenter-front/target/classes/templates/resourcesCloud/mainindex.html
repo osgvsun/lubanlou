@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resources Cloud</title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/icons/Arcade_Daze_Win/Invader_1.ico}"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.cookie.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/url/url.min.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/resourcesCloud/static/css/expand.css}" media="all">
+    <!--资源容器-->
+    <script type="text/javascript"
+            th:src="@{${session.resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <link rel="stylesheet" th:href="@{${session.resourceContainerHost} + '/shareApi/resourceContainer.css'}"
+          media="all">
+    <!--值获取-->
+    <script th:inline="javascript">
+        var userCenterHost = [[${session.userCenterHost}]];
+        window.currentUsername = [[${session.user.username}]];
+        var encryptUsername = [[${session.encryptUsername}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var dataSource = [[${session.dataSource}]];
+        var oauth2 = [[${session.oauth2}]];
+        var user = [[${session.user}]];
+        window.resourceContainerHost = [[${session.resourceContainerHost}]];
+        var serverHostArray = document.location.href.split('/');
+        var serverHost = serverHostArray[0] + "//" + serverHostArray[2] + "/" + serverHostArray[3] + "/";
+        // 资源容器init
+        resourceContainer.initResourceContainer({
+            oauth2Host: oauth2,
+            siteName: "文件系统",
+            username: currentUsername
+        });
+    </script>
+    <style>
+        .po_btn_disabled {
+            pointer-events: none;
+            color: #D3D3D3 !important;
+        }
+
+        .po_btn_disabled * {
+            color: #D3D3D3 !important;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+<div class="main_content_box">
+    <div class="head_box">
+        <!--头部左侧目录开始-->
+        <!--<img class="head_logo" th:src="@{/modules/resourcesCloud/static/images/logo.png}"/>-->
+        <div class="head_logo">Resources Cloud</div>
+        <!--头部左侧目录结束-->
+        <!--头部右侧工具栏开始-->
+        <div class="head_tool">
+            <a href="messageList" name="messageList" target="i" lay-tips="查看消息">消息
+                <!--有新消息时red_dot出现，没有则不出现-->
+                <font class="red_dot"></font>
+            </a>
+            <a href="transmissionList" name="transmissionList" target="i" lay-tips="查看传输列表">传输列表
+                <!--有文件正在传输时red_dot出现，没有则不出现-->
+                <font class="red_dot"></font>
+            </a>
+            <!--未登录时head_info不出现，登录按钮出现-->
+            <!--<a href="#">登录</a>-->
+            <div class="head_info user_info">
+                <div class="head_tit">
+                    <img th:src="@{/modules/resourcesCloud/static/images/user_head.jpg}"/>
+                    <label><!--用户名--></label>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+                <div class="user_detail">
+                    <div class="ud_pointer"></div>
+                    <div class="ud_top">
+                        <img th:src="@{/modules/resourcesCloud/static/images/user_head.jpg}"/>
+                        <div class="ud_info">
+                            <div><!--用户名--></div>
+                            <div><!--身份信息--></div>
+                        </div>
+                    </div>
+                    <div class="operation_mid">
+                        <a href="#" class="switchpermissions" data-method="switchpermissions">切换权限</a>
+                    </div>
+                    <a class="ud_logout" href="#" target="_parent" onclick="resourcesCloudLogout()">退出登录</a>
+                </div>
+            </div>
+        </div>
+        <!--头部右侧工具栏结束-->
+    </div>
+    <div class="main_box">
+        <!--左侧栏开始-->
+        <div class="main_tit">
+            <!--左侧栏消息列表(与头部消息为同一栏目)，释放可正常使用，选中效果为在mt_box_tit标签后添加mt_select-->
+            <!--<div class="mt_box">
+                <a class="mt_box_tit main_mt_box mt_select" href="messageList" name="messageList" target="i">
+                    <i class="fa fa-commenting-o"></i>
+                    <div class="mt_tit_text">消息</div>
+                    <font class="red_hint">8</font>
+                </a>
+            </div>-->
+            <!--<div class="mt_box">
+                <div class="mt_box_tit">
+                    <i class="fa fa-angle-down"></i>
+                    <div class="mt_tit_text">完整表单演示</div>
+                </div>
+                <div class="sub_mt_box">
+                    <div class="mt_box">
+                        <a class="mt_box_tit">
+                            <i class="fa fa-angle-down"></i>
+                            <div class="mt_tit_text">二级表单</div>
+                        </a>
+                        <div class="sub_mt_box">
+                            <div class="mt_box">
+                                <a class="mt_box_tit" href="messageList" name="messageList" target="i">
+                                    <i class="fa fa-angle-down"></i>
+                                    <div class="mt_tit_text">三级表单</div>
+                                </a>
+                            </div>
+                            <div class="mt_box">
+                                <a class="mt_box_tit" href="messageList" name="messageList" target="i">
+                                    <i class="fa fa-angle-down"></i>
+                                    <div class="mt_tit_text">三级表单</div>
+                                </a>
+                            </div>
+                            <div class="mt_box">
+                                <a class="mt_box_tit" href="messageList" name="messageList" target="i">
+                                    <i class="fa fa-angle-down"></i>
+                                    <div class="mt_tit_text">三级表单</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt_box">
+                        <a class="mt_box_tit" href="messageList" name="messageList" target="i">
+                            <i class="fa fa-angle-down"></i>
+                            <div class="mt_tit_text">二级表单</div>
+                        </a>
+                    </div>
+                    <div class="mt_box">
+                        <a class="mt_box_tit" href="messageList" name="messageList" target="i">
+                            <i class="fa fa-angle-down"></i>
+                            <div class="mt_tit_text">二级表单</div>
+                        </a>
+                    </div>
+                </div>
+            </div>-->
+            <div class="mt_box">
+                <a class="mt_box_tit" href="fileList" name="fileList" target="i" data-folderType="0">
+                    <i class="fa fa-angle-down"></i>
+                    <div class="mt_tit_text">我的文件夹</div>
+                </a>
+            </div>
+            <div class="mt_box">
+                <a class="mt_box_tit" href="tabList" name="tabList" target="i">
+                    <i class="fa fa-angle-down" style="visibility:hidden;"></i>
+                    <div class="mt_tit_text">表单</div>
+                </a>
+            </div>
+            <div class="mt_box">
+                <a class="mt_box_tit" href="imageList" name="imageList" target="i">
+                    <i class="fa fa-angle-down" style="visibility:hidden;"></i>
+                    <div class="mt_tit_text">图片</div>
+                </a>
+            </div>
+            <div class="mt_box">
+                <a class="mt_box_tit" href="documentList" name="documentList" target="i">
+                    <i class="fa fa-angle-down" style="visibility:hidden;"></i>
+                    <div class="mt_tit_text">文档</div>
+                </a>
+            </div>
+            <div class="mt_box">
+                <a class="mt_box_tit" href="fileList?folderType=1" name="fileList?folderType=1" data-folderType="1"
+                   target="i">
+                    <i class="fa fa-angle-down"></i>
+                    <div class="mt_tit_text">共享文件夹</div>
+                </a>
+            </div>
+            <div class="mt_box">
+                <a class="mt_box_tit" href="fileList?folderType=2" name="fileList?folderType=2" data-folderType="2"
+                   target="i">
+                    <i class="fa fa-angle-down"></i>
+                    <div class="mt_tit_text">部门文件夹</div>
+                </a>
+            </div>
+            <div class="mt_box">
+                <a class="mt_box_tit" href="fileList?folderType=3" name="fileList?folderType=3" data-folderType="3"
+                   target="i">
+                    <i class="fa fa-angle-down"></i>
+                    <div class="mt_tit_text">企业/学校文库</div>
+                </a>
+            </div>
+        </div>
+        <!--左侧栏结束-->
+        <!--主体开始-->
+        <div class="page_content full_screen">
+            <!--工具栏开始-->
+            <div class="page_operation">
+                <label class="fa fa-upload uploadfiles po_btn" data-method="uploadfiles">上传</label>
+                <label class="fa fa-download downloadfiles po_btn po_btn_disabled"
+                       data-method="downloadfiles">下载</label>
+                <div class="head_info basic_head_info po_btn_disabled">
+                    <div class="head_tit" style="transition:all 0.3s;">
+                        <label class="fa fa-share-alt">分享</label>
+                    </div>
+                    <div class="user_detail">
+                        <div class="ud_pointer"></div>
+                        <div class="operation_mid">
+                            <a class="fa fa-plus-circle sharewithvarious" data-method="sharewithvarious">创建分享</a>
+                            <a class="fa fa-link sharelink" data-method="sharelink">链接分享</a>
+                            <a class="fa fa-qrcode shareqrcode" data-method="shareqrcode">二维码分享</a>
+                        </div>
+                    </div>
+                </div>
+                <!--分隔符分隔一个模块-->
+                <span class="page_operation_separate"></span>
+                <!--<label class="fa fa-eye previewfiles po_btn" data-method="previewfiles">预览</label>-->
+                <!--<label class="fa fa-edit editfiles po_btn po_btn_disabled" data-method="editfiles">编辑</label>-->
+                <label class="fa fa-trash deletefiles po_btn po_btn_disabled" data-method="deletefiles">删除</label>
+                <label class="fa fa-clone copyfiles po_btn po_btn_disabled" data-method="copyfiles">复制</label>
+                <label class="fa fa-hand-stop-o movefiles po_btn po_btn_disabled" data-method="movefiles">移动到</label>
+                <!--分隔符分隔一个模块-->
+                <span class="page_operation_separate"></span>
+                <label class="fa fa-folder-o newfolder po_btn" data-method="newfolder">新建文件夹</label>
+                <span class="page_operation_separate"></span>
+                <label class="fa fa-refresh refresh po_btn" data-method="refresh" title="刷新当前目录">刷新</label>
+                <label class="fa fa-th-list listMode po_btn" data-method="listMode" style="float:right;"
+                       title="切换到列表模式"></label>
+                <!--<label class="fa fa-th thumbnailMode po_btn" data-method="thumbnailMode" style="float:right;" title="切换到缩略图模式"></label>-->
+            </div>
+            <!--工具栏结束-->
+            <!--地址栏开始-->
+            <div class="sub_tit">
+                <div class="search_mix fr">
+                    <input type="text" placeholder="请输入搜索关键字"/>
+                    <a class="fa fa-search" href="documentList" name="documentList" target="i"
+                       title="开始搜索"></a>
+                </div>
+                <div class="page_content_catalog fa fa-home">
+                    <!--<label class="sub_tit_box">
+                        <a href="fileList" name="fileList" target="i">我的文件夹</a>
+                    </label>-->
+                    <!--<label class="sub_tit_box">
+                        <a href="fileList" name="fileList" target="i">二级文件夹</a>
+                    </label>-->
+                </div>
+            </div>
+            <!--地址栏结束-->
+            <!--页面开始-->
+            <iframe id="iframe" src="" name="i"></iframe>
+            <!--页面结束-->
+        </div>
+        <!--主体结束-->
+    </div>
+</div>
+<script th:src="@{/modules/resourcesCloud/static/js/global.js}"></script>
+<script th:src="@{/modules/resourcesCloud/static/js/mainindex.js}"></script>
+<script th:src="@{/modules/resourcesCloud/static/js/breadCrumbs.js}"></script>
+<script crossorigin="anonymous"
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        src="//lib.baomitu.com/moment.js/2.29.1/moment.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha512-j83eLbbs+KVKlv8KI6i2lWPlLGY1nltBDnWXIMedQYYjhd5sfifdJB6f2Wxdli5mfrNqRbESVpqSXDHhzMREGw=="
+        src="//lib.baomitu.com/moment.js/2.29.1/locale/zh-cn.min.js"></script>
+<script th:src="@{/modules/resourcesCloud/static/js/fileView.js}"></script>
+<script>
+    moment.locale('zh-cn');
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'resourcesCloud/mainindex']);
+</script>
+</body>
+
+</html>

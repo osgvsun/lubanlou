@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>1.8</java.version>
+		<release.version>1.0.0-SNAPSHOT</release.version>
+		<!-- 标签线 -->
+		<tag.version>beta</tag.version>
+	</properties>
+
+	<artifactId>lubanlou-provider-auditserver</artifactId>
+	<version>${release.version}</version>
+
+	<parent>
+		<groupId>net.gvsun.lubanlou.provider</groupId>
+		<artifactId>lubanlou-provider</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.cwbase</groupId>
+			<artifactId>logback-redis-appender</artifactId>
+			<version>1.1.7-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>janino</artifactId>
+			<version>3.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-generator</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.30</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+			</plugin>
+			<!-- 谷歌·jib 镜像打包插件 -->
+			<plugin>
+					<groupId>com.google.cloud.tools</groupId>
+					<artifactId>jib-maven-plugin</artifactId>
+					<configuration>
+						<from>
+							<image>registry.cn-shanghai.aliyuncs.com/gvsun/jdk:8u141</image>
+						</from>
+						<to>
+							<image>lbl-${tag.version}/auditserver:${project.version}</image>
+						</to>
+						<!--容器相关的属性-->
+            <container>
+								<mainClass>net.gvsun.AuditApplication</mainClass>
+            </container>
+						<!--允许非https-->
+						<allowInsecureRegistries>true</allowInsecureRegistries>
+					</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>local-nexus</id>
+			<url>http://library.gvsun.net/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+</project>

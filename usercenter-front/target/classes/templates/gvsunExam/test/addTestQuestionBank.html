@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunExam/static/formselect/formSelects-v4.css}" media="all">
+    <style>
+        .layui-form-switch{
+            border-color: #409eff;
+            background-color: #409eff
+        }
+        .layui-form-onswitch{
+            border-color: #d2d2d2;
+            background-color: #d2d2d2
+        }
+        .layui-form-switch em{
+            color: #fff!important;
+        }
+        .layui-form-switch i{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form lesson_card" action="" lay-filter="addtestquestionbankbox" id="addtestquestionbankbox">
+        <div class="layui-fluid">
+            <div classs="layui-row layui-col-space20">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">添加测试试题
+                            <!--搜索开始-->
+                            <div class="fr search_line">
+                                <div class="layui-inline">
+                                    <select id="selectqpCategory" name="qpCategory" lay-search lay-filter="selectCategory">
+                                        <option value="">请选择题库类别</option>
+                                    </select>
+                                </div>
+                                <div class="layui-inline">
+                                    <select name="isOpen" lay-search lay-filter="selectqpOpen" id="selectQuestionPoolIsOpen">
+                                        <option value="">请选择全部题库</option>
+                                        <option value="1" selected="selected">公共题库</option>
+                                        <option value="2">课程题库</option>
+                                    </select>
+                                </div>
+                                <div class="layui-inline">
+                                    <select id="tCourseSiteOpt" name="site" lay-search lay-filter="addly">
+                                        <option value="">请选择题库</option>
+                                    </select>
+                                </div>
+                                <div class="layui-inline">
+                                    <input class="layui-input" name="searchid" id="searchbox" autocomplete="on"
+                                           placeholder="请输入抽题数量"/>
+                                </div>
+                                <input type="button" class="layui-btn" data-type="reload" value="抽题" onclick="selectRandomQuestion($('#searchbox').val())"/>
+                                <input type="button" class="layui-btn layui-btn-warm" value="全选" onclick="selectRandomQuestion(-1)"/>
+                            </div>
+                            <!--搜索结束-->
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space20">
+                                <div class="layui-col-md12" id="addly_loop">
+                                    <div id="page" class="mt20"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--操作按钮开始-->
+        <div class="layui-col-lg12 bottom_btnbox layui-hide">
+            <input type="button" lay-filter="addtestquestionbankbtn" id="addtestquestionbankbtn" class="layui-btn"
+                   lay-submit value="立即提交"/>
+            <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+        </div>
+        <!--操作按钮结束-->
+        <!--大项的id-->
+<!--        <input type="hidden" th:value="${currsection}" name="currsection" id="currsection"/>-->
+    </form>
+</div>
+<!--主体结束-->
+<div th:replace="/gvsunExam/globalscript"></div>
+<script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+<script th:src="@{/modules/gvsunExam/static/js/myProject.js}"></script>
+<script th:inline="javascript">
+    const siteId = [[${session.cid}]];
+</script>
+<script th:src="@{/modules/gvsunExam/test/addTestQuestionBank.js}"></script>
+</body>
+</html>

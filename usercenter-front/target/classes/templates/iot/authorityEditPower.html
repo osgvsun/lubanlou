@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/iot/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 70px;
+			}
+			
+			.layui-input-block {
+				margin-left: 70px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="layui-fluid">
+			<form class="layui-form" action="" lay-filter="editpower" id="editpower">
+				<!--基础信息开始-->
+				<div class="layui-col-md12 layui-row layui-col-space20 editbox">
+					<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">设置授权设备</div>
+							<div class="layui-card-body">
+								<div class="layui-row layui-form-item">
+									<div class="fill_box">
+										<div class="layui-row layui-col-space10 layui-form-item">
+											<div class="layui-col-lg12">
+												<!--穿梭数据开始-->
+												<div id="equipment"></div>
+												<!--穿梭数据结束-->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">设置授权实验室</div>
+							<div class="layui-card-body">
+								<div class="layui-row layui-form-item">
+									<div class="fill_box">
+										<div class="layui-row layui-col-space10 layui-form-item">
+											<div class="layui-col-lg12">
+												<!--穿梭数据开始-->
+												<div id="lab"></div>
+												<!--穿梭数据结束-->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-md12">
+						<div class="layui-card">
+							<div class="layui-card-header">实验室授权信息</div>
+							<div class="layui-card-body">
+								<div class="layui-row layui-form-item editbox">
+									<div class="fill_box">
+										<div class="layui-row layui-col-space20 layui-form-item">
+											<div class="layui-col-lg4">
+												<label class="layui-form-label">编辑权限：</label>
+												<div class="layui-input-block">
+													<input type="checkbox" name="editlab" lay-skin="switch" lay-text="允许编辑|禁止编辑" />
+												</div>
+											</div>
+											<div class="layui-col-lg8">
+												<label class="layui-form-label">授权类型：</label>
+												<div class="layui-input-block">
+													<input type="radio" name="accesstype" value="按时授权" title="按时授权" lay-filter="accesstype" checked="" />
+													<input type="radio" name="accesstype" value="永久授权" title="永久授权" lay-filter="accesstype" />
+												</div>
+											</div>
+											<div class="accessdate layui-row layui-col-space20">
+												<div class="layui-col-lg4">
+													<label class="layui-form-label">授权日期：</label>
+													<div class="layui-input-block">
+														<input type="text" id="accessdate" class="layui-input" placeholder="请选择授权日期范围" />
+													</div>
+												</div>
+												<div class="layui-col-lg4">
+													<label class="layui-form-label">授权时间：</label>
+													<div class="layui-input-block">
+														<input type="text" id="accesstime" class="layui-input" placeholder="请选择授权时间范围" />
+													</div>
+												</div>
+												<div class="layui-col-lg4 float_dd">
+													<label class="layui-form-label">授权周次：</label>
+													<div class="layui-input-block">
+														<select name="accessweek" lay-filter="required" lay-search>
+															<option value="">请选择周次</option>
+															<option value="1">单双周</option>
+															<option value="2">单周</option>
+															<option value="3">双周</option>
+														</select>
+													</div>
+												</div>
+												<div class="layui-col-lg12">
+													<label class="layui-form-label">授权星期：</label>
+													<div class="layui-input-block">
+														<input type="checkbox" name="accesstype" value="周一" title="周一" />
+														<input type="checkbox" name="accesstype" value="周二" title="周二" />
+														<input type="checkbox" name="accesstype" value="周三" title="周三" />
+														<input type="checkbox" name="accesstype" value="周四" title="周四" />
+														<input type="checkbox" name="accesstype" value="周五" title="周五" />
+														<input type="checkbox" name="accesstype" value="周六" title="周六" />
+														<input type="checkbox" name="accesstype" value="周日" title="周日" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--基础信息结束-->
+				<!--操作按钮开始-->
+				<div class="layui-col-lg12 layui-hide">
+					<button lay-filter="editpowerbtn" id="editpowerbtn" class="layui-btn" lay-submit>立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">取消</button>
+				</div>
+				<!--操作按钮结束-->
+			</form>
+		</div>
+		<!--右侧栏开始-->
+		<div class="quick_line">
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script th:src="@{/modules/iot/static/layui/layui.js}"></script>
+		<script th:src="@{/modules/iot/static/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{/modules/iot/static/js/global.js}"></script>
+		<script>
+			layui.config({
+				base: '../' //静态资源所在路径
+				}
+
+			).extend({
+					index: 'lib/index' //主入口模块
+				}
+
+			).use(['index', 'iot/authorityEditPower']);
+		</script>
+	</body>
+
+</html>

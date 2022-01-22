@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title></title>
+	<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="Generator" content="GVSUN" />
+	<meta name="Author" content="chenyawen" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+	<!-- layui -->
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}" media="all">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/organization/css/expand.css}" media="all">
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}"></script>
+	<script th:src="@{/js/initOAuth2.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<script th:src="@{/modules/configcenter/static/xm-select.js}"></script>
+	<!-- expand -->
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<script th:inline="javascript">
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var oauth2 = [[${session.oauth2}]];
+		const configCenterHost = apiGateWayHost+"/configcenter/";
+		function logout() {
+			localStorage.clear();
+			$.cookie('currauth', '');
+			$.cookie('currentauthName', '');
+			location.href = serverHost + 'logout';
+		}
+	</script>
+		<style>
+			.layui-form-label {
+				width: 107px;
+			}
+			
+			.layui-input-block {
+				margin-left: 107px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="main_content_box">
+			<div class="full_box">
+				<!--主体开始-->
+				<form class="layui-form lesson_card" action="" lay-filter="newfieldbox" id="newfieldbox">
+					<input id="templateId" th:value="${templateId}" type="hidden"/>
+					<input id="processId" th:value="${processId}" type="hidden"/>
+					<input name="id" id="configId" th:value="${configId}" type="hidden"/>
+					<div class="layui-row layui-col-space10">
+<!--						<div class="layui-col-lg4">-->
+<!--							<label class="layui-form-label">所属设置</label>-->
+<!--							<div class="layui-input-block">-->
+<!--								<select name="set" lay-search lay-verify="required">-->
+<!--									<option value="">请选择所属设置</option>-->
+<!--									<option value="1">一级建制字段自定义</option>-->
+<!--									<option value="2">二级建制字段自定义</option>-->
+<!--									<option value="3">三级建制字段自定义</option>-->
+<!--									<option value="4">四级建制字段自定义</option>-->
+<!--								</select>-->
+<!--							</div>-->
+<!--						</div>-->
+						<div class="layui-col-lg4">
+							<label class="layui-form-label">所属分项</label>
+							<div class="layui-input-block">
+								<select name="process" id="process" lay-search lay-verify="required">
+									<option value="">请选择所属分项</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-col-lg4">
+							<label class="layui-form-label">字段名称</label>
+							<div class="layui-input-block">
+								<input type="text" name="indicatorCname" id="indicatorCname" autocomplete="on" class="layui-input" lay-verify="required" placeholder="请输入字段名称" />
+							</div>
+						</div>
+						<div class="layui-col-lg4">
+							<label class="layui-form-label">字段英文名称</label>
+							<div class="layui-input-block">
+								<input type="text" name="indicatorEname" id="indicatorEname" autocomplete="on" class="layui-input" placeholder="请输入字段名称" />
+							</div>
+						</div>
+						<div class="layui-col-lg4">
+							<label class="layui-form-label">字段类型</label>
+							<div class="layui-input-block float_dd">
+								<select name="contentType" id="contentType" lay-search lay-verify="required" lay-filter="contentTypeFilter">
+									<option value="">请选择字段类型</option>
+									<option value="input">输入框</option>
+									<option value="number">数字框</option>
+<!--									<option value="3">密码框</option>-->
+<!--									<option value="4">电话框</option>-->
+<!--									<option value="5">时间</option>-->
+									<option value="date">日期</option>
+									<option value="dateTime">日期时间</option>
+<!--									<option value="8">时间范围</option>-->
+									<option value="rangeDate">日期范围</option>
+									<option value="rangeDateTime">日期时间范围</option>
+									<option value="select">下拉单选框</option>
+									<option value="multiSelect">下拉多选框</option>
+									<option value="radio">单选框</option>
+									<option value="checkbox">多选框</option>
+									<option value="text">基础文本框</option>
+<!--									<option value="16">富文本框</option>-->
+									<option value="file">添加附件</option>
+									<option value="url">外链</option>
+									<option value="get">接口调用(get)</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-col-lg4 indicator_name" style="display: none">
+							<label class="layui-form-label">特殊字段类型</label>
+
+							<div class="layui-input-block">
+							<div id="indicatorName" class="xm-select-demo"></div>
+<!--								<select name="indicatorName" id="indicatorName" lay-search lay-filter="indicatorNameFilter">-->
+<!--									<option value="">请选择特殊字段类型</option>-->
+<!--								</select>-->
+							</div>
+						</div>
+						<div class="layui-col-lg4 url" style="display: none">
+							<label class="layui-form-label">URL</label>
+							<div class="layui-input-block">
+								<input type="text" name="url" id="url" autocomplete="on" class="layui-input" placeholder="请输入url,和下拉框内容二选一" />
+							</div>
+						</div>
+						<div class="layui-col-lg4 son_indicators" style="display: none">
+							<label class="layui-form-label">下拉框内容</label>
+							<div class="layui-input-block">
+								<input type="text" name="sonIndicators" id="sonIndicators1" autocomplete="on" class="layui-input" placeholder="请输入下拉框内容,和URL二选一" />
+								<a class="layui-icon layui-icon-add-circle" onclick="addSonIndicators(this)" title="添加一条"></a>
+							</div>
+						</div>
+						<div class="layui-col-lg4 indicator_options" style="display: none">
+							<label class="layui-form-label">选项</label>
+							<div class="layui-input-block">
+								<input type="text" name="indicatorOptions" id="indicatorOptions" autocomplete="on" class="layui-input" placeholder="请输入选项,以',(英文逗号)'分隔" />
+							</div>
+						</div>
+						<div class="layui-col-lg4">
+							<label class="layui-form-label">是否必填:</label>
+							<div class="layui-input-block">
+<!--								<input type="checkbox" name="state" value="1" title="启用" checked="" />-->
+								<input type="radio" name="isRequired" value="1" checked="" title="是" />
+								<input type="radio" name="isRequired" value="0" title="否" />
+							</div>
+						</div>
+					</div>
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox layui-hide">
+						<input type="button" lay-filter="newfieldbtn" id="newfieldbtn" class="layui-btn" lay-submit value="立即提交" />
+						<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+					</div>
+					<!--操作按钮结束-->
+				</form>
+				<!--主体结束-->
+			</div>
+		</div>
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/static/js/myProject.js}"></script>
+		<script th:src="@{/modules/configcenter/organization/newField.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../layuiadmin/' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'newField']);-->
+<!--		</script>-->
+	</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	<link media="all" rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}">
+	<link rel="stylesheet" th:href="@{/modules/configcenter/registration/css/expand.css}" media="all">
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}" ></script>
+	<script th:src="@{/js/initOAuth2.js}"></script>
+	<script th:src="@{/js/jquery.cookie.js}"></script>
+	<script th:src="@{/layui/layui.js}"></script>
+	<!--    <script type="text/javascript" th:src="@{${session.oauth2} + '/oauth/OAuth2.js'}"></script>-->
+	<script th:inline="javascript">
+		var userCenterHost = [[${session.userCenterHost}]];
+		var currentUsername = [[${session.user.username}]];
+		var currentCname = [[${session.user.cname}]];
+		var apiGateWayHost = [[${session.apiGateWayHost}]];
+		var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+		var encryptUsername=[[${session.encryptUsername}]];
+		var currentsiteEnName = [[${session.siteEnName}]];
+		var currentsiteSecret = [[${session.siteSecret}]];
+		var oauth2 = [[${session.oauth2}]];
+		var dataSource = [[${session.dataSource}]];
+		var configType = [[${session.configType}]];
+	</script>
+	<!--    <script th:src="@{/modules/common.js}"></script>-->
+	<!--    <script th:src="@{/modules/configcenter/static/common.js}"></script>-->
+	<!--    <script th:src="@{/modules/configcenter/static/global.js}"></script>-->
+	<link rel="stylesheet" th:href="@{/modules/configcenter/process/css/commonList.css}">
+	<style type="text/css">
+		.send_msg:hover {
+			color: #409eff;
+		}
+	</style>
+</head>
+
+	<body>
+		<div class="main_content_box">
+			<!--主体开始-->
+			<div class="full_box">
+				<form class="layui-form lesson_card" action="" lay-filter="academicstudentlistbox" id="academicstudentlistbox">
+<!--					<blockquote class="layui-elem-quote layui-quote-nm tag_box">-->
+<!--						<fieldset class="layui-elem-field layui-field-title">-->
+<!--							<legend class="templateInfo">-->
+<!--								&lt;!&ndash;								这里显示项目的名称&ndash;&gt;-->
+<!--								<div class="li_cell_box">-->
+<!--									<div class="li_cell"><i class="layui-icon layui-icon-console"></i>开始时间：2021-11-18 08:00:00</div>-->
+<!--									<div class="li_cell"><i class="layui-icon layui-icon-component"></i>范围：全校</div>-->
+<!--								</div>-->
+<!--							</legend>-->
+<!--							<div class="breadcrumb_top breadcrumb_division">-->
+<!--								&lt;!&ndash;								<a class="breadcrumb_select">2018级</a>&ndash;&gt;-->
+<!--								&lt;!&ndash;								<a>2019级</a>&ndash;&gt;-->
+<!--								&lt;!&ndash;								<a>2020级</a>&ndash;&gt;-->
+<!--								&lt;!&ndash;								<a>2021级</a>&ndash;&gt;-->
+<!--							</div>-->
+<!--						</fieldset>-->
+<!--						<div class="field_btn_box layui-col-lg9 templateOtherInfo">-->
+<!--							&lt;!&ndash;							要求：这里显示要求/这里显示要求/这里显示要求/这里显示要求/这里显示要求&ndash;&gt;-->
+<!--						</div>-->
+<!--						<div class="layui-col-lg3">-->
+<!--							<select name="template" lay-search=""  lay-filter="templateSelect">-->
+<!--								&lt;!&ndash;								<option value="">可切换项目</option>&ndash;&gt;-->
+<!--								&lt;!&ndash;								<option value="1">项目1</option>&ndash;&gt;-->
+<!--								&lt;!&ndash;								<option value="2">项目2</option>&ndash;&gt;-->
+<!--								&lt;!&ndash;								<option value="3">项目3</option>&ndash;&gt;-->
+<!--							</select>-->
+<!--						</div>-->
+<!--						<div class="clearboth"></div>-->
+<!--					</blockquote>-->
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<span>学生工作管理</span>
+<!--							<label style="margin-left: 15px;" class="layui-icon layui-icon-edit layui-btn-green applychangeacademictutor header_btn" data-method="applychangeacademictutor">申请重选导师</label>-->
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+								<ul class="layui-tab-title">
+									<li class="layui-this">
+										<a>导师信息</a>
+									</li>
+									<li>
+										<a th:href="@{/configcenter/registration/editAcademicStudentWorkLog}" th:name="@{/configcenter/registration/editAcademicStudentWorkLog}" target="i">我的工作日志</a>
+									</li>
+									<li>
+										<a th:href="@{/configcenter/registration/editAcademicStudentWorkAchievement}" th:name="@{/configcenter/registration/editAcademicStudentWorkAchievement}" target="i">我的工作成果</a>
+									</li>
+								</ul>
+								<div class="layui-tab-content">
+									<div class="layui-tab-item layui-show layui-row layui-col-space10">
+										<div class="layui-col-md12">
+											<!--表单开始-->
+											<table class="layui-hide" id="academictutorlist" lay-filter="academictutorlist"></table>
+											<script type="text/html" id="toolbar">
+												<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="canceltutor">申请退选</a>
+											</script>
+											<!--表单结束-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<!--主体结束-->
+		</div>
+		<!--右侧栏开始-->
+		<div class="quick_line blueside_quick_line">
+			<!--<a href="#"><br/></a>-->
+			<div class="top layui-icon layui-icon-top"></div>
+		</div>
+		<!--右侧栏结束-->
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/registration/academicTutorList.js}"></script>
+	</body>
+
+</html>

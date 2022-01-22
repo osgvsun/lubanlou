@@ -1,0 +1,51 @@
+*{
+	font-size:14px;
+}
+
+textarea{
+	resize: none;
+}
+
+.overall_box{
+    box-sizing: border-box;
+	width: 100%;
+    margin: auto;
+    padding: 0 15px;
+}
+
+.card_basic_box .row{
+	margin-top:30px;
+}
+.card_basic_box .row:first-child{
+	margin-top: 0;
+}
+
+.card_basic_box .card-deck{
+	margin-left:0;
+	margin-right:0;
+	padding: 0;
+}
+
+.custom-file-label::after{
+	content:"选择文件";
+}
+
+
+.modal-header .close span{
+	font-size: 1.7rem;
+}
+
+.active .badge-primary{
+	color: #007bff;
+    background-color: #fff;
+}
+
+.btn{
+	padding: .3rem 1rem;
+	border-radius: 2px;
+}
+
+.btn-primary{
+	background: #409eff;
+	border: 1px solid #409eff;
+}

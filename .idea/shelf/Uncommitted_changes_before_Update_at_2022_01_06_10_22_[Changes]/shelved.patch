@@ -1,0 +1,313 @@
+Index: gvsun-business/provider-api/usercenter-front/src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>server:\r\n  port: 8080\r\n  servlet:\r\n    context-path: /teacherInformationCenter\r\n\r\nspring:\r\n  flyway:\r\n    baseline-on-migrate: true\r\n    enabled: false\r\n    encoding: UTF-8\r\n    validate-on-migrate: false\r\n  redis:\r\n    host: ${redis_host:localhost}\r\n    port: ${redis_port:6379}\r\n    password: ${redis_password:123465}\r\n  main:\r\n    allow-bean-definition-overriding: true\r\n  #  datasource:\r\n  #    url: jdbc:mysql://${db_host:localhost}/${db_name:teacher_info_center}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai\r\n  #    username: ${db_user:root}\r\n  #    password: ${db_pwd:gengshang}\r\n  #    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  jpa:\r\n    show-sql: false\r\n    open-in-view: false\r\n  thymeleaf:\r\n    prefix: classpath:/templates\r\n    suffix: .html\r\n    encoding: UTF-8\r\n    mode: HTML\r\n    servlet:\r\n      content-type: text/html\r\n    cache: false\r\n  servlet:\r\n    multipart:\r\n      max-file-size: 50MB\r\n      max-request-size: 60MB\r\n\r\nauthorization:\r\n  siteEnName: GvsunUserCenter\r\n  siteSecret: MisjTDa^ZintCniukj^eP5WQF!PYLjnrOmj%0tbMX#rxp646#eRYHYpaCK7H@2v3!5I6tzKxmExH!k&N^%$#BkH&RiOJwojun15FBg%Go@pAeS&5hxTz4RNB$gyI9R@#\r\n\r\n#管理员下放权限给教师（教师自己给自己配置栏目）\r\ndelegation: false\r\n\r\napiGateWayHost: ${apiGateWay_host:http://localhost:8760}\r\niotHost: ${iot_host:http://192.168.1.11:9523}\r\napiGateWayHostTest: ${apiGateWay_host:http://test.lubanlou.com/api}\r\n#apiGateWayHost: ${apiGateWay_host:http://zuultest.gvsun.net}\r\n#apiGateWayHost: ${apiGateWay_host:http://gateway.gvsun.net}\r\n#apiGateWayHost: ${apiGateWay_host:http://dev.gvsun.com/api}\r\n\r\n#资源容器的地址，注意不是网关上的地址，上传大文件不走网关\r\nresourceContainerHostForUpload: ${resource_host:http://localhost:8162}\r\nlogo: logotext_gvsun.png\r\ndataSource: true\r\n\r\n\r\n\r\n#oauth2Host: ${oauth2_Host:http://www.lubanlou.com/uaa}\r\n#oauth2Host: ${oauth2_Host:http://localhost:8765/uaa}\r\noauth2Host: ${oauth2_Host:http://test.lubanlou.com/uaa}\r\n#此处需要配置教学地址\r\nteachHost: ${teach_Host:http://www.lubanlou.com/api}\r\n#此处需要配置获取iot相关数据的地址\r\niotWebSocketHost: ${iot_websocket_host:http://localhost:9191/api/websocket}\r\n#此处需要配置datashare地址\r\ndatashareHost: ${datashare_host:http://localhost:9096/datashare}\r\n#此处需要配置device地址\r\ndeviceHost: ${device_host:http://localhost:8844/device/}\r\n#此处需要配置作业微服务地址\r\ngvsunWork: ${gvsun_work:http://localhost:8001/gvsunWork/}\r\n#此处需要配置考试微服务地址\r\ngvsunExam: ${gvsun_exam:http://localhost:8000/gvsunExam}\r\n#此处需要配置准入微服务access地址\r\naccessHost: ${access_host:http://localhost:9093/access}\r\n#此处需要配置limsproduct地址\r\nlimsproductHost: ${limsproduct_host:http://localhost:8763/limsproduct}\r\n#此处需要配置appointment地址\r\nappointmentHost: ${apiGateWayHost}/appointment\r\n#此处需要配置timetablelabRoom空间管理地址\r\nlabroomHost: ${apiGateWayHost}/timetable\r\n#此处需要配置usercenter用户中心地址 ${apiGateWayHost}/usercenter ${http://localhost:8762}\r\nusercenterHost: ${apiGateWayHost}/usercenter\r\n#此处需要配置timetablelabRoom空间管理地址\r\nauditserverHost: ${apiGateWayHost}/auditserver\r\nsecurity:\r\n  oauth2:\r\n    host: ${oauth2Host}\r\n    client:\r\n      clientId: GvsunUserCenter\r\n      clientSecret: MisjTDa^ZintCniukj^eP5WQF!PYLjnrOmj%0tbMX#rxp646#eRYHYpaCK7H@2v3!5I6tzKxmExH!k&N^%$#BkH&RiOJwojun15FBg%Go@pAeS&5hxTz4RNB$gyI9R@#\r\n      accessTokenUri: ${oauth2Host}/oauth/token\r\n      userAuthorizationUri: ${oauth2Host}/oauth/authorize\r\n      logoutOAuth2Uri: ${oauth2Host}/oauth/logout\r\n      logoutCallback: ${logout_callback:http://www.lubanlou.com/teacherInformationCenter}\r\n    resource:\r\n      userInfoUri: ${oauth2Host}/user/me\r\n\r\ndatasource:\r\n  projectName: usercenter-front\r\n  enableExecuteFlywayOnMultiDatasource: false\r\n\r\nusession:\r\n  project-name: ${datasource.projectName}\r\n  redis:\r\n    host: ${spring.redis.host}\r\n    port: ${spring.redis.port}\r\n    password: ${spring.redis.password}\r\n\r\n#统一身份认证-开始\r\nuia:\r\n  url: ${uia_host:http://test.lubanlou.com/uia}\r\n  #  url: ${uia_host:http://localhost:8550/uia}\r\n  #是否使用统一身份认证 true or false\r\n  isUia: ${isUia:true}\r\n  #统一身份认证登录路\r\n  loginUrl: ${uia.url}/signon\r\n  #统一身份认证退出路径\r\n  logoutUrl: ${uia.url}/signout\r\n  #密匙\r\n  secretKey: gvsun\r\napp:\r\n  #  本地\r\n  url: ${appurl:http://test.lubanlou.com/teacherInformationCenter}\r\n  #  url: ${appurl:http://localhost:8080/teacherInformationCenter}\r\n\r\n  #统一身份认证登录后回调地址\r\n  redirectUrl: ${app.url}/webapp/login\r\n  #统一身份认证退出后返回地址\r\n  #  本地\r\n  outUrl: ${appouturl:http://test.lubanlou.com/teacherInformationCenter/login}\r\n  #时效（以秒为单位）\r\n  timeDiff: ${timeDiff:600}\r\n#统一身份认证-结束\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gvsun-business/provider-api/usercenter-front/src/main/resources/application.yml b/gvsun-business/provider-api/usercenter-front/src/main/resources/application.yml
+--- a/gvsun-business/provider-api/usercenter-front/src/main/resources/application.yml	(revision 2b74311efb1c8a12f8a5f19a99016f61b9e1e8d6)
++++ b/gvsun-business/provider-api/usercenter-front/src/main/resources/application.yml	(date 1641432045673)
+@@ -12,7 +12,7 @@
+   redis:
+     host: ${redis_host:localhost}
+     port: ${redis_port:6379}
+-    password: ${redis_password:123465}
++    password: ${redis_password:123456}
+   main:
+     allow-bean-definition-overriding: true
+   #  datasource:
+@@ -45,7 +45,7 @@
+ 
+ apiGateWayHost: ${apiGateWay_host:http://localhost:8760}
+ iotHost: ${iot_host:http://192.168.1.11:9523}
+-apiGateWayHostTest: ${apiGateWay_host:http://test.lubanlou.com/api}
++apiGateWayHostTest: ${apiGateWay_host:http://www.lubanlou.com/api}
+ #apiGateWayHost: ${apiGateWay_host:http://zuultest.gvsun.net}
+ #apiGateWayHost: ${apiGateWay_host:http://gateway.gvsun.net}
+ #apiGateWayHost: ${apiGateWay_host:http://dev.gvsun.com/api}
+@@ -58,8 +58,8 @@
+ 
+ 
+ #oauth2Host: ${oauth2_Host:http://www.lubanlou.com/uaa}
+-#oauth2Host: ${oauth2_Host:http://localhost:8765/uaa}
+-oauth2Host: ${oauth2_Host:http://test.lubanlou.com/uaa}
++oauth2Host: ${oauth2_Host:http://localhost:8765/uaa}
++#oauth2Host: ${oauth2_Host:http://test.lubanlou.com/uaa}
+ #此处需要配置教学地址
+ teachHost: ${teach_Host:http://www.lubanlou.com/api}
+ #此处需要配置获取iot相关数据的地址
+@@ -110,7 +110,7 @@
+ 
+ #统一身份认证-开始
+ uia:
+-  url: ${uia_host:http://test.lubanlou.com/uia}
++  url: ${uia_host:http://www.lubanlou.com/uia}
+   #  url: ${uia_host:http://localhost:8550/uia}
+   #是否使用统一身份认证 true or false
+   isUia: ${isUia:true}
+@@ -122,8 +122,8 @@
+   secretKey: gvsun
+ app:
+   #  本地
+-  url: ${appurl:http://test.lubanlou.com/teacherInformationCenter}
+-  #  url: ${appurl:http://localhost:8080/teacherInformationCenter}
++  #  url: ${appurl:http://test.lubanlou.com/teacherInformationCenter}
++  url: ${appurl:http://localhost:8080/teacherInformationCenter}
+ 
+   #统一身份认证登录后回调地址
+   redirectUrl: ${app.url}/webapp/login
+Index: gvsun-business/provider-api/usercenter-front/src/main/resources/static/modules/configcenter/static/commonResource.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>var contextPath = \"\";\r\n// var evaluationHost = \"\";\r\n\r\n$(document).ready(function () {\r\n    contextPath = $(\"#pageContext\").val();\r\n    // evaluationHost =$(\"#zuulServerUrl\").val()+\"/configcenter/\";\r\n    // 初始化资源\r\n    resourceContainer.initResourceContainer({\r\n        oauth2Host: oauth2Host,\r\n        resourceContainerHost: resourceContainerHost + \"/gvsunResource\",\r\n        directoryEngineHost: resourceContainerHost + \"/gvsunDirectory\",\r\n        siteName: \"配置中心\",\r\n        authorizationURL: resourceContainerHost + \"/shareApi/getAuthorization\",\r\n        username: currentUsername,\r\n        resourceContainerHostForUpload: resourceContainerHostForUpload\r\n    });\r\n\r\n\r\n    //读取资源，返回文件存放路径\r\n    $.each($(\".resource-img\"),function (index,obj) {\r\n        if($(obj).attr(\"state\")==1){\r\n            if($(obj).attr(\"data\").indexOf(\"/\")==-1){\r\n                getFile({\r\n                    fileId:$(obj).attr(\"data\"),\r\n                    success:function (data) {\r\n                        if(!data.code){\r\n                            $(obj).attr(\"src\",data.data.url);\r\n                            $(obj).load();\r\n                        }\r\n\r\n                    }\r\n                });\r\n            }else{\r\n                $(obj).attr(\"src\",$(obj).attr(\"data\"));\r\n            }\r\n        }\r\n    });\r\n});\r\n\r\nfunction getAuthorization(jsonData) {\r\n    $.ajax({\r\n        type: \"Get\",\r\n        async: (jsonData.async == null ? true : jsonData.async),\r\n        url: contextPath+\"/shareApi/getAuthorization\",\r\n        success: function (data) {\r\n            jsonData.success(data);\r\n        }\r\n    });\r\n};\r\n\r\n// 读取资源\r\nfunction getFile(jsonData) {\r\n    getAuthorization({\r\n        async:jsonData.async,\r\n        success:function(authorization){\r\n            $.ajax({\r\n                url: $(\"#resourceContainerHost\").val()+\"/gvsunResource/getFileById?id=\"+jsonData.fileId,\r\n                type:\"Get\",\r\n                dataType:\"json\",\r\n                async:(jsonData.async==null?true:jsonData.async),\r\n                headers:{\r\n                    Authorization:authorization\r\n                },\r\n                success:function (data) {\r\n                    switch(data.url){\r\n                        case \"NoFileUrl\":\r\n                            if(jsonData.error!=null)\r\n                                jsonData.error();\r\n                            break;\r\n                        case \"AuthorizationOutOfTime\":\r\n                            if(jsonData.authorizationOutOfTime!=null)\r\n                                jsonData.authorizationOutOfTime();\r\n                            break;\r\n                        case \"NotAllowedRequest\":\r\n                            if(jsonData.notAllowedRequest!=null)\r\n                                jsonData.notAllowedRequest();\r\n                            break;\r\n                        default:\r\n                            if(jsonData.success!=null)\r\n                                jsonData.success(data);\r\n                            break;\r\n                    }\r\n                }\r\n            })\r\n        }\r\n    });\r\n};\r\n\r\nfunction openUploadWindowByPath(path,index,step) {\r\n    resourceContainer.initUploadFileWindow({\r\n        afterUploadSuccess: function (data) {\r\n            //data包含fileIds(文件id数组)、files(文件数组)、path(上传路径)\r\n            var fileIds = data.fileIds;\r\n            var files = data.files;\r\n            var targetTitle = data.path;\r\n            let configFiles = '';\r\n            for (var i = 0; i < fileIds.length; i++) {\r\n                var fd = new FormData();\r\n                var fileName = files[i].name;\r\n                var fileSize = resourceContainer.transformSize(files[i].size);\r\n                var fileId = fileIds[i];\r\n                var url = \"\";\r\n                var timetableResultId = $('#timetableResultId').val();\r\n                // var d1 = configResultList[0];\r\n                // var configResult = d1[$('#configName').val()];\r\n                if(targetTitle.split(\"/\")[targetTitle.split(\"/\").length-2]==\"业务流程记录\"){\r\n                    configFiles += fileId+'_'+fileName+',';\r\n                }else if(targetTitle.split(\"/\")[targetTitle.split(\"/\").length-2]==\"建制管理\"){\r\n                    configFiles += fileId+'_'+fileName+',';\r\n                }else if(targetTitle.split(\"/\")[targetTitle.split(\"/\").length-2]==\"学业导师\"){\r\n                    let fileInput = $('#fileUpload'+index+'_'+step).val();\r\n                    if(fileInput!=null && fileInput!=''){\r\n                        configFiles += fileInput + ',' +fileId+'_'+fileName+',';\r\n                    }else{\r\n                        configFiles += fileId+'_'+fileName+',';\r\n                    }\r\n\r\n                }\r\n            }\r\n            if(targetTitle.split(\"/\")[targetTitle.split(\"/\").length-2]==\"业务流程记录\"){\r\n                configFiles = (configFiles.substring(configFiles.length - 1) == ',') ? configFiles.substring(0, configFiles.length - 1) : configFiles\r\n                $('#fileUpload'+index+'_'+step).val(configFiles);\r\n            }else if(targetTitle.split(\"/\")[targetTitle.split(\"/\").length-2]==\"建制管理\" || targetTitle.split(\"/\")[targetTitle.split(\"/\").length-2]==\"学业导师\"){\r\n                configFiles = (configFiles.substring(configFiles.length - 1) == ',') ? configFiles.substring(0, configFiles.length - 1) : configFiles\r\n                $('#fileUpload'+index+'_'+step).val(configFiles);\r\n            }else if(targetTitle.split(\"/\")[targetTitle.split(\"/\").length-2]==\"项目库管理\"){\r\n                $.ajax({\r\n                    url: `${timetableHost}api/operation/saveOperationItemEnclosure?operationItemId=${targetTitle.split(\"/\")[targetTitle.split(\"/\").length-1]}&enclosureIds=${fileIds.join(',')}`,\r\n                    type: 'post',\r\n                    async: false,\r\n                    success: function (res) {\r\n                     if(res.data.code === 0){\r\n                         location.reload();\r\n                     }else{\r\n                         layer.msg('啊哦,后台出错了');\r\n                     }\r\n                    }\r\n                })\r\n            }\r\n            resourceContainer.showUploadWindow(false);\r\n        },\r\n        path: path,\r\n        uploadFail: function (reason) {\r\n                alert('上传失败：' + reason);\r\n        },\r\n        fileTags: ['我的文件'],\r\n        multiple: true//是否启用多文件上传\r\n    });\r\n    resourceContainer.showUploadWindow(true);\r\n};\r\nfunction fileInit(tableEachIndex) {\r\n    var download = '.file_download';\r\n    var show = '.file_show';\r\n    if(tableEachIndex){\r\n        download = '.file_download_table'+tableEachIndex;\r\n        show = '.file_show_table'+tableEachIndex;\r\n    }\r\n    $.each($(download), function (index, obj) {\r\n        $(obj).click(function(){\r\n            resourceContainer.downLoadFile({\r\n                fileId: $(obj).attr(\"data\")\r\n            })\r\n        });\r\n    });\r\n    $.each($(show), function (index, obj) {\r\n        $(obj).click(function(){\r\n            resourceContainer.getFileById({\r\n                success:function(result){\r\n                    layer.confirm('下载/预览?<br>doc,docx,ppt,pptx,xls,xlsx<font color=\"red\">最大可预览大小为10M</font>', {\r\n                        btn: ['下载','预览'] //按钮\r\n                        , offset: ['150px', '40%']\r\n                    }, function(index){\r\n                        resourceContainer.downLoadFile({\r\n                            fileId: $(obj).attr(\"data\")\r\n                        })\r\n                        layer.close(index);\r\n                    }, function(index){\r\n                        if(isPdf(result.fileName)){\r\n                            layer.open({\r\n                                type: 2,\r\n                                area: ['1000px', '650px'],\r\n                                fixed: false, //不固定\r\n                                maxmin: true,\r\n                                content: result.url\r\n                            });\r\n                        }else if(isMp4(result.fileName)){\r\n                            layer.open({\r\n                                type: 2,\r\n                                area: ['1000px', '650px'],\r\n                                fixed: false, //不固定\r\n                                maxmin: true,\r\n                                content: result.url\r\n                            });\r\n                        }else if(isDoc(result.fileName)){\r\n                            window.open(\"http://view.officeapps.live.com/op/view.aspx?src=\"+escape(result.url),'_blank');\r\n                        }else{\r\n                            // layer.msg('不是pdf,暂不支持预览谢谢!');\r\n                            layer.confirm('对不起,暂不支持该文件格式预览!<br><font color=\"red\">支持的格式:pdf,mp4,doc,docx,ppt,pptx,xls,xlsx</font>', {\r\n                                btn: ['下载','关闭'] //按钮\r\n                                , offset: ['150px', '40%']\r\n                            }, function(index){\r\n                                resourceContainer.downLoadFile({\r\n                                    fileId: $(obj).attr(\"data\")\r\n                                })\r\n                                layer.close(index);\r\n                            }, function(index){\r\n                                layer.close(index);\r\n                            });\r\n                        }\r\n                    });\r\n                    // $('#photo_img').attr(\"src\", result.url);\r\n                },\r\n                fail:function(){\r\n                    alert('文件获取失败！');\r\n                    // $('#photo_img').attr(\"src\",'');\r\n                },\r\n                fileId:$(obj).attr(\"data\"),\r\n                needToken:true\r\n            })\r\n        });\r\n    });\r\n}\r\n// 资源下载\r\nfunction downLoadFile(fileId) {\r\n    resourceContainer.downLoadFile({\r\n        fileId:fileId,\r\n        fail: function (reason) {\r\n            alert('下载失败:' + reason);\r\n        }\r\n    })\r\n}\r\n\r\n//删除系统图片\r\nfunction deleteSystemPic(id,fileId) {\r\n    f({\r\n        id: id,\r\n        fileId:fileId,\r\n    });\r\n}\r\nfunction f(jsonData) {\r\n    getAuthorization({\r\n        async:jsonData.async,\r\n        success:function(authorization){\r\n            jsonData.needToken = authorization;\r\n            jsonData.fail = function(){}\r\n            jsonData.success = function(){\r\n                $.ajax({\r\n                    url:contextPath+\"/system/deleteSystemPic?id=\"+jsonData.id,\r\n                    type:\"POST\",\r\n                    success:function () {\r\n                        alert(\"删除图片成功\");\r\n                        location.reload(true);\r\n                    }})\r\n            }\r\n            resourceContainer.deleteFileById(jsonData)\r\n        }\r\n    })\r\n}\r\n\r\nwindow.isPdf = function (fileName) {\r\n    let regExp = /\\.(PDF)$/i;\r\n    if (fileName && fileName.search(regExp) !== -1) {\r\n        return true;\r\n    } else {\r\n        return false;\r\n    }\r\n};\r\nwindow.isMp4 = function (fileName) {\r\n    let regExp = /\\.(MP4)$/i;\r\n    if (fileName && fileName.search(regExp) !== -1) {\r\n        return true;\r\n    } else {\r\n        return false;\r\n    }\r\n};\r\nwindow.isDoc = function (fileName) {\r\n    let regExp = /\\.(DOC|DOCX|XLSX|XLS|PPT|PPTX)$/i;\r\n    if (fileName && fileName.search(regExp) !== -1) {\r\n        return true;\r\n    } else {\r\n        return false;\r\n    }\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gvsun-business/provider-api/usercenter-front/src/main/resources/static/modules/configcenter/static/commonResource.js b/gvsun-business/provider-api/usercenter-front/src/main/resources/static/modules/configcenter/static/commonResource.js
+--- a/gvsun-business/provider-api/usercenter-front/src/main/resources/static/modules/configcenter/static/commonResource.js	(revision 2b74311efb1c8a12f8a5f19a99016f61b9e1e8d6)
++++ b/gvsun-business/provider-api/usercenter-front/src/main/resources/static/modules/configcenter/static/commonResource.js	(date 1641432045694)
+@@ -120,7 +120,7 @@
+             if(targetTitle.split("/")[targetTitle.split("/").length-2]=="业务流程记录"){
+                 configFiles = (configFiles.substring(configFiles.length - 1) == ',') ? configFiles.substring(0, configFiles.length - 1) : configFiles
+                 $('#fileUpload'+index+'_'+step).val(configFiles);
+-            }else if(targetTitle.split("/")[targetTitle.split("/").length-2]=="建制管理" || targetTitle.split("/")[targetTitle.split("/").length-2]=="学业导师"){
++            }else if(targetTitle.split("/")[targetTitle.split("/").length-2]=="建制管理"){
+                 configFiles = (configFiles.substring(configFiles.length - 1) == ',') ? configFiles.substring(0, configFiles.length - 1) : configFiles
+                 $('#fileUpload'+index+'_'+step).val(configFiles);
+             }else if(targetTitle.split("/")[targetTitle.split("/").length-2]=="项目库管理"){
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+new file mode 100644
+--- /dev/null	(date 1641432045719)
++++ b/pom.xml	(date 1641432045719)
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project xmlns="http://maven.apache.org/POM/4.0.0"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++    <modelVersion>4.0.0</modelVersion>
++
++    <groupId>org.example</groupId>
++    <artifactId>lubanlou</artifactId>
++    <version>1.0-SNAPSHOT</version>
++
++    <properties>
++        <maven.compiler.source>8</maven.compiler.source>
++        <maven.compiler.target>8</maven.compiler.target>
++    </properties>
++
++    <modules>
++        <module>lubanlou-master</module>
++        <module>gvsun-business/provider-api/es</module>
++    </modules>
++</project>
+\ No newline at end of file
+Index: gvsun-business/independent/limsproduct/src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>##################################################自定义配置开始##################################################\r\n#统一域名\r\nserverHost: ${server_host:http://localhost}\r\n#资源容器地址\r\nresourceContainerHost: ${resource_host:http://localhost:8162}\r\n#网关\r\napiGateWayHost: ${apiGateWay_host:${serverHost}/api}\r\n#apiGateWayHost: http://localhost:8760\r\n#oauth2\r\noauth2Host: ${oauth2_host:${serverHost}/uaa}\r\nReferer: ${Refer:localhost}\r\n#实验室登录成功后跳转回门户（老版门户-盐城）进行登录,如果不是老版门户，就不填\r\ncmsToLoginUrl: ${CmsToLoginUrl:}\r\n##################################################自定义配置结束##################################################\r\nserver:\r\n  port: 8763\r\n  servlet:\r\n    context-path: /limsproduct\r\n    jsp:\r\n      init-parameters:\r\n        development: true\r\n    session:\r\n      timeout: ${session_timeout:1800}\r\n\r\neureka:\r\n  instance:\r\n    #以IP地址注册到服务中心，相互注册使用IP地址\r\n    prefer-ip-address: true\r\n    status-page-url: http://localhost:${server.port}/swagger-ui.html\r\n  client:\r\n    serviceUrl:\r\n      defaultZone: ${eureka_host:http://localhost:8888/eureka/}\r\n\r\nspring:\r\n  application:\r\n    name: limsproduct\r\n  resources:\r\n    static-locations: classpath:/static/\r\n  mvc:\r\n    view:\r\n      prefix: /WEB-INF/pages/\r\n    static-path-pattern: /**\r\n  servlet:\r\n    multipart:\r\n      enabled: true\r\n      max-file-size: 100MB\r\n      max-request-size: 100MB\r\n  messages:\r\n    basename: bundles/i18n\r\n    encoding: UTF-8\r\n  redis:\r\n    host: ${redis_host:127.0.0.1}\r\n    port: ${redis_port:6379}\r\n    password: ${redis_password:123456}\r\n  jackson:\r\n    date-format: yyyy-MM-dd HH:mm:ss\r\n    time-zone: Asia/Chongqing\r\n  flyway:\r\n    # 当迁移时发现目标schema非空，而且带有没有元数据的表时，是否自动执行基准迁移，默认false\r\n    baseline-on-migrate: true\r\n    # 是否开启flywary，默认true\r\n    enabled: true\r\n    encoding: UTF-8\r\n    # 迁移时是否校验，默认为true\r\n    validate-on-migrate: false\r\n  kafka:\r\n    bootstrap-servers: ${boot_strap_servers:127.0.0.1:9092}\r\n    consumer:\r\n      group-id: limsproduct\r\n      auto-startup: true\r\n\r\n###############################################默认配置（一般不改）开始################################################\r\nauthorization:\r\n  siteEnName: ${site_EnName:GvsunLims}\r\n  siteSecret: ${site_secret:*Yq9g1Exze#9rV1@&75foh#zT@&J9ASD326Ks1x4%DQ4iziN^m98nGyWZMhx3CeScO@xv1nSJYfry9i0Sd9UG8w7gvv3JFGyWCx4oYqWYUcA0Vz07mYbjNE7MM7OIbdO}\r\n\r\n# 系统标识（对应redis的key值，如实验室：limsproduct，教学：gsteach）\r\ndatasource:\r\n  strictMode: ${datasource_strict_mode:true}\r\n  projectName: ${project_name:limsproduct}\r\n  enableExecuteFlywayOnMultiDatasource: true\r\n  # 数据源标识（如庚商：limsproduct，哈工大：hitszlims）\r\n  schoolName: ${school_name:limsproduct}\r\nusession:\r\n  project-name: ${datasource.projectName}\r\n  redis:\r\n    host: ${spring.redis.host}\r\n    port: ${spring.redis.port}\r\n    password: ${spring.redis.password}\r\n\r\n\r\n#统一身份认证-开始\r\nuia:\r\n  url: ${uia_host:${serverHost}/uia}\r\n  #是否使用统一身份认证 true or false\r\n  isUia: ${isUia:false}\r\n  #统一身份认证登录路径\r\n  loginUrl: ${uia.url}/signon\r\n  #统一身份认证退出路径\r\n  logoutUrl: ${uia.url}/signout\r\n  #密匙\r\n  secretKey: gvsun\r\n\r\napp:\r\n  # 本地\r\n  url: ${appurl:${serverHost}/limsproduct}\r\n  #统一身份认证登录后回调地址\r\n  redirectUrl: ${app.url}/webapp/login\r\n  #统一身份认证退出后返回地址（如果这里是返回首页，就填首页地址；如果是返回实验室系统，要记得加/login）\r\n  outUrl: ${app_outUrl:${serverHost}/limsproduct/login}\r\n  #时效（以秒为单位）\r\n  timeDiff: ${timeDiff:120}\r\n#统一身份认证-结束\r\n\r\nEasyCache:\r\n  redis:\r\n    host: ${spring.redis.host}\r\n    port: ${spring.redis.port}\r\n    password: ${spring.redis.password}\r\n    database: 1\r\n###########F####################################默认配置（一般不改）结束################################################
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gvsun-business/independent/limsproduct/src/main/resources/application.yml b/gvsun-business/independent/limsproduct/src/main/resources/application.yml
+--- a/gvsun-business/independent/limsproduct/src/main/resources/application.yml	(revision 2b74311efb1c8a12f8a5f19a99016f61b9e1e8d6)
++++ b/gvsun-business/independent/limsproduct/src/main/resources/application.yml	(date 1641432045707)
+@@ -29,7 +29,7 @@
+     status-page-url: http://localhost:${server.port}/swagger-ui.html
+   client:
+     serviceUrl:
+-      defaultZone: ${eureka_host:http://localhost:8888/eureka/}
++      defaultZone: ${eureka_host:http://localhost:8761/eureka/}
+ 
+ spring:
+   application:
+@@ -67,7 +67,7 @@
+     bootstrap-servers: ${boot_strap_servers:127.0.0.1:9092}
+     consumer:
+       group-id: limsproduct
+-      auto-startup: true
++      auto-startup: false
+ 
+ ###############################################默认配置（一般不改）开始################################################
+ authorization:
+@@ -76,7 +76,7 @@
+ 
+ # 系统标识（对应redis的key值，如实验室：limsproduct，教学：gsteach）
+ datasource:
+-  strictMode: ${datasource_strict_mode:true}
++  strictMode: ${datasource_strict_mode:false}
+   projectName: ${project_name:limsproduct}
+   enableExecuteFlywayOnMultiDatasource: true
+   # 数据源标识（如庚商：limsproduct，哈工大：hitszlims）
+Index: gvsun-business/provider-api/usercenter-front/src/main/resources/templates/configcenter/registration/editAcademicStudentWorkAchievement.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"zh-CN\"\r\n\t  xmlns:th=\"http://www.thymeleaf.org\">\r\n<head>\r\n\t<meta charset=\"UTF-8\">\r\n\t<title>列表</title>\r\n\t<meta name=\"renderer\" content=\"webkit\">\r\n\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n\t<meta name=\"viewport\"\r\n\t\t  content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0\">\r\n\t<link rel=\"stylesheet\" th:href=\"@{/layui/css/layui.css}\" media=\"all\">\r\n\t<link media=\"all\" rel=\"stylesheet\" th:href=\"@{/modules/configcenter/static/css/admin.css}\">\r\n\t<link rel=\"stylesheet\" th:href=\"@{/modules/configcenter/registration/css/expand.css}\" media=\"all\">\r\n\t<link th:href=\"@{/css/font-awesome.css}\" rel=\"stylesheet\" type=\"text/css\"/>\r\n\t<script th:src=\"@{/js/jquery-1.11.0.min.js}\"></script>\r\n\t<script th:src=\"@{${session.oauth2}+'/oauth/OAuth2.js'}\" ></script>\r\n\t<script th:src=\"@{/js/initOAuth2.js}\"></script>\r\n\t<script th:src=\"@{/js/jquery.textareafullscreen.js}\"></script>\r\n\t<script th:src=\"@{/js/jquery.cookie.js}\"></script>\r\n\t<script th:src=\"@{/layui/layui.js}\"></script>\r\n\t<!--    <script type=\"text/javascript\" th:src=\"@{${session.oauth2} + '/oauth/OAuth2.js'}\"></script>-->\r\n\t<link rel=\"stylesheet\" th:href=\"@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.css'}\" media=\"all\">\r\n\t<script type=\"text/javascript\" th:src=\"@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.js'}\"></script>\r\n\r\n\t<script th:inline=\"javascript\">\r\n\t\tvar userCenterHost = [[${session.userCenterHost}]];\r\n\t\tvar currentUsername = [[${session.user.username}]];\r\n\t\tvar currentCname = [[${session.user.cname}]];\r\n\t\tvar apiGateWayHost = [[${session.apiGateWayHost}]];\r\n\t\tvar apiGateWayHostTest = [[${session.apiGateWayHostTest}]];\r\n\t\tvar encryptUsername=[[${session.encryptUsername}]];\r\n\t\tvar currentsiteEnName = [[${session.siteEnName}]];\r\n\t\tvar currentsiteSecret = [[${session.siteSecret}]];\r\n\t\tvar oauth2Host = [[${session.oauth2}]];\r\n\t\tvar oauth2 = [[${session.oauth2}]];\r\n\t\tvar dataSource = [[${session.dataSource}]];\r\n\t\tvar configType = [[${session.configType}]];\r\n\t\tvar resourceContainerHost = [[${resourceContainerHost}]];\r\n\t\tvar resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];\r\n\t\tvar task;\r\n\t\tvar username = [[${username}]];\r\n\t\tvar type = [[${type}]];\r\n\t</script>\r\n\t<script th:src=\"@{/modules/configcenter/static/commonResource.js}\"></script>\r\n\t<link rel=\"stylesheet\" th:href=\"@{/modules/configcenter/process/css/commonList.css}\">\r\n\t\t<style>\r\n\t\t\t.layui-form-label {\r\n\t\t\t\twidth: 65px;\r\n\t\t\t}\r\n\t\t\t\r\n\t\t\t.layui-input-block {\r\n\t\t\t\tmargin-left: 65px;\r\n\t\t\t}\r\n\r\n\t\t\t.case_box {\r\n\t\t\t\tmargin-top: 10px;\r\n\t\t\t}\r\n\t\t</style>\r\n\t</head>\r\n\r\n\t<body>\r\n\t\t<div id=\"resource-container\"></div>\r\n\t\t<div class=\"main_content_box\">\r\n\t\t\t<!--主体开始-->\r\n\t\t\t<div class=\"full_box\">\r\n\t\t\t\t<form class=\"layui-form lesson_card\" action=\"\" lay-filter=\"editacademicstudentworkachievementbox\" id=\"editacademicstudentworkachievementbox\">\r\n<!--\t\t\t\t\t<blockquote class=\"layui-elem-quote layui-quote-nm tag_box\">-->\r\n<!--\t\t\t\t\t\t<fieldset class=\"layui-elem-field layui-field-title\">-->\r\n<!--\t\t\t\t\t\t\t<legend>-->\r\n<!--\t\t\t\t\t\t\t\t这里显示项目的名称-->\r\n<!--\t\t\t\t\t\t\t\t<div class=\"li_cell_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t<div class=\"li_cell\"><i class=\"layui-icon layui-icon-console\"></i>开始时间：2021-11-18 08:00:00</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t<div class=\"li_cell\"><i class=\"layui-icon layui-icon-component\"></i>范围：全校</div>-->\r\n<!--\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t</legend>-->\r\n<!--\t\t\t\t\t\t\t&lt;!&ndash;<div class=\"breadcrumb_top breadcrumb_division\">-->\r\n<!--\t\t\t\t\t\t\t\t<a class=\"breadcrumb_select\">test1</a>-->\r\n<!--\t\t\t\t\t\t\t\t<a>test2</a>-->\r\n<!--\t\t\t\t\t\t\t</div>&ndash;&gt;-->\r\n<!--\t\t\t\t\t\t</fieldset>-->\r\n<!--\t\t\t\t\t\t<div class=\"field_btn_box layui-col-lg9\">-->\r\n<!--\t\t\t\t\t\t\t要求：这里显示要求/这里显示要求/这里显示要求/这里显示要求/这里显示要求-->\r\n<!--\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t<div class=\"layui-col-lg3\">-->\r\n<!--\t\t\t\t\t\t\t<select name=\"template\" lay-search=\"\">-->\r\n<!--\t\t\t\t\t\t\t\t<option value=\"\">可切换项目</option>-->\r\n<!--\t\t\t\t\t\t\t\t<option value=\"1\">项目1</option>-->\r\n<!--\t\t\t\t\t\t\t\t<option value=\"2\">项目2</option>-->\r\n<!--\t\t\t\t\t\t\t\t<option value=\"3\">项目3</option>-->\r\n<!--\t\t\t\t\t\t\t</select>-->\r\n<!--\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t<div class=\"clearboth\"></div>-->\r\n<!--\t\t\t\t\t</blockquote>-->\r\n\t\t\t\t\t<div class=\"layui-card\">\r\n\t\t\t\t\t\t<div th:if=\"${type!='TEACHER'}\" class=\"layui-card-header\"><span>学生工作管理</span>\r\n\t\t\t\t\t\t\t<label style=\"margin-left: 15px;\" data=\"0\" class=\"layui-icon layui-icon-edit layui-btn-green header_btn editachievementboxbtn\">新增工作成果</label>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"layui-card-body\">\r\n\t\t\t\t\t\t\t<div class=\"layui-tab layui-tab-brief\" lay-filter=\"docDemoTabBrief\">\r\n\t\t\t\t\t\t\t\t<ul th:if=\"${type!='TEACHER'}\" class=\"layui-tab-title\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a th:href=\"@{/configcenter/registration/academicTutorList}\" th:name=\"@{/configcenter/registration/academicTutorList}\" target=\"i\">导师名单</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a th:href=\"@{/configcenter/registration/editAcademicStudentWorkLog}\" th:name=\"@{/configcenter/registration/editAcademicStudentWorkLog}\" target=\"i\">我的工作日志</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li class=\"layui-this\">\r\n\t\t\t\t\t\t\t\t\t\t<a>我的工作成果</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t\t<div class=\"layui-tab-content\">\r\n\t\t\t\t\t\t\t\t\t<div class=\"layui-tab-item layui-show layui-row layui-col-space10\" id=\"work_contents\">\r\n\t\t\t\t\t\t\t\t\t\t<div class=\"showachievementbox\">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"case_box\">\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"case_main_tit\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"button\" class=\"layui-input readinputbtn\" name=\"name\" autocomplete=\"off\" disabled=\"disabled\" readonly=\"readonly\" />-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"case_nav\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"case_nav_tit\">简介</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"button\" class=\"layui-input readinputbtn\" name=\"info\" autocomplete=\"off\" disabled=\"disabled\" readonly=\"readonly\" />-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"case_nav\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"case_nav_tit\">团队介绍</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"button\" class=\"layui-input readinputbtn\" name=\"teaminfo\" autocomplete=\"off\" disabled=\"disabled\" readonly=\"readonly\" />-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"case_nav\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"case_nav_tit\">文件资料-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-inline font_normal mt0-5\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"button\" class=\"layui-btn layui-btn-xs\" value=\"全部下载\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"button\" class=\"layui-btn layui-btn-xs layui-btn-green\" value=\"所选文件下载\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"text\" class=\"startvalue\" hidden=\"\" placeholder=\"shift键选择\" />-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"text\" class=\"ivalue\" hidden=\"\" placeholder=\"ctrl键选择\" />-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<font class=\"font_grey\">(可按住ctrl键点选或按住shift键连选)</font>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_box opacity_box mt10\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"音频.mp3\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/audio.png}\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">音频.mp3</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"视频.mp4\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/video.png}\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">视频.mp4</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"图片.jpg\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/picture.png}\" >-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">图片.jpg</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"txt文档.txt\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/txt.png}\" >-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">txt文档.txt</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"未知文档.xxx\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/unknow.png}\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">未知文档.xxx</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"我是文件夹\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/folder.png}\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">我是文件夹</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"word文档.docx\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/word.png}\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">word文档.docx</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"excel表格.xlsx\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/excel.png}\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">excel表格.xlsx</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"ppt演示文档.pptx\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/ppt.png}\" >-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">ppt演示文档.pptx</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"pdf文档.pdf\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/pdf.png}\" >-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">pdf文档.pdf</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pictext_net opacity1\" title=\"压缩文档.rar\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img_box\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_img\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img th:src=\"@{/modules/configcenter/static/images/rar.png}\" >-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pn_info\">压缩文档.rar</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t<div class=\"editachievementbox hide\">\r\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"fill_box\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-row layui-col-space10\">\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-col-lg12\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<label class=\"layui-form-label\">名称</label>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-input-block\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input class=\"layui-input\" name=\"name\" autocomplete=\"on\" lay-verify=\"required\" placeholder=\"请输入工作成果名称\" />-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-col-lg12\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<label class=\"layui-form-label\">简介</label>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-input-block\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input class=\"layui-input\" name=\"info\" autocomplete=\"on\" lay-verify=\"required\" placeholder=\"请输入工作成果简介\" />-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-col-lg12\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<label class=\"layui-form-label\">团队介绍</label>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-input-block\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<textarea class=\"layui-textarea\" name=\"teaminfo\" autocomplete=\"on\" lay-verify=\"required\" placeholder=\"请输入工作成果的团队介绍\"></textarea>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t&lt;!&ndash;上传开始&ndash;&gt;-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-col-md12\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<label class=\"layui-form-label\">上传文件</label>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-input-block\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"mix_uploadbox\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-upload\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-upload-drag\" id=\"projectbook\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"layui-icon\">\uE67C</i>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<p>点击选择文件，或将文件拖拽到此处</p>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"layui-upload-list\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<table class=\"layui-table\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<thead>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tr>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<th>文件名</th>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<th>大小</th>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<th>状态</th>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<th>操作</th>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</tr>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</thead>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tbody id=\"pblist\"></tbody>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</table>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"upload_btn\">-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"button\" class=\"layui-btn\" id=\"uploadfilesbtn\" value=\"开始上传文件\" />-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n<!--\t\t\t\t\t\t\t\t\t\t\t\t\t</div>-->\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<!--上传结束-->\r\n\t\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"tc mt10\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"button\" class=\"layui-btn\" lay-filter=\"saveachievementboxbtn\" id=\"saveachievementboxbtn\" lay-submit value=\"提交成果\" />\r\n\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"button\" class=\"layui-btn layui-btn-red cancelachievementboxbtn\" value=\"取消\" />\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t\t<!--主体结束-->\r\n\t\t</div>\r\n\t\t<!--右侧栏开始-->\r\n\t\t<div class=\"quick_line blueside_quick_line\">\r\n\t\t\t<!--<a href=\"#\"><br/></a>-->\r\n\t\t\t<div class=\"top layui-icon layui-icon-top\"></div>\r\n\t\t</div>\r\n\t\t<!--右侧栏结束-->\r\n\t\t<script th:src=\"@{/modules/configcenter/static/global.js}\"></script>\r\n\t\t<script type=\"text/javascript\" th:src=\"@{/modules/configcenter/process/templateSP.js}\"></script>\r\n\t\t<script th:src=\"@{/modules/configcenter/registration/editAcademicStudentWorkAchievement.js}\"></script>\r\n\t</body>\r\n\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gvsun-business/provider-api/usercenter-front/src/main/resources/templates/configcenter/registration/editAcademicStudentWorkAchievement.html b/gvsun-business/provider-api/usercenter-front/src/main/resources/templates/configcenter/registration/editAcademicStudentWorkAchievement.html
+--- a/gvsun-business/provider-api/usercenter-front/src/main/resources/templates/configcenter/registration/editAcademicStudentWorkAchievement.html	(revision 2b74311efb1c8a12f8a5f19a99016f61b9e1e8d6)
++++ b/gvsun-business/provider-api/usercenter-front/src/main/resources/templates/configcenter/registration/editAcademicStudentWorkAchievement.html	(date 1641432045757)
+@@ -21,7 +21,7 @@
+ 	<!--    <script type="text/javascript" th:src="@{${session.oauth2} + '/oauth/OAuth2.js'}"></script>-->
+ 	<link rel="stylesheet" th:href="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.css'}" media="all">
+ 	<script type="text/javascript" th:src="@{${session.resourceContainerHostForUpload} + '/shareApi/resourceContainer.js'}"></script>
+-
++	<script th:src="@{/modules/configcenter/static/commonResource.js}"></script>
+ 	<script th:inline="javascript">
+ 		var userCenterHost = [[${session.userCenterHost}]];
+ 		var currentUsername = [[${session.user.username}]];
+@@ -32,7 +32,6 @@
+ 		var currentsiteEnName = [[${session.siteEnName}]];
+ 		var currentsiteSecret = [[${session.siteSecret}]];
+ 		var oauth2Host = [[${session.oauth2}]];
+-		var oauth2 = [[${session.oauth2}]];
+ 		var dataSource = [[${session.dataSource}]];
+ 		var configType = [[${session.configType}]];
+ 		var resourceContainerHost = [[${resourceContainerHost}]];
+@@ -41,7 +40,9 @@
+ 		var username = [[${username}]];
+ 		var type = [[${type}]];
+ 	</script>
+-	<script th:src="@{/modules/configcenter/static/commonResource.js}"></script>
++	<!--    <script th:src="@{/modules/common.js}"></script>-->
++	<!--    <script th:src="@{/modules/configcenter/static/common.js}"></script>-->
++	<!--    <script th:src="@{/modules/configcenter/static/global.js}"></script>-->
+ 	<link rel="stylesheet" th:href="@{/modules/configcenter/process/css/commonList.css}">
+ 		<style>
+ 			.layui-form-label {
+@@ -229,60 +230,60 @@
+ 										<div class="editachievementbox hide">
+ 											<div class="fill_box">
+ 												<div class="layui-row layui-col-space10">
+-<!--													<div class="layui-col-lg12">-->
+-<!--														<label class="layui-form-label">名称</label>-->
+-<!--														<div class="layui-input-block">-->
+-<!--															<input class="layui-input" name="name" autocomplete="on" lay-verify="required" placeholder="请输入工作成果名称" />-->
+-<!--														</div>-->
+-<!--													</div>-->
+-<!--													<div class="layui-col-lg12">-->
+-<!--														<label class="layui-form-label">简介</label>-->
+-<!--														<div class="layui-input-block">-->
+-<!--															<input class="layui-input" name="info" autocomplete="on" lay-verify="required" placeholder="请输入工作成果简介" />-->
+-<!--														</div>-->
+-<!--													</div>-->
+-<!--													<div class="layui-col-lg12">-->
+-<!--														<label class="layui-form-label">团队介绍</label>-->
+-<!--														<div class="layui-input-block">-->
+-<!--															<textarea class="layui-textarea" name="teaminfo" autocomplete="on" lay-verify="required" placeholder="请输入工作成果的团队介绍"></textarea>-->
+-<!--														</div>-->
+-<!--													</div>-->
+-<!--													&lt;!&ndash;上传开始&ndash;&gt;-->
+-<!--													<div class="layui-col-md12">-->
+-<!--														<label class="layui-form-label">上传文件</label>-->
+-<!--														<div class="layui-input-block">-->
+-<!--															<div class="mix_uploadbox">-->
+-<!--																<div class="layui-upload">-->
+-<!--																	<div class="layui-upload-drag" id="projectbook">-->
+-<!--																		<i class="layui-icon"></i>-->
+-<!--																		<p>点击选择文件，或将文件拖拽到此处</p>-->
+-<!--																	</div>-->
+-<!--																	<div class="layui-upload-list">-->
+-<!--																		<table class="layui-table">-->
+-<!--																			<thead>-->
+-<!--																				<tr>-->
+-<!--																					<th>文件名</th>-->
+-<!--																					<th>大小</th>-->
+-<!--																					<th>状态</th>-->
+-<!--																					<th>操作</th>-->
+-<!--																				</tr>-->
+-<!--																			</thead>-->
+-<!--																			<tbody id="pblist"></tbody>-->
+-<!--																		</table>-->
+-<!--																		<div class="upload_btn">-->
+-<!--																			<input type="button" class="layui-btn" id="uploadfilesbtn" value="开始上传文件" />-->
+-<!--																		</div>-->
+-<!--																	</div>-->
+-<!--																</div>-->
+-<!--															</div>-->
++													<div class="layui-col-lg12">
++														<label class="layui-form-label">名称</label>
++														<div class="layui-input-block">
++															<input class="layui-input" name="name" autocomplete="on" lay-verify="required" placeholder="请输入工作成果名称" />
++														</div>
++													</div>
++													<div class="layui-col-lg12">
++														<label class="layui-form-label">简介</label>
++														<div class="layui-input-block">
++															<input class="layui-input" name="info" autocomplete="on" lay-verify="required" placeholder="请输入工作成果简介" />
++														</div>
++													</div>
++													<div class="layui-col-lg12">
++														<label class="layui-form-label">团队介绍</label>
++														<div class="layui-input-block">
++															<textarea class="layui-textarea" name="teaminfo" autocomplete="on" lay-verify="required" placeholder="请输入工作成果的团队介绍"></textarea>
++														</div>
++													</div>
++													<!--上传开始-->
++													<div class="layui-col-md12">
++														<label class="layui-form-label">上传文件</label>
++														<div class="layui-input-block">
++															<div class="mix_uploadbox">
++																<div class="layui-upload">
++																	<div class="layui-upload-drag" id="projectbook">
++																		<i class="layui-icon"></i>
++																		<p>点击选择文件，或将文件拖拽到此处</p>
++																	</div>
++																	<div class="layui-upload-list">
++																		<table class="layui-table">
++																			<thead>
++																				<tr>
++																					<th>文件名</th>
++																					<th>大小</th>
++																					<th>状态</th>
++																					<th>操作</th>
++																				</tr>
++																			</thead>
++																			<tbody id="pblist"></tbody>
++																		</table>
++																		<div class="upload_btn">
++																			<input type="button" class="layui-btn" id="uploadfilesbtn" value="开始上传文件" />
++																		</div>
++																	</div>
++																</div>
++															</div>
+ 
+-<!--														</div>-->
+-<!--													</div>-->
++														</div>
++													</div>
+ 													<!--上传结束-->
+ 												</div>
+ 											</div>
+ 											<div class="tc mt10">
+-												<input type="button" class="layui-btn" lay-filter="saveachievementboxbtn" id="saveachievementboxbtn" lay-submit value="提交成果" />
++												<input type="button" class="layui-btn saveachievementboxbtn" value="提交成果" />
+ 												<input type="button" class="layui-btn layui-btn-red cancelachievementboxbtn" value="取消" />
+ 											</div>
+ 										</div>
+Index: lubanlou-master/lubanlou-gateway/src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>server:\r\n  port: 8760\r\nspring:\r\n  flyway:\r\n    baseline-on-migrate: true\r\n    enabled: true\r\n    encoding: UTF-8\r\n    validate-on-migrate: false\r\n  application:\r\n    name: ZUUL-SERVICE\r\n  datasource:\r\n    url: jdbc:mysql://${db_host:localhost}/${db_name:zuul}?useUnilocalhostcode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&useSSL=false&autoReconnect=true&serverTimezone=Asia/Shanghai\r\n    username: ${db_user:root}\r\n    password: ${db_pwd:gengshang}\r\n  jpa:\r\n    show-sql: false\r\n    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect\r\n    hibernate:\r\n      ddl-auto: none\r\n    open-in-view: false\r\n    properties:\r\n      hibernate:\r\n        enable_lazy_load_no_trans: true\r\n        event:\r\n          merge:\r\n            entity_copy_observer: allow\r\n\r\neureka:\r\n  instance:\r\n    prefer-ip-address: true\r\n    lease-expiration-duration-in-seconds: 90 # 过期时间\r\n    lease-renewal-interval-in-seconds: 30 # 续约时间\r\n  client:\r\n    serviceUrl:\r\n      defaultZone: ${eureka_host:http://localhost:8761/eureka/}\r\n    register-with-eureka: true\r\n    fetch-registry: true\r\n\r\nmanagement:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: '*'\r\n\r\n\r\nhystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: ${timeout_in_milliseconds:120000}\r\nribbon:\r\n  ReadTimeout: ${read_timeout:20000}\r\n  ConnectTimeout: ${connect_timeout:20000}\r\n\r\nzuul:\r\n  sensitive-headers:\r\n  ignored-headers:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lubanlou-master/lubanlou-gateway/src/main/resources/application.yml b/lubanlou-master/lubanlou-gateway/src/main/resources/application.yml
+--- a/lubanlou-master/lubanlou-gateway/src/main/resources/application.yml	(revision 2b74311efb1c8a12f8a5f19a99016f61b9e1e8d6)
++++ b/lubanlou-master/lubanlou-gateway/src/main/resources/application.yml	(date 1641432045767)
+@@ -11,7 +11,7 @@
+   datasource:
+     url: jdbc:mysql://${db_host:localhost}/${db_name:zuul}?useUnilocalhostcode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&useSSL=false&autoReconnect=true&serverTimezone=Asia/Shanghai
+     username: ${db_user:root}
+-    password: ${db_pwd:gengshang}
++    password: ${db_pwd:0822}
+   jpa:
+     show-sql: false
+     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

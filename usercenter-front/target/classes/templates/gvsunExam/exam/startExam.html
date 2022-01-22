@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+	</head>
+	<body>
+		<div class="main_content_box">
+			<div class="full_box">
+				<!--主体开始-->
+				<div class="content_box">
+					<form class="layui-form lesson_card" action="" lay-filter="examscorebox" id="examscorebox">
+						<div class="basic_content"><span></span></div>
+
+					</form>
+					<!--操作按钮开始-->
+					<div class="layui-col-lg12 bottom_btnbox ">
+						<input type="button" lay-filter="startexambtn" id="startexambtn" class="layui-btn" lay-submit value="开始考试" />
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!--操作按钮结束-->
+		<div th:replace="/gvsunExam/globalscript"></div>
+		<script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			const assignmentId = [[${assignmentId}]];
+			const isLink = [[${isLink}]]
+			const username = [[${session.user.username}]];
+		</script>
+		<script type="text/javascript" th:src="@{/modules/gvsunExam/exam/startExam.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>教学班数据管理</title>
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/modules/datashare/static/css/index.css}"/>
+    <style>
+        .layui-table-tool-self {
+            display: none;
+        }
+        .layui-form-label.required:after {
+            content: ' *';
+            color: red;
+            font-size: 15px;
+        }
+        .layui-form-item.right {
+            float: right;
+        }
+    </style>
+    <script th:inline="javascript">
+        var datashareHost = [[${session.datashareHost}]];
+        var currentName= localStorage['roleCname'];
+        var currentUsername = [[${session.user.username}]];
+    </script>
+</head>
+<body>
+<div>
+    <form class="layui-form" action="" lay-filter="newschoolcourse" id="newschoolcourse">
+        <div class="layui-form-item">
+            <label class="layui-form-label required">教学班编号</label>
+            <div class="layui-input-block">
+                <input type="text" id="courseNo" name="courseNo" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">课程编号</label>
+            <div class="layui-input-block">
+                <input type="text" id="courseNumber" name="courseNumber" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">主讲教师工号</label>
+            <div class="layui-input-block">
+                <input type="text" id="teacher" name="teacher" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">学期代码</label>
+            <div class="layui-input-block">
+                <input type="text" id="termNumber" name="termNumber" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">开课学院编号</label>
+            <div class="layui-input-block">
+                <input type="text" id="academyNumber" name="academyNumber" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">计划人数</label>
+            <div class="layui-input-block">
+                <input type="text" id="planStudentNumber" name="planStudentNumber" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">教学班来源</label>
+            <div class="layui-input-block">
+                <input type="text" id="courseSource" name="courseSource" placeholder="为空或者DATA_PUSH:共享推送教学班；SELF:自主排课教学班"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">上课班级编号</label>
+            <div class="layui-input-block">
+                <input type="text" id="classNumbers" name="classNumbers" placeholder="多个班级请使用英文逗号隔开" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item right">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-filter="newcoursebtn" id="newcoursebtn" lay-submit >立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/jquery-3.5.1.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/modules/datashare/static/js/datashare/newSchoolCourse.js}"></script>
+</body>
+</html>

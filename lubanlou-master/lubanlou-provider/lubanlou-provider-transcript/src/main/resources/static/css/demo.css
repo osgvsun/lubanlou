@@ -1,0 +1,155 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	list-style: none;
+	text-decoration: none;
+	font-family: "微软雅黑";
+}
+
+body {
+	position: relative;
+}
+
+.seize {
+	height: 100px;
+	background: #a89271;
+}
+
+.link_box_limit {
+	width: 83%;
+}
+
+.top_nav {
+	box-sizing: border-box;
+	position: fixed;
+	padding: 15px 0;
+	white-space: nowrap;
+	overflow: auto;
+	z-index: 7;
+	background: white;
+	/* height: 100%; */
+	width: 100%;
+	margin: -20px;
+	padding: 30px;
+}
+
+.top_nav a {
+	float: left;
+	display: block;
+	font-size: 14px;
+	color: #cc0000;
+	font-weight: normal;
+	background: #ffffff;
+	border: 2px solid #cc0000;
+	padding: 5px 17px;
+	border-radius: 32px;
+	margin: 2px 15px 0 0;
+}
+.top_nav_top{
+	top:0;
+}
+
+.top_nav_fix {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: #4c4c4c;
+	width: 16%;
+	height: 100%;
+	padding: 15px 20px;
+	margin: 0;
+	z-index: 10;
+	/*display: none;*/
+}
+
+.top_nav_fix a {
+	float: none;
+	border: 2px solid #fff;
+	margin: 0 0 15px;
+}
+
+.top_nav a:hover,
+.top_nav a:active,
+.top_nav .top_nav_select {
+	/*color: #fff;*/
+	/*background: #cc0000;*/
+	/*border: 2px solid #cc0000;*/
+	cursor: pointer;
+}
+
+.top {
+	position: fixed;
+	right: 30px;
+	bottom: 65px;
+	width: 35px;
+	height: 35px;
+	line-height: 43px;
+	text-align: center;
+	font-size: 25px;
+	color: #ddd;
+	font-weight: bold;
+	background: #888;
+	border-radius: 5px;
+	cursor: pointer;
+	z-index: 7;
+}
+.bottom{
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	width: 35px;
+	height: 35px;
+	line-height: 43px;
+	text-align: center;
+	font-size: 25px;
+	color: #ddd;
+	font-weight: bold;
+	background: #888;
+	border-radius: 5px;
+	cursor: pointer;
+	z-index: 2000;
+	-webkit-transform:rotate(180deg)
+}
+.bottom:hover {
+	background: #cc0000;
+	color: #fff;
+}
+.top:hover {
+	background: #cc0000;
+	color: #fff;
+}
+
+.link_box {
+	display: block;
+}
+
+.link_box_fix a {
+	display: block;
+}
+
+.space {
+	height: 65px;
+}
+
+.blue,
+.pink {
+	display: block;
+	width: 100%;
+	height: 300px;
+}
+
+.blue:before,
+.pink:before {
+	content: "";
+	width: 100%;
+	height: 65px;
+}
+
+.blue {
+	background: rgb(152, 167, 197);
+}
+
+.pink {
+	background: rgb(229, 202, 201);
+}

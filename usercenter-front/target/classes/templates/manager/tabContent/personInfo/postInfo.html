@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>职称信息组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/css/expand.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/xm-select.js}"></script>
+    <script type="text/javascript" th:src="@{${resourceContainerHost} + '/shareApi/resourceContainer.js'}"></script>
+    <script th:inline="javascript">
+        var userCenterHost = [[${usercenterHost}]];
+        var currentUsername = [[${session.user.username}]];
+        var apiGateWayHost = [[${session.apiGateWayHost}]];
+        var encryptUsername=[[${session.encryptUsername}]];
+        var currentsiteEnName = [[${session.siteEnName}]];
+        var currentsiteSecret = [[${session.siteSecret}]];
+        var oauth2 = [[${session.oauth2}]];
+        var resourceContainerHost = [[${resourceContainerHost}]];
+        var resourceContainerHostForUpload = [[${resourceContainerHostForUpload}]];
+        var httpBaseUrl = /*[[@{/}]]*/'';
+        var datashareHost = [[${datashareHost}]];
+        resourceContainer.initResourceContainer({
+            oauth2Host: oauth2,
+            resourceContainerHost: resourceContainerHost + "/gvsunResource",
+            directoryEngineHost: resourceContainerHost + "/gvsunDirectory",
+            siteName: "用户中心",
+            authorizationURL: resourceContainerHost + "/shareApi/getAuthorization",
+            username: currentUsername,
+            resourceContainerHostForUpload: resourceContainerHostForUpload + '/gvsunResource',
+            unfixed: true
+        });
+    </script>
+    <script th:src="@{/modules/common.js}"></script>
+
+    <style>
+        .fill_box {
+            display: none;
+        }
+
+        .buttonAdd{
+            height: 30px;
+        }
+    </style>
+</head>
+<body> <!-- 新增职业信息-->
+<i class="fa fa-spinner fa-3x fa-spin loading"></i>
+<div class="fill_box" id="postInfoAdd">
+    <form class="layui-form" action="" lay-filter="postInfo">
+        <div class="layui-row layui-col-space10 layui-form-item">
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">职称</label>
+                <div class="layui-input-block">
+                    <select name="profession" class="profession" lay-search lay-filter="test">
+                        <option value=""></option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">职别</label>
+                <div class="layui-input-block">
+                    <input type="text" name="officialRank" id="officialRankAdd" lay-verify="required"
+                           autocomplete="off"
+                           class="layui-input officialRank" readonly>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">职级晋升年月</label>
+                <div class="layui-input-block">
+                    <input type="text" name="upgradeTime" id="upgradeTime_add"
+                           lay-verify="required|date" autocomplete="off" class="layui-input upgradeTime">
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">岗位等级</label>
+                <div class="layui-input-block">
+                    <select name="jobRank" class="jobRank" lay-search>
+                        <option value=""></option>
+<!--                        <option value="一级">一级</option>-->
+<!--                        <option value="二级">二级</option>-->
+<!--                        <option value="三级">三级</option>-->
+<!--                        <option value="四级">四级</option>-->
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg4 layui-col-md121">
+                <label class="layui-form-label">岗位类别</label>
+                <div class="layui-input-block">
+                    <select name="jobCategory" class="jobCategory" lay-filter="required" lay-search>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-lg12">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="postInfo">立即提交</button>
+                    <button type="reset" class="clearForm" style="display: none">取消</button>
+                    <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="buttonAdd"><button class="layui-btn header_edit" style="float: right">新增</button></div>
+    <table class="layui-hide" id="postInfo" lay-filter="postInfo"></table>
+<!--编辑职业信息-->
+    <div id="edit_postInfo" style="display:none;">
+        <form class="layui-form" action="" lay-filter="postInfo">
+            <div class="layui-row layui-col-space10 layui-form-item">
+                <div class="layui-col-lg4 layui-col-md121">
+                    <label class="layui-form-label">职称</label>
+                    <div class="layui-input-block">
+                        <select class="profession" name="profession" id="profession" lay-filter="edit_test" lay-search>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-col-lg4 layui-col-md121">
+                    <label class="layui-form-label">职别</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="officialRank" id="officialRank"
+                               lay-verify="required" autocomplete="off"
+                               class="layui-input officialRank" readonly>
+                    </div>
+                </div>
+                <div class="layui-col-lg4 layui-col-md121">
+                    <label class="layui-form-label">职级晋升年月</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="upgradeTime" id="upgradeTime"
+                               lay-verify="required|date" autocomplete="off" class="layui-input upgradeTime">
+                    </div>
+                </div>
+                <div class="layui-col-lg4 layui-col-md121">
+                    <label class="layui-form-label">岗位等级</label>
+                    <div class="layui-input-block">
+                        <select id="jobRank" name="jobRank" class="jobRank" lay-search>
+                            <!--<option value=""></option>-->
+<!--                            <option value="一级">一级</option>-->
+<!--                            <option value="二级">二级</option>-->
+<!--                            <option value="三级">三级 </option>-->
+<!--                            <option value="四级">四级</option>-->
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-col-lg4 layui-col-md121">
+                    <label class="layui-form-label">岗位类别</label>
+                    <div class="layui-input-block">
+                        <select id="jobCategory" name="jobCategory" class='jobCategory'
+                                lay-filter="required" lay-search>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-col-lg4" style="display: none">
+                    <label class="layui-form-label">ID</label>
+                    <div class="layui-input-block" id="postInfo_uid">
+                        <input type="text" name="id" id="id" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-col-lg12">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="postInfo">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary edit_hide">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<script type="text/html" id="edit1">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+    <script>
+        layui.config({
+                base: '../../../' //静态资源所在路径
+            }
+        ).extend({
+                index: 'lib/index' //主入口模块
+            }
+        ).use(['index', 'personalDetailTab']);
+
+
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+        var beShowUsername=GetQueryString("username");
+
+    </script>
+
+</body>
+</html>

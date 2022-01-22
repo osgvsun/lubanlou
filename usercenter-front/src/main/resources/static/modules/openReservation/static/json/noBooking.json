@@ -1,0 +1,33 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": "5",
+	"data": [
+		{
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"remark": "test4"
+		}, {
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"remark": "test4"
+		}, {
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"remark": "test4"
+		}, {
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"remark": "test4"
+		}, {
+			"daterange": "test1",
+			"week": "test2",
+			"timerange": "test3",
+			"remark": "test4"
+		}
+	]
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/gvsunWork/static/css/expand.css}" media="all">
+    <style>
+        .layui-input {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content_box">
+        <form id="messageForm" class="layui-form" lay-filter="messagebox">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">消息内容：<font style="color: red;">*</font></label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" name="content" class="layui-textarea" lay-verify="required"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">手机号码: <font style="color: red;">*</font></label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="telephone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱地址：<font style="color: red;">*</font></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="emailAddress" lay-verify="required|email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">接收人姓名：<font style="color: red;">*</font></label>
+                <div class="layui-input-inline">
+                    <input type="text" id="cname" name="cname" disabled="disabled" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">发送方式：</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="topic" value="email" title="邮件" lay-filter="topic" checked>
+                    <input type="checkbox" name="topic" value="sms" title="短信" lay-filter="topic">
+                </div>
+            </div>
+
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="messagebtn" id="messagebtn" class="layui-btn" lay-submit value="立即提交" />
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+            </div>
+            <!--操作按钮结束-->
+        </form>
+    </div>
+    <div th:replace="/gvsunWork/globalscript"></div>
+    <script th:inline="javascript">
+        const siteId = [[${session.cid}]];
+        const assignmentId = [[${assignmentId}]];
+        const receiver = [[${userName}]];
+        const sender = [[${session.user.username}]];
+    </script>
+    <script th:src="@{/modules/gvsunWork/openMessage.js}"></script>
+</body>
+</html>

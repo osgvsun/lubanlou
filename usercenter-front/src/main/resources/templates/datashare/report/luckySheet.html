@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>在线报表</title>
+    <link rel="stylesheet" th:href="@{/modules/datashare/static/plugins/luckysheet/pluginsCss.css}">
+    <link rel="stylesheet" th:href="@{/modules/datashare/static/plugins/luckysheet/plugins.css}">
+    <link rel="stylesheet" th:href="@{/modules/datashare/static/plugins/luckysheet/luckysheet.css}">
+    <link rel="stylesheet" th:href="@{/modules/datashare/static/plugins/luckysheet/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <style>
+         #container {
+            text-align: right;
+             margin-right: 10px;
+             margin-top: 10px;
+        }
+        /* #donwload {
+           position: absolute;
+           right: 0;
+        } */
+        #luckysheet {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            width: 100vw;
+            height: 95vh;
+            left: 0;
+            top: 2.5rem;
+        }
+         .file {
+             position: relative;
+             display: inline-block;
+             background: #1E9FFF;
+             border: 1px solid #99D3F5;
+             border-radius: 2px;
+             padding: 4px 12px;
+             overflow: hidden;
+             color: #fff;
+             text-decoration: none;
+             text-indent: 0;
+             line-height: 20px;
+             margin-right: 15px;
+         }
+         .file input {
+             position: absolute;
+             font-size: 100px;
+             right: 0;
+             top: 0;
+             opacity: 0;
+         }
+         .file:hover {
+             background: #AADFFD;
+             border-color: #78C3F3;
+             color: #004974;
+             text-decoration: none;
+         }
+         .layui-btn {
+             margin-top: -20px;
+         }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- style="position: absolute; z-index: 2;" -->
+        <a href="javascript" class="file"> 选择文件
+            <input type="file" id="fileUp"/>
+        </a>
+        <!-- <button>保存</button> -->
+        <!-- style="position: absolute; z-index: 2;" -->
+        <!-- <button id="donwload" >导出</button> -->
+
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal save_data">保存</button>
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal donwload">导出</button>
+    </div>
+    <div id="luckysheet"></div>
+
+    <script th:src="@{/modules/datashare/static/plugins/luckysheet/plugin.js}"></script>
+    <script th:src="@{/modules/datashare/static/plugins/luckysheet/luckysheet.umd.js}"></script>
+    <script th:src="@{/modules/datashare/static/plugins/luckysheet/xlsx.full.min.js}"></script>
+    <script th:src="@{/modules/datashare/static/plugins/luckysheet/exceljs.js}"></script>
+    <script th:src="@{/modules/datashare/static/plugins/luckysheet/luckyexcel.umd.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:inline="javascript">
+        const lakeNumber = [[${lakeNumber}]];
+        const reportNumber = [[${reportNumber}]];
+        const datashareHost = [[${session.datashareHost}]];
+        const params = [[${params}]];
+        const status = [[${status}]];
+    </script>
+    <script type="text/javascript" th:src="@{/modules/datashare/static/js/report/luckySheet.js}"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/instrumentManagement/static/css/expand.css}" media="all">
+		<style>
+			.layui-form-label {
+				width: 99px;
+			}
+			
+			.layui-input-block {
+				margin-left: 99px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="newtraningbox" id="newtraningbox">
+				<div class="layui-row layui-col-space20">
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">设备</label>
+						<div class="layui-input-block">
+							<select name="username" lay-search lay-verify="required">
+								<option value="">请选择人员学号/姓名</option>
+								<option value="20200261">丁豪然</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">培训时间</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="content" id="timerange" autocomplete="on" lay-verify="required" placeholder="请输入协议书内容" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">培训老师</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="content" id="timerange" autocomplete="on" lay-verify="required" placeholder="请输入协议书内容" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">提前预约时间</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="content" id="timerange" autocomplete="on" lay-verify="required" placeholder="请输入协议书内容" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">适用学院</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="content" id="timerange" autocomplete="on" lay-verify="required" placeholder="请输入协议书内容" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">培训内容</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="content" id="timerange" autocomplete="on" lay-verify="required" placeholder="请输入协议书内容" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">培训地点</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="content" id="timerange" autocomplete="on" lay-verify="required" placeholder="请输入协议书内容" />
+						</div>
+					</div>
+					<div class="layui-col-lg4">
+						<label class="layui-form-label">最大培训人数</label>
+						<div class="layui-input-block">
+							<input class="layui-input" name="content" id="timerange" autocomplete="on" lay-verify="required" placeholder="请输入协议书内容" />
+						</div>
+					</div>
+				</div>
+				<!--操作按钮开始-->
+				<div class="layui-col-lg12 bottom_btnbox layui-hide">
+					<input type="button" lay-filter="newtraningbtn" id="newtraningbtn" class="layui-btn" lay-submit value="立即提交" />
+					<input type="reset" class="layui-btn layui-btn-primary" value="取消" />
+				</div>
+				<!--操作按钮结束-->
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/access/globalscript"></div>
+		<script type="text/javascript" th:src="@{/modules/instrumentManagement/static/js/global.js}"></script>
+		<script th:src="@{/modules/access/securityAccess/newTraningList.js}"></script>
+	</body>
+</html>​​​

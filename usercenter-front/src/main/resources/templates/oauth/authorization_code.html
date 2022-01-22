@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8"/>
+    <title>loading……</title>
+
+
+</head>
+<body>
+<!--跳转中……-->
+<form id="login_box" th:action="${userAuthorizationUri}" method="post" style="display:none;">
+    <input type="text" name="redirect_uri" th:value="${redirect_uri}"/>
+    <input type="text" name="response_type" th:value="${response_type}"/>
+    <input type="text" name="state" th:value="${state}"/>
+    <input type="text" name="client_id" th:value="${client_id}"/>
+</form>
+<script>
+    document.getElementById("login_box").submit();
+</script>
+</body>
+</html>

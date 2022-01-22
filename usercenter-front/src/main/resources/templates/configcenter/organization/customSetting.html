@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+	  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/configcenter/organization/css/expand.css}" media="all">
+		<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{${session.oauth2}+'/oauth/OAuth2.js'}"></script>
+		<script th:src="@{/js/initOAuth2.js}"></script>
+		<script th:src="@{/js/jquery.cookie.js}"></script>
+		<script th:src="@{/layui/layui.js}"></script>
+		<!--树形组件-->
+		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/eletree/eleTree.css}" media="all">
+		<!-- expand -->
+		<link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+<!--		<link rel="stylesheet" th:href="@{/modules/configcenter/static/css/expand.css}" media="all">-->
+		<script th:inline="javascript">
+			var uid = [[${uid}]];
+			var userCenterHost = [[${session.userCenterHost}]];
+			var currentUsername = [[${session.user.username}]];
+			var apiGateWayHost = [[${session.apiGateWayHost}]];
+			var apiGateWayHostTest = [[${session.apiGateWayHostTest}]];
+			var encryptUsername=[[${session.encryptUsername}]];
+			var currentsiteEnName = [[${session.siteEnName}]];
+			var currentsiteSecret = [[${session.siteSecret}]];
+			var oauth2 = [[${session.oauth2}]];
+			const configCenterHost = apiGateWayHost+"/configcenter/";
+			function logout() {
+				localStorage.clear();
+				$.cookie('currauth', '');
+				$.cookie('currentauthName', '');
+				location.href = serverHost + 'logout';
+			}
+		</script>
+		<style type="text/css">
+			body {
+				overflow-y: hidden;
+			}
+			.addition-btn {
+				display: inline;
+				width: 20%;
+				padding: 0;
+				height: 36px;
+				margin-bottom: 4px;
+			}
+			.insertBefore, .insertAfter {
+				display: none!important;
+			}
+			.loading{
+				height:100%;width:100%;position:fixed;background:rgba(255,255,255,0.95);
+			}
+			.loading >p{position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;height:30px;width:120px;}
+			.loading >p i{display: block;float:left;margin:0 5px; width:5px;height:30px;background:#409eff;transform:scaleY(0.3);
+				animation:loading 1s ease infinite alternate;
+			}
+			.loading >p i:nth-child(2){animation-delay:0.1s;}
+			.loading >p i:nth-child(3){animation-delay:0.2s;}
+			.loading >p i:nth-child(4){animation-delay:0.3s;}
+			.loading >p i:nth-child(5){animation-delay:0.4s;}
+			@keyframes loading{
+				0%,40%,100%{
+					transform:scaleY(0.3)
+				}
+				20%{
+					transform:scaleY(1)
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="main_content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="customsettingbox" id="customsettingbox">
+				<!--左中工具栏开始-->
+				<div class="main_tit_sub" id="left">
+					<!--引用框架搭桥开始-->
+					<iframe class="soniframe" id="soniframe" src="" name="i"></iframe>
+					<!--引用框架搭桥结束-->
+					<div class="layui-row layui-col-space10">
+						<div class="layui-col-md12">
+							<!--树形目录搜索开始-->
+							<input style="display: inline;width: 75%;" type="text" placeholder="键入关键字搜索" autocomplete="off" class="layui-input eleTree-search1">
+							<!--树形目录搜索结束-->
+							<button type="button" class="layui-btn addition-btn btn-method" data-method="newNode"><i class="layui-icon layui-icon-addition"></i></button>
+<!--							<input style="display: inline;width: 20%;padding: 0;" type="button" class="layui-btn" value="新增"/>-->
+						</div>
+						<div class="layui-col-md12">
+							<!--树形目录开始-->
+							<div class="eleTree ele1 spec_tree_one" lay-filter="data1"></div>
+							<!--树形目录结束-->
+						</div>
+						<!--树形目录调试按钮，已隐藏，不调试可删除，开始-->
+						<div class="layui-col-md12">
+							<div class="eleTree layui-form ele_control_box">
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="renderAfterExpand" lay-skin="primary" checked>是否在第一次展开某个树节点后才渲染其子节点</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="highlightCurrent" lay-skin="primary">是否高亮当前选中节点，默认值是 false</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="defaultExpandAll" lay-skin="primary" checked>是否默认展开所有节点</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="expandOnClickNode" lay-skin="primary" checked="">是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="checkOnClickNode" lay-skin="primary">是否在点击节点的时候选中节点，默认值为 false，即只有在点击复选框时才会选中节点</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="defaultExpandedKeys" lay-skin="primary">默认展开的节点的 key 的数组</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="autoExpandParent" lay-skin="primary" checked>展开子节点的时候是否自动展开父节点</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="showCheckbox" lay-skin="primary" checked>节点是否可被选择</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="checkStrictly" lay-skin="primary">在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="defaultCheckedKeys" lay-skin="primary">默认勾选的节点的 key 的数组</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="accordion" lay-skin="primary">是否每次只打开一个同级树节点展开（手风琴效果）</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="indent" lay-skin="primary">相邻级节点间的水平缩进，单位为像素</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="lazy" lay-skin="primary">是否懒加载子节点，需与 load 方法结合使用</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="load" lay-skin="primary">加载子树数据的方法，仅当 lazy 属性为true 时生效</div>
+								<div class="inp"><input type="checkbox" autocomplete="off" name="opera" lay-filter="test" title="draggable" lay-skin="primary" checked="">是否开启拖拽节点功能</div>
+								<div class="inp">
+									<h3>contextmenuList</h3>
+									<input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="copy" lay-skin="primary" checked>
+									<input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="add" lay-skin="primary" checked>
+									<input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="edit" lay-skin="primary" checked>
+									<input type="checkbox" name="opera" autocomplete="off" lay-filter="menuList" title="remove" lay-skin="primary" checked>
+								</div>
+								<div class="inp">
+									<h3>indent</h3>
+									<div class="slideTest"></div>
+								</div>
+							</div>
+						</div>
+						<!--树形目录调试按钮，已隐藏，不调试可删除，结束-->
+					</div>
+				</div>
+				<!--左中工具栏结束-->
+			<!--主体开始-->
+				<div class="content_box" style="display: none;">
+					<div class="full_box">
+						<div class="layui-card">
+							<div class="layui-card-header">自定义设置</div>
+							<div class="layui-card-body">
+								<div class="layui-tab layui-tab-brief" lay-filter="organizational_tab">
+									<ul class="layui-tab-title organizational_tab">
+										<li class="layui-this">
+											<a>一级建制字段定义</a>
+										</li>
+										<li>
+											<a>二级建制字段定义</a>
+										</li>
+										<li>
+											<a>三级建制字段定义</a>
+										</li>
+										<li>
+											<a>四级建制字段定义</a>
+										</li>
+									</ul>
+									<div class="layui-tab-content">
+										<div class="layui-tab-item layui-show">
+											<div class="layui-row layui-col-space10">
+												<div class="layui-col-md12">
+													<blockquote class="layui-elem-quote layui-quote-nm line_tag_box">
+														<div class="field_btn_box subentry_tab">
+															<a class="field_btn_select">分项名称1</a>
+															<a>分项名称2</a>
+															<a>分项名称3</a>
+															<a>分项名称4</a>
+															<a>分项名称5</a>
+														</div>
+														<div class="inline_inside ml5">
+															<!--单次分项菜单开始-->
+															<div class="layui-inline add_nav_box hide">
+																<div class="mix_short_input add_nav_single">
+																	<input class="layui-input" name="" placeholder="请输入分项名称" />
+																	<label class="layui-icon layui-icon-close delete_nav " onClick="deletenav(this);" title="删除此分项"></label>
+																</div>
+															</div>
+															<!--单次分项菜单结束-->
+															<!--新增分项菜单区域开始-->
+															<div class="layui-inline new_nav_box">
+															</div>
+															<!--新增分项菜单区域结束-->
+														</div>
+														<!--分项管理按钮开始-->
+														<label class="layui-icon layui-icon-add-1 layui-btn-green short_btn addnav" data-method="addnav" lay-tips="新增分项"></label>
+														<label class="layui-icon layui-icon-edit layui-btn-green short_btn editnav" lay-tips="编辑分项"></label>
+														<label class="layui-btn-warm short_btn savenav hide" lay-tips="保存分项设置">保存</label>
+														<label class="layui-btn-warm short_btn btn-method" data-method="publish" lay-tips="发布此建制设置">发布</label>
+														<label class="layui-btn-warm short_btn btn-method" data-method="cancelPublish" lay-tips="撤回发布">撤回发布</label>
+<!--														<input type="button" style="float: right" class="layui-btn btn-method" data-method="publish" value="发布" />-->
+														<!--分项管理按钮结束-->
+													</blockquote>
+												</div>
+												<div class="process_content">
+													<!--搜索开始-->
+													<div class="layui-col-md12 search_line" style="padding-top: 5px;">
+														<div class="layui-inline">
+															<div class="layui-input-inline">
+																<input class="layui-input" name="searchid" id="searchbox" autocomplete="on" placeholder="请输入搜索内容" />
+															</div>
+														</div>
+														<input type="button" class="layui-btn" data-type="reload" value="搜索" />
+														<input type="button" class="layui-btn layui-btn-primary" data-type="reload" value="取消" />
+														<input type="button" class="layui-btn layui-btn-green btn-method" data-method="newfield" value="新增字段" />
+
+													</div>
+													<!--搜索结束-->
+													<div class="layui-col-md12 head_tab" style="padding-top: 10px;">
+														<!--表单开始-->
+														<table class="layui-hide" id="customsetting" lay-filter="customsetting"></table>
+														<!--行内工具栏开始-->
+														<script type="text/html" id="toolbar">
+															<a class="layui-btn layui-btn-green layui-btn-xs" lay-event="edit">编辑</a>
+															<a class="layui-btn layui-btn-red layui-btn-xs" lay-event="del">删除</a>
+														</script>
+														<!--行内工具栏结束-->
+														<!--表单结束-->
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--主体结束-->
+			</form>
+
+
+		</div>
+		<div class="loading">
+			<p>
+				<i></i>
+				<i></i>
+				<i></i>
+				<i></i>
+				<i></i>
+			</p>
+		</div>
+		<script th:src="@{/modules/configcenter/static/global.js}"></script>
+		<script th:src="@{/modules/configcenter/static/js/mainindex.js}"></script>
+		<script th:src="@{/modules/configcenter/organization/eleTree.js}"></script>
+		<script th:src="@{/modules/configcenter/organization/customSetting.js}"></script>
+<!--		<script>-->
+<!--			layui.config({-->
+<!--					base: '../layuiadmin/' //静态资源所在路径-->
+<!--				}-->
+
+<!--			).extend({-->
+<!--					index: 'lib/index' //主入口模块-->
+<!--				}-->
+
+<!--			).use(['index', 'customSetting']);-->
+<!--		</script>-->
+	</body>
+
+</html>​​​

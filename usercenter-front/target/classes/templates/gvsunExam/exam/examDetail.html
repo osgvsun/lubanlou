@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="Generator" content="GVSUN" />
+		<meta name="Author" content="chenyawen" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1" />
+		<!-- layui -->
+		<link rel="stylesheet" th:href="@{/teachPublic/layui/css/layui.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/style/admin.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/font-awesome.min.css}" media="all">
+		<link rel="stylesheet" th:href="@{/modules/gvsunExam/static/css/expand.css}" media="all">
+		<style>
+			.detail_item .layui-form-label {
+				width: 127px;
+			}
+			
+			.detail_item .layui-input-block {
+				margin-left: 127px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--主体开始-->
+		<div class="content_box">
+			<form class="layui-form lesson_card" action="" lay-filter="examdetailbox" id="examdetailbox">
+				<div class="layui-fluid">
+					<!--基础信息开始-->
+					<div class="layui-card ovh">
+						<div class="layui-card-header">基础信息</div>
+						<div class="layui-card-body">
+							<div class="layui-col-md12 mb20 detail_item" action="" lay-filter="">
+								<div class="layui-row">
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">考试名称</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="name" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">考试分值</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="score" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">考试类型</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="sort" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">原考试</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="basic" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">分类</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="type" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">章节</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="chapter" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">课时</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="class" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">考试时长(单位：分钟)</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="duration" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">时间范围</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="time" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">及格分值</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="pass" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">学院</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="college" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">班级</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="grade" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--基础信息结束-->
+					<!--考试设置开始-->
+					<div class="layui-card ovh">
+						<div class="layui-card-header">考试设置</div>
+						<div class="layui-card-body">
+							<div class="layui-col-md12 mb20 detail_item" action="" lay-filter="">
+								<div class="layui-row">
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">提交次数</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="submittimes" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">考试添加到成绩簿</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="gradebook" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">成绩公布给学生</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="publish" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">成绩计入总成绩</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="sum" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">是否显示答题详情</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="info" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">是否作答</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="answer" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg12">
+										<label class="layui-form-label">题目来源</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="source" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--考试设置结束-->
+					<!--题库开始-->
+					<div class="layui-card questionbank_box">
+						<div class="layui-card-header">题库</div>
+						<div class="layui-card-body">
+							<div class="layui-row layui-col-space20">
+								<!--表单开始-->
+								<div class="layui-col-md12">
+<!--									<table class="layui-hide new_progress" id="questionbank" lay-filter="questionbank"></table>-->
+									<table class="layui-hide new_progress" id="questionbank" lay-filter="questionbank">
+<!--										-->
+									</table>
+								</div>
+								<!--表单结束-->
+							</div>
+						</div>
+					</div>
+					<!--题库结束-->
+					<!--试题库开始-->
+					<div class="layui-card testbank ovh">
+						<div class="layui-card-header">试题库</div>
+						<div class="layui-card-body">
+							<div class="layui-col-md12 mb20 detail_item" action="" lay-filter="">
+								<div class="layui-row">
+									<div class="layui-col-lg4">
+										<label class="layui-form-label">试卷库分类</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="banktype" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+									<div class="layui-col-lg8">
+										<label class="layui-form-label">试卷库</label>
+										<div class="layui-input-block">
+											<input type="button" class="layui-input readinputbtn" name="bank" autocomplete="off" disabled="disabled" readonly="readonly">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--试题库结束-->
+					<!--考试详情开始-->
+					<div class="layui-card">
+						<div class="layui-card-header">考试详情</div>
+						<div class="layui-card-body">
+							<input type="button" class="btn_article" name="detail" autocomplete="off" disabled="disabled" readonly="readonly" />
+						</div>
+					</div>
+					<!--考试详情结束-->
+				</div>
+			</form>
+		</div>
+		<!--主体结束-->
+		<div th:replace="/gvsunExam/globalscript"></div>
+		<script th:src="@{/modules/gvsunExam/static/js/global.js}"></script>
+		<script th:inline="javascript">
+			var assignmentId = [[${assignmentId}]];
+		</script>
+		<script type="text/javascript" th:src="@{/modules/gvsunExam/exam/examDetail.js}"></script>
+	</body>
+</html>​​​

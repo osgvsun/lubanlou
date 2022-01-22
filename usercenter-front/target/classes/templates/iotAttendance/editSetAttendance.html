@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta name="renderer" content="webkit|ie-stand|ie-comp"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="Generator" content="GVSUN"/>
+    <meta name="Author" content="chenyawen"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=0.5, maximum-scale=1"/>
+    <!-- layui -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/style/admin.css}" media="all">
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <!-- expand -->
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/font-awesome.min.css}" media="all">
+    <link rel="stylesheet" th:href="@{/modules/iotAttendance/static/css/expand.css}" media="all">
+    <style>
+        .layui-form-label {
+            width: 68px;
+        }
+
+        .layui-input-block {
+            margin-left: 68px;
+        }
+    </style>
+
+</head>
+
+<body>
+<!--主体开始-->
+<div class="content_box">
+    <form class="layui-form" action="" lay-filter="editsetattendancebox" id="editsetattendancebox">
+        <div class="layui-fluid">
+            <!--基础信息开始-->
+            <div class="layui-card">
+                <div class="layui-card-header">基础信息</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-lg4">
+                            <label class="layui-form-label">考勤状态</label>
+                            <div class="layui-input-block">
+                                <select name="state" lay-search lay-verify="required">
+                                    <option value="">请选择考勤状态</option>
+                                    <option value="1">正常出勤</option>
+                                    <option value="2">迟到</option>
+                                    <option value="3">早退</option>
+                                    <option value="4">旷课</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-col-lg4">
+                            <label class="layui-form-label">考勤分值</label>
+                            <div class="layui-input-block">
+                                <input type="number" class="layui-input" name="score" lay-verify="required"
+                                       autocomplete="off" placeholder="请输入考勤分值"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--基础信息结束-->
+            <!--【课程开始】考勤时间范围开始-->
+            <div class="layui-card">
+                <div class="layui-card-header">【课程开始】考勤时间范围</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-lg12">
+                            <label class="layui-form-label">开始时间:</label>
+                            <div class="layui-input-block short_inputtext_block">
+                                <input type="radio" name="startfront" value="课前" title="课前" lay-filter="startfront">
+                                <label class="startfront_before short_inputtext_box hide">
+                                    <input type="number" class="layui-input short_inputtext" name="startfrontbefore"
+                                           autocomplete="off" placeholder=""/>
+                                    <font>分钟</font>
+                                </label>
+                                <input type="radio" name="startfront" value="课程开始" title="课程开始" lay-filter="startfront"
+                                       checked="">
+                                <input type="radio" name="startfront" value="课后" title="课后" lay-filter="startfront">
+                                <label class="startfront_after short_inputtext_box hide">
+                                    <input type="number" class="layui-input short_inputtext" name="startfrontafter"
+                                           autocomplete="off" placeholder=""/>
+                                    <font>分钟</font>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="layui-col-lg12">
+                            <label class="layui-form-label">结束时间:</label>
+                            <div class="layui-input-block short_inputtext_block">
+                                <input type="radio" name="startlast" value="课前" title="课前" lay-filter="startlast">
+                                <label class="startlast_before short_inputtext_box hide">
+                                    <input type="number" class="layui-input short_inputtext" name="startlastbefore"
+                                           autocomplete="off" placeholder=""/>
+                                    <font>分钟</font>
+                                </label>
+                                <input type="radio" name="startlast" value="课程开始" title="课程开始" lay-filter="startlast"
+                                       checked="">
+                                <input type="radio" name="startlast" value="课后" title="课后" lay-filter="startlast">
+                                <label class="startlast_after short_inputtext_box hide">
+                                    <input type="number" class="layui-input short_inputtext" name="startlastafter"
+                                           autocomplete="off" placeholder=""/>
+                                    <font>分钟</font>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--【课程开始】考勤时间范围结束-->
+            <!--【课程结束】考勤时间范围开始-->
+            <div class="layui-card">
+                <div class="layui-card-header">【课程结束】考勤时间范围</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-lg12">
+                            <label class="layui-form-label">开始时间:</label>
+                            <div class="layui-input-block short_inputtext_block">
+                                <input type="radio" name="endfront" value="课前" title="课前" lay-filter="endfront">
+                                <label class="endfront_before short_inputtext_box hide">
+                                    <input type="number" class="layui-input short_inputtext" name="startfrontbefore"
+                                           autocomplete="off" placeholder=""/>
+                                    <font>分钟</font>
+                                </label>
+                                <input type="radio" name="endfront" value="课程开始" title="课程开始" lay-filter="endfront"
+                                       checked="">
+                                <input type="radio" name="endfront" value="课后" title="课后" lay-filter="endfront">
+                                <label class="endfront_after short_inputtext_box hide">
+                                    <input type="number" class="layui-input short_inputtext" name="endfrontafter"
+                                           autocomplete="off" placeholder=""/>
+                                    <font>分钟</font>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="layui-col-lg12">
+                            <label class="layui-form-label">结束时间:</label>
+                            <div class="layui-input-block short_inputtext_block">
+                                <input type="radio" name="endlast" value="课前" title="课前" lay-filter="endlast">
+                                <label class="endlast_before short_inputtext_box hide">
+                                    <input type="number" class="layui-input short_inputtext" name="endlastbefore"
+                                           autocomplete="off" placeholder=""/>
+                                    <font>分钟</font>
+                                </label>
+                                <input type="radio" name="endlast" value="课程开始" title="课程开始" lay-filter="endlast"
+                                       checked="">
+                                <input type="radio" name="endlast" value="课后" title="课后" lay-filter="endlast">
+                                <label class="endlast_after short_inputtext_box hide">
+                                    <input type="number" class="layui-input short_inputtext" name="endlastafter"
+                                           autocomplete="off" placeholder=""/>
+                                    <font>分钟</font>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--【课程结束】考勤时间范围结束-->
+            <!--操作按钮开始-->
+            <div class="layui-col-lg12 bottom_btnbox layui-hide">
+                <input type="button" lay-filter="editsetattendancebtn" id="editsetattendancebtn" class="layui-btn"
+                       lay-submit value="立即提交"/>
+                <input type="reset" class="layui-btn layui-btn-primary" value="取消"/>
+            </div>
+            <!--操作按钮结束-->
+        </div>
+    </form>
+</div>
+<!--主体结束-->
+<!--右侧栏开始-->
+<!--<div class="quick_line">
+    <a href="#"></a>
+    <div class="top layui-icon layui-icon-top"></div>
+</div>-->
+<!--右侧栏结束-->
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/modules/iotAttendance/static/js/global.js}"></script>
+<script>
+    layui.config({
+            base: '../' //静态资源所在路径
+        }
+    ).extend({
+            index: 'lib/index' //主入口模块
+        }
+    ).use(['index', 'iotAttendance/editSetAttendance']);
+</script>
+</body>
+
+</html>
