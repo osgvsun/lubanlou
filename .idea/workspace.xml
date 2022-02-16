@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04281594-ef29-4dcf-a90e-70e0b78409bf" name="Changes" comment="deploy-usercenter-用户中心-获取职称接口不返回晋升时间">
-      <change afterPath="$PROJECT_DIR$/opensource.ipr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usercenter-front/usercenter-front.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_01_15_17_39_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_01_18_15_23_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_01_18_17_04_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_01_20_18_59_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -750,6 +752,8 @@
       <workItem from="1642817020039" duration="3136000" />
       <workItem from="1642822090409" duration="3464000" />
       <workItem from="1642838527322" duration="155000" />
+      <workItem from="1642842741664" duration="708000" />
+      <workItem from="1643517321928" duration="579000" />
     </task>
     <task id="LOCAL-00001" summary="deploy-usercenter-用户中心-获取职称接口可以获取多用户的多职称">
       <created>1640940129219</created>
